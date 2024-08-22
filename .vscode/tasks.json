@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run program",
+      "type": "shell",
+      "command": "./mvnw clean javafx:run",
+      "windows": {
+        "command": ".\\mvnw.cmd clean javafx:run"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
