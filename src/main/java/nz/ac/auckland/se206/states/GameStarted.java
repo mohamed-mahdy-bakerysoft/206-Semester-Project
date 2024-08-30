@@ -1,10 +1,12 @@
 package nz.ac.auckland.se206.states;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * The GameStarted state of the game. Handles the initial interactions when the game starts,
@@ -13,6 +15,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 public class GameStarted implements GameState {
 
   private final GameStateContext context;
+  private MediaPlayer player;
+  private Media sound;
 
   /**
    * Constructs a new GameStarted state with the given game state context.
@@ -30,16 +34,17 @@ public class GameStarted implements GameState {
    * @param event the mouse event triggered by clicking a rectangle
    * @param rectangleId the ID of the clicked rectangle
    * @throws IOException if there is an I/O error
+   * @throws URISyntaxException
    */
   @Override
-  public void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException {
+  public void handleRectangleClick(MouseEvent event, String rectangleId)
+      throws IOException, URISyntaxException {
     // Transition to chat view or provide an introduction based on the clicked rectangle
     switch (rectangleId) {
-      case "rectCashier":
-        TextToSpeech.speak("Welcome to my cafe!");
-        return;
-      case "rectWaitress":
-        TextToSpeech.speak("Hi, let me know when you are ready to order!");
+      case "rectOfficer":
+        sound = new Media(App.class.getResource("/sounds/police.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
         return;
     }
     App.openChat(event, context.getProfession(rectangleId));
@@ -50,10 +55,13 @@ public class GameStarted implements GameState {
    * transitions to the guessing state.
    *
    * @throws IOException if there is an I/O error
+   * @throws URISyntaxException
    */
   @Override
-  public void handleGuessClick() throws IOException {
-    TextToSpeech.speak("Make a guess, click on the " + context.getProfessionToGuess());
+  public void handleGuessClick() throws IOException, URISyntaxException {
+    sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
+    player = new MediaPlayer(sound);
+    player.play();
     context.setState(context.getGuessingState());
   }
 }
