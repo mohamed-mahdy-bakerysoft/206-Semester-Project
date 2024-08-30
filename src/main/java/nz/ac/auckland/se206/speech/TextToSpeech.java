@@ -23,7 +23,7 @@ public class TextToSpeech {
    * @param text the text to be converted to speech
    * @throws IllegalArgumentException if the text is null or empty
    */
-  public static void speak(String text) {
+  public static void speak(String text, String profession) {
     if (text == null || text.isEmpty()) {
       throw new IllegalArgumentException("Text should not be null or empty");
     }
@@ -34,14 +34,33 @@ public class TextToSpeech {
           protected Void call() {
             try {
               ApiProxyConfig config = ApiProxyConfig.readConfig();
+              // the default voice provider if no explicity profession is given
               Provider provider = Provider.GOOGLE;
               Voice voice = Voice.GOOGLE_EN_US_STANDARD_H;
+              // changing voice based on what suspect is being spoken to
+              switch (profession) {
+                case "Curious Art Student":
+                  provider = Provider.GOOGLE;
+                  voice = Voice.GOOGLE_EN_AU_STANDARD_C;
+                  break;
+                case "Art Thief":
+                  provider = Provider.GOOGLE;
+                  voice = Voice.GOOGLE_EN_GB_STANDARD_B;
+                  break;
+                case "Grumpy Out of Town Tourist":
+                  provider = Provider.GOOGLE;
+                  voice = Voice.GOOGLE_EN_AU_STANDARD_D;
+                  break;
+              }
 
               TextToSpeechRequest ttsRequest = new TextToSpeechRequest(config);
               ttsRequest.setText(text).setProvider(provider).setVoice(voice);
 
               TextToSpeechResult ttsResult = ttsRequest.execute();
               String audioUrl = ttsResult.getAudioUrl();
+
+              // retrieving audio file from ai:
+              System.out.println("playing audio from: " + audioUrl);
 
               try (InputStream inputStream =
                   new BufferedInputStream(new URL(audioUrl).openStream())) {
@@ -60,6 +79,7 @@ public class TextToSpeech {
 
     Thread backgroundThread = new Thread(backgroundTask);
     backgroundThread.setDaemon(true); // Ensure the thread does not prevent JVM shutdown
-    backgroundThread.start();
+    // backgroundThread.start();
+    System.out.println(text);
   }
 }

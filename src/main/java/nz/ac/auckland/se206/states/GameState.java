@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.states;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -15,13 +16,16 @@ public interface GameState {
    * @param event the mouse event triggered by clicking a rectangle
    * @param rectangleId the ID of the clicked rectangle
    * @throws IOException if there is an I/O error
+   * @throws URISyntaxException
    */
-  void handleRectangleClick(MouseEvent event, String rectangleId) throws IOException;
+  void handleRectangleClick(MouseEvent event, String rectangleId)
+      throws IOException, URISyntaxException;
 
   /**
    * Handles the event when the guess button is clicked.
    *
    * @throws IOException if there is an I/O error
+   * @throws URISyntaxException
    */
-  void handleGuessClick() throws IOException;
+  void handleGuessClick() throws IOException, URISyntaxException;
 }
