@@ -13,16 +13,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.states.Guessing;
 
 /**
- * Controller class for the room view. Handles user interactions within the room where the user can
- * chat with customers and guess their profession.
+ * Added Controller class for the intelroom view. Handles user interactions within the room where
+ * the user can chat with customers and guess their profession.
  */
-public class RoomController {
+public class InteragationRoomController {
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
@@ -56,12 +57,6 @@ public class RoomController {
     return clueHasBeenInteractedWith;
   }
 
-  @FXML private Rectangle rectSecurityCamera;
-  @FXML private Rectangle rectPerson1;
-  @FXML private Rectangle rectPerson2;
-  @FXML private Rectangle rectPerson3;
-  @FXML private Rectangle rectOfficer;
-  @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
@@ -81,12 +76,8 @@ public class RoomController {
    * @throws URISyntaxException
    */
   @FXML
-  public void initialize() throws URISyntaxException {
+  public void initialize() throws ApiProxyException {
     TimeManager timeManager = TimeManager.getInstance();
-    if (isFirstTimeInit) {
-      // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
-      isFirstTimeInit = false;
-    }
     timeManager.setTimerLabel(mins, secs);
   }
 
@@ -155,12 +146,6 @@ public class RoomController {
     }
   }
 
-  @FXML
-  private void handleIntelRoomClick(ActionEvent event) throws IOException {
-    // Change scene to the intel room
-    App.setRoot("intel_Draft");
-  }
-
   /**
    * Handles the guess button click event.
    *
@@ -186,24 +171,6 @@ public class RoomController {
       player.play();
     }
     App.setRoot("room");
-  }
-
-  /**
-   * Handles the right arrow click event to change perspective of the room to the right.
-   *
-   * @param event mouse click event.
-   * @throws IOException exception if file is not found.
-   */
-  public void onClickRight(MouseEvent event) throws IOException {
-    if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
-      // investigation
-      return;
-    }
-    ImageView clickedArrow = (ImageView) event.getSource();
-    if (clickedArrow.getId().equals("mainArrowRight")) {
-      App.setRoot("room2");
-    }
   }
 
   /**

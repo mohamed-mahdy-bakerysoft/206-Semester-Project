@@ -12,7 +12,9 @@ public class SceneManager {
     BAD_END,
     CAMERA,
     BIN,
-    MAP
+    MAP,
+    // Added Intel room Here as ENUM
+    INTELROOM
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
