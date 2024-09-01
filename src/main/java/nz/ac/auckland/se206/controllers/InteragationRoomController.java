@@ -24,8 +24,6 @@ import nz.ac.auckland.se206.states.Guessing;
  * the user can chat with customers and guess their profession.
  */
 public class InteragationRoomController {
-
-  private static boolean isFirstTimeInit = true;
   private static GameStateContext context = new GameStateContext();
   private static boolean clueHasBeenInteractedWith = false;
 
