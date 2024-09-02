@@ -56,6 +56,7 @@ public class InteragationRoomController {
   }
 
   @FXML private Button btnGuess;
+  @FXML private Button btnBack;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
@@ -136,6 +137,11 @@ public class InteragationRoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
+    App.setRoot("room");
+  }
+
+  @FXML
+  private void handleBackToCrimeSceneClick(ActionEvent event) throws IOException {
     App.setRoot("room");
   }
 
