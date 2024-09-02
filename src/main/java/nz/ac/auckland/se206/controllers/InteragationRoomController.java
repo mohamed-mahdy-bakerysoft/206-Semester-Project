@@ -113,38 +113,6 @@ public class InteragationRoomController {
   }
 
   /**
-   * Handles mouse clicks on the clues in the room.
-   *
-   * @param event the mouse event triggered by clicking a clue
-   * @throws IOException if there is an I/O error
-   * @throws URISyntaxException if there is an error in the URI syntax
-   */
-  @FXML
-  private void handleClueClick(MouseEvent event) throws IOException, URISyntaxException {
-    Rectangle clickedRectangle = (Rectangle) event.getSource();
-    clueHasBeenInteractedWith = true;
-    if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the clues should not be interacted with
-      handleRectangleClick(event);
-      return;
-    }
-    switch (clickedRectangle.getId()) {
-      case "rectSecurityCamera":
-        App.setRoot("clue1");
-        break;
-      case "rectBin":
-        App.setRoot("clue2");
-        break;
-      case "rectPaperClue":
-        App.setRoot("clue3");
-        break;
-      case "rectSecurityCamera2":
-        App.setRoot("clue4");
-        break;
-    }
-  }
-
-  /**
    * Handles the guess button click event.
    *
    * @param event the action event triggered by clicking the guess button
@@ -171,6 +139,20 @@ public class InteragationRoomController {
     App.setRoot("room");
   }
 
+  @FXML
+  private void handleRoomsClick(MouseEvent event) throws IOException {
+    Rectangle clickedRoom = (Rectangle) event.getSource();
+    if (clickedRoom.getId().equals("rectRoomOne")) {
+      App.setRoot("IntelRoomOne");
+    }
+    if (clickedRoom.getId().equals("rectRoomTwo")) {
+      App.setRoot("IntelRoomTwo");
+    }
+    if (clickedRoom.getId().equals("rectRoomThree")) {
+      App.setRoot("IntelRoomThree");
+    }
+  }
+
   /**
    * Handles the left arrow click event to change perspective of room to the left.
    *
@@ -185,7 +167,7 @@ public class InteragationRoomController {
     }
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
-      App.setRoot("room");
+      App.setRoot("Intel_Draft");
     }
   }
 }

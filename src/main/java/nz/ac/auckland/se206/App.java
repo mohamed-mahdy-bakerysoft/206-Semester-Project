@@ -97,7 +97,14 @@ public class App extends Application {
     SceneManager.addUi(AppUi.BIN, loadFxml("clue2"));
     SceneManager.addUi(AppUi.MAP, loadFxml("clue3"));
     // Added Intel room Here
-    SceneManager.addUi(AppUi.INTELROOM, loadFxml("intel_Draft"));
+    // Corridor
+    SceneManager.addUi(AppUi.INTELROOM, loadFxml("Intel_Draft"));
+    // RoomOne
+    SceneManager.addUi(AppUi.INTELROOMONE, loadFxml("IntelRoomOne"));
+    // RoomTwo
+    SceneManager.addUi(AppUi.INTELROOMTWO, loadFxml("IntelRoomTwo"));
+    // RoomThree
+    SceneManager.addUi(AppUi.INTELROOMTHREE, loadFxml("IntelRoomThree"));
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START));
     stage.setScene(scene);

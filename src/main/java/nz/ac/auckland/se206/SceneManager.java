@@ -14,7 +14,14 @@ public class SceneManager {
     BIN,
     MAP,
     // Added Intel room Here as ENUM
-    INTELROOM
+    // Corridor
+    INTELROOM,
+    // RoomOne
+    INTELROOMONE,
+    // RoomTwo
+    INTELROOMTWO,
+    // RoomThree
+    INTELROOMTHREE
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

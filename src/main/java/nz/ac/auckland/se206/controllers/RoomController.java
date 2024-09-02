@@ -158,7 +158,7 @@ public class RoomController {
   @FXML
   private void handleIntelRoomClick(ActionEvent event) throws IOException {
     // Change scene to the intel room
-    App.setRoot("intel_Draft");
+    App.setRoot("Intel_Draft");
   }
 
   /**
@@ -220,6 +220,7 @@ public class RoomController {
     }
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
+      System.out.println("clicked");
       App.setRoot("room");
     }
   }
