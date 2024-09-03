@@ -434,6 +434,7 @@ public class InteragationRoomController {
    */
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
+    chatGroup.setVisible(false);
     if (clueHasBeenInteractedWith
         && InteragationRoomController
             .getSuspectHasBeenTalkedTo()) { // TO DO: && chatController.getSuspectHasBeenTalkedTo()
