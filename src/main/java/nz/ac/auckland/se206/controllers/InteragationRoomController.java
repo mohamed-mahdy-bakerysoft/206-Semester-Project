@@ -33,6 +33,8 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.states.Guessing;
 
+// improt key event
+
 /**
  * Added Controller class for the intelroom view. Handles user interactions within the room where
  * the user can chat with customers and guess their profession.
@@ -127,8 +129,7 @@ public class InteragationRoomController {
     chatHistory.put("suspect2.txt", new StringBuilder());
     chatHistory.put("thief.txt", new StringBuilder());
     // testing purposes
-    System.out.println("Entire Chat history: ");
-    System.out.println(chatHistory);
+    System.out.println("Entire Chat history intalizeed");
   }
 
   /**
@@ -138,7 +139,7 @@ public class InteragationRoomController {
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " pressed");
+    // System.out.println("Key " + event.getCode() + " pressed");
   }
 
   /**
@@ -148,7 +149,7 @@ public class InteragationRoomController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {
-    System.out.println("Key " + event.getCode() + " released");
+    // System.out.println("Key " + event.getCode() + " released");
   }
 
   public void setProfession(String profession) throws URISyntaxException {
@@ -450,6 +451,7 @@ public class InteragationRoomController {
 
     // Initialize the chat with the suspect
     setProfession(profession); // This method handles initializing chat context
+    context.handleRectangleClick(event, clickedRectangle.getId());
   }
 
   /**
@@ -486,20 +488,9 @@ public class InteragationRoomController {
   }
 
   @FXML
-  private void handleRoomsClick(MouseEvent event) throws IOException {
+  private void handleRoomsClick(MouseEvent event) throws IOException, URISyntaxException {
     Rectangle clickedRoom = (Rectangle) event.getSource();
-    if (suspectHasBeenTalkedTo) {
-      return;
-    }
-    if (clickedRoom.getId().equals("rectRoomOne")) {
-      App.setRoot("IntelRoomOne");
-    }
-    if (clickedRoom.getId().equals("rectRoomTwo")) {
-      App.setRoot("IntelRoomTwo");
-    }
-    if (clickedRoom.getId().equals("rectRoomThree")) {
-      App.setRoot("IntelRoomThree");
-    }
+    context.handleRectangleClick(event, clickedRoom.getId());
   }
 
   // // Map to store room instances

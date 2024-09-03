@@ -1,12 +1,18 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
+// import InteragationRoomController
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.controllers.InteragationRoomController;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
@@ -36,6 +42,49 @@ public class App extends Application {
   }
 
   public static void setSameRoot(Parent root) {
+    scene.setRoot(root);
+  }
+
+  private static Map<String, Parent> sceneCache = new HashMap<>();
+  private static Map<String, InteragationRoomController> controllerCache = new HashMap<>();
+
+  public static void openChat(MouseEvent event, String profession)
+      throws IOException, URISyntaxException {
+    String sceneKey = event.getSource().toString();
+
+    Parent root;
+    InteragationRoomController chatController;
+
+    // Check if the scene is already cached
+    if (sceneCache.containsKey(sceneKey)) {
+      root = sceneCache.get(sceneKey);
+      chatController = controllerCache.get(sceneKey);
+    } else {
+      FXMLLoader loader = null;
+      System.out.println("ID In app Is: " + profession);
+      switch (profession) {
+        case "rectRoomOne":
+          loader = new FXMLLoader(App.class.getResource("/fxml/IntelRoomOne.fxml"));
+          break;
+        case "rectRoomTwo":
+          loader = new FXMLLoader(App.class.getResource("/fxml/IntelRoomTwo.fxml"));
+          break;
+        case "rectRoomThree":
+          loader = new FXMLLoader(App.class.getResource("/fxml/IntelRoomThree.fxml"));
+          break;
+        default:
+          System.err.println("Id is " + profession + " so error");
+          return;
+      }
+      root = loader.load();
+
+      chatController = loader.getController();
+
+      // Cache the loaded scene and controller
+      sceneCache.put(sceneKey, root);
+      controllerCache.put(sceneKey, chatController);
+    }
+
     scene.setRoot(root);
   }
 

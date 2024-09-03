@@ -47,7 +47,8 @@ public class GameStarted implements GameState {
         player.play();
         return;
     }
-    // App.openChat(event, context.getProfession(rectangleId));
+    System.out.println("ID In GameStarted Is: " + rectangleId);
+    App.openChat(event, rectangleId);
   }
 
   /**
