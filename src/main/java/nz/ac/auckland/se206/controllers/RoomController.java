@@ -61,6 +61,7 @@ public class RoomController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectOfficer;
+  @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
@@ -154,6 +155,12 @@ public class RoomController {
     }
   }
 
+  @FXML
+  private void handleIntelRoomClick(ActionEvent event) throws IOException {
+    // Change scene to the intel room
+    App.setRoot("Intel_Draft");
+  }
+
   /**
    * Handles the guess button click event.
    *
@@ -164,7 +171,7 @@ public class RoomController {
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     if (clueHasBeenInteractedWith
-        && ChatController
+        && InteragationRoomController
             .getSuspectHasBeenTalkedTo()) { // TO DO: && chatController.getSuspectHasBeenTalkedTo()
       System.out.println("Now in guessing state");
       context.handleGuessClick();
@@ -213,6 +220,7 @@ public class RoomController {
     }
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
+      System.out.println("clicked");
       App.setRoot("room");
     }
   }
