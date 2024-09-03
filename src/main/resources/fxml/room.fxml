@@ -10,14 +10,9 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="469.0" fitWidth="822.0" layoutX="-16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="450.0" fitWidth="801.0" layoutX="-9.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/genericRoom.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="475.0" fitWidth="815.0" layoutX="-9.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mainroom.png" />
+            <Image url="@../images/crimescene_2.png" />
          </image>
       </ImageView>
       <Button fx:id="btnGuess" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
@@ -59,6 +54,11 @@
       <ImageView fx:id="mainArrowRight" fitHeight="99.0" fitWidth="111.0" layoutX="708.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/RIGHT.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mainArrowLeft" fitHeight="113.0" fitWidth="99.0" layoutX="-9.0" layoutY="250.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/LEFT.png" />
          </image>
       </ImageView>
       <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleIntelRoomClick" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">

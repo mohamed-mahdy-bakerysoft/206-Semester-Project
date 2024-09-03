@@ -4,63 +4,54 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <BorderPane fx:id="mainPane" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;">
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #D1B266;" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="454.0" fitWidth="807.0" layoutX="-11.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/13.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="btnGuess" layoutX="541.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Rectangle fx:id="rectSecurityCamera2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="257.0" layoutY="117.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-                  <Rectangle fx:id="rectOfficer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="191.0" layoutX="298.0" layoutY="342.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-                  <Rectangle fx:id="rectPaperClue" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="171.0" layoutX="25.0" layoutY="315.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="136.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" text="Guess Who ?">
-                     <font>
-                        <Font size="38.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="131.0" layoutY="48.0" text="Chat with the three suspects, and guess who is the art thief!">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="69.0" prefWidth="58.0">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="69.0" prefWidth="58.0">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="15.0" prefHeight="56.0" prefWidth="58.0" text=":">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="arrowRight" fitHeight="99.0" fitWidth="111.0" layoutX="708.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/RIGHT.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </center>
-      </BorderPane>
+      <ImageView fitHeight="475.0" fitWidth="822.0" layoutX="-32.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/crimescene_1.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGuess" layoutX="541.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="rectSecurityCamera2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="681.0" layoutY="68.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="rectPaperClue" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="298.0" layoutY="437.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" text=" PI Masters">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="114.0" layoutY="537.0" text="Chat with the three suspects, and guess who is the art thief!">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="66.0" layoutX="19.0" layoutY="398.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="2.0" prefHeight="56.0" prefWidth="58.0" text=":">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="arrowRight" fitHeight="98.0" fitWidth="98.0" layoutX="702.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RIGHT.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

@@ -203,6 +203,8 @@ public class RoomController {
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowRight")) {
       App.setRoot("room2");
+    } else if (clickedArrow.getId().equals("arrowRight")) {
+      App.setRoot("room");
     }
   }
 
@@ -221,6 +223,8 @@ public class RoomController {
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
       System.out.println("clicked");
+      App.setRoot("room3");
+    } else if (clickedArrow.getId().equals("arrowLeft")) {
       App.setRoot("room");
     }
   }
