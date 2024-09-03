@@ -1,15 +1,12 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.controllers.ChatController;
 
 /**
  * This is the entry point of the JavaFX application. This class initializes and runs the JavaFX
@@ -50,25 +47,6 @@ public class App extends Application {
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
-  // /**
-  //  * Opens the chat view and sets the profession in the chat controller.
-  //  *
-  //  * @param event the mouse event that triggered the method
-  //  * @param profession the profession to set in the chat controller
-  //  * @throws IOException if the FXML file is not found
-  //  * @throws URISyntaxException if there is an error with the URI syntax
-  //  */
-  // public static void openChat(MouseEvent event, String profession)
-  //     throws IOException, URISyntaxException {
-  //   FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/chat.fxml"));
-  //   Parent root = loader.load();
-
-  //   ChatController chatController = loader.getController();
-  //   chatController.setProfession(profession);
-  //   chatController.displaySuspectOnChat();
-  //   scene.setRoot(root);
-  // }
-
   public static void showEnding(String ending) throws IOException {
     switch (ending) {
       case "good_ending":
@@ -90,7 +68,6 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     SceneManager.addUi(AppUi.START, loadFxml("start"));
     SceneManager.addUi(AppUi.ROOM, loadFxml("room"));
-    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addUi(AppUi.GOOD_END, loadFxml("goodending"));
     SceneManager.addUi(AppUi.BAD_END, loadFxml("badending"));
     SceneManager.addUi(AppUi.CAMERA, loadFxml("clue1"));

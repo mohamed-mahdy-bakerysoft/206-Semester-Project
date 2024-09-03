@@ -171,7 +171,7 @@ public class RoomController {
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     if (clueHasBeenInteractedWith
-        && ChatController
+        && InteragationRoomController
             .getSuspectHasBeenTalkedTo()) { // TO DO: && chatController.getSuspectHasBeenTalkedTo()
       System.out.println("Now in guessing state");
       context.handleGuessClick();

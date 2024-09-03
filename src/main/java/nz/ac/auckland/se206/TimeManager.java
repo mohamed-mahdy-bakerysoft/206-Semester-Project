@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import nz.ac.auckland.se206.controllers.ChatController;
+import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.Guessing;
@@ -65,7 +65,7 @@ public class TimeManager {
         System.out.println("Game is over");
         return;
       } else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
-          || !(ChatController.getSuspectHasBeenTalkedTo()
+          || !(InteragationRoomController.getSuspectHasBeenTalkedTo()
               && RoomController
                   .getClueHasBeenInteractedWith())) { // if already in guessing state OR player has
         // not investigated, move to game over state
