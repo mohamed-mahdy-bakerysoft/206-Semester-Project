@@ -104,6 +104,7 @@ public class InteragationRoomController {
   private Media artStudentHmm;
   private Media thiefHmm;
   private Media grumpyTouristHmm;
+  private Map<String, StringBuilder> chatHistory;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -121,6 +122,13 @@ public class InteragationRoomController {
     initializeSounds();
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setTimerLabel(mins, secs);
+    this.chatHistory = new HashMap<>();
+    chatHistory.put("suspect1.txt", new StringBuilder());
+    chatHistory.put("suspect2.txt", new StringBuilder());
+    chatHistory.put("thief.txt", new StringBuilder());
+    // testing purposes
+    System.out.println("Entire Chat history: ");
+    System.out.println(chatHistory);
   }
 
   /**
@@ -210,6 +218,12 @@ public class InteragationRoomController {
         break;
     }
     map.put("profession", profession);
+    map.put("chathistory", chatHistory.get(promptFile).toString());
+    // testing purposes
+    System.out.println("Chat history: ");
+    System.out.println(chatHistory.get(promptFile).toString());
+    System.out.println("Entire Chat history: ");
+    System.out.println(chatHistory);
     return PromptEngineering.getPrompt(promptFile, map);
   }
 
@@ -332,6 +346,19 @@ public class InteragationRoomController {
   private void appendChatMessage(ChatMessage msg) {
     if (!msg.getRole().equals("user") && suspectHasBeenTalkedToMap.get(profession)) {
       playHmmSound(profession);
+    }
+
+    switch (profession) {
+      case "Curious Art Student":
+        chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+        break;
+      case "Art Thief":
+        chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+        break;
+      case "Grumpy Out of Town Tourist":
+        chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+
+        break;
     }
 
     // Start the text animation after a small delay to allow "hmm" sound to finish
@@ -461,6 +488,9 @@ public class InteragationRoomController {
   @FXML
   private void handleRoomsClick(MouseEvent event) throws IOException {
     Rectangle clickedRoom = (Rectangle) event.getSource();
+    if (suspectHasBeenTalkedTo) {
+      return;
+    }
     if (clickedRoom.getId().equals("rectRoomOne")) {
       App.setRoot("IntelRoomOne");
     }
@@ -471,6 +501,46 @@ public class InteragationRoomController {
       App.setRoot("IntelRoomThree");
     }
   }
+
+  // // Map to store room instances
+  // private Map<String, Parent> roomInstances = new HashMap<>();
+
+  // @FXML
+  // private void handleRoomsClick(MouseEvent event) throws IOException {
+  //     Rectangle clickedRoom = (Rectangle) event.getSource();
+
+  //     // Check if suspect has been talked to, if so, return early
+  //     if (suspectHasBeenTalkedTo) {
+  //         return;
+  //     }
+
+  //     // Get the ID of the clicked room
+  //     String roomId = clickedRoom.getId();
+  //     Parent roomInstance = null;
+
+  //     // Check if the room instance is already stored in the map
+  //     if (roomInstances.containsKey(roomId)) {
+  //         // Retrieve the stored instance
+  //         roomInstance = roomInstances.get(roomId);
+  //     } else {
+  //         // Load the room for the first time and store it in the map
+  //         String fxmlFile = "";
+  //         if (roomId.equals("rectRoomOne")) {
+  //             fxmlFile = "IntelRoomOne.fxml";
+  //         } else if (roomId.equals("rectRoomTwo")) {
+  //             fxmlFile = "IntelRoomTwo.fxml";
+  //         } else if (roomId.equals("rectRoomThree")) {
+  //             fxmlFile = "IntelRoomThree.fxml";
+  //         }
+
+  //         // Load the FXML file and store the instance
+  //         roomInstance = FXMLLoader.load(getClass().getResource(fxmlFile));
+  //         roomInstances.put(roomId, roomInstance);
+  //     }
+
+  //     // Set the root to the room instance
+  //     App.setRoot(roomInstance);
+  // }
 
   // Initialize sound resources only once
   private void initializeSounds() {
