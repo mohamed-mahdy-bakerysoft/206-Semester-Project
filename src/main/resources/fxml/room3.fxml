@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="475.0" fitWidth="822.0" layoutX="-32.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/crimescene_1.png" />
+            <Image url="@../images/crimescene_3.png" />
          </image>
       </ImageView>
       <Button fx:id="btnGuess" layoutX="541.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
@@ -20,8 +20,6 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Rectangle fx:id="rectSecurityCamera2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="681.0" layoutY="68.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="rectPaperClue" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="298.0" layoutY="437.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" text=" PI Masters">
          <font>
             <Font size="38.0" />
@@ -32,7 +30,7 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="66.0" layoutX="19.0" layoutY="398.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="264.0" layoutX="194.0" layoutY="172.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="125.0" />
       <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
          <font>
             <Font size="45.0" />

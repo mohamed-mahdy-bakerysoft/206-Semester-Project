@@ -20,11 +20,6 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Rectangle fx:id="rectSecurityCamera" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="688.0" layoutY="68.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="176.0" layoutX="74.0" layoutY="308.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="203.0" layoutX="238.0" layoutY="294.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-      <Rectangle fx:id="rectOfficer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="191.0" layoutX="425.0" layoutY="264.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="176.0" layoutX="601.0" layoutY="308.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="97.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="176.0" layoutY="7.0" text=" PI Masters">
          <font>
             <Font size="38.0" />
@@ -35,7 +30,7 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="66.0" layoutX="19.0" layoutY="398.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="66.0" layoutX="8.0" layoutY="389.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
       <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="-5.0" prefHeight="69.0" prefWidth="58.0" text="00">
          <font>
             <Font size="45.0" />
