@@ -140,7 +140,7 @@ public class RoomController {
       return;
     }
     switch (clickedRectangle.getId()) {
-      case "rectSecurityCamera":
+      case "rectSecurityRoom":
         App.setRoot("clue1");
         break;
       case "rectBin":
@@ -148,9 +148,6 @@ public class RoomController {
         break;
       case "rectPaperClue":
         App.setRoot("clue3");
-        break;
-      case "rectSecurityCamera2":
-        App.setRoot("clue4");
         break;
     }
   }
