@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
@@ -67,7 +68,12 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="60.0" opacity="0.0" prefHeight="449.0" prefWidth="200" style="-fx-background-color: #2E2E2E;" spacing = "20">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="60.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
+            <font>
+               <Font name="Monaco" size="24.0" />
+            </font>
+         </Text>
     <Button fx:id="suspect1Button" text="Suspect 1">
         <graphic>
             <ImageView fitHeight="52.0" fitWidth="63.0">
