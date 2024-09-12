@@ -105,7 +105,7 @@ public class RoomController {
         e -> {
           try {
 
-            goToRoom("Suspect1Room");
+            goToRoom("IntelRoomOne");
           } catch (IOException e1) {
             e1.printStackTrace();
           }
@@ -113,7 +113,7 @@ public class RoomController {
     suspect2Button.setOnAction(
         e -> {
           try {
-            goToRoom("Suspect2Room");
+            goToRoom("IntelRoomTwo");
           } catch (IOException e1) {
             e1.printStackTrace();
           }
@@ -121,7 +121,7 @@ public class RoomController {
     suspect3Button.setOnAction(
         e -> {
           try {
-            goToRoom("Suspect3Room");
+            goToRoom("IntelRoomThree");
           } catch (IOException e1) {
             e1.printStackTrace();
           }
@@ -197,7 +197,7 @@ public class RoomController {
     Stage stage = (Stage) navBar.getScene().getWindow();
     stage.setWidth(originalWidth);
     // Handle room switching logic
-    App.setRoot("Intel_Draft");
+    App.setRoot(roomName);
   }
 
   private void goToCorridor() throws IOException {
