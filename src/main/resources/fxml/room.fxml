@@ -62,12 +62,12 @@
             <Image url="@../images/RIGHT.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleIntelRoomClick" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+      <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="60.0" opacity="0.0" prefHeight="449.0" prefWidth="200">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="60.0" opacity="0.0" prefHeight="449.0" prefWidth="200" style="-fx-background-color: #2E2E2E;" spacing = "20">
     <Button fx:id="suspect1Button" text="Suspect 1">
         <graphic>
             <ImageView fitHeight="52.0" fitWidth="63.0">

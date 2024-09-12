@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
@@ -56,6 +61,13 @@ public class RoomController {
     return clueHasBeenInteractedWith;
   }
 
+  // Added navbar with buttons
+  @FXML private VBox navBar;
+  @FXML private Button corridorButton;
+  @FXML private Button suspect1Button;
+  @FXML private Button suspect2Button;
+  @FXML private Button suspect3Button;
+
   @FXML private Rectangle rectSecurityCamera;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
@@ -73,6 +85,7 @@ public class RoomController {
 
   private MediaPlayer player;
   private Media sound;
+  private boolean navBarVisible = false;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -83,6 +96,45 @@ public class RoomController {
   @FXML
   public void initialize() throws URISyntaxException {
     TimeManager timeManager = TimeManager.getInstance();
+    // NavBar Initialization
+    // Initialize with navBar hidden
+    navBar.setTranslateX(-200);
+    btnGoIntelRoom.setOnAction(e -> toggleNavBar());
+
+    suspect1Button.setOnAction(
+        e -> {
+          try {
+
+            goToRoom("Suspect1Room");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    suspect2Button.setOnAction(
+        e -> {
+          try {
+            goToRoom("Suspect2Room");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    suspect3Button.setOnAction(
+        e -> {
+          try {
+            goToRoom("Suspect3Room");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    corridorButton.setOnAction(
+        e -> {
+          try {
+            goToCorridor();
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+
     if (isFirstTimeInit) {
       // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
       isFirstTimeInit = false;
@@ -108,6 +160,45 @@ public class RoomController {
   @FXML
   public void onKeyReleased(KeyEvent event) {
     System.out.println("Key " + event.getCode() + " released");
+  }
+
+  private void toggleNavBar() {
+    TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
+    FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
+    // Get the current stage from the scene
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    double originalWidth = stage.getWidth();
+
+    if (navBarVisible) {
+      // Slide out and fade out, then reduce the window size
+      translateTransition.setByX(-200); // Move back off-screen to the right
+      fadeTransition.setToValue(0); // Fade out to invisible
+      navBarVisible = false;
+
+      // Reduce the window size after the transition
+      translateTransition.setOnFinished(e -> stage.setWidth(originalWidth - 200));
+    } else {
+      // Slide in and fade in, then increase the window size
+      translateTransition.setByX(200); // Move into view
+      fadeTransition.setToValue(1); // Fade in to fully visible
+      navBarVisible = true;
+
+      // Increase the window size during the transition
+      stage.setWidth(originalWidth + 200);
+    }
+
+    // Play both transitions
+    translateTransition.play();
+    fadeTransition.play();
+  }
+
+  private void goToRoom(String roomName) throws IOException {
+    // Handle room switching logic
+    App.setRoot("Intel_Draft");
+  }
+
+  private void goToCorridor() throws IOException {
+    App.setRoot("Intel_Draft");
   }
 
   /**
@@ -153,12 +244,6 @@ public class RoomController {
         App.setRoot("clue4");
         break;
     }
-  }
-
-  @FXML
-  private void handleIntelRoomClick(ActionEvent event) throws IOException {
-    // Change scene to the intel room
-    App.setRoot("Intel_Draft");
   }
 
   /**
