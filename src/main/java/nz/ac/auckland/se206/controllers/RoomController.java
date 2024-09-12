@@ -86,6 +86,7 @@ public class RoomController {
   private MediaPlayer player;
   private Media sound;
   private boolean navBarVisible = false;
+  private double originalWidth;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -100,7 +101,6 @@ public class RoomController {
     // Initialize with navBar hidden
     navBar.setTranslateX(-200);
     btnGoIntelRoom.setOnAction(e -> toggleNavBar());
-
     suspect1Button.setOnAction(
         e -> {
           try {
@@ -167,7 +167,7 @@ public class RoomController {
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
     // Get the current stage from the scene
     Stage stage = (Stage) navBar.getScene().getWindow();
-    double originalWidth = stage.getWidth();
+    originalWidth = stage.getWidth();
 
     if (navBarVisible) {
       // Slide out and fade out, then reduce the window size
@@ -193,11 +193,16 @@ public class RoomController {
   }
 
   private void goToRoom(String roomName) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
     // Handle room switching logic
     App.setRoot("Intel_Draft");
   }
 
   private void goToCorridor() throws IOException {
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
     App.setRoot("Intel_Draft");
   }
 
