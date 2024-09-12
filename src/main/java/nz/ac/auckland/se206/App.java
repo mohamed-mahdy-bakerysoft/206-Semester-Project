@@ -59,6 +59,7 @@ public class App extends Application {
     if (sceneCache.containsKey(sceneKey)) {
       root = sceneCache.get(sceneKey);
       chatController = controllerCache.get(sceneKey);
+      chatController.setTime();
     } else {
       FXMLLoader loader = null;
       System.out.println("ID In app Is: " + profession);

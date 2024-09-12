@@ -132,6 +132,11 @@ public class InteragationRoomController {
     System.out.println("Entire Chat history intalizeed");
   }
 
+  public void setTime() {
+    TimeManager timeManager = TimeManager.getInstance();
+    timeManager.setTimerLabel(mins, secs);
+  }
+
   /**
    * Handles the key pressed event.
    *
@@ -451,7 +456,6 @@ public class InteragationRoomController {
 
     // Initialize the chat with the suspect
     setProfession(profession); // This method handles initializing chat context
-    context.handleRectangleClick(event, clickedRectangle.getId());
   }
 
   /**
