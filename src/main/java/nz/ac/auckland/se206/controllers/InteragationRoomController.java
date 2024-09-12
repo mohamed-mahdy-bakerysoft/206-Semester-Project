@@ -585,6 +585,9 @@ public class InteragationRoomController {
 
   @FXML
   private void handleBackToCrimeSceneClick(ActionEvent event) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
     App.setRoot("room");
   }
 

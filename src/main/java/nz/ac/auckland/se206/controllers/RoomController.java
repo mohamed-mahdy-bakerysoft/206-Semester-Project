@@ -315,9 +315,4 @@ public class RoomController {
       App.setRoot("room");
     }
   }
-
-  @FXML
-  private void handleBackToCrimeSceneClick(ActionEvent event) throws IOException {
-    App.setRoot("room");
-  }
 }
