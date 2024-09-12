@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -17,9 +19,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -86,6 +91,14 @@ public class InteragationRoomController {
     return clueHasBeenInteractedWith;
   }
 
+  // Added navbar with buttons
+  @FXML private VBox navBar;
+  @FXML private Button corridorButton;
+  @FXML private Button suspect1Button;
+  @FXML private Button suspect2Button;
+  @FXML private Button suspect3Button;
+
+  @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private Button btnBack;
   @FXML private BorderPane mainPane;
@@ -107,6 +120,8 @@ public class InteragationRoomController {
   private Media thiefHmm;
   private Media grumpyTouristHmm;
   private Map<String, StringBuilder> chatHistory;
+  private boolean navBarVisible = false;
+  private double originalWidth;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -116,6 +131,43 @@ public class InteragationRoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    // NavBar Initialization
+    // Initialize with navBar hidden
+    navBar.setTranslateX(-200);
+    btnGoIntelRoom.setOnAction(e -> toggleNavBar());
+    suspect1Button.setOnAction(
+        e -> {
+          try {
+
+            goToRoom("IntelRoomOne");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    suspect2Button.setOnAction(
+        e -> {
+          try {
+            goToRoom("IntelRoomTwo");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    suspect3Button.setOnAction(
+        e -> {
+          try {
+            goToRoom("IntelRoomThree");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    corridorButton.setOnAction(
+        e -> {
+          try {
+            goToCorridor();
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
     if (isFirstTimeInit) {
       initializeSuspectTalkedToMap();
       initializeRoleToNameMap();
@@ -202,6 +254,51 @@ public class InteragationRoomController {
     } catch (ApiProxyException e) {
       e.printStackTrace();
     }
+  }
+
+  // NavBar Methods
+  private void toggleNavBar() {
+    TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
+    FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
+    // Get the current stage from the scene
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    originalWidth = stage.getWidth();
+
+    if (navBarVisible) {
+      // Slide out and fade out, then reduce the window size
+      translateTransition.setByX(-200); // Move back off-screen to the right
+      fadeTransition.setToValue(0); // Fade out to invisible
+      navBarVisible = false;
+
+      // Reduce the window size after the transition
+      translateTransition.setOnFinished(e -> stage.setWidth(originalWidth - 200));
+    } else {
+      // Slide in and fade in, then increase the window size
+      translateTransition.setByX(200); // Move into view
+      fadeTransition.setToValue(1); // Fade in to fully visible
+      navBarVisible = true;
+
+      // Increase the window size during the transition
+      stage.setWidth(originalWidth + 200);
+    }
+
+    // Play both transitions
+    translateTransition.play();
+    fadeTransition.play();
+  }
+
+  private void goToRoom(String roomName) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
+    // Handle room switching logic
+    App.setRoot(roomName);
+  }
+
+  private void goToCorridor() throws IOException {
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
+    App.setRoot("Intel_Draft");
   }
 
   /**

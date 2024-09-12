@@ -162,6 +162,7 @@ public class RoomController {
     System.out.println("Key " + event.getCode() + " released");
   }
 
+  // NavBar Methods
   private void toggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
@@ -313,5 +314,10 @@ public class RoomController {
       System.out.println("clicked");
       App.setRoot("room");
     }
+  }
+
+  @FXML
+  private void handleBackToCrimeSceneClick(ActionEvent event) throws IOException {
+    App.setRoot("room");
   }
 }
