@@ -497,46 +497,6 @@ public class InteragationRoomController {
     context.handleRectangleClick(event, clickedRoom.getId());
   }
 
-  // // Map to store room instances
-  // private Map<String, Parent> roomInstances = new HashMap<>();
-
-  // @FXML
-  // private void handleRoomsClick(MouseEvent event) throws IOException {
-  //     Rectangle clickedRoom = (Rectangle) event.getSource();
-
-  //     // Check if suspect has been talked to, if so, return early
-  //     if (suspectHasBeenTalkedTo) {
-  //         return;
-  //     }
-
-  //     // Get the ID of the clicked room
-  //     String roomId = clickedRoom.getId();
-  //     Parent roomInstance = null;
-
-  //     // Check if the room instance is already stored in the map
-  //     if (roomInstances.containsKey(roomId)) {
-  //         // Retrieve the stored instance
-  //         roomInstance = roomInstances.get(roomId);
-  //     } else {
-  //         // Load the room for the first time and store it in the map
-  //         String fxmlFile = "";
-  //         if (roomId.equals("rectRoomOne")) {
-  //             fxmlFile = "IntelRoomOne.fxml";
-  //         } else if (roomId.equals("rectRoomTwo")) {
-  //             fxmlFile = "IntelRoomTwo.fxml";
-  //         } else if (roomId.equals("rectRoomThree")) {
-  //             fxmlFile = "IntelRoomThree.fxml";
-  //         }
-
-  //         // Load the FXML file and store the instance
-  //         roomInstance = FXMLLoader.load(getClass().getResource(fxmlFile));
-  //         roomInstances.put(roomId, roomInstance);
-  //     }
-
-  //     // Set the root to the room instance
-  //     App.setRoot(roomInstance);
-  // }
-
   // Initialize sound resources only once
   private void initializeSounds() {
     try {

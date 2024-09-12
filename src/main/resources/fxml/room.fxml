@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -66,5 +67,29 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="60.0" opacity="0.0" prefHeight="449.0" prefWidth="200">
+    <Button fx:id="suspect1Button" text="Suspect 1">
+        <graphic>
+            <ImageView fitHeight="52.0" fitWidth="63.0">
+                <Image url="@../images/2.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="suspect2Button" text="Suspect 2">
+        <graphic>
+            <ImageView fitHeight="46.0" fitWidth="52.0">
+                <Image url="@../images/1.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="suspect3Button" text="Suspect 3">
+        <graphic>
+            <ImageView fitHeight="46.0" fitWidth="48.0">
+                <Image url="@../images/3.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <Button fx:id="corridorButton" text="The Corridor" />
+</VBox>
    </children>
 </Pane>
