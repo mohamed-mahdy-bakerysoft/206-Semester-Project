@@ -170,22 +170,24 @@ public class RoomController {
    */
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
-    if (clueHasBeenInteractedWith
-        && InteragationRoomController
-            .getSuspectHasBeenTalkedTo()) { // TO DO: && chatController.getSuspectHasBeenTalkedTo()
-      System.out.println("Now in guessing state");
-      context.handleGuessClick();
-    } else {
-      sound =
-          new Media(
-              App.class
-                  .getResource("/sounds/investigate_more_before_guessing.mp3")
-                  .toURI()
-                  .toString());
-      player = new MediaPlayer(sound);
-      player.play();
-    }
-    App.setRoot("room");
+    // if (clueHasBeenInteractedWith
+    //     && InteragationRoomController
+    //         .getSuspectHasBeenTalkedTo()) { // TO DO: &&
+    // chatController.getSuspectHasBeenTalkedTo()
+    //   System.out.println("Now in guessing state");
+    //   context.handleGuessClick();
+    // } else {
+    //   sound =
+    //       new Media(
+    //           App.class
+    //               .getResource("/sounds/investigate_more_before_guessing.mp3")
+    //               .toURI()
+    //               .toString());
+    //   player = new MediaPlayer(sound);
+    //   player.play();
+    // }
+    // App.setRoot("room");
+    App.setRoot("submitanswer");
   }
 
   /**
