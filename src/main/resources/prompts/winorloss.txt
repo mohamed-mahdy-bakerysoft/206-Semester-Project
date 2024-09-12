@@ -1,0 +1,17 @@
+Only respond with a true or false. 
+With the following info, compare the user inputted answer on what they think happened, with what actually happened.
+If its really close and accurate to what happened, reply true.
+If its very vague, lacking in info or guessed the wrong thief, reply false.
+this is the users inputted answer on what they thing happened: {answer}
+
+Compare the inputted answer with the following info:
+The Art Museum Heist:
+The crime that took place at the prestigious art museum was a well-planned heist, executed by an insider—the Head of Security (HOS)—who was under immense financial pressure due to personal debts.
+Key Players:
+The Janitor: An ex-convict trying to turn his life around, who initially becomes a prime suspect because of his criminal past. However, he wasn’t working on the night of the heist. His keycard was used in the crime, but he reported it missing shortly before the theft occurred.
+The Curator: A well-respected but somewhat naïve figure, who accidentally became involved in the situation after unknowingly infecting the museum’s security system with a virus. He received a scam text, fell for it, and was too embarrassed to admit it.
+The Head of Security (HOS): The true mastermind behind the heist. Desperate for money, he orchestrated the crime by stealing the janitor’s keycard during a casual chat at a party the night before the crime. Knowing that the curator would fall for the scam text, HOS sent a virus to infect the security system, making the curator look guilty.
+The Heist: The HOS had everything planned out. He needed a way to gain access to restricted areas of the museum without raising suspicion. So, he exploited the janitor’s criminal history and weak alibi by stealing the janitor's keycard. Using the stolen keycard, the HOS bypassed security protocols and gained access to the vault containing the expensive art pieces.
+
+In the days leading up to the heist, HOS sent a scam text to the curator, knowing the curator would fall for it. The scam text led the curator to download malware, which infected the museum's security system. This made the curator look suspicious as he tried to fix the issue late at night in the security room, just around the time of the heist.
+On the night of the heist, the HOS used the keycard, executed the theft, and left behind the janitor’s ID at the crime scene. The HOS ensured the security cameras were disabled using the virus, creating a window of opportunity to steal the valuable artwork and leave the curator as a possible suspect due to the virus installation.

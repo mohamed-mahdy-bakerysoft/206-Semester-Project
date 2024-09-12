@@ -29,6 +29,6 @@
       <Glow />
    </effect>
    <cursor>
-      <Cursor fx:constant="N_RESIZE" />
+      <Cursor fx:constant="DEFAULT" />
    </cursor>
 </VBox>
