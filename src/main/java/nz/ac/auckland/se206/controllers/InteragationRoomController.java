@@ -45,7 +45,6 @@ import nz.ac.auckland.se206.states.Guessing;
  * the user can chat with customers and guess their profession.
  */
 public class InteragationRoomController {
-  private static GameStateContext context = new GameStateContext();
   private static boolean clueHasBeenInteractedWith = false;
   private String profession;
   private ChatCompletionRequest chatCompletionRequest;
@@ -53,6 +52,7 @@ public class InteragationRoomController {
   private static boolean suspectHasBeenTalkedTo = false;
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
   private static Map<String, String> professionToNameMap = new HashMap<>();
+  private static GameStateContext context = GameStateContext.getInstance();
 
   /**
    * Gets the game context.
@@ -176,10 +176,12 @@ public class InteragationRoomController {
     initializeSounds();
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setTimerLabel(mins, secs);
-    this.chatHistory = new HashMap<>();
-    chatHistory.put("suspect1.txt", new StringBuilder());
-    chatHistory.put("suspect2.txt", new StringBuilder());
-    chatHistory.put("thief.txt", new StringBuilder());
+    // Initialize the game context with the charHistory
+    this.chatHistory = context.getChatHistory();
+    // this.chatHistory = new HashMap<>();
+    // chatHistory.put("suspect1.txt", new StringBuilder());
+    // chatHistory.put("suspect2.txt", new StringBuilder());
+    // chatHistory.put("thief.txt", new StringBuilder());
     // testing purposes
     System.out.println("Entire Chat history intalizeed");
   }
@@ -307,6 +309,7 @@ public class InteragationRoomController {
    * @return the system prompt string
    */
   private String getSystemPrompt() {
+    Map<String, StringBuilder> chatHistory = context.getChatHistory();
     Map<String, String> map = new HashMap<>();
     String promptFile = null;
     switch (profession) {
@@ -447,6 +450,7 @@ public class InteragationRoomController {
   }
 
   private void appendChatMessage(ChatMessage msg) {
+    Map<String, StringBuilder> chatHistory = context.getChatHistory();
     if (!msg.getRole().equals("user") && suspectHasBeenTalkedToMap.get(profession)) {
       playHmmSound(profession);
     }

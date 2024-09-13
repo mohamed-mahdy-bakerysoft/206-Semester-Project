@@ -30,7 +30,7 @@ import nz.ac.auckland.se206.states.Guessing;
 public class RoomController {
 
   private static boolean isFirstTimeInit = true;
-  private static GameStateContext context = new GameStateContext();
+  private static GameStateContext context = GameStateContext.getInstance();
   private static boolean clueHasBeenInteractedWith = false;
 
   /**
