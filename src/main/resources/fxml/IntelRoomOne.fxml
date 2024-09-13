@@ -15,7 +15,7 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
    <children>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="1082.0" layoutY="69.0" opacity="0.0" prefHeight="586.0" prefWidth="222.0" spacing="20.0" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="1100.0" layoutY="58.0" opacity="0.0" prefHeight="591.0" prefWidth="196.0" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
                <font>
@@ -50,7 +50,6 @@
                </graphic>
             </Button>
             <Button fx:id="corridorButton" text="The Corridor" />
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackToCrimeSceneClick" prefHeight="44.0" prefWidth="200.0" text="Back to Crime Scene" />
          </children>
       </VBox>
       <Button fx:id="btnGuess" layoutX="720.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
