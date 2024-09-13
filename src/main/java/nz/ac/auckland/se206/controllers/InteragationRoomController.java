@@ -124,7 +124,7 @@ public class InteragationRoomController {
   private Map<String, StringBuilder> chatHistory;
 
   private boolean navBarVisible = false;
-  private double originalWidth;
+  private int originalWidth = 789;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -267,16 +267,16 @@ public class InteragationRoomController {
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
     // Get the current stage from the scene
     Stage stage = (Stage) navBar.getScene().getWindow();
-    originalWidth = stage.getWidth();
+    // originalWidth = stage.getWidth();
 
     if (navBarVisible) {
       // Slide out and fade out, then reduce the window size
-      translateTransition.setByX(-200); // Move back off-screen to the right
+      translateTransition.setToX(-200); // Move back off-screen to the right
       fadeTransition.setToValue(0); // Fade out to invisible
       navBarVisible = false;
 
       // Reduce the window size after the transition
-      translateTransition.setOnFinished(e -> stage.setWidth(originalWidth - 200));
+      translateTransition.setOnFinished(e -> stage.setWidth(originalWidth));
     } else {
       // Slide in and fade in, then increase the window size
       translateTransition.setByX(200); // Move into view

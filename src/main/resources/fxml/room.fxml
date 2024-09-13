@@ -12,6 +12,43 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
+               <font>
+                  <Font name="Monaco" size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="suspect1Button" text="Suspect 1">
+               <graphic>
+                  <ImageView fitHeight="52.0" fitWidth="63.0">
+                     <image>
+                        <Image url="@../images/2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="suspect2Button" text="Suspect 2">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="52.0">
+                     <image>
+                        <Image url="@../images/1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="suspect3Button" text="Suspect 3">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="48.0">
+                     <image>
+                        <Image url="@../images/3.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="corridorButton" text="The Corridor" />
+         </children>
+      </VBox>
       <ImageView fitHeight="469.0" fitWidth="822.0" layoutX="-16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/genericRoom.png" />
@@ -68,42 +105,5 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
-         <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
-               <font>
-                  <Font name="Monaco" size="24.0" />
-               </font>
-            </Text>
-            <Button fx:id="suspect1Button" text="Suspect 1">
-               <graphic>
-                  <ImageView fitHeight="52.0" fitWidth="63.0">
-                     <image>
-                        <Image url="@../images/2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="suspect2Button" text="Suspect 2">
-               <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="52.0">
-                     <image>
-                        <Image url="@../images/1.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="suspect3Button" text="Suspect 3">
-               <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="48.0">
-                     <image>
-                        <Image url="@../images/3.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="corridorButton" text="The Corridor" />
-         </children>
-      </VBox>
    </children>
 </Pane>

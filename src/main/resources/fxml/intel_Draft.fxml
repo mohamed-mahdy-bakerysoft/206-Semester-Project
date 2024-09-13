@@ -12,49 +12,6 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
    <children>
-      <Button fx:id="btnGuess" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="9.0" text=" PI Masters">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="114.0" layoutY="537.0" text="Chat with the three suspects, and guess who is the art thief!">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="4.0" prefHeight="69.0" prefWidth="58.0" text="00">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="69.0" prefWidth="58.0" text="2">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="5.0" prefHeight="56.0" prefWidth="58.0" text=":">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="447.0" fitWidth="791.0" layoutX="-4.0" layoutY="75.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/IntelRoom.png" />
-         </image>
-      </ImageView>
-      <Rectangle fx:id="rectRoomOne" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="371.0" layoutX="623.0" layoutY="96.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
-      <Rectangle fx:id="rectRoomTwo" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="222.0" layoutX="543.0" layoutY="136.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="rectRoomThree" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="156.0" layoutX="493.0" layoutY="160.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
-      <Button fx:id="btnGoIntelRoom" layoutX="549.0" layoutY="9.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="74.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="20.0" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
@@ -93,5 +50,48 @@
             <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackToCrimeSceneClick" prefHeight="44.0" prefWidth="200.0" text="Back to Crime Scene" />
          </children>
       </VBox>
+      <Button fx:id="btnGuess" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="9.0" text=" PI Masters">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="114.0" layoutY="537.0" text="Chat with the three suspects, and guess who is the art thief!">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="4.0" prefHeight="69.0" prefWidth="58.0" text="00">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" prefHeight="69.0" prefWidth="58.0" text="2">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="5.0" prefHeight="56.0" prefWidth="58.0" text=":">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="447.0" fitWidth="791.0" layoutX="-4.0" layoutY="75.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/IntelRoom.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectRoomOne" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="347.0" layoutX="636.0" layoutY="120.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
+      <Rectangle fx:id="rectRoomTwo" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="222.0" layoutX="549.0" layoutY="151.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
+      <Rectangle fx:id="rectRoomThree" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="156.0" layoutX="493.0" layoutY="160.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+      <Button fx:id="btnGoIntelRoom" layoutX="549.0" layoutY="9.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
