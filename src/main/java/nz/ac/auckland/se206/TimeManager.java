@@ -93,7 +93,7 @@ public class TimeManager {
   }
 
   private void setGuessTimer() {
-    interval = 11; // added a second so that GUI could show 10 seconds
+    interval = 61; // added a second so that GUI could show 1 minute
     initialiseTimer();
   }
 

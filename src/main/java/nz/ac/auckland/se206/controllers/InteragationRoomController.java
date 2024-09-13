@@ -135,7 +135,7 @@ public class InteragationRoomController {
   private Map<String, StringBuilder> chatHistory;
 
   private boolean navBarVisible = false;
-  private int originalWidth = 800;
+  private int originalWidth = 1100;
   private Random random = new Random();
 
   /**
