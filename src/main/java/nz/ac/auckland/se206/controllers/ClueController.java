@@ -38,6 +38,8 @@ public class ClueController {
     Button clickedButton = (Button) event.getSource();
     if (clickedButton.getId().equals("backButton2")) {
       App.setRoot("room2");
+    } else if (clickedButton.getId().equals("backButton3")) {
+      App.setRoot("room3");
     } else {
       App.setRoot("room");
     }

@@ -9,12 +9,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ClueController">
    <children>
-      <ImageView fitHeight="563.0" fitWidth="981.0" layoutX="-96.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="464.0" fitWidth="811.0" layoutX="-20.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/Clue1.png" />
+            <Image url="@../images/computer_clue.png" />
          </image>
       </ImageView>
-      <Button fx:id="backButton" layoutX="570.0" layoutY="37.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
+      <Button fx:id="backButton3" layoutX="582.0" layoutY="32.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

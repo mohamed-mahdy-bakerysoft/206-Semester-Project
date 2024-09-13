@@ -139,6 +139,7 @@ public class App extends Application {
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START));
     stage.setScene(scene);
+    stage.setMaximized(true); // sets the stage to full screen on start
     stage.show();
   }
 }
