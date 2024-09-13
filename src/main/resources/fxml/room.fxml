@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="560.0" prefWidth="800.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
 
       <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
@@ -61,14 +61,9 @@
          </font>
       </Button>
       <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="79.0" layoutX="1.0" layoutY="386.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="9.0" text=" PI Masters">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="8.0" text=" PI Masters">
          <font>
             <Font size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="114.0" layoutY="537.0" text="Chat with the three suspects, and guess who is the art thief!">
-         <font>
-            <Font size="21.0" />
          </font>
       </Label>
       <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
@@ -97,7 +92,7 @@
          </image>
       </ImageView>
 
-      <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+      <Button fx:id="btnGoIntelRoom" layoutX="531.0" layoutY="20.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
 
          <font>
             <Font size="18.0" />
