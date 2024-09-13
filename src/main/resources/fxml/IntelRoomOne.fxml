@@ -91,17 +91,17 @@
             <Image url="@../images/LEFT.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Currator2" fitHeight="478.0" fitWidth="518.0" layoutX="167.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="Currator2" fitHeight="462.0" fitWidth="472.0" layoutX="180.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/artcurr3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Currator1" fitHeight="472.0" fitWidth="523.0" layoutX="180.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="Currator1" fitHeight="436.0" fitWidth="443.0" layoutX="180.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/artcurr2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Currator0" fitHeight="431.0" fitWidth="419.0" layoutX="213.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Currator0" fitHeight="431.0" fitWidth="419.0" layoutX="207.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/artcurrator.png" />
          </image>

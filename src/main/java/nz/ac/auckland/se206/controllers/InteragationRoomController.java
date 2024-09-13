@@ -113,6 +113,12 @@ public class InteragationRoomController {
   @FXML private ImageView Currator0;
   @FXML private ImageView Currator1;
   @FXML private ImageView Currator2;
+  @FXML private ImageView Thief0;
+  @FXML private ImageView Thief1;
+  @FXML private ImageView Thief2;
+  @FXML private ImageView Janitor0;
+  @FXML private ImageView Janitor1;
+  @FXML private ImageView Janitor2;
   @FXML private Group chatGroup;
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
@@ -525,7 +531,6 @@ public class InteragationRoomController {
 
   // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
   private ImageView getImageView(String imageId) {
-    // Parent currentRoot = SceneManager.getUiRoot(SceneManager.AppUi.INTELROOMONE);
     Parent currentRoot = navBar.getScene().getRoot(); // Get the root of the current scene
     return (ImageView) currentRoot.lookup("#" + imageId); // Adjust based on your FXML structure
   }
