@@ -13,7 +13,7 @@
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
 
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="68.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
                <font>
@@ -50,7 +50,7 @@
             <Button fx:id="corridorButton" text="The Corridor" />
          </children>
       </VBox>
-      <ImageView fitHeight="469.0" fitWidth="822.0" layoutX="-16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="482.0" fitWidth="807.0" layoutX="-16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/MainRoom.png" />
          </image>
@@ -61,7 +61,7 @@
          </font>
       </Button>
       <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="79.0" layoutX="1.0" layoutY="386.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="9.0" text=" PI Masters">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="18.0" text=" PI Masters">
          <font>
             <Font size="38.0" />
          </font>
@@ -97,7 +97,7 @@
          </image>
       </ImageView>
 
-      <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+      <Button fx:id="btnGoIntelRoom" layoutX="533.0" layoutY="20.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
 
          <font>
             <Font size="18.0" />
