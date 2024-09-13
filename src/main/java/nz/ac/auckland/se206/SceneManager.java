@@ -16,11 +16,11 @@ public class SceneManager {
     // Added Intel room Here as ENUM
     // Corridor
     INTELROOM,
-    // RoomOne
+    // RoomOne - Art Currator
     INTELROOMONE,
-    // RoomTwo
+    // RoomTwo - Art Thief
     INTELROOMTWO,
-    // RoomThree
+    // RoomThree - Janitor
     INTELROOMTHREE
   }
 

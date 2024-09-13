@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -11,6 +12,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -108,6 +110,9 @@ public class InteragationRoomController {
   @FXML private ImageView mainRightArrow;
   @FXML private ImageView arrowLeft;
   @FXML private ImageView arrowRight;
+  @FXML private ImageView Currator0;
+  @FXML private ImageView Currator1;
+  @FXML private ImageView Currator2;
   @FXML private Group chatGroup;
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
@@ -124,7 +129,8 @@ public class InteragationRoomController {
   private Map<String, StringBuilder> chatHistory;
 
   private boolean navBarVisible = false;
-  private int originalWidth = 789;
+  private int originalWidth = 800;
+  private Random random = new Random();
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -454,23 +460,27 @@ public class InteragationRoomController {
 
   private void appendChatMessage(ChatMessage msg) {
     Map<String, StringBuilder> chatHistory = context.getChatHistory();
+    int randomIndex = random.nextInt(3); // Generates 0, 1, or 2
+
     if (!msg.getRole().equals("user") && suspectHasBeenTalkedToMap.get(profession)) {
       playHmmSound(profession);
     }
 
+    // Adding to history and change the image of the person after each sentence
     switch (profession) {
       case "Art Currator":
         chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+        setImageVisibility("Currator", randomIndex);
         break;
       case "Art Thief":
         chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+        setImageVisibility("Thief", randomIndex);
         break;
       case "Janitor":
+        setImageVisibility("Janitor", randomIndex);
         chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-
         break;
     }
-
     // Start the text animation after a small delay to allow "hmm" sound to finish
     new Thread(
             () -> {
@@ -482,6 +492,42 @@ public class InteragationRoomController {
               }
             })
         .start();
+  }
+
+  // Helper method to set visibility based on the random index
+  private void setImageVisibility(String suspectType, int randomIndex) {
+    // Hide all images first
+    hideAllImages(suspectType);
+
+    // Show the selected image based on the random index
+    switch (randomIndex) {
+      case 0:
+        // Show suspectType + "1" image (e.g. Currator1)
+        getImageView(suspectType + "0").setVisible(true);
+        break;
+      case 1:
+        // Show suspectType + "2" image (e.g. Currator2)
+        getImageView(suspectType + "1").setVisible(true);
+        break;
+      case 2:
+        // Show suspectType + "3" image (e.g. Currator3)
+        getImageView(suspectType + "2").setVisible(true);
+        break;
+    }
+  }
+
+  // Hide all images for a given suspect
+  private void hideAllImages(String suspectType) {
+    getImageView(suspectType + "0").setVisible(false);
+    getImageView(suspectType + "1").setVisible(false);
+    getImageView(suspectType + "2").setVisible(false);
+  }
+
+  // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
+  private ImageView getImageView(String imageId) {
+    // Parent currentRoot = SceneManager.getUiRoot(SceneManager.AppUi.INTELROOMONE);
+    Parent currentRoot = navBar.getScene().getRoot(); // Get the root of the current scene
+    return (ImageView) currentRoot.lookup("#" + imageId); // Adjust based on your FXML structure
   }
 
   /**
