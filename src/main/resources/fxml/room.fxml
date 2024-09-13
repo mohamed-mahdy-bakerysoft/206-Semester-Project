@@ -5,12 +5,52 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="475.0" fitWidth="822.0" layoutX="-20.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
+               <font>
+                  <Font name="Monaco" size="24.0" />
+               </font>
+            </Text>
+            <Button fx:id="suspect1Button" text="Suspect 1">
+               <graphic>
+                  <ImageView fitHeight="52.0" fitWidth="63.0">
+                     <image>
+                        <Image url="@../images/2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="suspect2Button" text="Suspect 2">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="52.0">
+                     <image>
+                        <Image url="@../images/1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="suspect3Button" text="Suspect 3">
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="48.0">
+                     <image>
+                        <Image url="@../images/3.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="corridorButton" text="The Corridor" />
+         </children>
+      </VBox>
+      <ImageView fitHeight="469.0" fitWidth="822.0" layoutX="-16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/MainRoom.png" />
          </image>
@@ -56,7 +96,9 @@
             <Image url="@../images/RIGHT.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGoIntelRoom" layoutX="534.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleIntelRoomClick" prefHeight="44.0" prefWidth="252.0" text="Go to Interrogation Rooms">
+
+      <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+
          <font>
             <Font size="18.0" />
          </font>

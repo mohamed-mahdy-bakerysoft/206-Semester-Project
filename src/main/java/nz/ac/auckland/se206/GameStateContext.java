@@ -22,15 +22,22 @@ public class GameStateContext {
   private final GameStarted gameStartedState;
   private final Guessing guessingState;
   private final GameOver gameOverState;
+  private static GameStateContext instance;
   private GameState gameState;
+  private Map<String, StringBuilder> chatHistory;
 
   /** Constructs a new GameStateContext and initializes the game states and professions. */
-  public GameStateContext() {
+  private GameStateContext() {
     gameStartedState = new GameStarted(this);
     guessingState = new Guessing(this);
     gameOverState = new GameOver(this);
 
     gameState = gameStartedState; // Initial state
+
+    chatHistory = new HashMap<>();
+    chatHistory.put("suspect1.txt", new StringBuilder());
+    chatHistory.put("suspect2.txt", new StringBuilder());
+    chatHistory.put("thief.txt", new StringBuilder());
 
     rectanglesToProfession = new HashMap<>();
     rectanglesToProfession.put("rectPerson1", "Curious Art Student");
@@ -38,6 +45,22 @@ public class GameStateContext {
     rectanglesToProfession.put("rectPerson3", "Grumpy Out of Town Tourist");
     rectIdToGuess = "rectPerson2";
     professionToGuess = "Art Thief";
+  }
+
+  public static GameStateContext getInstance() {
+    if (instance == null) {
+      instance = new GameStateContext();
+    }
+    return instance;
+  }
+
+  /**
+   * Getter for the chat history
+   *
+   * @param chatHistory the current chat history
+   */
+  public Map<String, StringBuilder> getChatHistory() {
+    return chatHistory;
   }
 
   /**
