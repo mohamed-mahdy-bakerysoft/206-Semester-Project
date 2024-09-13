@@ -8,19 +8,20 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="450.0" fitWidth="801.0" layoutX="-9.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="475.0" fitWidth="822.0" layoutX="-20.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/crimescene_2.png" />
+            <Image url="@../images/MainRoom.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGuess" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="375.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="176.0" layoutY="7.0" text=" PI Masters">
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="79.0" layoutX="1.0" layoutY="386.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="9.0" text=" PI Masters">
          <font>
             <Font size="38.0" />
          </font>
@@ -30,33 +31,32 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="66.0" layoutX="8.0" layoutY="389.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="-5.0" prefHeight="69.0" prefWidth="58.0" text="00">
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="-5.0" prefHeight="69.0" prefWidth="58.0" text="2">
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="-4.0" prefHeight="56.0" prefWidth="58.0" text=":">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="2.0" prefHeight="56.0" prefWidth="58.0" text=":">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="mainArrowRight" fitHeight="99.0" fitWidth="111.0" layoutX="708.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/RIGHT.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="mainArrowLeft" fitHeight="113.0" fitWidth="99.0" layoutX="-9.0" layoutY="250.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mainArrowLeft" fitHeight="98.0" fitWidth="98.0" layoutX="-9.0" layoutY="251.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/LEFT.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleIntelRoomClick" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+      <ImageView fx:id="mainArrowRight" fitHeight="106.0" fitWidth="98.0" layoutX="704.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RIGHT.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGoIntelRoom" layoutX="534.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleIntelRoomClick" prefHeight="44.0" prefWidth="252.0" text="Go to Interrogation Rooms">
          <font>
             <Font size="18.0" />
          </font>

@@ -23,7 +23,7 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <Label layoutX="135.0" layoutY="526.0" text="Chat with the three suspects, and guess who is the art thief!">
+      <Label layoutX="135.0" layoutY="531.0" text="Chat with the three suspects, and guess who is the art thief!">
          <font>
             <Font size="21.0" />
          </font>
@@ -53,7 +53,7 @@
       <Rectangle fx:id="rectRoomThree" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="156.0" layoutX="493.0" layoutY="160.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
       <ImageView fitHeight="447.0" fitWidth="791.0" layoutX="-1.0" layoutY="60.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/IntelRoomThree.png" />
+            <Image url="@../images/HOSRoom.png" />
          </image>
       </ImageView>
       <ImageView fx:id="mainArrowLeft" fitHeight="98.0" fitWidth="98.0" layoutX="11.0" layoutY="271.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
@@ -61,7 +61,12 @@
             <Image url="@../images/LEFT.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="250.0" layoutX="291.0" layoutY="175.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+      <ImageView fitHeight="406.0" fitWidth="531.0" layoutX="103.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/headofsecurity%20-%20CROPPED.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="394.0" layoutX="262.0" layoutY="113.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="212.0" />
       <Group fx:id="chatGroup" layoutX="135.0" layoutY="465.0" visible="false">
          <children>
             <TextArea fx:id="txtaChat" editable="false" prefHeight="93.0" prefWidth="538.0" wrapText="true">
