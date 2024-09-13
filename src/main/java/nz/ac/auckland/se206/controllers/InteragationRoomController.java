@@ -119,7 +119,10 @@ public class InteragationRoomController {
   private Media artStudentHmm;
   private Media thiefHmm;
   private Media grumpyTouristHmm;
+
+  @SuppressWarnings("unused")
   private Map<String, StringBuilder> chatHistory;
+
   private boolean navBarVisible = false;
   private double originalWidth;
 
