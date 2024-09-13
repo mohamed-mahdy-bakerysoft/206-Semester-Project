@@ -93,7 +93,7 @@
       <Rectangle fx:id="rectRoomThree" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="156.0" layoutX="493.0" layoutY="160.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
       <ImageView fitHeight="447.0" fitWidth="791.0" layoutX="-1.0" layoutY="60.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/IntelRoomOne.png" />
+            <Image url="@../images/Office.png" />
          </image>
       </ImageView>
       <ImageView fx:id="mainArrowLeft" fitHeight="98.0" fitWidth="98.0" layoutX="1.0" layoutY="261.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
@@ -101,7 +101,12 @@
             <Image url="@../images/LEFT.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="324.0" layoutX="302.0" layoutY="183.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
+      <ImageView fitHeight="431.0" fitWidth="419.0" layoutX="185.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/artcurrator.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="357.0" layoutX="305.0" layoutY="156.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="168.0" />
       <Group fx:id="chatGroup" layoutX="114.0" layoutY="445.0" visible="false">
          <children>
             <TextArea fx:id="txtaChat" editable="false" prefHeight="93.0" prefWidth="538.0" wrapText="true">

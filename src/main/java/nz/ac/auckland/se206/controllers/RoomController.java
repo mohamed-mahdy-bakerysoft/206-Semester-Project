@@ -237,7 +237,7 @@ public class RoomController {
       return;
     }
     switch (clickedRectangle.getId()) {
-      case "rectSecurityCamera":
+      case "rectSecurityRoom":
         App.setRoot("clue1");
         break;
       case "rectBin":
@@ -245,9 +245,6 @@ public class RoomController {
         break;
       case "rectPaperClue":
         App.setRoot("clue3");
-        break;
-      case "rectSecurityCamera2":
-        App.setRoot("clue4");
         break;
     }
   }
@@ -294,6 +291,8 @@ public class RoomController {
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowRight")) {
       App.setRoot("room2");
+    } else if (clickedArrow.getId().equals("arrowRight")) {
+      App.setRoot("room");
     }
   }
 
@@ -312,6 +311,8 @@ public class RoomController {
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
       System.out.println("clicked");
+      App.setRoot("room3");
+    } else if (clickedArrow.getId().equals("arrowLeft")) {
       App.setRoot("room");
     }
   }

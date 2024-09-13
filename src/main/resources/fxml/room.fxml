@@ -12,6 +12,7 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
+
       <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
@@ -51,25 +52,16 @@
       </VBox>
       <ImageView fitHeight="469.0" fitWidth="822.0" layoutX="-16.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/genericRoom.png" />
+            <Image url="@../images/MainRoom.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="475.0" fitWidth="815.0" layoutX="-9.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/mainroom.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="btnGuess" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="375.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Rectangle fx:id="rectSecurityCamera" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="688.0" layoutY="68.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="176.0" layoutX="74.0" layoutY="308.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="203.0" layoutX="238.0" layoutY="294.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-      <Rectangle fx:id="rectOfficer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="191.0" layoutX="425.0" layoutY="264.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="176.0" layoutX="601.0" layoutY="308.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="97.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="176.0" layoutY="7.0" text=" PI Masters">
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="79.0" layoutX="1.0" layoutY="386.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="72.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="156.0" layoutY="9.0" text=" PI Masters">
          <font>
             <Font size="38.0" />
          </font>
@@ -79,28 +71,34 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="66.0" layoutX="19.0" layoutY="398.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="-5.0" prefHeight="69.0" prefWidth="58.0" text="00">
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="-5.0" prefHeight="69.0" prefWidth="58.0" text="2">
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="-4.0" prefHeight="56.0" prefWidth="58.0" text=":">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="2.0" prefHeight="56.0" prefWidth="58.0" text=":">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="mainArrowRight" fitHeight="99.0" fitWidth="111.0" layoutX="708.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mainArrowLeft" fitHeight="98.0" fitWidth="98.0" layoutX="-9.0" layoutY="251.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/LEFT.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="mainArrowRight" fitHeight="106.0" fitWidth="98.0" layoutX="704.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/RIGHT.png" />
          </image>
       </ImageView>
+
       <Button fx:id="btnGoIntelRoom" layoutX="532.0" layoutY="7.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+
          <font>
             <Font size="18.0" />
          </font>
