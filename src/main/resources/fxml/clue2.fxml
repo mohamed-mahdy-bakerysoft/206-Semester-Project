@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ClueController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BinClueController">
    <children>
       <ImageView fitHeight="701.0" fitWidth="1241.0" layoutX="-70.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -39,32 +39,32 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fitHeight="163.0" fitWidth="137.0" layoutX="507.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Keycard" fitHeight="163.0" fitWidth="137.0" layoutX="507.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Keycard.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="189.0" fitWidth="227.0" layoutX="481.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish1" fitHeight="189.0" fitWidth="227.0" layoutX="481.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="205.0" fitWidth="231.0" layoutX="405.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish2" fitHeight="205.0" fitWidth="231.0" layoutX="405.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="205.0" fitWidth="240.0" layoutX="551.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish3" fitHeight="205.0" fitWidth="240.0" layoutX="551.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="189.0" fitWidth="227.0" layoutX="396.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish4" fitHeight="189.0" fitWidth="227.0" layoutX="396.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="205.0" fitWidth="240.0" layoutX="335.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish5" fitHeight="205.0" fitWidth="240.0" layoutX="337.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish2.png" />
          </image>
