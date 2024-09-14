@@ -12,7 +12,6 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fitHeight="697.0" fitWidth="1237.0" layoutX="-71.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
       <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="68.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
@@ -50,6 +49,7 @@
             <Button fx:id="corridorButton" text="The Corridor" />
          </children>
       </VBox>
+      <ImageView fitHeight="697.0" fitWidth="1237.0" layoutX="-71.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SecurityRoom.png" />
          </image>
