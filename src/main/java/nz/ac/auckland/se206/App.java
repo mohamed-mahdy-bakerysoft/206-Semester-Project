@@ -22,6 +22,12 @@ public class App extends Application {
 
   private static Scene scene;
 
+  // private static Font font;
+
+  // public static Font getFont() {
+  //   return font;
+  // }
+
   /**
    * The main method that launches the JavaFX application.
    *
@@ -139,7 +145,9 @@ public class App extends Application {
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START));
     stage.setScene(scene);
-    stage.setMaximized(true); // sets the stage to full screen on start
+    // stage.setMaximized(true); // sets the stage to full screen on start
+    stage.setHeight(690);
+    stage.setWidth(1100);
     stage.show();
   }
 }

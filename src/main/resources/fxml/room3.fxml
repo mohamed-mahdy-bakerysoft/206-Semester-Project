@@ -10,8 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
+      <ImageView fitHeight="697.0" fitWidth="1237.0" layoutX="-71.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
       <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="68.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
@@ -49,43 +50,37 @@
             <Button fx:id="corridorButton" text="The Corridor" />
          </children>
       </VBox>
-      <ImageView fitHeight="475.0" fitWidth="822.0" layoutX="-32.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/SecurityRoom.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGuess" layoutX="376.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="845.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="9.0" text=" PI Masters">
+      <Rectangle fx:id="rectSecurityRoom" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="403.0" layoutX="273.0" layoutY="168.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="184.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TimerBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
          <font>
-            <Font size="38.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Label layoutX="114.0" layoutY="537.0" text="Chat with the three suspects, and guess who is the art thief!">
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
          <font>
-            <Font size="21.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectSecurityRoom" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="264.0" layoutX="194.0" layoutY="172.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="125.0" />
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
          <font>
-            <Font size="45.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="2.0" prefHeight="56.0" prefWidth="58.0" text=":">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="arrowRight" fitHeight="98.0" fitWidth="98.0" layoutX="702.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="arrowRight" fitHeight="101.0" fitWidth="101.0" layoutX="1007.0" layoutY="295.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/RIGHT.png" />
          </image>

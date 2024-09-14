@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
    <children>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="790.0" layoutY="58.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="20.0" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="1100.0" layoutY="58.0" opacity="0.0" prefHeight="591.0" prefWidth="196.0" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
                <font>
@@ -50,80 +50,84 @@
                </graphic>
             </Button>
             <Button fx:id="corridorButton" text="The Corridor" />
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackToCrimeSceneClick" prefHeight="44.0" prefWidth="200.0" text="Back to Crime Scene" />
          </children>
       </VBox>
-      <Button fx:id="btnGuess" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <ImageView fitHeight="704.0" fitWidth="1301.0" layoutX="-76.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/JanitorRoom.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGuess" layoutX="720.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="7.0" text=" PI Masters">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <Label layoutX="114.0" layoutY="537.0" text="Chat with the three suspects, and guess who is the art thief!">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="2.0" prefHeight="56.0" prefWidth="58.0" text=":">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="447.0" fitWidth="791.0" layoutX="-4.0" layoutY="60.0" pickOnBounds="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/IntelRoom.png" />
+            <Image url="@../images/TimerBackground.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectRoomOne" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="371.0" layoutX="623.0" layoutY="96.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
-      <Rectangle fx:id="rectRoomTwo" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="222.0" layoutX="543.0" layoutY="136.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="rectRoomThree" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="156.0" layoutX="493.0" layoutY="160.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
-      <ImageView fitHeight="447.0" fitWidth="791.0" layoutX="-1.0" layoutY="60.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/JanitorsRoom.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="mainArrowLeft" fitHeight="98.0" fitWidth="98.0" layoutX="11.0" layoutY="271.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="mainArrowLeft" fitHeight="170.0" fitWidth="160.0" layoutX="-13.0" layoutY="277.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/LEFT.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="427.0" fitWidth="470.0" layoutX="169.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/janitor.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="387.0" layoutX="237.0" layoutY="112.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="280.0" />
-      <Group fx:id="chatGroup" layoutX="113.0" layoutY="445.0" visible="false">
+      <ImageView fx:id="Janitor1" fitHeight="605.0" fitWidth="598.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../images/jan2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Janitor2" fitHeight="597.0" fitWidth="598.0" layoutX="220.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/jan3.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="476.0" layoutX="365.0" layoutY="161.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="312.0" />
+      <Group fx:id="chatGroup" layoutX="207.0" layoutY="522.0" visible="false">
          <children>
-            <TextArea fx:id="txtaChat" editable="false" prefHeight="93.0" prefWidth="538.0" wrapText="true">
+            <TextArea fx:id="txtaChat" editable="false" layoutY="-39.0" prefHeight="137.0" prefWidth="755.0" wrapText="true">
                <font>
-                  <Font size="15.0" />
+                  <Font size="18.0" />
                </font>
             </TextArea>
-            <TextField fx:id="txtInput" layoutY="92.0" prefHeight="26.0" prefWidth="435.0">
+            <Button fx:id="btnSend" layoutX="580.0" layoutY="99.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="76.0" text="Send">
                <font>
-                  <Font size="15.0" />
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="656.0" layoutY="99.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="31.0" prefWidth="98.0" text="Go Back">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtInput" layoutY="98.0" prefHeight="46.0" prefWidth="580.0">
+               <font>
+                  <Font size="18.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSend" layoutX="435.0" layoutY="92.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="31.0" prefWidth="43.0" text="Send" />
-            <Button layoutX="478.0" layoutY="92.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="31.0" prefWidth="59.0" text="Go Back" />
          </children>
-        </Group>
-        <Button fx:id="btnGoIntelRoom" layoutX="549.0" layoutY="9.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
+      </Group>
+        <Button fx:id="btnGoIntelRoom" layoutX="864.0" layoutY="9.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
          <font>
             <Font size="18.0" />
          </font>

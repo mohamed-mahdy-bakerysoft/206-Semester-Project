@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
@@ -42,6 +44,14 @@ public class ClueController {
       App.setRoot("room3");
     } else {
       App.setRoot("room");
+    }
+  }
+
+  @FXML
+  private void handleInitialLogBookClick(MouseEvent event) throws IOException {
+    Rectangle clicked = (Rectangle) event.getSource();
+    if (clicked.getId().equals("rectLogBook")) {
+      App.setRoot("logbookclue1");
     }
   }
 }

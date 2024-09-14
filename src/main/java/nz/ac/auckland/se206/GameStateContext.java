@@ -40,9 +40,9 @@ public class GameStateContext {
     chatHistory.put("thief.txt", new StringBuilder());
 
     rectanglesToProfession = new HashMap<>();
-    rectanglesToProfession.put("rectPerson1", "Curious Art Student");
+    rectanglesToProfession.put("rectPerson1", "Art Currator");
     rectanglesToProfession.put("rectPerson2", "Art Thief");
-    rectanglesToProfession.put("rectPerson3", "Grumpy Out of Town Tourist");
+    rectanglesToProfession.put("rectPerson3", "Janitor");
     rectIdToGuess = "rectPerson2";
     professionToGuess = "Art Thief";
   }

@@ -16,7 +16,7 @@ import nz.ac.auckland.se206.states.Guessing;
 
 public class TimeManager {
   private static TimeManager instance;
-  private static int interval = 120; // 120 for 2 minutes
+  private static int interval = 300; // 300 for 5 minutes
 
   public static synchronized TimeManager getInstance() {
     if (instance == null) {
@@ -93,7 +93,7 @@ public class TimeManager {
   }
 
   private void setGuessTimer() {
-    interval = 11; // added a second so that GUI could show 10 seconds
+    interval = 61; // added a second so that GUI could show 1 minute
     initialiseTimer();
   }
 

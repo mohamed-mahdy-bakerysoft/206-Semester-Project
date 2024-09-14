@@ -39,7 +39,7 @@ public class TextToSpeech {
               Voice voice = Voice.GOOGLE_EN_US_STANDARD_H;
               // changing voice based on what suspect is being spoken to
               switch (profession) {
-                case "Curious Art Student":
+                case "Art Currator":
                   provider = Provider.GOOGLE;
                   voice = Voice.GOOGLE_EN_AU_STANDARD_C;
                   break;
@@ -47,7 +47,7 @@ public class TextToSpeech {
                   provider = Provider.GOOGLE;
                   voice = Voice.GOOGLE_EN_GB_STANDARD_B;
                   break;
-                case "Grumpy Out of Town Tourist":
+                case "Janitor":
                   provider = Provider.GOOGLE;
                   voice = Voice.GOOGLE_EN_AU_STANDARD_D;
                   break;
