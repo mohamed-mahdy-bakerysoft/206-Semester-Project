@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ClueController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ClueController">
    <children>
-      <ImageView fitHeight="465.0" fitWidth="789.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="701.0" fitWidth="1241.0" layoutX="-70.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/binclue.png" />
          </image>
       </ImageView>
-      <Button fx:id="backButton" layoutX="325.0" layoutY="22.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
+      <Button fx:id="backButton" layoutX="936.0" layoutY="22.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
@@ -24,20 +24,50 @@
             <Image url="@../images/TimerBackground.png" />
          </image>
       </ImageView>
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="69.0" prefWidth="58.0">
-        <font>
-          <Font size="45.0" />
-        </font>
+     <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
       </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="69.0" prefWidth="58.0">
-        <font>
-          <Font size="45.0" />
-        </font>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="15.0" prefHeight="56.0" prefWidth="58.0" text=":">
-        <font>
-          <Font size="45.0" />
-        </font>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
       </Label>
+      <ImageView fitHeight="163.0" fitWidth="137.0" layoutX="507.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Keycard.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="189.0" fitWidth="227.0" layoutX="481.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Rubbish1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="205.0" fitWidth="231.0" layoutX="405.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Rubbish3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="205.0" fitWidth="240.0" layoutX="551.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Rubbish2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="189.0" fitWidth="227.0" layoutX="396.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Rubbish1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="205.0" fitWidth="240.0" layoutX="335.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Rubbish2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
