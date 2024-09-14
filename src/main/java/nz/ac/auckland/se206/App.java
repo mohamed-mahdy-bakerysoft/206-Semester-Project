@@ -22,6 +22,12 @@ public class App extends Application {
 
   private static Scene scene;
 
+  // private static Font font;
+
+  // public static Font getFont() {
+  //   return font;
+  // }
+
   /**
    * The main method that launches the JavaFX application.
    *

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
    <children>
       <VBox fx:id="navBar" alignment="CENTER" layoutX="1100.0" layoutY="58.0" opacity="0.0" prefHeight="591.0" prefWidth="196.0" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
@@ -52,36 +52,31 @@
             <Button fx:id="corridorButton" text="The Corridor" />
          </children>
       </VBox>
+      <ImageView fitHeight="704.0" fitWidth="1301.0" layoutX="-76.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/JanitorRoom.png" />
+         </image>
+      </ImageView>
       <Button fx:id="btnGuess" layoutX="720.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="7.0" text=" PI Masters">
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
          <font>
-            <Font size="38.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="00">
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
          <font>
-            <Font size="45.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
          <font>
-            <Font size="45.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="2.0" prefHeight="56.0" prefWidth="58.0" text=":">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="591.0" fitWidth="1100.0" layoutX="1.0" layoutY="61.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/JanitorsRoom.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="mainArrowLeft" fitHeight="170.0" fitWidth="160.0" layoutX="-13.0" layoutY="277.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/LEFT.png" />
