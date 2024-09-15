@@ -42,7 +42,7 @@
       </Label>
       <Rectangle fx:id="rectBackToInbox" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="23.0" layoutX="220.0" layoutY="262.0" onMouseClicked="#handleComputerClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="115.0" />
       <Rectangle fx:id="rectBackToInbox" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="63.0" layoutX="229.0" layoutY="172.0" onMouseClicked="#handleComputerClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="137.0" />
-      <Rectangle fx:id="rectBackToInbox" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="35.0" layoutX="220.0" layoutY="99.0" onMouseClicked="#handleBackToInbox" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+      <Rectangle fx:id="rectBackToInbox" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="35.0" layoutX="220.0" layoutY="99.0" onMouseClicked="#handleComputerClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
       <Rectangle fx:id="rectEscape" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="35.0" layoutX="834.0" layoutY="52.0" onMouseClicked="#handleComputerClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
    </children>
 </AnchorPane>
