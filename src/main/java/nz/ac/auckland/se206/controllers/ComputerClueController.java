@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
@@ -50,9 +51,18 @@ public class ComputerClueController extends ClueController {
     passwordGuesses++;
     if (passwordTxtField.getText().equals("williamthegoat")) {
       App.setRoot("computerclue1");
-    } else if (passwordGuesses >= 2) {
+    } else if (passwordGuesses >= 2
+        && !passwordTxtField
+            .getText()
+            .equals("")) { // if not empty and user has guessed more than twice
       passwordTxtField.clear();
       passwordHint.setVisible(true);
+    }
+  }
+
+  public void handleEnter(KeyEvent keyEvent) throws IOException {
+    if (keyEvent.getCode().toString().equals("ENTER")) {
+      handlePassword(null);
     }
   }
 }
