@@ -57,6 +57,7 @@ public class ClueController {
 
   @FXML
   private void handleInitialComputerClick() throws IOException {
+    System.out.println(ComputerClueController.getPasswordHasBeenGuessed());
     if (ComputerClueController.getPasswordHasBeenGuessed()) {
       App.setRoot("computerclue1");
       return;

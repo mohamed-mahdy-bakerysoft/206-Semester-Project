@@ -19,6 +19,10 @@ public class ComputerClueController extends ClueController {
     return passwordHasBeenGuessed;
   }
 
+  private static void incrementPasswordGuesses() {
+    passwordGuesses++;
+  }
+
   @FXML private Rectangle rectOpenEmail;
   @FXML private Rectangle rectEscape;
   @FXML private Rectangle rectBackToInbox;
@@ -48,9 +52,10 @@ public class ComputerClueController extends ClueController {
   }
 
   public void handlePassword(MouseEvent event) throws IOException {
-    passwordGuesses++;
+    incrementPasswordGuesses();
     if (passwordTxtField.getText().equals("williamthegoat")) {
       App.setRoot("computerclue1");
+      passwordHasBeenGuessed = true;
     } else if (passwordGuesses >= 2
         && !passwordTxtField
             .getText()
