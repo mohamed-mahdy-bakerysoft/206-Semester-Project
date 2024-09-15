@@ -54,4 +54,9 @@ public class ClueController {
       App.setRoot("logbookclue1");
     }
   }
+
+  @FXML
+  private void handleInitialComputerClick() throws IOException {
+    App.setRoot("computerclue1");
+  }
 }
