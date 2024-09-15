@@ -20,13 +20,18 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
+// improt java fxml text
+
 public class SubmitAnswerController {
+  private static String feed;
 
   @FXML private Button submitButton;
+  @FXML private Button appendfeed;
   @FXML private TextArea answerTxtArea;
   @FXML private Rectangle janitorFile;
   @FXML private Rectangle hosFile;
   @FXML private Rectangle curatorFile;
+  @FXML private TextArea feedback;
 
   public void initialize() {}
 
@@ -36,6 +41,12 @@ public class SubmitAnswerController {
 
     System.out.println("Answer submitted: " + answerTxtArea.getText());
     intizliaseAndGpt(map);
+  }
+
+  @FXML
+  private void appendfeedback() {
+    feedback.appendText(feed);
+    System.out.println("append button clicked");
   }
 
   @FXML
@@ -75,6 +86,8 @@ public class SubmitAnswerController {
               .setTopP(0.5)
               .setMaxTokens(100);
       runGpt(new ChatMessage("system", getSystemPrompt(data)));
+      App.showEnding("good_ending");
+
     } catch (ApiProxyException e) {
       e.printStackTrace();
     } catch (IOException e) { // Add this catch block for IOException
@@ -92,17 +105,10 @@ public class SubmitAnswerController {
 
       // Extract the content as a String
       String messageContent = result.getChatMessage().getContent();
-      if (messageContent == null) {
-        System.out.println("No content in the message");
-      } else if (messageContent.contains("True")) {
-        System.out.println("You win");
-        App.setRoot("goodEnding");
-      } else if (messageContent.contains("False")) {
-        App.setRoot("badEnding");
-      } else {
-        System.out.println("IDK whats wrong");
-      }
 
+      // set meesage content onto the text feedback
+      feed = messageContent;
+      System.out.println("Message content: " + feed);
       // Return the content as a string
       return messageContent;
 

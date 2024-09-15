@@ -1,7 +1,6 @@
-Only respond with a true or false. 
 With the following info, compare the user inputted answer on what they think happened, with what actually happened.
-If its really close and accurate to what happened, reply true.
-If its very vague, lacking in info or guessed the wrong thief, reply false.
+Provide feedback on why they were right or wrong about the story. Try to keep it simple and on point. Try to keep it short.
+Point out areas where they were wrong or right. If they don't know, or if its a absurd answer, just give them a quick rundown of the story.
 this is the users inputted answer on what they thing happened: {answer}
 
 Compare the inputted answer with the following info:

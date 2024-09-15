@@ -112,6 +112,11 @@ public class App extends Application {
     }
   }
 
+  // make a method that returns the current roots controller
+  public static InteragationRoomController getController() {
+    return controllerCache.get(scene.toString());
+  }
+
   /**
    * This method is invoked when the application starts. It loads and shows the "room" scene.
    *
