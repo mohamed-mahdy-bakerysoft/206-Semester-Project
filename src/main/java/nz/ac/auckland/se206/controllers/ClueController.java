@@ -54,4 +54,14 @@ public class ClueController {
       App.setRoot("logbookclue1");
     }
   }
+
+  @FXML
+  private void handleInitialComputerClick() throws IOException {
+    System.out.println(ComputerClueController.getPasswordHasBeenGuessed());
+    if (ComputerClueController.getPasswordHasBeenGuessed()) {
+      App.setRoot("computerclue1");
+      return;
+    }
+    App.setRoot("computercluepassword");
+  }
 }
