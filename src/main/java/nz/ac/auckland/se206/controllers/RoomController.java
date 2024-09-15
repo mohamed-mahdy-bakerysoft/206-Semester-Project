@@ -187,7 +187,7 @@ public class RoomController {
     //   player.play();
     // }
     // App.setRoot("room");
-    App.setRoot("submitanswer");
+    App.setRoot("whosThief");
   }
 
   /**

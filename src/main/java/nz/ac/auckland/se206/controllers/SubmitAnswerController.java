@@ -1,11 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException; // Add this import for IOException
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -19,6 +24,9 @@ public class SubmitAnswerController {
 
   @FXML private Button submitButton;
   @FXML private TextArea answerTxtArea;
+  @FXML private Rectangle janitorFile;
+  @FXML private Rectangle hosFile;
+  @FXML private Rectangle curatorFile;
 
   public void initialize() {}
 
@@ -28,6 +36,27 @@ public class SubmitAnswerController {
 
     System.out.println("Answer submitted: " + answerTxtArea.getText());
     intizliaseAndGpt(map);
+  }
+
+  @FXML
+  private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
+    Rectangle clickedRectangle = (Rectangle) event.getSource();
+    String id = clickedRectangle.getId();
+    if (id.equals("janitorFile")) {
+      App.setRoot("badEnding");
+      Media media =
+          new Media(getClass().getResource("/sounds/better_luck_next_time.mp3").toExternalForm());
+      MediaPlayer player = new MediaPlayer(media);
+      player.play();
+    } else if (id.equals("hosFile")) {
+      App.setRoot("submitanswer");
+    } else if (id.equals("curatorFile")) {
+      App.setRoot("badEnding");
+      Media media =
+          new Media(getClass().getResource("/sounds/better_luck_next_time.mp3").toExternalForm());
+      MediaPlayer player = new MediaPlayer(media);
+      player.play();
+    }
   }
 
   private String getSystemPrompt(Map<String, String> data) {

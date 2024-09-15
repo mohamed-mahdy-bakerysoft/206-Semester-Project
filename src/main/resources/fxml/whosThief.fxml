@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
+   <children>
+      <ImageView fitHeight="493.0" fitWidth="789.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/suspectfiles3.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="40.0" text="Detective, it's your call! Click on the file of the person you believe is guilty.">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="janitorFile" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="279.0" layoutY="237.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+      <Rectangle fx:id="curatorFile" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="36.0" layoutY="154.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+      <Rectangle fx:id="hosFile" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="534.0" layoutY="160.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+   </children>
+</Pane>
