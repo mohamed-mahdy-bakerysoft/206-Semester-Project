@@ -73,7 +73,7 @@ public class RoomController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectOfficer;
-  @FXML private Button btnGoIntelRoom;
+  // @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
@@ -99,8 +99,9 @@ public class RoomController {
     TimeManager timeManager = TimeManager.getInstance();
     // NavBar Initialization
     // Initialize with navBar hidden
-    navBar.setTranslateX(-200);
-    btnGoIntelRoom.setOnAction(e -> toggleNavBar());
+    navBar.setTranslateX(+200);
+    navBar.setDisable(true);
+    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
     suspect1Button.setOnAction(
         e -> {
           try {
@@ -122,14 +123,6 @@ public class RoomController {
         e -> {
           try {
             goToRoom("IntelRoomThree");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    corridorButton.setOnAction(
-        e -> {
-          try {
-            goToCorridor();
           } catch (IOException e1) {
             e1.printStackTrace();
           }
@@ -163,29 +156,23 @@ public class RoomController {
   }
 
   // NavBar Methods
+  @FXML
   private void toggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
-    // Get the current stage from the scene
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    originalWidth = stage.getWidth();
 
     if (navBarVisible) {
       // Slide out and fade out, then reduce the window size
-      translateTransition.setByX(-200); // Move back off-screen to the right
+      translateTransition.setToX(200); // Move back off-screen to the right
       fadeTransition.setToValue(0); // Fade out to invisible
       navBarVisible = false;
-
-      // Reduce the window size after the transition
-      translateTransition.setOnFinished(e -> stage.setWidth(originalWidth - 200));
+      navBar.setDisable(true); // Disable the navBar
     } else {
+      navBar.setDisable(false); // Enable the navBar
       // Slide in and fade in, then increase the window size
-      translateTransition.setByX(200); // Move into view
+      translateTransition.setByX(-200); // Move into view
       fadeTransition.setToValue(1); // Fade in to fully visible
       navBarVisible = true;
-
-      // Increase the window size during the transition
-      stage.setWidth(originalWidth + 200);
     }
 
     // Play both transitions
@@ -199,12 +186,6 @@ public class RoomController {
     stage.setWidth(originalWidth);
     // Handle room switching logic
     App.setRoot(roomName);
-  }
-
-  private void goToCorridor() throws IOException {
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    stage.setWidth(originalWidth);
-    App.setRoot("Intel_Draft");
   }
 
   /**
