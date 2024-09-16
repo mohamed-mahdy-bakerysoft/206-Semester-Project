@@ -128,15 +128,6 @@ public class RoomController {
           }
         });
 
-    // corridorButton.setOnAction(
-    //     e -> {
-    //       try {
-    //         goToCorridor();
-    //       } catch (IOException e1) {
-    //         e1.printStackTrace();
-    //       }
-    //     });
-
     if (isFirstTimeInit) {
       // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
       isFirstTimeInit = false;
@@ -196,12 +187,6 @@ public class RoomController {
     // Handle room switching logic
     App.setRoot(roomName);
   }
-
-  // private void goToCorridor() throws IOException {
-  //   Stage stage = (Stage) navBar.getScene().getWindow();
-  //   stage.setWidth(originalWidth);
-  //   App.setRoot("Intel_Draft");
-  // }
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.

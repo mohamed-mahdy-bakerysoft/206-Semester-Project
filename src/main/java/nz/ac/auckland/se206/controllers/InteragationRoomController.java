@@ -176,14 +176,7 @@ public class InteragationRoomController {
             e1.printStackTrace();
           }
         });
-    // corridorButton.setOnAction(
-    //     e -> {
-    //       try {
-    //         goToCorridor();
-    //       } catch (IOException e1) {
-    //         e1.printStackTrace();
-    //       }
-    //     });
+
     if (isFirstTimeInit) {
       initializeSuspectTalkedToMap();
       initializeRoleToNameMap();
@@ -194,10 +187,6 @@ public class InteragationRoomController {
     timeManager.setTimerLabel(mins, secs);
     // Initialize the game context with the charHistory
     this.chatHistory = context.getChatHistory();
-    // this.chatHistory = new HashMap<>();
-    // chatHistory.put("suspect1.txt", new StringBuilder());
-    // chatHistory.put("suspect2.txt", new StringBuilder());
-    // chatHistory.put("thief.txt", new StringBuilder());
     // testing purposes
     System.out.println("Entire Chat history intalizeed");
   }
