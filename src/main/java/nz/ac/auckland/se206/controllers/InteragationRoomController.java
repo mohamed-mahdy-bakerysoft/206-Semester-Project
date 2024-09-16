@@ -690,7 +690,7 @@ public class InteragationRoomController {
     }
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
-      App.setRoot("Intel_Draft");
+      App.setRoot("room");
     }
   }
 
@@ -704,6 +704,6 @@ public class InteragationRoomController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     chatGroup.setVisible(false); // Ensure chat group is visible
-    App.setRoot("Intel_Draft");
+    App.setRoot("room");
   }
 }
