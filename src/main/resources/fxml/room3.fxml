@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,45 +9,51 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="789.0" layoutY="68.0" opacity="0.0" prefHeight="449.0" prefWidth="200" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+      <ImageView fitHeight="697.0" fitWidth="1237.0" layoutX="-71.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/SecurityRoom.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowRight" fitHeight="101.0" fitWidth="101.0" layoutX="1007.0" layoutY="295.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RIGHT.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="914.0" layoutY="135.0" prefHeight="516.0" prefWidth="196.0" style="-fx-background-image: url('/images/nav_bar_background.png'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 2;">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
-               <font>
-                  <Font name="Monaco" size="24.0" />
-               </font>
-            </Text>
-            <Button fx:id="suspect1Button" text="Suspect 1">
+            <Button fx:id="suspect1Button" contentDisplay="GRAPHIC_ONLY" prefHeight="97.0" prefWidth="91.0" snapToPixel="false" style="-fx-background-color: transparent;" textAlignment="CENTER" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <graphic>
-                  <ImageView fitHeight="52.0" fitWidth="63.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
-                        <Image url="@../images/2.png" />
+                        <Image url="@../images/NavFrank.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="suspect2Button" text="Suspect 2">
+            <Button fx:id="suspect2Button" contentDisplay="GRAPHIC_ONLY" prefHeight="143.0" prefWidth="69.0" style="-fx-background-color: transparent;" text="Suspect 2">
                <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="52.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
-                        <Image url="@../images/1.png" />
+                        <Image url="@../images/NavJohn.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="suspect3Button" text="Suspect 3">
+            <Button fx:id="suspect3Button" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" text="Suspect 3">
                <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="48.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
-                        <Image url="@../images/3.png" />
+                        <Image url="@../images/NavWill.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="corridorButton" text="The Corridor" />
          </children>
       </VBox>
       <ImageView fitHeight="697.0" fitWidth="1237.0" layoutX="-71.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
@@ -80,15 +87,10 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="arrowRight" fitHeight="101.0" fitWidth="101.0" layoutX="1007.0" layoutY="295.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="107.0" fitWidth="117.0" layoutX="977.0" layoutY="19.0" onMouseClicked="#toggleNavBar" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/RIGHT.png" />
+            <Image url="@../images/FileIcon.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGoIntelRoom" layoutX="864.0" layoutY="20.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
    </children>
 </Pane>
