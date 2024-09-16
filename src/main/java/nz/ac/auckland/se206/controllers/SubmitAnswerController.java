@@ -8,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
@@ -24,20 +22,26 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 public class SubmitAnswerController {
   private static String feed;
+  private static String thief;
 
   @FXML private Button submitButton;
-  @FXML private Button appendfeed;
+  @FXML private Button viewfeedback;
+  @FXML private Button viewfeedback2;
   @FXML private TextArea answerTxtArea;
-  @FXML private Rectangle janitorFile;
-  @FXML private Rectangle hosFile;
-  @FXML private Rectangle curatorFile;
+  @FXML private Rectangle janitor;
+  @FXML private Rectangle hos;
+  @FXML private Rectangle curator;
   @FXML private TextArea feedback;
+  @FXML private TextArea feedback2;
 
   public void initialize() {}
 
   public void sendAnswer() {
+    System.err.println(thief);
     Map<String, String> map = new HashMap<>();
     map.put("answer", answerTxtArea.getText());
+    map.put("thief", thief);
+    System.out.println("Thief: " + thief);
 
     System.out.println("Answer submitted: " + answerTxtArea.getText());
     intizliaseAndGpt(map);
@@ -45,29 +49,21 @@ public class SubmitAnswerController {
 
   @FXML
   private void appendfeedback() {
-    feedback.appendText(feed);
-    System.out.println("append button clicked");
+    if (thief.equals("hos")) {
+      feedback.appendText(feed);
+    } else if (thief.equals("curator")) {
+      feedback2.appendText(feed);
+    } else if (thief.equals("janitor")) {
+      feedback2.appendText(feed);
+    }
   }
 
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
-    String id = clickedRectangle.getId();
-    if (id.equals("janitorFile")) {
-      App.setRoot("badEnding");
-      Media media =
-          new Media(getClass().getResource("/sounds/better_luck_next_time.mp3").toExternalForm());
-      MediaPlayer player = new MediaPlayer(media);
-      player.play();
-    } else if (id.equals("hosFile")) {
-      App.setRoot("submitanswer");
-    } else if (id.equals("curatorFile")) {
-      App.setRoot("badEnding");
-      Media media =
-          new Media(getClass().getResource("/sounds/better_luck_next_time.mp3").toExternalForm());
-      MediaPlayer player = new MediaPlayer(media);
-      player.play();
-    }
+    thief = clickedRectangle.getId();
+
+    App.setRoot("submitanswer");
   }
 
   private String getSystemPrompt(Map<String, String> data) {
@@ -86,8 +82,17 @@ public class SubmitAnswerController {
               .setTopP(0.5)
               .setMaxTokens(100);
       runGpt(new ChatMessage("system", getSystemPrompt(data)));
-      App.showEnding("good_ending");
+      System.err.println("stuff about to run here........................");
+      if (thief.equals("janitor")) {
+        App.setRoot("badending");
+      } else if (thief.equals("hos")) {
+        App.setRoot("goodending2");
+      } else if (thief.equals("curator")) {
+        App.setRoot("badending");
 
+      } else {
+        System.err.println("error");
+      }
     } catch (ApiProxyException e) {
       e.printStackTrace();
     } catch (IOException e) { // Add this catch block for IOException

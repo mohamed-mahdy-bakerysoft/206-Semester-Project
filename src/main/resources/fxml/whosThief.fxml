@@ -20,8 +20,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Rectangle fx:id="janitorFile" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="279.0" layoutY="237.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-      <Rectangle fx:id="curatorFile" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="36.0" layoutY="154.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-      <Rectangle fx:id="hosFile" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="534.0" layoutY="160.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+      <Rectangle fx:id="janitor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="279.0" layoutY="237.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+      <Rectangle fx:id="curator" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="36.0" layoutY="154.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
+      <Rectangle fx:id="hos" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="534.0" layoutY="160.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
    </children>
 </Pane>
