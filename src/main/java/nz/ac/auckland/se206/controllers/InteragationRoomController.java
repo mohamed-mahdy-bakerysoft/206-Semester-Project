@@ -148,7 +148,8 @@ public class InteragationRoomController {
   public void initialize() throws ApiProxyException {
     // NavBar Initialization
     // Initialize with navBar hidden
-    navBar.setTranslateX(-200);
+    navBar.setTranslateX(+200);
+    navBar.setDisable(true);
     // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
     suspect1Button.setOnAction(
         e -> {
@@ -278,26 +279,19 @@ public class InteragationRoomController {
   private void toggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
-    // Get the current stage from the scene
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    // originalWidth = stage.getWidth();
 
     if (navBarVisible) {
       // Slide out and fade out, then reduce the window size
-      translateTransition.setToX(-200); // Move back off-screen to the right
+      translateTransition.setToX(200); // Move back off-screen to the right
       fadeTransition.setToValue(0); // Fade out to invisible
       navBarVisible = false;
-
-      // Reduce the window size after the transition
-      translateTransition.setOnFinished(e -> stage.setWidth(originalWidth));
+      navBar.setDisable(true); // Disable the navBar
     } else {
+      navBar.setDisable(false); // Enable the navBar
       // Slide in and fade in, then increase the window size
-      translateTransition.setByX(200); // Move into view
+      translateTransition.setByX(-200); // Move into view
       fadeTransition.setToValue(1); // Fade in to fully visible
       navBarVisible = true;
-
-      // Increase the window size during the transition
-      stage.setWidth(originalWidth + 200);
     }
 
     // Play both transitions
