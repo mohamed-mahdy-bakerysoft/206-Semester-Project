@@ -55,7 +55,7 @@
             <Image url="@../images/mainroom.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGuess" layoutX="722.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="722.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" stylesheets="@../css/styles.css" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
