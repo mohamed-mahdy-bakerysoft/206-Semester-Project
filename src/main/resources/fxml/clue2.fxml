@@ -5,6 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BinClueController">
@@ -14,6 +15,7 @@
             <Image url="@../images/binclue.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="rectBackDrop" arcHeight="5.0" arcWidth="5.0" fill="#000000a1" height="710.0" layoutX="-2.0" onMouseClicked="#handleClickBack" stroke="BLACK" strokeType="INSIDE" visible="false" width="1108.0" />
       <Button fx:id="backButton" layoutX="936.0" layoutY="22.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
          <font>
             <Font name="System Bold" size="25.0" />
@@ -39,34 +41,39 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="Keycard" fitHeight="163.0" fitWidth="137.0" layoutX="507.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Keycard" fitHeight="163.0" fitWidth="137.0" layoutX="482.0" layoutY="224.0" onMouseClicked="#handleKeyCard" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Keycard.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Rubbish1" fitHeight="189.0" fitWidth="227.0" layoutX="481.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish1" fitHeight="189.0" fitWidth="227.0" layoutX="540.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Rubbish2" fitHeight="205.0" fitWidth="231.0" layoutX="405.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish2" fitHeight="205.0" fitWidth="231.0" layoutX="448.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Rubbish3" fitHeight="205.0" fitWidth="240.0" layoutX="551.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish3" fitHeight="205.0" fitWidth="240.0" layoutX="550.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Rubbish4" fitHeight="189.0" fitWidth="227.0" layoutX="396.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish4" fitHeight="189.0" fitWidth="227.0" layoutX="446.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Rubbish5" fitHeight="205.0" fitWidth="240.0" layoutX="337.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Rubbish5" fitHeight="205.0" fitWidth="240.0" layoutX="335.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Rubbish2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Keycard2" fitHeight="581.0" fitWidth="603.0" layoutX="283.0" layoutY="66.0" onMouseClicked="#handleKeyCard" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Keycard.png" />
          </image>
       </ImageView>
    </children>
