@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
@@ -23,19 +22,14 @@
             <Image url="@../images/RIGHT.png" />
          </image>
       </ImageView>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="906.0" layoutY="125.0" opacity="0.98" prefHeight="516.0" prefWidth="196.0" spacing="10.0" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="908.0" layoutY="125.0" prefHeight="516.0" prefWidth="196.0" style="-fx-background-image: url('/images/nav_bar_background.png'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 2;">
          <children>
-            <Text boundsType="VISUAL" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." textAlignment="CENTER" textOrigin="TOP" translateY="15.0" wrappingWidth="159.56695556640625">
-               <font>
-                  <Font name="Monaco" size="24.0" />
-               </font>
-            </Text>
             <Button fx:id="suspect1Button" contentDisplay="GRAPHIC_ONLY" prefHeight="97.0" prefWidth="91.0" snapToPixel="false" style="-fx-background-color: transparent;" textAlignment="CENTER" wrapText="true">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="150.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
                         <Image url="@../images/NavFrank.png" />
                      </image>
@@ -44,7 +38,7 @@
             </Button>
             <Button fx:id="suspect2Button" contentDisplay="GRAPHIC_ONLY" prefHeight="143.0" prefWidth="69.0" style="-fx-background-color: transparent;" text="Suspect 2">
                <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="150.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
                         <Image url="@../images/NavJohn.png" />
                      </image>
@@ -53,7 +47,7 @@
             </Button>
             <Button fx:id="suspect3Button" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" text="Suspect 3">
                <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="150.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
                         <Image url="@../images/NavWill.png" />
                      </image>
