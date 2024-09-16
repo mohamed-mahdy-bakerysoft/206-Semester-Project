@@ -174,8 +174,8 @@ public class TimeManager {
   }
 
   // make a setter for interval
-  public void setInterval(int interval) {
-    this.interval = interval;
+  public void setInterval(int interval1) {
+    interval = interval1;
   }
 
   // make a getter for time interval

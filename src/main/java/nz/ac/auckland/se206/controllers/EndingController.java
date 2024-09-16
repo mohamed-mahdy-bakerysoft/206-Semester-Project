@@ -14,18 +14,23 @@ public class EndingController {
   private void appendfeedback() {
     thief = SubmitAnswerController.getThief();
     feed = SubmitAnswerController.getFeed();
-    if (thief.equals("hos")) {
-      feedback.appendText(feed);
-    } else if (thief.equals("curator")) {
-      feedback2.appendText(feed);
-    } else if (thief.equals("janitor")) {
-      feedback2.appendText(feed);
-    } else {
+    if (feed == null) {
       if (thief.equals("hos")) {
         feedback.appendText("feedback unavaiable");
+        return;
       } else {
         feedback2.appendText("feedback unavaiable");
+        return;
       }
+    }
+    if (thief.equals("hos")) {
+      feedback.setText(feed);
+    } else if (thief.equals("curator")) {
+      feedback2.setText(feed);
+    } else if (thief.equals("janitor")) {
+      feedback2.setText(feed);
+    } else {
+
     }
   }
 }
