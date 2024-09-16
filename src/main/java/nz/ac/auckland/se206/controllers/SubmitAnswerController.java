@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +17,8 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 // improt java fxml text
@@ -23,6 +26,17 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 public class SubmitAnswerController {
   private static String feed;
   private static String thief;
+  private static String answer;
+  private static boolean isFirstTime = true;
+
+  // make getters for feed and thief
+  public static String getFeed() {
+    return feed;
+  }
+
+  public static String getThief() {
+    return thief;
+  }
 
   @FXML private Button submitButton;
   @FXML private Button viewfeedback;
@@ -33,18 +47,61 @@ public class SubmitAnswerController {
   @FXML private Rectangle curator;
   @FXML private TextArea feedback;
   @FXML private TextArea feedback2;
+  @FXML private Label mins;
+  @FXML private Label secs;
 
-  public void initialize() {}
+  // make a getter for answer
+  public static String getAnswer() {
+    return answer;
+  }
+
+  // make a setter for isfirst time
+  public static void setIsFirstTime(boolean isFirstTime) {
+    SubmitAnswerController.isFirstTime = isFirstTime;
+  }
+
+  public void initialize() {
+    TimeManager timeManager = TimeManager.getInstance();
+    if (isFirstTime == true) {
+
+      timeManager.stopTimer();
+      timeManager.setInterval(60);
+    }
+    timeManager.startTimer();
+    timeManager.setTimerLabel(mins, secs);
+    GameStateContext context = RoomController.getGameContext();
+    context.setState(context.getGuessingState());
+  }
 
   public void sendAnswer() {
     System.err.println(thief);
+    if (answerTxtArea.getText().isEmpty()) {
+      return;
+    } else {
+      Map<String, String> map = new HashMap<>();
+      map.put("answer", answerTxtArea.getText());
+      map.put("thief", thief);
+      System.out.println("Thief: " + thief);
+
+      System.out.println("Answer submitted: " + answerTxtArea.getText());
+      intizliaseAndGpt(map);
+    }
+  }
+
+  public static Map<String, String> intiateanswer() {
     Map<String, String> map = new HashMap<>();
-    map.put("answer", answerTxtArea.getText());
+    map.put("answer", answer);
     map.put("thief", thief);
     System.out.println("Thief: " + thief);
 
-    System.out.println("Answer submitted: " + answerTxtArea.getText());
-    intizliaseAndGpt(map);
+    System.out.println("Answer submitted: " + answer);
+    return map;
+  }
+
+  @FXML
+  private void savefeedback() {
+    answer = answerTxtArea.getText();
+    System.out.println("Answer: " + answer);
   }
 
   @FXML
@@ -55,6 +112,8 @@ public class SubmitAnswerController {
       feedback2.appendText(feed);
     } else if (thief.equals("janitor")) {
       feedback2.appendText(feed);
+    } else {
+      feedback2.appendText("Feedback not avaiable");
     }
   }
 
@@ -62,7 +121,7 @@ public class SubmitAnswerController {
   private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     thief = clickedRectangle.getId();
-
+    isFirstTime = false;
     App.setRoot("submitanswer");
   }
 
@@ -82,7 +141,8 @@ public class SubmitAnswerController {
               .setTopP(0.5)
               .setMaxTokens(100);
       runGpt(new ChatMessage("system", getSystemPrompt(data)));
-      System.err.println("stuff about to run here........................");
+      System.out.println("stuff about to run here........................");
+      System.out.println("thief is: " + thief);
       if (thief.equals("janitor")) {
         App.setRoot("badending");
       } else if (thief.equals("hos")) {
@@ -112,6 +172,7 @@ public class SubmitAnswerController {
       String messageContent = result.getChatMessage().getContent();
 
       // set meesage content onto the text feedback
+
       feed = messageContent;
       System.out.println("Message content: " + feed);
       // Return the content as a string

@@ -85,6 +85,7 @@ public class RoomController {
     TimeManager timeManager = TimeManager.getInstance();
     if (isFirstTimeInit) {
       // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
+      System.out.println("First time");
       isFirstTimeInit = false;
     }
     timeManager.setTimerLabel(mins, secs);

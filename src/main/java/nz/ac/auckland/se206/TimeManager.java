@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Map;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -11,12 +12,15 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SubmitAnswerController;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.Guessing;
 
+// import map
+
 public class TimeManager {
   private static TimeManager instance;
-  private static int interval = 120; // 120 for 2 minutes
+  private static int interval; // 120 for 2 minutes
 
   public static synchronized TimeManager getInstance() {
     if (instance == null) {
@@ -69,8 +73,27 @@ public class TimeManager {
               && RoomController
                   .getClueHasBeenInteractedWith())) { // if already in guessing state OR player has
         // not investigated, move to game over state
-        RoomController.setGameOverState();
+        SubmitAnswerController.setIsFirstTime(false);
+        if (SubmitAnswerController.getAnswer() != null) {
+          Map<String, String> map = SubmitAnswerController.intiateanswer();
+          SubmitAnswerController intiateanswer = new SubmitAnswerController();
+          intiateanswer.intizliaseAndGpt(map);
+        } else {
+          String thief = SubmitAnswerController.getThief();
+          if (thief.equals("janitor")) {
+            App.setRoot("badending");
+          } else if (thief.equals("hos")) {
+            App.setRoot("goodending2");
+          } else if (thief.equals("curator")) {
+            App.setRoot("badending");
+
+          } else {
+            System.err.println("error");
+          }
+        }
         timeline.stop();
+
+        return;
       } else { // move to guessing state and give 10 seconds to guess
         RoomController.getGameContext()
             .setState(RoomController.getGameContext().getGuessingState());
@@ -142,5 +165,21 @@ public class TimeManager {
       mins.setText(formattedMinutes);
       secs.setText(formattedSeconds);
     }
+  }
+
+  // make a reset function
+  public void resetTimer() {
+    interval = 0;
+    updateTimerLabels();
+  }
+
+  // make a setter for interval
+  public void setInterval(int interval) {
+    this.interval = interval;
+  }
+
+  // make a getter for time interval
+  public int getInterval() {
+    return interval;
   }
 }
