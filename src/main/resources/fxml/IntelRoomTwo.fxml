@@ -20,7 +20,7 @@
             <Image url="@../images/JanitorRoom.png" />
          </image>
       </ImageView>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="905.0" layoutY="121.0" opacity="0.0" prefHeight="516.0" prefWidth="196.0" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="904.0" layoutY="131.0" opacity="0.0" prefHeight="516.0" prefWidth="196.0" spacing="30" style="-fx-background-color: #2E2E2E;  -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 2;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Fast Travel to..." wrappingWidth="159.56695556640625">
                <font>
