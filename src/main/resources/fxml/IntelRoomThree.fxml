@@ -49,7 +49,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="corridorButton" text="The Corridor" />
          </children>
       </VBox>
       <ImageView fitHeight="703.0" fitWidth="1245.0" layoutX="-79.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
@@ -130,10 +129,10 @@
             </TextField>
          </children>
       </Group>
-      <Button fx:id="btnGoIntelRoom" layoutX="864.0" layoutY="13.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="222.0" text="Go to Interragation rooms">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <ImageView fitHeight="107.0" fitWidth="117.0" layoutX="977.0" layoutY="19.0" onMouseClicked="#toggleNavBar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/FileIcon.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

@@ -73,7 +73,7 @@ public class RoomController {
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
   @FXML private Rectangle rectOfficer;
-  @FXML private Button btnGoIntelRoom;
+  // @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
@@ -100,7 +100,7 @@ public class RoomController {
     // NavBar Initialization
     // Initialize with navBar hidden
     navBar.setTranslateX(-200);
-    btnGoIntelRoom.setOnAction(e -> toggleNavBar());
+    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
     suspect1Button.setOnAction(
         e -> {
           try {
@@ -126,14 +126,15 @@ public class RoomController {
             e1.printStackTrace();
           }
         });
-    corridorButton.setOnAction(
-        e -> {
-          try {
-            goToCorridor();
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
+
+    // corridorButton.setOnAction(
+    //     e -> {
+    //       try {
+    //         goToCorridor();
+    //       } catch (IOException e1) {
+    //         e1.printStackTrace();
+    //       }
+    //     });
 
     if (isFirstTimeInit) {
       // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
@@ -163,6 +164,7 @@ public class RoomController {
   }
 
   // NavBar Methods
+  @FXML
   private void toggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
@@ -201,11 +203,11 @@ public class RoomController {
     App.setRoot(roomName);
   }
 
-  private void goToCorridor() throws IOException {
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    stage.setWidth(originalWidth);
-    App.setRoot("Intel_Draft");
-  }
+  // private void goToCorridor() throws IOException {
+  //   Stage stage = (Stage) navBar.getScene().getWindow();
+  //   stage.setWidth(originalWidth);
+  //   App.setRoot("Intel_Draft");
+  // }
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.

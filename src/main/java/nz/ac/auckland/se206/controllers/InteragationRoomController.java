@@ -100,7 +100,7 @@ public class InteragationRoomController {
   @FXML private Button suspect2Button;
   @FXML private Button suspect3Button;
 
-  @FXML private Button btnGoIntelRoom;
+  // @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private Button btnBack;
   @FXML private BorderPane mainPane;
@@ -149,7 +149,7 @@ public class InteragationRoomController {
     // NavBar Initialization
     // Initialize with navBar hidden
     navBar.setTranslateX(-200);
-    btnGoIntelRoom.setOnAction(e -> toggleNavBar());
+    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
     suspect1Button.setOnAction(
         e -> {
           try {
@@ -175,14 +175,14 @@ public class InteragationRoomController {
             e1.printStackTrace();
           }
         });
-    corridorButton.setOnAction(
-        e -> {
-          try {
-            goToCorridor();
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
+    // corridorButton.setOnAction(
+    //     e -> {
+    //       try {
+    //         goToCorridor();
+    //       } catch (IOException e1) {
+    //         e1.printStackTrace();
+    //       }
+    //     });
     if (isFirstTimeInit) {
       initializeSuspectTalkedToMap();
       initializeRoleToNameMap();
@@ -274,6 +274,7 @@ public class InteragationRoomController {
   }
 
   // NavBar Methods
+  @FXML
   private void toggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
@@ -312,11 +313,11 @@ public class InteragationRoomController {
     App.setRoot(roomName);
   }
 
-  private void goToCorridor() throws IOException {
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    stage.setWidth(originalWidth);
-    App.setRoot("Intel_Draft");
-  }
+  // private void goToCorridor() throws IOException {
+  //   Stage stage = (Stage) navBar.getScene().getWindow();
+  //   stage.setWidth(originalWidth);
+  //   App.setRoot("Intel_Draft");
+  // }
 
   /**
    * Generates the system prompt based on the profession.
