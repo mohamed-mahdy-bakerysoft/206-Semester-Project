@@ -7,33 +7,32 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
    <children>
-      <ImageView fitHeight="493.0" fitWidth="789.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="587.0" fitWidth="1098.0" layoutX="1.0" layoutY="107.0" pickOnBounds="true">
          <image>
             <Image url="@../images/suspectfiles3.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="205.0" layoutY="47.0" text=" Click on the file of the person you believe is guilty.">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="36.0" text=" Click on the file of the person you believe is guilty.">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Rectangle fx:id="janitor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="279.0" layoutY="237.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-      <Rectangle fx:id="curator" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="36.0" layoutY="154.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-      <Rectangle fx:id="hos" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="303.0" layoutX="534.0" layoutY="160.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="31.0" prefHeight="69.0" prefWidth="58.0" text="00">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="32.0" prefHeight="56.0" prefWidth="58.0" text=":">
+      <Rectangle fx:id="janitor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="354.0" layoutX="405.0" layoutY="256.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="284.0" />
+      <Rectangle fx:id="curator" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="345.0" layoutX="61.0" layoutY="165.0" onMouseClicked="#handleRectangleClick" opacity="0.0" rotate="-7.6" stroke="BLACK" strokeType="INSIDE" width="295.0" />
+      <Rectangle fx:id="hos" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="345.0" layoutX="754.0" layoutY="183.0" onMouseClicked="#handleRectangleClick" opacity="0.0" rotate="-171.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="19.0" prefHeight="69.0" prefWidth="58.0" text="00">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="20.0" prefHeight="56.0" prefWidth="58.0" text=":">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="17.0" prefHeight="69.0" prefWidth="58.0" text="2">
          <font>
             <Font size="45.0" />
          </font>
