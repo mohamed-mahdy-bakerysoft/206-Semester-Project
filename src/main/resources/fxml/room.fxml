@@ -56,7 +56,12 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="btnGuess" layoutX="722.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <ImageView fitHeight="698.0" fitWidth="1236.0" layoutX="-74.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/mainroom.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnGuess" layoutX="722.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" stylesheets="@../css/styles.css" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>

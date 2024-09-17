@@ -15,7 +15,7 @@
             <Image url="@../images/ComputerMain.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="backButton3" layoutX="925.0" layoutY="4.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
+      <Button fx:id="backButton3" layoutX="936.0" layoutY="22.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" stylesheets="@../css/styles.css" text="Go back">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
@@ -41,5 +41,6 @@
          </font>
       </Label>
       <Rectangle fx:id="rectInternetExplorer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="103.0" layoutX="113.0" layoutY="218.0" onMouseClicked="#handleComputerClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
+      <Rectangle fx:id="rectSecurityCamera" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="103.0" layoutX="117.0" layoutY="115.0" onMouseClicked="#handleComputerClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="70.0" />
    </children>
 </AnchorPane>

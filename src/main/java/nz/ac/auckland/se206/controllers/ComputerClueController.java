@@ -29,6 +29,7 @@ public class ComputerClueController extends ClueController {
   @FXML private Rectangle rectInternetExplorer;
   @FXML private TextField passwordTxtField;
   @FXML private ImageView passwordHint;
+  @FXML private Rectangle rectSecurityCamera;
 
   @Override
   public void initialize() throws ApiProxyException {
@@ -48,12 +49,15 @@ public class ComputerClueController extends ClueController {
       case "rectEscape":
         App.setRoot("computerclue1");
         break;
+      case "rectSecurityCamera":
+        App.setRoot("computerclue4");
+        break;
     }
   }
 
   public void handlePassword(MouseEvent event) throws IOException {
     incrementPasswordGuesses();
-    if (passwordTxtField.getText().equals("williamthegoat")) {
+    if (passwordTxtField.getText().equals("willthegoat")) {
       App.setRoot("computerclue1");
       passwordHasBeenGuessed = true;
     } else if (passwordGuesses >= 2
