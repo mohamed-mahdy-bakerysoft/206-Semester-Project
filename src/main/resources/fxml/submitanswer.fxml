@@ -1,60 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" prefHeight="690.0" prefWidth="1100.0" spacing="20.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
    <children>
-      <Pane prefHeight="62.0" prefWidth="1060.0">
-         <children>
-            <Label layoutX="160.0" layoutY="18.0" text="Why do you think this suspect is the thief">
-               <font>
-                  <Font name="System Bold Italic" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="2.0" prefHeight="69.0" prefWidth="58.0" text="00">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="3.0" prefHeight="56.0" prefWidth="58.0" text=":">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="1.0" prefHeight="69.0" prefWidth="58.0" text="2">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <TextArea fx:id="answerTxtArea" onKeyReleased="#savefeedback" prefHeight="227.0" prefWidth="749.0" promptText="Record your response here:" wrapText="true">
+      <ImageView fitHeight="703.0" fitWidth="1241.0" layoutX="-79.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/submitAnswer.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TimerBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
          <font>
-            <Font name="Arial Black" size="18.0" />
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="HOSPhoto" fitHeight="319.0" fitWidth="368.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/WillWhosThief.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="CurratorPhoto" fitHeight="328.0" fitWidth="325.0" layoutX="198.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/FrankWhosThief.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="janitorPhoto" fitHeight="334.0" fitWidth="333.0" layoutX="182.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/JohnWhosThief.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="answerTxtArea" layoutX="561.0" layoutY="161.0" onKeyReleased="#savefeedback" prefHeight="384.0" prefWidth="413.0" promptText="Record your response here:" wrapText="true">
+         <font>
+            <Font name="Courier New" size="18.0" />
          </font>
       </TextArea>
-      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" text="Submit">
+      <Button fx:id="submitButton" layoutX="617.0" layoutY="561.0" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" text="Submit">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
       </Button>
    </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-   <effect>
-      <Glow />
-   </effect>
-   <cursor>
-      <Cursor fx:constant="DEFAULT" />
-   </cursor>
-</VBox>
+</AnchorPane>
