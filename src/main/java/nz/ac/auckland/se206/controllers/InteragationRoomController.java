@@ -687,4 +687,10 @@ public class InteragationRoomController {
     chatGroup.setVisible(false); // Ensure chat group is visible
     App.setRoot("room");
   }
+
+  public static void resetSuspectsTalkedToMap() {
+    suspectHasBeenTalkedToMap.put("Art Currator", false);
+    suspectHasBeenTalkedToMap.put("Art Thief", false);
+    suspectHasBeenTalkedToMap.put("Janitor", false);
+  }
 }

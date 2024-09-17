@@ -186,4 +186,12 @@ public class SubmitAnswerController {
       return null;
     }
   }
+
+  // Rest function for the submit answer controller
+  public static void reset() {
+    feed = null;
+    thief = null;
+    answer = null;
+    isFirstTime = true; // Reset to ensure the timer logic behaves correctly
+  }
 }

@@ -74,4 +74,9 @@ public class ComputerClueController extends ClueController {
       handlePassword(null);
     }
   }
+
+  public static void reset() {
+    passwordGuesses = 0; // Reset the number of password guesses
+    passwordHasBeenGuessed = false; // Reset the guessed status
+  }
 }

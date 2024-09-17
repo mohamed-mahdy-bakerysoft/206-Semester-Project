@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.GameState;
@@ -152,5 +153,18 @@ public class GameStateContext {
 
   public GameState getCurrentState() {
     return gameState;
+  }
+
+  public void reset() {
+    // Reset the game state back to the initial game started state
+    this.gameState = this.gameStartedState;
+
+    // Clear the chat history for the suspects
+    chatHistory.get("suspect1.txt").setLength(0);
+    chatHistory.get("suspect2.txt").setLength(0);
+    chatHistory.get("thief.txt").setLength(0);
+
+    // Reset clue interaction
+    RoomController.setClueHasBeenInteractedWith(false);
   }
 }
