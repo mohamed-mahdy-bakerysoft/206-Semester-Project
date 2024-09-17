@@ -9,13 +9,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndingController">
    <children>
-      <ImageView fitHeight="409.0" fitWidth="630.0" layoutX="80.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <TextArea fx:id="feedback" layoutX="20.0" layoutY="441.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true" />
+      <ImageView fitHeight="425.0" fitWidth="688.0" layoutX="51.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/youlose.png" />
+            <Image url="@../images/youwin.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback2" layoutX="20.0" layoutY="441.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true" />
-      <Text layoutX="311.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback:">
+      <Text layoutX="316.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback:">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>

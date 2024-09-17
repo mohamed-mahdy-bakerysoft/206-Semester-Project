@@ -130,6 +130,7 @@ public class RoomController {
 
     if (isFirstTimeInit) {
       // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
+      System.out.println("First time");
       isFirstTimeInit = false;
     }
     timeManager.setTimerLabel(mins, secs);
@@ -239,22 +240,24 @@ public class RoomController {
    */
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
-    if (clueHasBeenInteractedWith
-        && InteragationRoomController
-            .getSuspectHasBeenTalkedTo()) { // TO DO: && chatController.getSuspectHasBeenTalkedTo()
-      System.out.println("Now in guessing state");
-      context.handleGuessClick();
-    } else {
-      sound =
-          new Media(
-              App.class
-                  .getResource("/sounds/investigate_more_before_guessing.mp3")
-                  .toURI()
-                  .toString());
-      player = new MediaPlayer(sound);
-      player.play();
-    }
-    App.setRoot("room");
+    // if (clueHasBeenInteractedWith
+    //     && InteragationRoomController
+    //         .getSuspectHasBeenTalkedTo()) { // TO DO: &&
+    // chatController.getSuspectHasBeenTalkedTo()
+    //   System.out.println("Now in guessing state");
+    //   context.handleGuessClick();
+    // } else {
+    //   sound =
+    //       new Media(
+    //           App.class
+    //               .getResource("/sounds/investigate_more_before_guessing.mp3")
+    //               .toURI()
+    //               .toString());
+    //   player = new MediaPlayer(sound);
+    //   player.play();
+    // }
+    // App.setRoot("room");
+    App.setRoot("whosThief");
   }
 
   /**
