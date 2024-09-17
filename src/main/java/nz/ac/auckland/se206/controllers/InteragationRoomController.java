@@ -620,7 +620,7 @@ public class InteragationRoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
-    App.setRoot("room");
+    // App.setRoot("room");
   }
 
   @FXML

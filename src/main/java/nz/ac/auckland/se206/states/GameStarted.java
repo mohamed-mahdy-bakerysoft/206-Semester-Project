@@ -64,5 +64,6 @@ public class GameStarted implements GameState {
     player = new MediaPlayer(sound);
     player.play();
     context.setState(context.getGuessingState());
+    App.setRoot("whosThief");
   }
 }
