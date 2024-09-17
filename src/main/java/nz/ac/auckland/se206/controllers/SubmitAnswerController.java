@@ -174,6 +174,8 @@ public class SubmitAnswerController {
       // set meesage content onto the text feedback
 
       feed = messageContent;
+      EndingController.setFeed(feed);
+      EndingController.setThief(thief);
       System.out.println("Message content: " + feed);
       // Return the content as a string
       return messageContent;
