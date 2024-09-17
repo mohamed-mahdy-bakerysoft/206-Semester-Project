@@ -144,6 +144,8 @@ public class App extends Application {
 
     scene = new Scene(SceneManager.getUiRoot(AppUi.START));
     stage.setScene(scene);
+    stage.setHeight(730);
+    stage.setWidth(1100);
     stage.show();
   }
 }

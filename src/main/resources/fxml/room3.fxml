@@ -1,66 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <BorderPane fx:id="mainPane" prefHeight="599.0" prefWidth="789.0" style="-fx-background-color: #D1B266;">
-         <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #D1B266;" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="454.0" fitWidth="807.0" layoutX="-11.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="697.0" fitWidth="1237.0" layoutX="-71.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/SecurityRoom.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowRight" fitHeight="101.0" fitWidth="101.0" layoutX="1007.0" layoutY="295.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/RIGHT.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="navBar" alignment="CENTER" layoutX="914.0" layoutY="135.0" prefHeight="516.0" prefWidth="196.0" style="-fx-background-image: url('/images/nav_bar_background.png'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 2;">
+         <children>
+            <Button fx:id="suspect1Button" contentDisplay="GRAPHIC_ONLY" prefHeight="97.0" prefWidth="91.0" snapToPixel="false" style="-fx-background-color: transparent;" textAlignment="CENTER" wrapText="true">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
-                        <Image url="@../images/13.png" />
+                        <Image url="@../images/NavFrank.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnGuess" layoutX="541.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Rectangle fx:id="rectSecurityCamera2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="55.0" layoutX="257.0" layoutY="117.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-                  <Rectangle fx:id="rectOfficer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="191.0" layoutX="298.0" layoutY="342.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="89.0" />
-                  <Rectangle fx:id="rectPaperClue" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="171.0" layoutX="25.0" layoutY="315.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="136.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" text="Guess Who ?">
-                     <font>
-                        <Font size="38.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="131.0" layoutY="48.0" text="Chat with the three suspects, and guess who is the art thief!">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="14.0" prefHeight="69.0" prefWidth="58.0">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="69.0" prefWidth="58.0">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="15.0" prefHeight="56.0" prefWidth="58.0" text=":">
-                     <font>
-                        <Font size="45.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="arrowRight" fitHeight="99.0" fitWidth="111.0" layoutX="708.0" layoutY="251.0" onMouseClicked="#onClickRight" pickOnBounds="true" preserveRatio="true">
+               </graphic>
+            </Button>
+            <Button fx:id="suspect2Button" contentDisplay="GRAPHIC_ONLY" prefHeight="143.0" prefWidth="69.0" style="-fx-background-color: transparent;" text="Suspect 2">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
                      <image>
-                        <Image url="@../images/RIGHT.png" />
+                        <Image url="@../images/NavJohn.png" />
                      </image>
                   </ImageView>
-               </children>
-            </Pane>
-         </center>
-      </BorderPane>
+               </graphic>
+            </Button>
+            <Button fx:id="suspect3Button" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" text="Suspect 3">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
+                     <image>
+                        <Image url="@../images/NavWill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="btnGuess" layoutX="807.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" stylesheets="@../css/styles.css" text="Make a Guess">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="rectSecurityRoom" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="403.0" layoutX="273.0" layoutY="168.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="184.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TimerBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="107.0" fitWidth="117.0" layoutX="977.0" layoutY="19.0" onMouseClicked="#toggleNavBar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/FileIcon.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
@@ -38,8 +40,28 @@ public class ClueController {
     Button clickedButton = (Button) event.getSource();
     if (clickedButton.getId().equals("backButton2")) {
       App.setRoot("room2");
+    } else if (clickedButton.getId().equals("backButton3")) {
+      App.setRoot("room3");
     } else {
       App.setRoot("room");
     }
+  }
+
+  @FXML
+  private void handleInitialLogBookClick(MouseEvent event) throws IOException {
+    Rectangle clicked = (Rectangle) event.getSource();
+    if (clicked.getId().equals("rectLogBook")) {
+      App.setRoot("logbookclue1");
+    }
+  }
+
+  @FXML
+  private void handleInitialComputerClick() throws IOException {
+    System.out.println(ComputerClueController.getPasswordHasBeenGuessed());
+    if (ComputerClueController.getPasswordHasBeenGuessed()) {
+      App.setRoot("computerclue1");
+      return;
+    }
+    App.setRoot("computercluepassword");
   }
 }

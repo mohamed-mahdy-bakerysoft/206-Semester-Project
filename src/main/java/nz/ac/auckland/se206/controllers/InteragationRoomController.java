@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -17,9 +21,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -40,7 +47,6 @@ import nz.ac.auckland.se206.states.Guessing;
  * the user can chat with customers and guess their profession.
  */
 public class InteragationRoomController {
-  private static GameStateContext context = new GameStateContext();
   private static boolean clueHasBeenInteractedWith = false;
   private String profession;
   private ChatCompletionRequest chatCompletionRequest;
@@ -48,6 +54,7 @@ public class InteragationRoomController {
   private static boolean suspectHasBeenTalkedTo = false;
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
   private static Map<String, String> professionToNameMap = new HashMap<>();
+  private static GameStateContext context = GameStateContext.getInstance();
 
   /**
    * Gets the game context.
@@ -86,6 +93,14 @@ public class InteragationRoomController {
     return clueHasBeenInteractedWith;
   }
 
+  // Added navbar with buttons
+  @FXML private VBox navBar;
+  @FXML private Button corridorButton;
+  @FXML private Button suspect1Button;
+  @FXML private Button suspect2Button;
+  @FXML private Button suspect3Button;
+
+  // @FXML private Button btnGoIntelRoom;
   @FXML private Button btnGuess;
   @FXML private Button btnBack;
   @FXML private BorderPane mainPane;
@@ -95,6 +110,15 @@ public class InteragationRoomController {
   @FXML private ImageView mainRightArrow;
   @FXML private ImageView arrowLeft;
   @FXML private ImageView arrowRight;
+  @FXML private ImageView Currator0;
+  @FXML private ImageView Currator1;
+  @FXML private ImageView Currator2;
+  @FXML private ImageView Thief0;
+  @FXML private ImageView Thief1;
+  @FXML private ImageView Thief2;
+  @FXML private ImageView Janitor0;
+  @FXML private ImageView Janitor1;
+  @FXML private ImageView Janitor2;
   @FXML private Group chatGroup;
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
@@ -103,10 +127,16 @@ public class InteragationRoomController {
 
   private MediaPlayer player;
   private Media sound;
-  private Media artStudentHmm;
+  private Media artCurratorHmm;
   private Media thiefHmm;
-  private Media grumpyTouristHmm;
+  private Media janitorHmm;
+
+  @SuppressWarnings("unused")
   private Map<String, StringBuilder> chatHistory;
+
+  private boolean navBarVisible = false;
+  private int originalWidth = 1100;
+  private Random random = new Random();
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -116,6 +146,37 @@ public class InteragationRoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    // NavBar Initialization
+    // Initialize with navBar hidden
+    navBar.setTranslateX(+200);
+    navBar.setDisable(true);
+    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
+    suspect1Button.setOnAction(
+        e -> {
+          try {
+
+            goToRoom("IntelRoomOne");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    suspect2Button.setOnAction(
+        e -> {
+          try {
+            goToRoom("IntelRoomTwo");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+    suspect3Button.setOnAction(
+        e -> {
+          try {
+            goToRoom("IntelRoomThree");
+          } catch (IOException e1) {
+            e1.printStackTrace();
+          }
+        });
+
     if (isFirstTimeInit) {
       initializeSuspectTalkedToMap();
       initializeRoleToNameMap();
@@ -124,10 +185,8 @@ public class InteragationRoomController {
     initializeSounds();
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setTimerLabel(mins, secs);
-    this.chatHistory = new HashMap<>();
-    chatHistory.put("suspect1.txt", new StringBuilder());
-    chatHistory.put("suspect2.txt", new StringBuilder());
-    chatHistory.put("thief.txt", new StringBuilder());
+    // Initialize the game context with the charHistory
+    this.chatHistory = context.getChatHistory();
     // testing purposes
     System.out.println("Entire Chat history intalizeed");
   }
@@ -204,22 +263,62 @@ public class InteragationRoomController {
     }
   }
 
+  // NavBar Methods
+  @FXML
+  private void toggleNavBar() {
+    TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
+    FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
+
+    if (navBarVisible) {
+      // Slide out and fade out, then reduce the window size
+      translateTransition.setToX(200); // Move back off-screen to the right
+      fadeTransition.setToValue(0); // Fade out to invisible
+      navBarVisible = false;
+      navBar.setDisable(true); // Disable the navBar
+    } else {
+      navBar.setDisable(false); // Enable the navBar
+      // Slide in and fade in, then increase the window size
+      translateTransition.setByX(-200); // Move into view
+      fadeTransition.setToValue(1); // Fade in to fully visible
+      navBarVisible = true;
+    }
+
+    // Play both transitions
+    translateTransition.play();
+    fadeTransition.play();
+  }
+
+  private void goToRoom(String roomName) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
+    // Handle room switching logic
+    App.setRoot(roomName);
+  }
+
+  // private void goToCorridor() throws IOException {
+  //   Stage stage = (Stage) navBar.getScene().getWindow();
+  //   stage.setWidth(originalWidth);
+  //   App.setRoot("Intel_Draft");
+  // }
+
   /**
    * Generates the system prompt based on the profession.
    *
    * @return the system prompt string
    */
   private String getSystemPrompt() {
+    Map<String, StringBuilder> chatHistory = context.getChatHistory();
     Map<String, String> map = new HashMap<>();
     String promptFile = null;
     switch (profession) {
-      case "Curious Art Student":
+      case "Art Currator":
         promptFile = "suspect1.txt";
         break;
       case "Art Thief":
         promptFile = "thief.txt";
         break;
-      case "Grumpy Out of Town Tourist":
+      case "Janitor":
         promptFile = "suspect2.txt";
         break;
     }
@@ -251,12 +350,12 @@ public class InteragationRoomController {
 
   private String getInitialMessageForProfession(String profession) {
     switch (profession) {
-      case "Curious Art Student":
+      case "Art Currator":
         return "Hey can you tell me what happened here? I'm investigating this case.";
       case "Art Thief":
         return "Hi sir. I'm one of the investigators on this job. Can you tell me what happened"
             + " here?";
-      case "Grumpy Out of Town Tourist":
+      case "Janitor":
         return "Hello. I'm investigating this case on behalf of PI Masters. Can you tell me what"
             + " happened here?";
       default:
@@ -265,15 +364,15 @@ public class InteragationRoomController {
   }
 
   private void initializeSuspectTalkedToMap() {
-    suspectHasBeenTalkedToMap.put("Curious Art Student", false);
+    suspectHasBeenTalkedToMap.put("Art Currator", false);
     suspectHasBeenTalkedToMap.put("Art Thief", false);
-    suspectHasBeenTalkedToMap.put("Grumpy Out of Town Tourist", false);
+    suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 
   private void initializeRoleToNameMap() {
-    professionToNameMap.put("Curious Art Student", "Jessica");
+    professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
-    professionToNameMap.put("Grumpy Out of Town Tourist", "Johnson");
+    professionToNameMap.put("Janitor", "John");
     professionToNameMap.put("user", "Investigator");
   }
 
@@ -329,9 +428,9 @@ public class InteragationRoomController {
       player.stop();
     }
     switch (profession) {
-      case "Curious Art Student":
-        if (artStudentHmm != null) {
-          player = new MediaPlayer(artStudentHmm);
+      case "Art Currator":
+        if (artCurratorHmm != null) {
+          player = new MediaPlayer(artCurratorHmm);
         }
         break;
       case "Art Thief":
@@ -339,9 +438,9 @@ public class InteragationRoomController {
           player = new MediaPlayer(thiefHmm);
         }
         break;
-      case "Grumpy Out of Town Tourist":
-        if (grumpyTouristHmm != null) {
-          player = new MediaPlayer(grumpyTouristHmm);
+      case "Janitor":
+        if (janitorHmm != null) {
+          player = new MediaPlayer(janitorHmm);
         }
         break;
       default:
@@ -350,23 +449,28 @@ public class InteragationRoomController {
   }
 
   private void appendChatMessage(ChatMessage msg) {
+    Map<String, StringBuilder> chatHistory = context.getChatHistory();
+    int randomIndex = random.nextInt(3); // Generates 0, 1, or 2
+
     if (!msg.getRole().equals("user") && suspectHasBeenTalkedToMap.get(profession)) {
       playHmmSound(profession);
     }
 
+    // Adding to history and change the image of the person after each sentence
     switch (profession) {
-      case "Curious Art Student":
+      case "Art Currator":
         chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+        setImageVisibility("Currator", randomIndex);
         break;
       case "Art Thief":
         chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
+        setImageVisibility("Thief", randomIndex);
         break;
-      case "Grumpy Out of Town Tourist":
+      case "Janitor":
+        setImageVisibility("Janitor", randomIndex);
         chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-
         break;
     }
-
     // Start the text animation after a small delay to allow "hmm" sound to finish
     new Thread(
             () -> {
@@ -378,6 +482,41 @@ public class InteragationRoomController {
               }
             })
         .start();
+  }
+
+  // Helper method to set visibility based on the random index
+  private void setImageVisibility(String suspectType, int randomIndex) {
+    // Hide all images first
+    hideAllImages(suspectType);
+
+    // Show the selected image based on the random index
+    switch (randomIndex) {
+      case 0:
+        // Show suspectType + "1" image (e.g. Currator1)
+        getImageView(suspectType + "0").setVisible(true);
+        break;
+      case 1:
+        // Show suspectType + "2" image (e.g. Currator2)
+        getImageView(suspectType + "1").setVisible(true);
+        break;
+      case 2:
+        // Show suspectType + "3" image (e.g. Currator3)
+        getImageView(suspectType + "2").setVisible(true);
+        break;
+    }
+  }
+
+  // Hide all images for a given suspect
+  private void hideAllImages(String suspectType) {
+    getImageView(suspectType + "0").setVisible(false);
+    getImageView(suspectType + "1").setVisible(false);
+    getImageView(suspectType + "2").setVisible(false);
+  }
+
+  // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
+  private ImageView getImageView(String imageId) {
+    Parent currentRoot = navBar.getScene().getRoot(); // Get the root of the current scene
+    return (ImageView) currentRoot.lookup("#" + imageId); // Adjust based on your FXML structure
   }
 
   /**
@@ -439,13 +578,13 @@ public class InteragationRoomController {
     String suspectId = clickedRectangle.getId();
     switch (suspectId) {
       case "rectPerson1":
-        profession = "Curious Art Student";
+        profession = "Art Currator";
         break;
       case "rectPerson2":
         profession = "Art Thief";
         break;
       case "rectPerson3":
-        profession = "Grumpy Out of Town Tourist";
+        profession = "Janitor";
         break;
     }
 
@@ -488,6 +627,9 @@ public class InteragationRoomController {
 
   @FXML
   private void handleBackToCrimeSceneClick(ActionEvent event) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
     App.setRoot("room");
   }
 
@@ -497,57 +639,17 @@ public class InteragationRoomController {
     context.handleRectangleClick(event, clickedRoom.getId());
   }
 
-  // // Map to store room instances
-  // private Map<String, Parent> roomInstances = new HashMap<>();
-
-  // @FXML
-  // private void handleRoomsClick(MouseEvent event) throws IOException {
-  //     Rectangle clickedRoom = (Rectangle) event.getSource();
-
-  //     // Check if suspect has been talked to, if so, return early
-  //     if (suspectHasBeenTalkedTo) {
-  //         return;
-  //     }
-
-  //     // Get the ID of the clicked room
-  //     String roomId = clickedRoom.getId();
-  //     Parent roomInstance = null;
-
-  //     // Check if the room instance is already stored in the map
-  //     if (roomInstances.containsKey(roomId)) {
-  //         // Retrieve the stored instance
-  //         roomInstance = roomInstances.get(roomId);
-  //     } else {
-  //         // Load the room for the first time and store it in the map
-  //         String fxmlFile = "";
-  //         if (roomId.equals("rectRoomOne")) {
-  //             fxmlFile = "IntelRoomOne.fxml";
-  //         } else if (roomId.equals("rectRoomTwo")) {
-  //             fxmlFile = "IntelRoomTwo.fxml";
-  //         } else if (roomId.equals("rectRoomThree")) {
-  //             fxmlFile = "IntelRoomThree.fxml";
-  //         }
-
-  //         // Load the FXML file and store the instance
-  //         roomInstance = FXMLLoader.load(getClass().getResource(fxmlFile));
-  //         roomInstances.put(roomId, roomInstance);
-  //     }
-
-  //     // Set the root to the room instance
-  //     App.setRoot(roomInstance);
-  // }
-
   // Initialize sound resources only once
   private void initializeSounds() {
     try {
-      artStudentHmm =
+      artCurratorHmm =
           new Media(App.class.getResource("/sounds/art_student_hmm.mp3").toURI().toString());
       thiefHmm = new Media(App.class.getResource("/sounds/thief_hmm.mp3").toURI().toString());
-      grumpyTouristHmm =
+      janitorHmm =
           new Media(App.class.getResource("/sounds/grumpy_tourist_hmm.mp3").toURI().toString());
 
       // Check if any Media is null
-      if (artStudentHmm == null || thiefHmm == null || grumpyTouristHmm == null) {
+      if (artCurratorHmm == null || thiefHmm == null || janitorHmm == null) {
         throw new IllegalArgumentException("Failed to load one or more sound files.");
       }
     } catch (URISyntaxException e) {
@@ -571,7 +673,7 @@ public class InteragationRoomController {
     }
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
-      App.setRoot("Intel_Draft");
+      App.setRoot("room");
     }
   }
 
@@ -585,6 +687,6 @@ public class InteragationRoomController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     chatGroup.setVisible(false); // Ensure chat group is visible
-    App.setRoot("Intel_Draft");
+    App.setRoot("room");
   }
 }
