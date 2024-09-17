@@ -28,6 +28,7 @@ public class SubmitAnswerController {
   private static String thief;
   private static String answer;
   private static boolean isFirstTime = true;
+  public static TimeManager timeManager = TimeManager.getInstance();
 
   // make getters for feed and thief
   public static String getFeed() {
@@ -61,7 +62,7 @@ public class SubmitAnswerController {
   }
 
   public void initialize() {
-    TimeManager timeManager = TimeManager.getInstance();
+
     if (isFirstTime == true) {
 
       timeManager.stopTimer();
@@ -74,6 +75,7 @@ public class SubmitAnswerController {
   }
 
   public void sendAnswer() {
+    timeManager.stopTimer();
     System.err.println(thief);
     if (answerTxtArea.getText().isEmpty()) {
       return;

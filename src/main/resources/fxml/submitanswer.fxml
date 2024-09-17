@@ -14,7 +14,7 @@
    <children>
       <Pane prefHeight="71.0" prefWidth="749.0">
          <children>
-            <Label layoutX="160.0" layoutY="18.0" text="Why and who do you think is the thief">
+            <Label layoutX="160.0" layoutY="18.0" text="Why do you think this suspect is the thief">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
@@ -36,7 +36,7 @@
             </Label>
          </children>
       </Pane>
-      <TextArea fx:id="answerTxtArea" onKeyPressed="#savefeedback" prefHeight="227.0" prefWidth="749.0" promptText="Record your response here" wrapText="true">
+      <TextArea fx:id="answerTxtArea" onKeyReleased="#savefeedback" prefHeight="227.0" prefWidth="749.0" promptText="Record your response here" wrapText="true">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
