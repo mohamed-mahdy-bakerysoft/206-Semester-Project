@@ -70,7 +70,7 @@ public class TimeManager {
         System.out.println("Game is over");
         return;
       } else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
-          || !(InteragationRoomController.getSuspectHasBeenTalkedTo()
+          || !(InteragationRoomController.getSuspectsHaveBeenTalkedTo()
               && RoomController
                   .getClueHasBeenInteractedWith())) { // if already in guessing state OR player has
         // not investigated, move to game over state
@@ -95,10 +95,10 @@ public class TimeManager {
         timeline.stop();
 
         return;
-      } else { // move to guessing state and give 10 seconds to guess
-        RoomController.getGameContext()
-            .setState(RoomController.getGameContext().getGuessingState());
-        App.setRoot("room");
+      } else { // move to guessing state and give 60 seconds to guess
+        // RoomController.getGameContext()
+        //     .setState(RoomController.getGameContext().getGuessingState());
+        App.setRoot("whosThief");
         sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
         player = new MediaPlayer(sound);
         player.play();

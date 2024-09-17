@@ -51,7 +51,6 @@ public class InteragationRoomController {
   private String profession;
   private ChatCompletionRequest chatCompletionRequest;
   private static boolean isFirstTimeInit = true;
-  private static boolean suspectHasBeenTalkedTo = false;
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
   private static Map<String, String> professionToNameMap = new HashMap<>();
   private static GameStateContext context = GameStateContext.getInstance();
@@ -65,13 +64,25 @@ public class InteragationRoomController {
     return context;
   }
 
+  private static void initializeSuspectTalkedToMap() {
+    suspectHasBeenTalkedToMap.put("Art Currator", false);
+    suspectHasBeenTalkedToMap.put("Art Thief", false);
+    suspectHasBeenTalkedToMap.put("Janitor", false);
+  }
+
   /**
-   * Returns whether the suspect has been talked to.
+   * Returns whether the suspects have been talked to.
    *
-   * @return true if the suspect has been talked to, false otherwise
+   * @return true if all 3 suspects have been talked to, false otherwise
    */
-  public static boolean getSuspectHasBeenTalkedTo() {
-    return suspectHasBeenTalkedTo;
+  public static boolean getSuspectsHaveBeenTalkedTo() {
+    System.out.println(suspectHasBeenTalkedToMap.get("Art Currator"));
+    System.out.println(suspectHasBeenTalkedToMap.get("Janitor"));
+    System.out.println(suspectHasBeenTalkedToMap.get("Art Thief"));
+
+    return suspectHasBeenTalkedToMap.get("Art Currator")
+        && suspectHasBeenTalkedToMap.get("Art Thief")
+        && suspectHasBeenTalkedToMap.get("Janitor");
   }
 
   /**
@@ -296,12 +307,6 @@ public class InteragationRoomController {
     App.setRoot(roomName);
   }
 
-  // private void goToCorridor() throws IOException {
-  //   Stage stage = (Stage) navBar.getScene().getWindow();
-  //   stage.setWidth(originalWidth);
-  //   App.setRoot("Intel_Draft");
-  // }
-
   /**
    * Generates the system prompt based on the profession.
    *
@@ -363,12 +368,6 @@ public class InteragationRoomController {
     }
   }
 
-  private void initializeSuspectTalkedToMap() {
-    suspectHasBeenTalkedToMap.put("Art Currator", false);
-    suspectHasBeenTalkedToMap.put("Art Thief", false);
-    suspectHasBeenTalkedToMap.put("Janitor", false);
-  }
-
   private void initializeRoleToNameMap() {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
@@ -392,7 +391,6 @@ public class InteragationRoomController {
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-    suspectHasBeenTalkedTo = true;
 
     // Run user message in a background thread
     Task<ChatMessage> task =
@@ -608,8 +606,8 @@ public class InteragationRoomController {
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     chatGroup.setVisible(false);
     if (clueHasBeenInteractedWith
-        && InteragationRoomController
-            .getSuspectHasBeenTalkedTo()) { // TO DO: && chatController.getSuspectHasBeenTalkedTo()
+        && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&
+      // chatController.getSuspectHasBeenTalkedTo()
       System.out.println("Now in guessing state");
       context.handleGuessClick();
     } else {
@@ -622,7 +620,7 @@ public class InteragationRoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
-    App.setRoot("room");
+    // App.setRoot("room");
   }
 
   @FXML
