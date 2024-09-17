@@ -58,7 +58,8 @@ public class EndingController {
     GameStateContext.getInstance().reset();
 
     // Reset the timer
-    TimeManager.getInstance().resetTimer();
+    TimeManager.getInstance().resetTimerRestart();
+    TimeManager.getInstance().startTimer();
 
     // Reset suspects talked to map
     InteragationRoomController.resetSuspectsTalkedToMap();
@@ -66,11 +67,11 @@ public class EndingController {
     // Reset the computer clue controller
     ComputerClueController.reset();
 
-    // Navigate back to the start room
-    App.setRoot("room");
-
     // Reset submit answer state
     SubmitAnswerController.reset();
+
+    // Navigate back to the start room
+    App.setRoot("room");
   }
 
   @FXML
