@@ -10,9 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="599.0" prefWidth="789.0" spacing="20.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
+
+<VBox alignment="CENTER" prefHeight="690.0" prefWidth="1100.0" spacing="20.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
    <children>
-      <Pane prefHeight="71.0" prefWidth="749.0">
+      <Pane prefHeight="62.0" prefWidth="1060.0">
          <children>
             <Label layoutX="160.0" layoutY="18.0" text="Why do you think this suspect is the thief">
                <font>
@@ -36,7 +37,7 @@
             </Label>
          </children>
       </Pane>
-      <TextArea fx:id="answerTxtArea" onKeyReleased="#savefeedback" prefHeight="227.0" prefWidth="749.0" promptText="Record your response here" wrapText="true">
+      <TextArea fx:id="answerTxtArea" onKeyReleased="#savefeedback" prefHeight="227.0" prefWidth="749.0" promptText="Record your response here:" wrapText="true">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
@@ -44,7 +45,8 @@
       <Button fx:id="submitButton" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" text="Submit">
          <font>
             <Font name="System Bold Italic" size="24.0" />
-         </font></Button>
+         </font>
+      </Button>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

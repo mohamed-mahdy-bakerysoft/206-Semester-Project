@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ClueController">
    <children>
-      <ImageView fitHeight="703.0" fitWidth="1245.0" layoutX="-78.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="713.0" fitWidth="1109.0" layoutX="-2.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Computer.png" />
          </image>
@@ -40,6 +40,13 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Rectangle fx:id="computer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="305.0" layoutX="331.0" layoutY="82.0" onMouseClicked="#handleInitialComputerClick" stroke="TRANSPARENT" strokeType="INSIDE" width="413.0" />
+      <Rectangle fx:id="computer" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="264.0" layoutX="330.0" layoutY="89.0" onMouseClicked="#handleInitialComputerClick" stroke="TRANSPARENT" strokeType="INSIDE" width="410.0" />
+      <Rectangle fx:id="rectHint" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="88.0" layoutX="649.0" layoutY="377.0" onMouseClicked="#handleComputerStickyNote" stroke="TRANSPARENT" strokeType="INSIDE" width="83.0" />
+      <Rectangle fx:id="rectBackDrop" arcHeight="5.0" arcWidth="5.0" fill="#00000095" height="702.0" layoutY="-5.0" onMouseClicked="#handleClickBack" stroke="BLACK" strokeType="INSIDE" visible="false" width="1100.0" />
+      <ImageView fx:id="passwordHint" fitHeight="489.0" fitWidth="485.0" layoutX="300.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/passwordhint2.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
