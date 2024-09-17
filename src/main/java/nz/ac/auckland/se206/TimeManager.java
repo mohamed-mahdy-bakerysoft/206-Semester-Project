@@ -174,6 +174,12 @@ public class TimeManager {
     updateTimerLabels();
   }
 
+  public void resetTimerRestart() {
+    interval = 300; // Reset to 5 minutes
+    updateTimerLabels();
+    stopTimer(); // Stop the current timer if it was running
+  }
+
   // make a setter for interval
   public void setInterval(int interval1) {
     interval = interval1;

@@ -298,4 +298,8 @@ public class RoomController {
       App.setRoot("room");
     }
   }
+
+  public static void setClueHasBeenInteractedWith(boolean b) {
+    clueHasBeenInteractedWith = false;
+  }
 }

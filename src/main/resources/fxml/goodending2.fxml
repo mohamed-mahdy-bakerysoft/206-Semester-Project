@@ -21,6 +21,6 @@
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Text>
-      <Button layoutX="458.0" layoutY="445.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="229.0" text="Restart the game" />
+      <Button fx:id="restartButton" layoutX="446.0" layoutY="446.0" onAction="#handleRestartClick" prefHeight="50.0" prefWidth="218.0" text="Restart Game" />
    </children>
 </AnchorPane>

@@ -14,6 +14,6 @@
          </image>
       </ImageView>
       <TextArea fx:id="feedback2" disable="true" editable="false" layoutX="177.0" layoutY="550.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true" />
-      <Button layoutX="481.0" layoutY="535.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="229.0" text="Restart the game" />
+      <Button fx:id="restartButton" text="Restart Game" onAction="#handleRestartClick" layoutX="150.0" layoutY="350.0"/>
    </children>
 </AnchorPane>
