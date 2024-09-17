@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fitHeight="699.0" fitWidth="1249.0" layoutX="-74.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
@@ -51,12 +49,7 @@
             </Button>
          </children>
       </VBox>
-      <ImageView fitHeight="699.0" fitWidth="1249.0" layoutX="-74.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Reception.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="btnGuess" layoutX="722.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" stylesheets="@../css/styles.css" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="794.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>
