@@ -71,7 +71,7 @@ public class EndingController {
     SubmitAnswerController.reset();
 
     // Navigate back to the start room
-    App.setRoot("room");
+    App.setRoot("start");
   }
 
   @FXML
