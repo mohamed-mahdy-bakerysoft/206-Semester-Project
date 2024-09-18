@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController2">
    <children>
       <ImageView fitHeight="703.0" fitWidth="1241.0" layoutX="-79.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -35,12 +35,12 @@
             <Image url="@../images/WillWhosThief.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="CurratorPhoto" fitHeight="328.0" fitWidth="325.0" layoutX="198.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="CuratorPhoto" fitHeight="328.0" fitWidth="325.0" layoutX="198.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/FrankWhosThief.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="janitorPhoto" fitHeight="334.0" fitWidth="333.0" layoutX="182.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="JanitorPhoto" fitHeight="334.0" fitWidth="333.0" layoutX="182.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/JohnWhosThief.png" />
          </image>
@@ -50,12 +50,12 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <TextArea fx:id="answerTxtArea" layoutX="561.0" layoutY="161.0" onKeyReleased="#savefeedback" prefHeight="384.0" prefWidth="413.0" promptText="Record your response here:" wrapText="true">
+      <TextArea fx:id="answerTxtArea" layoutX="561.0" layoutY="161.0" onKeyReleased="#savefeedback" prefHeight="403.0" prefWidth="413.0" promptText="Record your response here:" wrapText="true">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
       </TextArea>
-      <Button fx:id="submitButton" layoutX="617.0" layoutY="561.0" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" text="Submit">
+      <Button fx:id="submitButton" layoutX="617.0" layoutY="574.0" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" text="Submit">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>

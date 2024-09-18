@@ -256,6 +256,7 @@ public class RoomController {
     //   player = new MediaPlayer(sound);
     //   player.play();
     // }
+    // delte later
     context.handleGuessClick();
     App.setRoot("whosThief");
   }
