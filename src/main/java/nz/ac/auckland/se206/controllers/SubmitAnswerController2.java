@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
@@ -10,7 +11,7 @@ public class SubmitAnswerController2 extends SubmitAnswerController {
   @FXML private ImageView HOSPhoto;
   @FXML private ImageView CuratorPhoto;
 
-  public void initialize() {
+  public void initialize() throws URISyntaxException {
     super.initialize();
     displayChosenSuspect();
   }
