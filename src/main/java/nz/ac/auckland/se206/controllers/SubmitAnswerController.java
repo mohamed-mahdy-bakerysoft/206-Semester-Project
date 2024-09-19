@@ -8,6 +8,7 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -52,6 +53,7 @@ public class SubmitAnswerController {
   @FXML private TextArea feedback2;
   @FXML private Label mins;
   @FXML private Label secs;
+  @FXML private ProgressBar progressBar;
 
   // make a getter for answer
   public static String getAnswer() {
@@ -89,7 +91,36 @@ public class SubmitAnswerController {
       System.out.println("Thief: " + thief);
 
       System.out.println("Answer submitted: " + answerTxtArea.getText());
-      intizliaseAndGpt(map);
+      progressBar.setVisible(true); // Show the progress bar
+
+      Task<Void> task =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              updateProgress(0, 100); // Start progress
+              intizliaseAndGpt(map);
+              for (int i = 0; i <= 100; i++) {
+                updateProgress(i, 100); // Update the progress
+                Thread.sleep(20); // Simulate progress
+              }
+              return null;
+            }
+          };
+
+      task.setOnSucceeded(
+          event -> {
+            progressBar.setVisible(false); // Hide progress bar when task is done
+            // Handle successful feedback logic here
+          });
+
+      task.setOnFailed(
+          event -> {
+            progressBar.setVisible(false); // Hide progress bar if the task fails
+            task.getException().printStackTrace();
+          });
+
+      progressBar.progressProperty().bind(task.progressProperty());
+      new Thread(task).start(); // Run the task in a background thread
     }
   }
 
