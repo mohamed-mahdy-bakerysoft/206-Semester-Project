@@ -42,10 +42,13 @@
             <Font name="Arial Black" size="18.0" />
          </font>
       </TextArea>
-      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" text="Submit">
+      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" stylesheets="@../css/styles.css" text="Submit">
          <font>
             <Font name="System Bold Italic" size="24.0" />
-         </font></Button>
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <ProgressBar fx:id="progressBar" prefHeight="19.0" prefWidth="301.0" progress="0.0" visible="false" />
    </children>
    <padding>

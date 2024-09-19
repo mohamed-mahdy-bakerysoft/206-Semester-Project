@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,10 +14,13 @@
             <Image url="@../images/startImage.png" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="459.0" layoutY="373.0" mnemonicParsing="false" onAction="#onStart" prefHeight="55.0" prefWidth="182.0" text="Start">
+      <Button fx:id="startButton" layoutX="459.0" layoutY="373.0" mnemonicParsing="false" onAction="#onStart" prefHeight="55.0" prefWidth="182.0" stylesheets="@../css/styles.css" text="Start">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>
