@@ -127,7 +127,18 @@ public class SubmitAnswerController {
   }
 
   private String getSystemPrompt(Map<String, String> data) {
-    return PromptEngineering.getPrompt("winorloss.txt", data);
+    if (thief.equals("hos")) {
+      System.out.println("hos Toouched......................");
+      return PromptEngineering.getPrompt("win.txt", data);
+    } else if (thief.equals("curator")) {
+      System.out.println("curator Toouched......................");
+      return PromptEngineering.getPrompt("loss.txt", data);
+    } else if (thief.equals("janitor")) {
+      System.out.println("janitor Toouched......................");
+      return PromptEngineering.getPrompt("loss.txt", data);
+    }
+    System.err.println("error");
+    return "error";
   }
 
   private ChatCompletionRequest chatCompletionRequest;
