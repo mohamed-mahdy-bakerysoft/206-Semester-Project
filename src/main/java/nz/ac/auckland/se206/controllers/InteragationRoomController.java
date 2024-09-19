@@ -54,6 +54,12 @@ public class InteragationRoomController {
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
   private static Map<String, String> professionToNameMap = new HashMap<>();
   private static GameStateContext context = GameStateContext.getInstance();
+  private static boolean isChatOpened = false;
+
+  // make a setter for isChatOpened
+  public static void setIsChatOpened(boolean isChatOpened1) {
+    isChatOpened = isChatOpened1;
+  }
 
   /**
    * Gets the game context.
@@ -160,7 +166,7 @@ public class InteragationRoomController {
     suspect1Button.setOnAction(
         e -> {
           try {
-
+            InteragationRoomController.setIsChatOpened(false);
             goToRoom("IntelRoomOne");
           } catch (IOException e1) {
             e1.printStackTrace();
@@ -169,6 +175,7 @@ public class InteragationRoomController {
     suspect2Button.setOnAction(
         e -> {
           try {
+            InteragationRoomController.setIsChatOpened(false);
             goToRoom("IntelRoomTwo");
           } catch (IOException e1) {
             e1.printStackTrace();
@@ -177,6 +184,7 @@ public class InteragationRoomController {
     suspect3Button.setOnAction(
         e -> {
           try {
+            InteragationRoomController.setIsChatOpened(false);
             goToRoom("IntelRoomThree");
           } catch (IOException e1) {
             e1.printStackTrace();
@@ -607,12 +615,19 @@ public class InteragationRoomController {
     }
 
     // Display the chat UI
-    chatGroup.setVisible(true); // Ensure chat group is visible
-    txtaChat.clear();
-    txtInput.clear();
-
     // Initialize the chat with the suspect
-    setProfession(profession); // This method handles initializing chat context
+    // This method handles initializing chat context
+
+    if (!isChatOpened) {
+      chatGroup.setVisible(true); // Ensure chat group is visible
+      txtaChat.clear();
+      txtInput.clear();
+
+      setProfession(profession);
+      isChatOpened = true; // prevent further calls
+    } else {
+      System.out.println("Chat has already been opened!");
+    }
   }
 
   /**
@@ -687,6 +702,7 @@ public class InteragationRoomController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     chatGroup.setVisible(false); // Ensure chat group is visible
+    InteragationRoomController.setIsChatOpened(false);
     App.setRoot("room");
   }
 
