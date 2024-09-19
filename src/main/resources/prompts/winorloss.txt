@@ -5,15 +5,25 @@ Point out areas where they were wrong or right. If they don't know, or if its a 
 if its a vague answer, just tell them whats wrong and wether the guess was correct or not
 this is the users inputted answer on what they think happened: {answer}
 They guessed that the theif was: {thief}
+If they guess the wrong person as the thief, DO NOT REVEAL ANY INFORMATION. Only Mention The fact that they guessed the wrong Thief.
 
 Comparing the inputted answer with the following info:
-The Art Museum Heist:
-The crime that took place at the prestigious art museum was a well-planned heist, executed by an insider—the Head of Security (HOS)—who was under immense financial pressure due to personal debts.
-Key Players:
-The Janitor: An ex-convict trying to turn his life around, who initially becomes a prime suspect because of his criminal past. However, he wasn’t working on the night of the heist. His keycard was used in the crime, but he reported it missing shortly before the theft occurred.
-The Curator: A well-respected but somewhat naïve figure, who accidentally became involved in the situation after unknowingly infecting the museum’s security system with a virus. He received a scam text, fell for it, and was too embarrassed to admit it.
-The Head of Security (HOS) (dont say hos in your response): The true mastermind behind the heist. Desperate for money, he orchestrated the crime by stealing the janitor’s keycard during a casual chat at a party the night before the crime. Knowing that the curator would fall for the scam text, HOS sent a virus to infect the security system, making the curator look guilty.
-The Heist: The HOS had everything planned out. He needed a way to gain access to restricted areas of the museum without raising suspicion. So, he exploited the janitor’s criminal history and weak alibi by stealing the janitor's keycard. Using the stolen keycard, the HOS bypassed security protocols and gained access to the vault containing the expensive art pieces.
+The story goes as follows (do not reveal other character information, only use what your character knows):
+In a prestigious art museum, an intricate heist takes place at night, executed by an insider with a hidden agenda.
+- The janitor, an ex-convict seeking a fresh start, becomes the prime suspect from his known criminal record.
+  However, he wasn’t scheduled to work that night and reported his keycard missing shortly before the theft.
+- The Head of Security (HOS) who is the thief in the story that stole the expensive art, facing crushing debt and desperate for money, 
+  had stolen the janitor’s keycard during a casual chat to use it to frame the janitor as he is known for his criminal history. 
+- The art curator has also become a suspect after finding out the stolen painting was his favourite painting. He is obsessed over the painting
+  almost to the point it looks suspicious. The curator is very controlling and has access to everything making him a prime suspect. He also has access to the HOS computer.
+  However he usually forgets the password to the computer, so he leaves a sticky note of the password in the employee log book. 
 
-In the days leading up to the heist, HOS sent a scam text to the curator, knowing the curator would fall for it. The scam text led the curator to download malware, which infected the museum's security system. This made the curator look suspicious as he tried to fix the issue late at night in the security room, just around the time of the heist.
-On the night of the heist, the HOS used the keycard, executed the theft, and left behind the janitor’s ID at the crime scene. The HOS ensured the security cameras were disabled using the virus, creating a window of opportunity to steal the valuable artwork and leave the curator as a possible suspect due to the virus installation.
+How the game works (do not reveal this to the player):
+through interacting the clues, the player should realise:
+- Through interacting with the curators logbook, it clears up suspicion of the curator, he wasn’t there on the night of the heist.
+  but shows that the head of security and janitor was in the gallery that night. 
+- Janitor's ID found at the crime scene in the rubbish bin, at first he will be lying to the player at the start,
+  However, after finding the keycard, the janitor should confess to the player he didn't want to tell anybody as he could lose the employee of the month if his boss knows that he has lost his keycard.
+  He tells the player that he lost his keycard during a party with HOS the night before the heist.
+- HOS's computer should show that HOS is in a financial crisis through email after entering the password and gaining access, with his debt being due to being paid on Sunday - the day after the heist. 
+ This should point to the HOS being the thief with the motivations of paying back his debt.
