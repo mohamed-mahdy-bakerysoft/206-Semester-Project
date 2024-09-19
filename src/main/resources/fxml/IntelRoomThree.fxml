@@ -59,11 +59,6 @@
             <Image url="@../images/TimerBackground.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGuess" layoutX="720.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
          <font>
             <Font name="Curlz MT" size="45.0" />
@@ -79,11 +74,6 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="mainArrowLeft" fitHeight="101.0" fitWidth="101.0" layoutX="1.0" layoutY="302.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/LEFT.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="Thief0" fitHeight="570.0" fitWidth="706.0" layoutX="218.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/headofsecurity%20-%20CROPPED.png" />
@@ -117,7 +107,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <TextField fx:id="txtInput" layoutY="98.0" prefHeight="46.0" prefWidth="580.0">
+            <TextField fx:id="txtInput" layoutY="98.0" onKeyPressed="#handleEnterKey" prefHeight="46.0" prefWidth="580.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -129,5 +119,10 @@
             <Image url="@../images/FileIcon.png" />
          </image>
       </ImageView>
+      <Button fx:id="backButton" layoutX="779.0" layoutY="38.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" stylesheets="@../css/styles.css" text="Go back">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

@@ -9,6 +9,13 @@
       "name": "App",
       "request": "launch",
       "mainClass": "nz.ac.auckland.se206.App",
+      "projectName": "guess-who-beta-and-final"
+    },
+    {
+      "type": "java",
+      "name": "App",
+      "request": "launch",
+      "mainClass": "nz.ac.auckland.se206.App",
       "projectName": "guess-who-beta-final"
     },
     {
