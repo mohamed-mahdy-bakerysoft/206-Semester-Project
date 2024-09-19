@@ -74,11 +74,6 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="mainArrowLeft" fitHeight="170.0" fitWidth="160.0" layoutX="-13.0" layoutY="277.0" onMouseClicked="#onClickLeft" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/LEFT.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="Janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/janitor.png" />
@@ -124,5 +119,10 @@
             <Image url="@../images/FileIcon.png" />
          </image>
       </ImageView>
+      <Button fx:id="backButton" layoutX="789.0" layoutY="35.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" stylesheets="@../css/styles.css" text="Go back">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

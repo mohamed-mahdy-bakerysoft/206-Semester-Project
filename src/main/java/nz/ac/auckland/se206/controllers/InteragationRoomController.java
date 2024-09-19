@@ -39,7 +39,6 @@ import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
-import nz.ac.auckland.se206.states.Guessing;
 
 // improt key event
 
@@ -117,10 +116,6 @@ public class InteragationRoomController {
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
-  @FXML private ImageView mainLeftArrow;
-  @FXML private ImageView mainRightArrow;
-  @FXML private ImageView arrowLeft;
-  @FXML private ImageView arrowRight;
   @FXML private ImageView Currator0;
   @FXML private ImageView Currator1;
   @FXML private ImageView Currator2;
@@ -679,24 +674,6 @@ public class InteragationRoomController {
       e.printStackTrace();
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
-    }
-  }
-
-  /**
-   * Handles the left arrow click event to change perspective of room to the left.
-   *
-   * @param event mouse click
-   * @throws IOException if the FXML file is not found
-   */
-  public void onClickLeft(MouseEvent event) throws IOException {
-    if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
-      // investigation
-      return;
-    }
-    ImageView clickedArrow = (ImageView) event.getSource();
-    if (clickedArrow.getId().equals("mainArrowLeft")) {
-      App.setRoot("room");
     }
   }
 
