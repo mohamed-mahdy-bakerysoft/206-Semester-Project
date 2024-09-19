@@ -81,12 +81,20 @@ public class TimeManager {
           intiateanswer.intizliaseAndGpt(map);
         } else {
           String thief = SubmitAnswerController.getThief();
+          // cehck if thief is null
+          if (thief == null) {
+            App.setRoot("badending");
+            TimeManager.getInstance().stopTimer();
+            return;
+          }
           if (thief.equals("janitor")) {
             App.setRoot("badending");
+            TimeManager.getInstance().stopTimer();
           } else if (thief.equals("hos")) {
             App.setRoot("goodending2");
           } else if (thief.equals("curator")) {
             App.setRoot("badending");
+            TimeManager.getInstance().stopTimer();
 
           } else {
             System.err.println("error");
