@@ -15,7 +15,7 @@
             <Image url="@../images/LogBook1.png" />
          </image>
       </ImageView>
-      <Button fx:id="backButton2" layoutX="925.0" layoutY="4.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" text="Go back">
+      <Button fx:id="backButton2" layoutX="925.0" layoutY="4.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" stylesheets="@../css/styles.css" text="Go back">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>

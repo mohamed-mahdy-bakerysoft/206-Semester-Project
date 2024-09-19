@@ -101,7 +101,6 @@ public class RoomController {
     // Initialize with navBar hidden
     navBar.setTranslateX(+200);
     navBar.setDisable(true);
-    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
     suspect1Button.setOnAction(
         e -> {
           try {
@@ -134,8 +133,8 @@ public class RoomController {
       isFirstTimeInit = false;
     }
     timeManager.setTimerLabel(mins, secs);
-    // delete later
-    context.setState(context.getGuessingState());
+    // delete later (to test guessing state)
+    // context.setState(context.getGuessingState());
   }
 
   /**
@@ -242,23 +241,23 @@ public class RoomController {
    */
   @FXML
   private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
-    // if (clueHasBeenInteractedWith
-    //     && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&
-    //   System.out.println("Now in guessing state");
-    //   context.handleGuessClick();
-    // } else {
-    //   sound =
-    //       new Media(
-    //           App.class
-    //               .getResource("/sounds/investigate_more_before_guessing.mp3")
-    //               .toURI()
-    //               .toString());
-    //   player = new MediaPlayer(sound);
-    //   player.play();
-    // }
-    // delte later
-    context.handleGuessClick();
-    App.setRoot("whosThief");
+    if (clueHasBeenInteractedWith
+        && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&
+      System.out.println("Now in guessing state");
+      context.handleGuessClick();
+    } else {
+      sound =
+          new Media(
+              App.class
+                  .getResource("/sounds/investigate_more_before_guessing.mp3")
+                  .toURI()
+                  .toString());
+      player = new MediaPlayer(sound);
+      player.play();
+    }
+    // delete later(to test guessing screen):
+    // context.handleGuessClick();
+    // App.setRoot("whosThief");
   }
 
   /**
