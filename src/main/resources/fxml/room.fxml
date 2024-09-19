@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -21,6 +22,9 @@
          <image>
             <Image url="@../images/RIGHT.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <VBox fx:id="navBar" alignment="CENTER" layoutX="908.0" layoutY="125.0" prefHeight="516.0" prefWidth="196.0" style="-fx-background-image: url('/images/nav_bar_background.png'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 2;">
          <children>
@@ -33,6 +37,9 @@
                      <image>
                         <Image url="@../images/NavFrank.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </graphic>
             </Button>
@@ -42,6 +49,9 @@
                      <image>
                         <Image url="@../images/NavJohn.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </graphic>
             </Button>
@@ -51,6 +61,9 @@
                      <image>
                         <Image url="@../images/NavWill.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </graphic>
             </Button>
@@ -60,8 +73,14 @@
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="120.0" layoutY="487.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="120.0" layoutY="487.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rect-bin" width="77.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/TimerBackground.png" />
@@ -86,11 +105,17 @@
          <image>
             <Image url="@../images/LEFT.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="107.0" fitWidth="117.0" layoutX="967.0" layoutY="9.0" onMouseClicked="#toggleNavBar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/FileIcon.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
    </children>
 </Pane>

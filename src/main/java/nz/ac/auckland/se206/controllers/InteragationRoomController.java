@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -38,7 +39,6 @@ import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 import nz.ac.auckland.se206.speech.TextToSpeech;
-import nz.ac.auckland.se206.states.Guessing;
 
 // improt key event
 
@@ -112,15 +112,10 @@ public class InteragationRoomController {
   @FXML private Button suspect3Button;
 
   // @FXML private Button btnGoIntelRoom;
-  @FXML private Button btnGuess;
   @FXML private Button btnBack;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
-  @FXML private ImageView mainLeftArrow;
-  @FXML private ImageView mainRightArrow;
-  @FXML private ImageView arrowLeft;
-  @FXML private ImageView arrowRight;
   @FXML private ImageView Currator0;
   @FXML private ImageView Currator1;
   @FXML private ImageView Currator2;
@@ -384,6 +379,31 @@ public class InteragationRoomController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    sendMessage();
+  }
+
+  /**
+   * Handles the "Enter" key press in the TextField to send a message.
+   *
+   * @param event the KeyEvent triggered by pressing a key
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      sendMessage();
+    }
+  }
+
+  /**
+   * Sends a message to the GPT model.
+   *
+   * @param event the action event triggered by the send button
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an I/O error
+   */
+  private void sendMessage() throws ApiProxyException, IOException {
     String message = txtInput.getText().trim();
     if (message.isEmpty()) {
       return;
@@ -654,24 +674,6 @@ public class InteragationRoomController {
       e.printStackTrace();
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
-    }
-  }
-
-  /**
-   * Handles the left arrow click event to change perspective of room to the left.
-   *
-   * @param event mouse click
-   * @throws IOException if the FXML file is not found
-   */
-  public void onClickLeft(MouseEvent event) throws IOException {
-    if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
-      // investigation
-      return;
-    }
-    ImageView clickedArrow = (ImageView) event.getSource();
-    if (clickedArrow.getId().equals("mainArrowLeft")) {
-      App.setRoot("room");
     }
   }
 
