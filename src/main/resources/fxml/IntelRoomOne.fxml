@@ -54,11 +54,6 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="btnGuess" layoutX="720.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/TimerBackground.png" />
@@ -120,7 +115,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <TextField fx:id="txtInput" layoutY="98.0" prefHeight="46.0" prefWidth="580.0">
+            <TextField fx:id="txtInput" layoutY="98.0" onKeyPressed="#handleEnterKey" prefHeight="46.0" prefWidth="580.0">
                <font>
                   <Font size="18.0" />
                </font>

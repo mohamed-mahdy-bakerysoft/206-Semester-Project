@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -112,7 +113,6 @@ public class InteragationRoomController {
   @FXML private Button suspect3Button;
 
   // @FXML private Button btnGoIntelRoom;
-  @FXML private Button btnGuess;
   @FXML private Button btnBack;
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
@@ -384,6 +384,31 @@ public class InteragationRoomController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    sendMessage();
+  }
+
+  /**
+   * Handles the "Enter" key press in the TextField to send a message.
+   *
+   * @param event the KeyEvent triggered by pressing a key
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void handleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      sendMessage();
+    }
+  }
+
+  /**
+   * Sends a message to the GPT model.
+   *
+   * @param event the action event triggered by the send button
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an I/O error
+   */
+  private void sendMessage() throws ApiProxyException, IOException {
     String message = txtInput.getText().trim();
     if (message.isEmpty()) {
       return;
