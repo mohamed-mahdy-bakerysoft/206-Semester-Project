@@ -56,13 +56,10 @@
             <Font name="Courier New" size="18.0" />
          </font>
       </TextArea>
-      <Button fx:id="submitButton" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="66.0" prefWidth="302.0" stylesheets="@../css/styles.css" text="Submit">
+      <ProgressBar fx:id="progressBar" layoutX="615.0" layoutY="570.0" prefHeight="19.0" prefWidth="301.0" progress="0.0" visible="false" />
+      <Button fx:id="submitButton" layoutX="636.0" layoutY="593.0" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="49.0" prefWidth="261.0" stylesheets="@../css/styles.css" text="Submit">
          <font>
             <Font name="System Bold Italic" size="24.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <ProgressBar fx:id="progressBar" prefHeight="19.0" prefWidth="301.0" progress="0.0" visible="false" />
+         </font></Button>
    </children>
 </AnchorPane>
