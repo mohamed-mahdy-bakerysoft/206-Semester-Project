@@ -16,3 +16,7 @@
   -fx-border-radius: 22;
   -fx-border-width: 2;
 }
+
+.rect-bin {
+  -fx-cursor: hand; /* Change cursor to hand pointer on hover */
+}
