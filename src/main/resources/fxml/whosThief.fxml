@@ -9,32 +9,33 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SubmitAnswerController">
    <children>
-      <ImageView fitHeight="587.0" fitWidth="1098.0" layoutX="1.0" layoutY="107.0" pickOnBounds="true">
+      <ImageView fitHeight="700.0" fitWidth="1250.0" layoutX="-77.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/suspectfiles3.png" />
+            <Image url="@../images/suspectfiles.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="36.0" text=" Click on the file of the person you believe is guilty.">
+      <Rectangle fx:id="janitor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="345.0" layoutX="432.0" layoutY="297.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="275.0" />
+      <Rectangle fx:id="curator" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="328.0" layoutX="126.0" layoutY="167.0" onMouseClicked="#handleRectangleClick" opacity="0.0" rotate="-7.6" stroke="BLACK" strokeType="INSIDE" width="256.0" />
+      <Rectangle fx:id="hos" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="326.0" layoutX="749.0" layoutY="160.0" onMouseClicked="#handleRectangleClick" opacity="0.0" rotate="-171.0" stroke="BLACK" strokeType="INSIDE" width="263.0" />
+      
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TimerBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Rectangle fx:id="janitor" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="354.0" layoutX="405.0" layoutY="256.0" onMouseClicked="#handleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="284.0" />
-      <Rectangle fx:id="curator" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="345.0" layoutX="61.0" layoutY="165.0" onMouseClicked="#handleRectangleClick" opacity="0.0" rotate="-7.6" stroke="BLACK" strokeType="INSIDE" width="295.0" />
-      <Rectangle fx:id="hos" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="345.0" layoutX="754.0" layoutY="183.0" onMouseClicked="#handleRectangleClick" opacity="0.0" rotate="-171.0" stroke="BLACK" strokeType="INSIDE" width="313.0" />
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="19.0" prefHeight="69.0" prefWidth="58.0" text="00">
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
          <font>
-            <Font size="45.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="20.0" prefHeight="56.0" prefWidth="58.0" text=":">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
          <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="17.0" prefHeight="69.0" prefWidth="58.0" text="2">
-         <font>
-            <Font size="45.0" />
+            <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
    </children>

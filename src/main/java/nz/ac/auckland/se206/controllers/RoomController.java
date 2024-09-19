@@ -101,7 +101,6 @@ public class RoomController {
     // Initialize with navBar hidden
     navBar.setTranslateX(+200);
     navBar.setDisable(true);
-    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
     suspect1Button.setOnAction(
         e -> {
           try {
@@ -134,6 +133,8 @@ public class RoomController {
       isFirstTimeInit = false;
     }
     timeManager.setTimerLabel(mins, secs);
+    // delete later (to test guessing state)
+    // context.setState(context.getGuessingState());
   }
 
   /**
@@ -254,7 +255,8 @@ public class RoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
-    // App.setRoot("room");
+    // delete later(to test guessing screen):
+    // context.handleGuessClick();
     // App.setRoot("whosThief");
   }
 

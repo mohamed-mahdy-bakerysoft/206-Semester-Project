@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
@@ -16,6 +17,9 @@ public class ClueController {
   @FXML private Button backButton;
   @FXML private Label mins;
   @FXML private Label secs;
+  @FXML private Rectangle rectHint;
+  @FXML private Rectangle rectBackDrop;
+  @FXML private ImageView passwordHint;
 
   /**
    * Initializes the clue view.
@@ -63,5 +67,15 @@ public class ClueController {
       return;
     }
     App.setRoot("computercluepassword");
+  }
+
+  public void handleComputerStickyNote(MouseEvent event) throws IOException {
+    passwordHint.setVisible(true);
+    rectBackDrop.setVisible(true);
+  }
+
+  public void handleClickBack(MouseEvent event) throws IOException {
+    passwordHint.setVisible(false);
+    rectBackDrop.setVisible(false);
   }
 }
