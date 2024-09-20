@@ -95,6 +95,15 @@ public class EndingController {
 
     // Navigate back to the start room
     App.setRoot("start");
+
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   @FXML
