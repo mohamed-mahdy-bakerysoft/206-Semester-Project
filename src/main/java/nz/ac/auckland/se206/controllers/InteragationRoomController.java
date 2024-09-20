@@ -283,7 +283,7 @@ public class InteragationRoomController {
 
   // NavBar Methods
   @FXML
-  private void toggleNavBar() {
+  private void onToggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
 
@@ -422,7 +422,7 @@ public class InteragationRoomController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void handleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
+  private void onHandleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
       if (!btnSend.isDisabled()) {
         sendMessage();
@@ -633,7 +633,7 @@ public class InteragationRoomController {
    * @throws InterruptedException
    */
   @FXML
-  private void handleRectangleClick(MouseEvent event)
+  private void onHandleRectangleClick(MouseEvent event)
       throws IOException, URISyntaxException, InterruptedException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
 
