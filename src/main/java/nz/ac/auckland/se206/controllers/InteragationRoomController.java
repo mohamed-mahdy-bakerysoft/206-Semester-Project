@@ -458,16 +458,16 @@ public class InteragationRoomController {
           player = new MediaPlayer(janitorHmm);
         }
         break;
-      default:
-        return;
     }
+    player.play();
   }
 
   private void appendChatMessage(ChatMessage msg) {
     Map<String, StringBuilder> chatHistory = context.getChatHistory();
     int randomIndex = random.nextInt(3); // Generates 0, 1, or 2
 
-    if (!msg.getRole().equals("user") && suspectHasBeenTalkedToMap.get(profession)) {
+    if (!msg.getRole().equals("user")) {
+      System.out.println("playing hmm sound from " + profession);
       playHmmSound(profession);
     }
 
@@ -660,10 +660,9 @@ public class InteragationRoomController {
   private void initializeSounds() {
     try {
       artCurratorHmm =
-          new Media(App.class.getResource("/sounds/art_student_hmm.mp3").toURI().toString());
-      thiefHmm = new Media(App.class.getResource("/sounds/thief_hmm.mp3").toURI().toString());
-      janitorHmm =
-          new Media(App.class.getResource("/sounds/grumpy_tourist_hmm.mp3").toURI().toString());
+          new Media(App.class.getResource("/sounds/Curatorhmmm.mp3").toURI().toString());
+      thiefHmm = new Media(App.class.getResource("/sounds/HOShuh.mp3").toURI().toString());
+      janitorHmm = new Media(App.class.getResource("/sounds/janhmmm.mp3").toURI().toString());
 
       // Check if any Media is null
       if (artCurratorHmm == null || thiefHmm == null || janitorHmm == null) {

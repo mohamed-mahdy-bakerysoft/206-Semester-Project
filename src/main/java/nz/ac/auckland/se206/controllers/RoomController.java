@@ -128,7 +128,6 @@ public class RoomController {
         });
 
     if (isFirstTimeInit) {
-      // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
       System.out.println("First time");
       isFirstTimeInit = false;
     }
