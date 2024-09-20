@@ -38,7 +38,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 // improt key event
 
@@ -222,7 +221,7 @@ public class InteragationRoomController {
     // System.out.println("Key " + event.getCode() + " released");
   }
 
-  public void setProfession(String profession) throws URISyntaxException {
+  public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
 
     // Only display the initial message if no previous conversation exists
@@ -235,7 +234,7 @@ public class InteragationRoomController {
       chatCompletionRequest =
           new ChatCompletionRequest(config)
               .setN(1)
-              .setTemperature(0.2)
+              .setTemperature(0.8)
               .setTopP(0.5)
               .setMaxTokens(80);
 
@@ -253,7 +252,6 @@ public class InteragationRoomController {
             ChatMessage resultMessage = task.getValue();
             appendChatMessage(resultMessage);
             if (!suspectHasBeenTalkedToMap.get(profession)) {
-              TextToSpeech.speak(resultMessage.getContent(), profession);
               suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
             }
           });
@@ -427,7 +425,6 @@ public class InteragationRoomController {
           appendChatMessage(resultMessage);
           // Check if TTS should be used
           if (!suspectHasBeenTalkedToMap.get(profession)) {
-            TextToSpeech.speak(resultMessage.getContent(), profession);
             suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
           }
         });
@@ -587,9 +584,11 @@ public class InteragationRoomController {
    * @param event the mouse event triggered by clicking a rectangle
    * @throws IOException if there is an I/O error
    * @throws URISyntaxException
+   * @throws InterruptedException
    */
   @FXML
-  private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
+  private void handleRectangleClick(MouseEvent event)
+      throws IOException, URISyntaxException, InterruptedException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
 
     // Identify which suspect was clicked and set the profession accordingly

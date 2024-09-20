@@ -75,14 +75,12 @@ public class SubmitAnswerController {
       timeManager.stopTimer();
       timeManager.setInterval(60);
 
-      sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
-      player = new MediaPlayer(sound);
-      player.play();
+      // sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
+      // player = new MediaPlayer(sound);
+      // player.play();
     }
     timeManager.startTimer();
     timeManager.setTimerLabel(mins, secs);
-    // GameStateContext context = RoomController.getGameContext();
-    // context.setState(context.getGuessingState());
   }
 
   public void sendAnswer() {
