@@ -21,6 +21,8 @@ import nz.ac.auckland.se206.controllers.InteragationRoomController;
 public class App extends Application {
 
   private static Scene scene;
+  private static Map<String, Parent> sceneCache = new HashMap<>();
+  private static Map<String, InteragationRoomController> controllerCache = new HashMap<>();
 
   /**
    * The main method that launches the JavaFX application.
@@ -44,9 +46,6 @@ public class App extends Application {
   public static void setSameRoot(Parent root) {
     scene.setRoot(root);
   }
-
-  private static Map<String, Parent> sceneCache = new HashMap<>();
-  private static Map<String, InteragationRoomController> controllerCache = new HashMap<>();
 
   public static void openChat(MouseEvent event, String profession)
       throws IOException, URISyntaxException {
