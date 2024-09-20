@@ -82,8 +82,6 @@ public class SubmitAnswerController {
   }
 
   @FXML private Button submitButton; // Button to submit the answer
-  @FXML private Button viewfeedback; // Button to view feedback
-  @FXML private Button viewfeedback2; // Another button to view feedback
   @FXML private TextArea answerTxtArea; // Text area for player's answer
   @FXML private Rectangle janitor; // Rectangle representing the janitor suspect
   @FXML private Rectangle hos; // Rectangle representing the head of security suspect
@@ -175,20 +173,6 @@ public class SubmitAnswerController {
   @FXML
   private void savefeedback() {
     answer = answerTxtArea.getText(); // Save the answer from the text area
-  }
-
-  /** Appends feedback based on the selected thief. */
-  @FXML
-  private void appendfeedback() {
-    if (thief.equals("hos")) {
-      feedback.appendText(feed); // Append feedback for head of security
-    } else if (thief.equals("curator")) {
-      feedback2.appendText(feed); // Append feedback for curator
-    } else if (thief.equals("janitor")) {
-      feedback2.appendText(feed); // Append feedback for janitor
-    } else {
-      feedback2.appendText("Feedback not available"); // Default feedback
-    }
   }
 
   /**
@@ -291,16 +275,12 @@ public class SubmitAnswerController {
    */
   private String runGpt(ChatMessage msg) throws ApiProxyException, IOException {
     chatCompletionRequest.addMessage(msg); // Add the message to the GPT request
-    ChatCompletionResult chatCompletionResult =
-        chatCompletionRequest.execute(); // Execute the GPT request
-    Choice result =
-        chatCompletionResult.getChoices().iterator().next(); // Get the first choice from the result
-    chatCompletionRequest.addMessage(
-        result.getChatMessage()); // Add the response message to the request
-
+    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+    Choice result = chatCompletionResult.getChoices().iterator().next();
+    chatCompletionRequest.addMessage(result.getChatMessage());
     String messageContent =
         result.getChatMessage().getContent(); // Get the content of the response message
-    feed = messageContent; // Set the feedback
+    feed = messageContent;
     EndingController.setFeed(feed); // Set the feedback in the ending controller
     EndingController.setThief(thief); // Set the thief in the ending controller
     return messageContent; // Return the response message content

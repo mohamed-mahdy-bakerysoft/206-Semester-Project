@@ -111,7 +111,7 @@ public class EndingController {
    * @throws IOException if there is an error navigating to the start room
    */
   @FXML
-  private void handleRestartClick(ActionEvent event) throws IOException {
+  private void onHandleRestartClick(ActionEvent event) throws IOException {
     // Reset the game state
     GameStateContext.getInstance().reset();
 

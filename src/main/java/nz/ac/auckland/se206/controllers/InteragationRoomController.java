@@ -377,17 +377,21 @@ public class InteragationRoomController {
    * @return a string containing the initial message tailored to the given profession
    */
   private String getInitialMessageForProfession(String profession) {
+    // Switch case to determine the initial message based on the profession
     switch (profession) {
       case "Art Currator":
-        return "Hey can you tell me what happened here? I'm investigating this case.";
+        return "Hey can you tell me what happened here? I'm investigating this case."; // Case for
+      // the art
+      // currator
       case "Art Thief":
         return "Hi sir. I'm one of the investigators on this job. Can you tell me what happened"
-            + " here?";
+            + " here?"; // case for Art Thief
       case "Janitor":
         return "Hello. I'm investigating this case on behalf of PI Masters. Can you tell me what"
-            + " happened here?";
+            + " happened here?"; // case for Janitor
       default:
-        return "Hello, I am investigating this case. Can you tell me what happened here?";
+        return "Hello, I am investigating this case. Can you tell me what happened"
+            + " here?"; // default case
     }
   }
 
