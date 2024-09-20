@@ -183,7 +183,7 @@ public class TimeManager {
   }
 
   public void resetTimerRestart() {
-    interval = 300; // Reset to 5 minutes
+    interval = 300; // Reset to 5 minutes (300 seconds)
     updateTimerLabels();
     stopTimer(); // Stop the current timer if it was running
   }
