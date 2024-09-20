@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SubmitAnswerController;
 import nz.ac.auckland.se206.states.GameOver;
+import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.Guessing;
 
 /**
@@ -76,8 +77,72 @@ public class TimeManager {
    */
   public void decrementTime() throws IOException, URISyntaxException {
     if (interval == 0) {
-      handleTimeExpiry();
-    } else { // Decrement the timer
+      if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
+          && InteragationRoomController.getSuspectsHaveBeenTalkedTo()
+          && RoomController
+              .getClueHasBeenInteractedWith()) { // if game started state and suspects have been
+        // talked to and clue has been interacted with,
+        // move to guessing state
+        System.out.println("Game started state to guessing state");
+        GameStateContext context = GameStateContext.getInstance();
+        context.setState(context.getGuessingState());
+        System.out.println("Now in guessing state");
+        App.setRoot("whosThief");
+        setInterval(60);
+        return;
+      }
+      if (RoomController.getGameContext().getCurrentState()
+          instanceof GameOver) { // if game is over, do nothing
+        stopTimer();
+        System.out.println("Game is over");
+        return;
+      } else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
+          || !(InteragationRoomController.getSuspectsHaveBeenTalkedTo()
+              && RoomController
+                  .getClueHasBeenInteractedWith())) { // if already in guessing state OR player has
+        // not investigated, move to game over state
+        SubmitAnswerController.setIsFirstTime(false);
+        if (SubmitAnswerController.getAnswer() != null) {
+          Map<String, String> map = SubmitAnswerController.intiateanswer();
+          SubmitAnswerController intiateanswer = new SubmitAnswerController();
+          intiateanswer.intizliaseAndGpt(map);
+        } else {
+          String thief = SubmitAnswerController.getThief();
+          // cehck if thief is null
+          if (thief == null) {
+            App.setRoot("badending");
+            TimeManager.getInstance().stopTimer();
+            return;
+          }
+          if (thief.equals("janitor")) {
+            App.setRoot("badending");
+            TimeManager.getInstance().stopTimer();
+          } else if (thief.equals("hos")) {
+            App.setRoot("goodending2");
+          } else if (thief.equals("curator")) {
+            App.setRoot("badending");
+            TimeManager.getInstance().stopTimer();
+
+          } else {
+            System.err.println("error");
+          }
+        }
+        timeline.stop();
+
+        return;
+      } else { // move to guessing state and give 60 seconds to guess
+        // RoomController.getGameContext()
+        //     .setState(RoomController.getGameContext().getGuessingState());
+        App.setRoot("whosThief");
+        sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
+        setGuessTimer();
+        startTimer();
+        System.out.println("Now in guessing state");
+      }
+      timeline.stop();
+    } else { // else decrement the timer by 1 second
       interval--;
       int minutes = interval / 60;
       int seconds = interval % 60;
@@ -85,28 +150,7 @@ public class TimeManager {
       formattedSeconds = String.format("%02d", seconds);
     }
   }
-
-  /** Handles what happens when time runs out based on the game's current state. */
-  private void handleTimeExpiry() throws IOException, URISyntaxException {
-    if (RoomController.getGameContext().getCurrentState() instanceof GameOver) {
-      stopTimer();
-      System.out.println("Game is over");
-    } else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
-        || !(InteragationRoomController.getSuspectsHaveBeenTalkedTo()
-            && RoomController.getClueHasBeenInteractedWith())) {
-      handleGameOverState();
-    } else { // Move to guessing state and give 60 seconds to guess
-      App.setRoot("whosThief");
-      sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
-      player = new MediaPlayer(sound);
-      player.play();
-      setGuessTimer();
-      startTimer();
-      System.out.println("Now in guessing state");
-    }
-    timeline.stop();
-  }
-
+  
   /** Sets the timer to 61 seconds for the guessing state. */
   private void setGuessTimer() {
     interval = 61; // Set 1 minute for guessing state

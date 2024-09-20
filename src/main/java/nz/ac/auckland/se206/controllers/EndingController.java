@@ -115,6 +115,8 @@ public class EndingController {
 
     // Reset submit answer state
     SubmitAnswerController.reset();
+    feed = null;
+    thief = null;
 
     // Navigate back to the start room
     App.setRoot("start");
