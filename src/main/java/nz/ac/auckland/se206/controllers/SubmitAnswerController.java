@@ -4,10 +4,14 @@ import java.io.IOException; // Add this import for IOException
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -49,6 +53,7 @@ public class SubmitAnswerController {
   @FXML private TextArea feedback2;
   @FXML private Label mins;
   @FXML private Label secs;
+  @FXML private ProgressBar progressBar;
 
   // make a getter for answer
   public static String getAnswer() {
@@ -74,6 +79,7 @@ public class SubmitAnswerController {
   }
 
   public void sendAnswer() {
+    submitButton.setDisable(true);
     timeManager.stopTimer();
     System.err.println(thief);
     if (answerTxtArea.getText().isEmpty()) {
@@ -85,7 +91,36 @@ public class SubmitAnswerController {
       System.out.println("Thief: " + thief);
 
       System.out.println("Answer submitted: " + answerTxtArea.getText());
-      intizliaseAndGpt(map);
+      progressBar.setVisible(true); // Show the progress bar
+
+      Task<Void> task =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              updateProgress(0, 100); // Start progress
+              intizliaseAndGpt(map);
+              for (int i = 0; i <= 100; i++) {
+                updateProgress(i, 100); // Update the progress
+                Thread.sleep(20); // Simulate progress
+              }
+              return null;
+            }
+          };
+
+      task.setOnSucceeded(
+          event -> {
+            progressBar.setVisible(false); // Hide progress bar when task is done
+            // Handle successful feedback logic here
+          });
+
+      task.setOnFailed(
+          event -> {
+            progressBar.setVisible(false); // Hide progress bar if the task fails
+            task.getException().printStackTrace();
+          });
+
+      progressBar.progressProperty().bind(task.progressProperty());
+      new Thread(task).start(); // Run the task in a background thread
     }
   }
 
@@ -126,6 +161,13 @@ public class SubmitAnswerController {
     App.setRoot("submitanswer");
   }
 
+  @FXML
+  private void handleEnterKey(KeyEvent event) throws IOException {
+    if (event.getCode().equals(KeyCode.ENTER)) {
+      sendAnswer(); // Call the same method for submitting the answer
+    }
+  }
+
   private String getSystemPrompt(Map<String, String> data) {
     if (thief.equals("hos")) {
       System.out.println("hos Toouched......................");
@@ -144,32 +186,55 @@ public class SubmitAnswerController {
   private ChatCompletionRequest chatCompletionRequest;
 
   public void intizliaseAndGpt(Map<String, String> data) {
-    try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-      chatCompletionRequest =
-          new ChatCompletionRequest(config)
-              .setN(1)
-              .setTemperature(0.2)
-              .setTopP(0.5)
-              .setMaxTokens(100);
-      runGpt(new ChatMessage("system", getSystemPrompt(data)));
-      System.out.println("stuff about to run here........................");
-      System.out.println("thief is: " + thief);
-      if (thief.equals("janitor")) {
-        App.setRoot("badending");
-      } else if (thief.equals("hos")) {
-        App.setRoot("goodending2");
-      } else if (thief.equals("curator")) {
-        App.setRoot("badending");
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            try {
+              ApiProxyConfig config = ApiProxyConfig.readConfig();
+              chatCompletionRequest =
+                  new ChatCompletionRequest(config)
+                      .setN(1)
+                      .setTemperature(0.2)
+                      .setTopP(0.5)
+                      .setMaxTokens(100);
+              runGpt(new ChatMessage("system", getSystemPrompt(data)));
+              return null;
+            } catch (ApiProxyException | IOException e) {
+              e.printStackTrace();
+              return null;
+            }
+          }
+        };
 
-      } else {
-        System.err.println("error");
-      }
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-    } catch (IOException e) { // Add this catch block for IOException
-      e.printStackTrace();
-    }
+    task.setOnSucceeded(
+        event -> {
+          // UI updates or logic after GPT response
+          if (thief.equals("janitor")) {
+            try {
+              App.setRoot("badending");
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          } else if (thief.equals("hos")) {
+            try {
+              App.setRoot("goodending2");
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          } else if (thief.equals("curator")) {
+            try {
+              App.setRoot("badending");
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          } else {
+            System.err.println("error");
+          }
+          submitButton.setDisable(false);
+        });
+
+    new Thread(task).start(); // Start the background task
   }
 
   private String runGpt(ChatMessage msg)
