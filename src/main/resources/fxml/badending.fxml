@@ -14,7 +14,7 @@
             <Image url="@../images/youlose.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback2" editable="false" layoutX="177.0" layoutY="550.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true" />
+      <TextArea fx:id="feedback2" editable="false" layoutX="177.0" layoutY="550.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback unavailable" wrapText="true" />
       <Button fx:id="restartButton" layoutX="489.0" layoutY="492.0" onAction="#handleRestartClick" prefHeight="42.0" prefWidth="182.0" stylesheets="@../css/styles.css" text="Restart Game">
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -104,6 +104,7 @@ public class RoomController {
     suspect1Button.setOnAction(
         e -> {
           try {
+            InteragationRoomController.setIsChatOpened(false);
 
             goToRoom("IntelRoomOne");
           } catch (IOException e1) {
@@ -113,6 +114,7 @@ public class RoomController {
     suspect2Button.setOnAction(
         e -> {
           try {
+            InteragationRoomController.setIsChatOpened(false);
             goToRoom("IntelRoomTwo");
           } catch (IOException e1) {
             e1.printStackTrace();
@@ -121,6 +123,7 @@ public class RoomController {
     suspect3Button.setOnAction(
         e -> {
           try {
+            InteragationRoomController.setIsChatOpened(false);
             goToRoom("IntelRoomThree");
           } catch (IOException e1) {
             e1.printStackTrace();
