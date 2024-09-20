@@ -61,6 +61,15 @@ public class RoomController {
     return clueHasBeenInteractedWith;
   }
 
+  /**
+   * Sets the clueHasBeenInteractedWith boolean to check if the clue has been interacted with.
+   *
+   * @return the clueHasBeenInteractedWith boolean
+   */
+  public static void setClueHasBeenInteractedWith(boolean b) {
+    clueHasBeenInteractedWith = false;
+  }
+
   // Added navbar with buttons
   @FXML private VBox navBar;
   @FXML private Button corridorButton;
@@ -302,9 +311,5 @@ public class RoomController {
     } else if (clickedArrow.getId().equals("arrowLeft")) {
       App.setRoot("room");
     }
-  }
-
-  public static void setClueHasBeenInteractedWith(boolean b) {
-    clueHasBeenInteractedWith = false;
   }
 }
