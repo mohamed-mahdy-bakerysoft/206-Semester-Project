@@ -1,5 +1,5 @@
 With the following info, compare the user inputted answer on what they think happened, with what actually happened. This is for the game over screen.
-Provide feedback on why they were right or wrong about the story. Try to keep it simple and on point. Try to keep it short as possible, this is a one time feedback and no responeses will be given after.
+Provide feedback on why they were right or wrong about the story. Try to keep it simple and on point. Make sure your explaination is concise, understanable and within 3-4 sentences (around 60 words, and make line breaks when appropriate), this is a one time feedback and no responeses will be given after.
 Make sure this meesage is intended to read once.
 Point out areas where they were wrong or right. If they don't know, or if its a absurd answer, just give them a quick rundown of the story.
 if its a vague answer, just tell them whats wrong and wether the guess was correct or not
