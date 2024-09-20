@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException; // Add this import for IOException
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,22 +24,60 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
-// improt java fxml text
-
+/**
+ * The SubmitAnswerController class manages the submission of answers in the guessing game. It
+ * includes interactions with the OpenAI GPT model, progress bar handling, and timer management.
+ */
 public class SubmitAnswerController {
+
   private static String feed;
   private static String thief;
   private static String answer;
   private static boolean isFirstTime = true;
   public static TimeManager timeManager = TimeManager.getInstance();
 
-  // make getters for feed and thief
+  /**
+   * Gets the current feedback.
+   *
+   * @return the feedback from the GPT response
+   */
   public static String getFeed() {
     return feed;
   }
 
+  /**
+   * Gets the current selected thief.
+   *
+   * @return the thief chosen by the player
+   */
   public static String getThief() {
     return thief;
+  }
+
+  /**
+   * Gets the current answer.
+   *
+   * @return the answer provided by the player
+   */
+  public static String getAnswer() {
+    return answer;
+  }
+
+  /**
+   * Sets the value of the isFirstTime flag.
+   *
+   * @param isFirstTime boolean indicating if it's the player's first interaction
+   */
+  public static void setIsFirstTime(boolean isFirstTime) {
+    SubmitAnswerController.isFirstTime = isFirstTime;
+  }
+
+  /** Resets the submit answer controller state, including the timer, feed, and thief data. */
+  public static void reset() {
+    feed = null;
+    thief = null;
+    answer = null;
+    isFirstTime = true; // Reset to ensure the timer logic behaves correctly
   }
 
   @FXML private Button submitButton;
@@ -55,91 +93,87 @@ public class SubmitAnswerController {
   @FXML private Label secs;
   @FXML private ProgressBar progressBar;
 
-  // make a getter for answer
-  public static String getAnswer() {
-    return answer;
-  }
+  private ChatCompletionRequest chatCompletionRequest;
 
-  // make a setter for isfirst time
-  public static void setIsFirstTime(boolean isFirstTime) {
-    SubmitAnswerController.isFirstTime = isFirstTime;
-  }
-
+  /**
+   * Initializes the controller, setting up the timer and resetting the first-time flag if
+   * necessary.
+   */
   public void initialize() {
-
-    if (isFirstTime == true) {
-
+    if (isFirstTime) {
       timeManager.stopTimer();
       timeManager.setInterval(60);
     }
     timeManager.startTimer();
     timeManager.setTimerLabel(mins, secs);
-    // GameStateContext context = RoomController.getGameContext();
-    // context.setState(context.getGuessingState());
   }
 
+  /**
+   * Sends the player's answer and processes the submission asynchronously. It includes progress bar
+   * updates and invokes GPT model interactions.
+   */
   public void sendAnswer() {
     submitButton.setDisable(true);
     timeManager.stopTimer();
-    System.err.println(thief);
     if (answerTxtArea.getText().isEmpty()) {
       return;
-    } else {
-      Map<String, String> map = new HashMap<>();
-      map.put("answer", answerTxtArea.getText());
-      map.put("thief", thief);
-      System.out.println("Thief: " + thief);
-
-      System.out.println("Answer submitted: " + answerTxtArea.getText());
-      progressBar.setVisible(true); // Show the progress bar
-
-      Task<Void> task =
-          new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-              updateProgress(0, 100); // Start progress
-              intizliaseAndGpt(map);
-              for (int i = 0; i <= 100; i++) {
-                updateProgress(i, 100); // Update the progress
-                Thread.sleep(20); // Simulate progress
-              }
-              return null;
-            }
-          };
-
-      task.setOnSucceeded(
-          event -> {
-            progressBar.setVisible(false); // Hide progress bar when task is done
-            // Handle successful feedback logic here
-          });
-
-      task.setOnFailed(
-          event -> {
-            progressBar.setVisible(false); // Hide progress bar if the task fails
-            task.getException().printStackTrace();
-          });
-
-      progressBar.progressProperty().bind(task.progressProperty());
-      new Thread(task).start(); // Run the task in a background thread
     }
+
+    Map<String, String> map = new HashMap<>();
+    map.put("answer", answerTxtArea.getText());
+    map.put("thief", thief);
+
+    progressBar.setVisible(true); // Show the progress bar
+
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            updateProgress(0, 100); // Start progress
+            intizliaseAndGpt(map);
+            for (int i = 0; i <= 100; i++) {
+              updateProgress(i, 100); // Update the progress
+              Thread.sleep(20); // Simulate progress
+            }
+            return null;
+          }
+        };
+
+    task.setOnSucceeded(
+        event -> {
+          progressBar.setVisible(false); // Hide progress bar when task is done
+          // Handle successful feedback logic here
+        });
+
+    task.setOnFailed(
+        event -> {
+          progressBar.setVisible(false); // Hide progress bar if the task fails
+          task.getException().printStackTrace();
+        });
+
+    progressBar.progressProperty().bind(task.progressProperty());
+    new Thread(task).start(); // Run the task in a background thread
   }
 
+  /**
+   * Initiates the answer submission process.
+   *
+   * @return a map containing the answer and thief
+   */
   public static Map<String, String> intiateanswer() {
     Map<String, String> map = new HashMap<>();
     map.put("answer", answer);
     map.put("thief", thief);
-    System.out.println("Thief: " + thief);
-
-    System.out.println("Answer submitted: " + answer);
     return map;
   }
 
+  /** Saves the current answer entered in the text area. */
   @FXML
   private void savefeedback() {
     answer = answerTxtArea.getText();
-    System.out.println("Answer: " + answer);
   }
 
+  /** Appends feedback based on the selected thief. */
   @FXML
   private void appendfeedback() {
     if (thief.equals("hos")) {
@@ -149,10 +183,17 @@ public class SubmitAnswerController {
     } else if (thief.equals("janitor")) {
       feedback2.appendText(feed);
     } else {
-      feedback2.appendText("Feedback not avaiable");
+      feedback2.appendText("Feedback not available");
     }
   }
 
+  /**
+   * Handles the event when a rectangle representing a suspect is clicked.
+   *
+   * @param event the mouse event triggered by clicking a suspect rectangle
+   * @throws IOException if there is an I/O error
+   * @throws URISyntaxException if there is a URI error
+   */
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
@@ -161,6 +202,12 @@ public class SubmitAnswerController {
     App.setRoot("submitanswer");
   }
 
+  /**
+   * Handles the "Enter" key press to submit the answer.
+   *
+   * @param event the key event triggered by pressing the "Enter" key
+   * @throws IOException if there is an I/O error
+   */
   @FXML
   private void handleEnterKey(KeyEvent event) throws IOException {
     if (event.getCode().equals(KeyCode.ENTER)) {
@@ -168,23 +215,26 @@ public class SubmitAnswerController {
     }
   }
 
+  /**
+   * Generates the system prompt based on the suspect (thief) selected.
+   *
+   * @param data a map containing relevant data for prompt generation
+   * @return the generated system prompt
+   */
   private String getSystemPrompt(Map<String, String> data) {
     if (thief.equals("hos")) {
-      System.out.println("hos Toouched......................");
       return PromptEngineering.getPrompt("win.txt", data);
-    } else if (thief.equals("curator")) {
-      System.out.println("curator Toouched......................");
-      return PromptEngineering.getPrompt("loss.txt", data);
-    } else if (thief.equals("janitor")) {
-      System.out.println("janitor Toouched......................");
+    } else if (thief.equals("curator") || thief.equals("janitor")) {
       return PromptEngineering.getPrompt("loss.txt", data);
     }
-    System.err.println("error");
     return "error";
   }
 
-  private ChatCompletionRequest chatCompletionRequest;
-
+  /**
+   * Initializes and runs the GPT-based interaction asynchronously.
+   *
+   * @param data a map containing the player's answer and thief
+   */
   public void intizliaseAndGpt(Map<String, String> data) {
     Task<Void> task =
         new Task<Void>() {
@@ -210,26 +260,14 @@ public class SubmitAnswerController {
     task.setOnSucceeded(
         event -> {
           // UI updates or logic after GPT response
-          if (thief.equals("janitor")) {
-            try {
+          try {
+            if (thief.equals("janitor") || thief.equals("curator")) {
               App.setRoot("badending");
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          } else if (thief.equals("hos")) {
-            try {
+            } else if (thief.equals("hos")) {
               App.setRoot("goodending2");
-            } catch (IOException e) {
-              e.printStackTrace();
             }
-          } else if (thief.equals("curator")) {
-            try {
-              App.setRoot("badending");
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          } else {
-            System.err.println("error");
+          } catch (IOException e) {
+            e.printStackTrace();
           }
           submitButton.setDisable(false);
         });
@@ -237,37 +275,24 @@ public class SubmitAnswerController {
     new Thread(task).start(); // Start the background task
   }
 
-  private String runGpt(ChatMessage msg)
-      throws ApiProxyException, IOException { // Fixed IOException import
+  /**
+   * Runs the GPT model with a given chat message.
+   *
+   * @param msg the chat message to process
+   * @return the content of the GPT response message
+   * @throws ApiProxyException if there is an error with the GPT API
+   * @throws IOException if there is an I/O error
+   */
+  private String runGpt(ChatMessage msg) throws ApiProxyException, IOException {
     chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
+    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+    Choice result = chatCompletionResult.getChoices().iterator().next();
+    chatCompletionRequest.addMessage(result.getChatMessage());
 
-      // Extract the content as a String
-      String messageContent = result.getChatMessage().getContent();
-
-      // set meesage content onto the text feedback
-
-      feed = messageContent;
-      EndingController.setFeed(feed);
-      EndingController.setThief(thief);
-      System.out.println("Message content: " + feed);
-      // Return the content as a string
-      return messageContent;
-
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  // Rest function for the submit answer controller
-  public static void reset() {
-    feed = null;
-    thief = null;
-    answer = null;
-    isFirstTime = true; // Reset to ensure the timer logic behaves correctly
+    String messageContent = result.getChatMessage().getContent();
+    feed = messageContent;
+    EndingController.setFeed(feed);
+    EndingController.setThief(thief);
+    return messageContent;
   }
 }
