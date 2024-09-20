@@ -275,7 +275,7 @@ public class RoomController {
    * @throws URISyntaxException
    */
   @FXML
-  private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
+  private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     if (clueHasBeenInteractedWith
         && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&
       System.out.println("Now in guessing state");

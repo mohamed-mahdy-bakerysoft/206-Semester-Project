@@ -82,8 +82,6 @@ public class SubmitAnswerController {
   }
 
   @FXML private Button submitButton; // Button to submit the answer
-  @FXML private Button viewfeedback; // Button to view feedback
-  @FXML private Button viewfeedback2; // Another button to view feedback
   @FXML private TextArea answerTxtArea; // Text area for player's answer
   @FXML private Rectangle janitor; // Rectangle representing the janitor suspect
   @FXML private Rectangle hos; // Rectangle representing the head of security suspect
@@ -175,20 +173,6 @@ public class SubmitAnswerController {
   @FXML
   private void savefeedback() {
     answer = answerTxtArea.getText(); // Save the answer from the text area
-  }
-
-  /** Appends feedback based on the selected thief. */
-  @FXML
-  private void appendfeedback() {
-    if (thief.equals("hos")) {
-      feedback.appendText(feed); // Append feedback for head of security
-    } else if (thief.equals("curator")) {
-      feedback2.appendText(feed); // Append feedback for curator
-    } else if (thief.equals("janitor")) {
-      feedback2.appendText(feed); // Append feedback for janitor
-    } else {
-      feedback2.appendText("Feedback not available"); // Default feedback
-    }
   }
 
   /**
