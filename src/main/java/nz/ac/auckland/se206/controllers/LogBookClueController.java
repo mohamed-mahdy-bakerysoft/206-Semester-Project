@@ -10,6 +10,10 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 
+/**
+ * The LogBookClueController class manages the interaction with the logbook clue in the game. It
+ * allows the player to turn pages in the logbook to investigate clues.
+ */
 public class LogBookClueController extends ClueController {
 
   @FXML private Rectangle rectLogBook;
@@ -20,6 +24,11 @@ public class LogBookClueController extends ClueController {
   private MediaPlayer player;
   private Media sound;
 
+  /**
+   * Initializes the logbook clue view by calling the parent class's initialize method.
+   *
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   */
   @Override
   public void initialize() throws ApiProxyException {
     super.initialize();
@@ -31,6 +40,13 @@ public class LogBookClueController extends ClueController {
     player = new MediaPlayer(sound);
   }
 
+  /**
+   * Handles the event when the right page turn button is clicked. It changes the view to the next
+   * logbook page.
+   *
+   * @param event the mouse event triggered by clicking a page turn button
+   * @throws IOException if there is an error loading the next page
+   */
   public void handleTurnPageClickRight(MouseEvent event) throws IOException {
     Rectangle clicked = (Rectangle) event.getSource();
     if (clicked.getId().equals("rectPageTurnRight")) {
@@ -41,6 +57,13 @@ public class LogBookClueController extends ClueController {
     player.play();
   }
 
+  /**
+   * Handles the event when the left page turn button is clicked. It changes the view to the
+   * previous logbook page.
+   *
+   * @param event the mouse event triggered by clicking a page turn button
+   * @throws IOException if there is an error loading the previous page
+   */
   public void handleTurnPageClickLeft(MouseEvent event) throws IOException {
     Rectangle clicked = (Rectangle) event.getSource();
     if (clicked.getId().equals("rectPageTurnLeft")) {
