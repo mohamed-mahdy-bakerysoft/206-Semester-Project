@@ -32,12 +32,22 @@ public class EndingController {
    * Initializes the feedback display for the ending scene. If no feedback is available, it shows a
    * message indicating that the feedback is unavailable based on the selected suspect.
    */
+  /**
+   * Initializes the feedback display for the ending scene. If no feedback is available, it shows a
+   * message indicating that the feedback is unavailable based on the selected suspect. It also
+   * plays the appropriate audio feedback based on the game result.
+   *
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
+   */
   public void initialize() throws URISyntaxException {
+    // Check if feedback is null
     if (feed == null) {
+      // Check if thief is null
       if (thief == null) {
         System.out.println("thief is null");
         return;
       }
+      // Display feedback unavailable message based on the thief
       if (thief.equals("hos")) {
         feedback.appendText("feedback unavailable");
         return;
@@ -46,24 +56,26 @@ public class EndingController {
         return;
       }
     }
+    // Display feedback based on the thief
     if (thief.equals("hos")) {
       feedback.setText(feed);
     } else if (thief.equals("curator")) {
       feedback2.setText(feed);
     } else if (thief.equals("janitor")) {
       feedback2.setText(feed);
-    } else {
     }
+
+    // Log the current game state
     System.out.println("game state:" + RoomController.getGameContext().getCurrentState());
 
-    // playing the TTS audio when player wins or loses
-    if (RoomController.getGameContext().getCurrentState()
-        instanceof GameOver) { // only plays audio if game is over
-      if (Guessing.getGameResult()) { // if true
+    // Play the TTS audio when the game is over
+    if (RoomController.getGameContext().getCurrentState() instanceof GameOver) {
+      // Play winning audio if the player wins
+      if (Guessing.getGameResult()) {
         sound = new Media(App.class.getResource("/sounds/correct_you_win.mp3").toURI().toString());
         player = new MediaPlayer(sound);
         player.play();
-      } else {
+      } else { // Play losing audio if the player loses
         sound =
             new Media(
                 App.class.getResource("/sounds/better_luck_next_time.mp3").toURI().toString());

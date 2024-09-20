@@ -36,6 +36,7 @@ public class ClueController {
 
   /** ImageView to display password hints in the clue scene. */
   @FXML private ImageView passwordHint;
+
   private MediaPlayer player;
   private Media sound;
 
@@ -61,21 +62,31 @@ public class ClueController {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    // Get the button that was clicked
     Button clickedButton = (Button) event.getSource();
+
+    // Determine which room to navigate to based on the button's ID
     if (clickedButton.getId().equals("backButton2")) {
+      // Navigate to room2
       App.setRoot("room2");
     } else if (clickedButton.getId().equals("backButton3")) {
+      // Navigate to room3
       App.setRoot("room3");
     } else {
+      // Default navigation to the main room
       App.setRoot("room");
     }
 
-    // adding click sound effect
+    // Adding click sound effect
     try {
+      // Load the sound file
       sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
     } catch (URISyntaxException e) {
+      // Print stack trace if there is an error with the URI
       e.printStackTrace();
     }
+
+    // Initialize and play the media player with the sound
     player = new MediaPlayer(sound);
     player.play();
   }

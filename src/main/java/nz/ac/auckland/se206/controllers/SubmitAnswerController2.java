@@ -12,6 +12,7 @@ import nz.ac.auckland.se206.App;
  */
 public class SubmitAnswerController2 extends SubmitAnswerController {
 
+  // FXML annotations to link with the corresponding ImageView elements in the FXML file
   @FXML private ImageView JanitorPhoto;
   @FXML private ImageView HOSPhoto;
   @FXML private ImageView CuratorPhoto;
@@ -19,9 +20,13 @@ public class SubmitAnswerController2 extends SubmitAnswerController {
   /**
    * Initializes the controller by calling the parent initialize method and then displaying the
    * chosen suspect's photo.
+   *
+   * @throws URISyntaxException if a URI syntax error occurs
    */
   public void initialize() throws URISyntaxException {
+    // Call the initialize method of the parent class
     super.initialize();
+    // Display the photo of the chosen suspect
     displayChosenSuspect();
   }
 
@@ -31,6 +36,7 @@ public class SubmitAnswerController2 extends SubmitAnswerController {
    */
   @FXML
   private void displayChosenSuspect() {
+    // Check the value of the thief and set the corresponding ImageView to visible
     if (getThief().equals("janitor")) {
       JanitorPhoto.setVisible(true);
     } else if (getThief().equals("hos")) {
@@ -40,8 +46,14 @@ public class SubmitAnswerController2 extends SubmitAnswerController {
     }
   }
 
+  /**
+   * Handles the action of going back to the previous screen.
+   *
+   * @throws IOException if an I/O error occurs
+   */
   @FXML
   private void onGoBack() throws IOException {
+    // Set the root to the "whosThief" screen
     App.setRoot("whosThief");
   }
 }
