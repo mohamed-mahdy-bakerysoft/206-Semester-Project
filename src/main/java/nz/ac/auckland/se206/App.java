@@ -109,12 +109,15 @@ public class App extends Application {
   public static void showEnding(String ending) throws IOException {
     switch (ending) {
       case "good_ending":
+        // Set the root to the good ending scene
         setRoot("goodending");
         break;
       case "bad_ending":
+        // Set the root to the bad ending scene
         setRoot("badending");
         break;
       default:
+        // Throw an exception if the ending type is unknown
         throw new IllegalArgumentException("Unknown ending type: " + ending);
     }
   }

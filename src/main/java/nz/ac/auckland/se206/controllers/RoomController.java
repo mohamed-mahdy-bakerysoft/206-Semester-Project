@@ -230,24 +230,34 @@ public class RoomController {
    */
   @FXML
   private void handleClueClick(MouseEvent event) throws IOException, URISyntaxException {
+    // Get the rectangle that was clicked
     Rectangle clickedRectangle = (Rectangle) event.getSource();
+    // Set the clueHasBeenInteractedWith flag to true
     clueHasBeenInteractedWith = true;
-    if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the clues should not be interacted with
+
+    // If the current state is Guessing, clues should not be interacted with
+    if (context.getCurrentState() instanceof Guessing) {
       handleRectangleClick(event);
       return;
     }
+
+    // Determine which clue was clicked based on the rectangle's ID
     switch (clickedRectangle.getId()) {
       case "rectSecurityRoom":
+        // Navigate to the clue1 view
         App.setRoot("clue1");
         break;
       case "rectBin":
+        // Navigate to the clue2 view
         App.setRoot("clue2");
         break;
       case "rectPaperClue":
+        // Navigate to the clue3 view
         App.setRoot("clue3");
         break;
     }
+
+    // Play a click sound effect
     try {
       sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
     } catch (URISyntaxException e) {

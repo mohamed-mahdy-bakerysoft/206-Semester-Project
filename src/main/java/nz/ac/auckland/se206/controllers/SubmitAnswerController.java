@@ -282,14 +282,6 @@ public class SubmitAnswerController {
   }
 
   /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the content of the GPT response message
-   * @throws ApiProxyException if there is an error with the GPT API
-   * @throws IOException if there is an I/O error
-   */
-  /**
    * Executes a GPT chat completion request with the given chat message and processes the result.
    *
    * @param msg the chat message to be sent to the GPT model
