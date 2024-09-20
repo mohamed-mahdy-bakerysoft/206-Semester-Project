@@ -51,20 +51,28 @@ public class TimeManager {
     updateTimerLabels(); // Set initial label values
   }
 
-  /** Initializes the timer with a one-second interval. */
+  /**
+   * Initializes the timer with a one-second interval. This method sets up a Timeline that
+   * decrements the timer every second and updates the timer in the game UI.
+   */
   public void initialiseTimer() {
+    // Create a new Timeline with a KeyFrame that triggers every second
     timeline =
         new Timeline(
             new KeyFrame(
                 javafx.util.Duration.seconds(1),
                 e -> {
                   try {
+                    // Decrement the timer and handle state transitions
                     decrementTime();
                   } catch (IOException | URISyntaxException e1) {
+                    // Print stack trace if an exception occurs
                     e1.printStackTrace();
                   }
+                  // Update the timer in the game UI
                   updateTimerInGame();
                 }));
+    // Set the Timeline to repeat indefinitely
     timeline.setCycleCount(Timeline.INDEFINITE);
   }
 
@@ -238,12 +246,21 @@ public class TimeManager {
     return interval;
   }
 
-  /** Updates the timer labels (minutes and seconds) to display the current remaining time. */
+  /**
+   * Updates the timer labels (minutes and seconds) to display the current remaining time. This
+   * method calculates the remaining minutes and seconds from the interval and updates the
+   * corresponding labels if they are not null.
+   */
   private void updateTimerLabels() {
+    // Calculate the remaining minutes and seconds
     int minutes = interval / 60;
     int seconds = interval % 60;
+
+    // Format the minutes and seconds to ensure they are displayed correctly
     formattedMinutes = String.format("%01d", minutes);
     formattedSeconds = String.format("%02d", seconds);
+
+    // Update the labels if they are not null
     if (mins != null && secs != null) {
       mins.setText(formattedMinutes);
       secs.setText(formattedSeconds);

@@ -472,29 +472,37 @@ public class InteragationRoomController {
   }
 
   // Method to play "hmm" sound based on profession
-  private void playHmmSound(String profession) {
-    if (player != null) {
-      player.stop();
-    }
-    switch (profession) {
-      case "Art Currator":
-        if (artCurratorHmm != null) {
-          player = new MediaPlayer(artCurratorHmm);
-        }
-        break;
-      case "Art Thief":
-        if (thiefHmm != null) {
-          player = new MediaPlayer(thiefHmm);
-        }
-        break;
-      case "Janitor":
-        if (janitorHmm != null) {
-          player = new MediaPlayer(janitorHmm);
-        }
-        break;
-    }
-    player.play();
+private void playHmmSound(String profession) {
+  // Stop the current player if it is playing
+  if (player != null) {
+    player.stop();
   }
+  
+  // Switch case to determine which sound to play based on profession
+  switch (profession) {
+    case "Art Currator":
+      // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
+      if (artCurratorHmm != null) {
+        player = new MediaPlayer(artCurratorHmm);
+      }
+      break;
+    case "Art Thief":
+      // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
+      if (thiefHmm != null) {
+        player = new MediaPlayer(thiefHmm);
+      }
+      break;
+    case "Janitor":
+      // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
+      if (janitorHmm != null) {
+        player = new MediaPlayer(janitorHmm);
+      }
+      break;
+  }
+  
+  // Play the selected sound
+  player.play();
+}
 
   private void appendChatMessage(ChatMessage msg) {
     Map<String, StringBuilder> chatHistory = context.getChatHistory();

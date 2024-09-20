@@ -49,11 +49,22 @@ public class BinClueController extends ClueController {
    */
   @Override
   public void initialize() throws ApiProxyException {
+    // Call the initialize method from the superclass ClueController
     super.initialize();
+
+    // Make the first rubbish object draggable
     draggableMaker.makeDraggable(Rubbish1);
+
+    // Make the second rubbish object draggable
     draggableMaker.makeDraggable(Rubbish2);
+
+    // Make the third rubbish object draggable
     draggableMaker.makeDraggable(Rubbish3);
+
+    // Make the fourth rubbish object draggable
     draggableMaker.makeDraggable(Rubbish4);
+
+    // Make the fifth rubbish object draggable
     draggableMaker.makeDraggable(Rubbish5);
   }
 
