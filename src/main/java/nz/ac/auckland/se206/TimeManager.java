@@ -150,7 +150,7 @@ public class TimeManager {
       formattedSeconds = String.format("%02d", seconds);
     }
   }
-  
+
   /** Sets the timer to 61 seconds for the guessing state. */
   private void setGuessTimer() {
     interval = 61; // Set 1 minute for guessing state
@@ -241,36 +241,6 @@ public class TimeManager {
     if (mins != null && secs != null) {
       mins.setText(formattedMinutes);
       secs.setText(formattedSeconds);
-    }
-  }
-
-  /**
-   * Handles the game over state by checking the current thief and navigating to the correct ending.
-   *
-   * @throws IOException if there is an I/O error
-   */
-  private void handleGameOverState() throws IOException {
-    SubmitAnswerController.setIsFirstTime(false);
-    if (SubmitAnswerController.getAnswer() != null) {
-      Map<String, String> map = SubmitAnswerController.intiateanswer();
-      SubmitAnswerController intiateanswer = new SubmitAnswerController();
-      intiateanswer.intizliaseAndGpt(map);
-    } else {
-      String thief = SubmitAnswerController.getThief();
-      if (thief == null) {
-        App.setRoot("badending");
-        stopTimer();
-        return;
-      }
-      if (thief.equals("janitor")) {
-        App.setRoot("badending");
-      } else if (thief.equals("hos")) {
-        App.setRoot("goodending2");
-      } else if (thief.equals("curator")) {
-        App.setRoot("badending");
-      } else {
-        System.err.println("error");
-      }
     }
   }
 }

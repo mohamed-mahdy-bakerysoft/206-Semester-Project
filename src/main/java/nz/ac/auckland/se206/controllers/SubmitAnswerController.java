@@ -23,7 +23,6 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
@@ -157,10 +156,8 @@ public class SubmitAnswerController {
           task.getException().printStackTrace();
         });
 
-      progressBar.progressProperty().bind(task.progressProperty());
-      new Thread(task).start(); // Run the task in a background thread
-    }
-    GameStateContext.getInstance().setState(GameStateContext.getInstance().getGameOverState());
+    progressBar.progressProperty().bind(task.progressProperty());
+    new Thread(task).start(); // Run the task in a background thread
   }
 
   /**
