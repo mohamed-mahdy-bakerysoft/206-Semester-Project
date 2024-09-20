@@ -61,7 +61,7 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="btnGuess" layoutX="794.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" stylesheets="@../css/styles.css" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="794.0" layoutY="21.0" mnemonicParsing="false" onAction="" prefHeight="44.0" prefWidth="140.0" stylesheets="@../css/styles.css" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>

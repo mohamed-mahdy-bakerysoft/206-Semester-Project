@@ -671,7 +671,7 @@ public class InteragationRoomController {
    * @throws URISyntaxException
    */
   @FXML
-  private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
+  private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     chatGroup.setVisible(false);
     if (clueHasBeenInteractedWith
         && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&
