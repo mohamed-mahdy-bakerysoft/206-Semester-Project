@@ -377,17 +377,21 @@ public class InteragationRoomController {
    * @return a string containing the initial message tailored to the given profession
    */
   private String getInitialMessageForProfession(String profession) {
+    // Switch case to determine the initial message based on the profession
     switch (profession) {
       case "Art Currator":
-        return "Hey can you tell me what happened here? I'm investigating this case.";
+        return "Hey can you tell me what happened here? I'm investigating this case."; // Case for
+      // the art
+      // currator
       case "Art Thief":
         return "Hi sir. I'm one of the investigators on this job. Can you tell me what happened"
-            + " here?";
+            + " here?"; // case for Art Thief
       case "Janitor":
         return "Hello. I'm investigating this case on behalf of PI Masters. Can you tell me what"
-            + " happened here?";
+            + " happened here?"; // case for Janitor
       default:
-        return "Hello, I am investigating this case. Can you tell me what happened here?";
+        return "Hello, I am investigating this case. Can you tell me what happened"
+            + " here?"; // default case
     }
   }
 
@@ -472,37 +476,37 @@ public class InteragationRoomController {
   }
 
   // Method to play "hmm" sound based on profession
-private void playHmmSound(String profession) {
-  // Stop the current player if it is playing
-  if (player != null) {
-    player.stop();
+  private void playHmmSound(String profession) {
+    // Stop the current player if it is playing
+    if (player != null) {
+      player.stop();
+    }
+
+    // Switch case to determine which sound to play based on profession
+    switch (profession) {
+      case "Art Currator":
+        // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
+        if (artCurratorHmm != null) {
+          player = new MediaPlayer(artCurratorHmm);
+        }
+        break;
+      case "Art Thief":
+        // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
+        if (thiefHmm != null) {
+          player = new MediaPlayer(thiefHmm);
+        }
+        break;
+      case "Janitor":
+        // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
+        if (janitorHmm != null) {
+          player = new MediaPlayer(janitorHmm);
+        }
+        break;
+    }
+
+    // Play the selected sound
+    player.play();
   }
-  
-  // Switch case to determine which sound to play based on profession
-  switch (profession) {
-    case "Art Currator":
-      // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
-      if (artCurratorHmm != null) {
-        player = new MediaPlayer(artCurratorHmm);
-      }
-      break;
-    case "Art Thief":
-      // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
-      if (thiefHmm != null) {
-        player = new MediaPlayer(thiefHmm);
-      }
-      break;
-    case "Janitor":
-      // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
-      if (janitorHmm != null) {
-        player = new MediaPlayer(janitorHmm);
-      }
-      break;
-  }
-  
-  // Play the selected sound
-  player.play();
-}
 
   private void appendChatMessage(ChatMessage msg) {
     Map<String, StringBuilder> chatHistory = context.getChatHistory();

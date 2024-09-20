@@ -31,12 +31,16 @@ public class LogBookClueController extends ClueController {
    */
   @Override
   public void initialize() throws ApiProxyException {
+    // Call the parent class's initialize method
     super.initialize();
     try {
+      // Load the sound file for the page turning effect
       sound = new Media(App.class.getResource("/sounds/turningpage.mp3").toURI().toString());
     } catch (URISyntaxException e) {
+      // Print the stack trace if there is an error with the URI syntax
       e.printStackTrace();
     }
+    // Initialize the MediaPlayer with the loaded sound
     player = new MediaPlayer(sound);
   }
 

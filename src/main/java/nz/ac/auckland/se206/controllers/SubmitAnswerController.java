@@ -291,16 +291,12 @@ public class SubmitAnswerController {
    */
   private String runGpt(ChatMessage msg) throws ApiProxyException, IOException {
     chatCompletionRequest.addMessage(msg); // Add the message to the GPT request
-    ChatCompletionResult chatCompletionResult =
-        chatCompletionRequest.execute(); // Execute the GPT request
-    Choice result =
-        chatCompletionResult.getChoices().iterator().next(); // Get the first choice from the result
-    chatCompletionRequest.addMessage(
-        result.getChatMessage()); // Add the response message to the request
-
+    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+    Choice result = chatCompletionResult.getChoices().iterator().next();
+    chatCompletionRequest.addMessage(result.getChatMessage());
     String messageContent =
         result.getChatMessage().getContent(); // Get the content of the response message
-    feed = messageContent; // Set the feedback
+    feed = messageContent;
     EndingController.setFeed(feed); // Set the feedback in the ending controller
     EndingController.setThief(thief); // Set the thief in the ending controller
     return messageContent; // Return the response message content
