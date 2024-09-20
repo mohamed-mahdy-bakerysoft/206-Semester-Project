@@ -61,6 +61,15 @@ public class RoomController {
     return clueHasBeenInteractedWith;
   }
 
+  /**
+   * Sets the clueHasBeenInteractedWith boolean to check if the clue has been interacted with.
+   *
+   * @return the clueHasBeenInteractedWith boolean
+   */
+  public static void setClueHasBeenInteractedWith(boolean b) {
+    clueHasBeenInteractedWith = false;
+  }
+
   // Added navbar with buttons
   @FXML private VBox navBar;
   @FXML private Button corridorButton;
@@ -131,13 +140,10 @@ public class RoomController {
         });
 
     if (isFirstTimeInit) {
-      // TextToSpeech.speak("Chat with the three suspects, and guess who is the art thief");
       System.out.println("First time");
       isFirstTimeInit = false;
     }
     timeManager.setTimerLabel(mins, secs);
-    // delete later (to test guessing state)
-    // context.setState(context.getGuessingState());
   }
 
   /**
@@ -183,6 +189,15 @@ public class RoomController {
     // Play both transitions
     translateTransition.play();
     fadeTransition.play();
+
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   private void goToRoom(String roomName) throws IOException {
@@ -233,6 +248,13 @@ public class RoomController {
         App.setRoot("clue3");
         break;
     }
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   /**
@@ -258,9 +280,6 @@ public class RoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
-    // delete later(to test guessing screen):
-    // context.handleGuessClick();
-    // App.setRoot("whosThief");
   }
 
   /**
@@ -281,6 +300,15 @@ public class RoomController {
     } else if (clickedArrow.getId().equals("arrowRight")) {
       App.setRoot("room");
     }
+
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   /**
@@ -302,9 +330,14 @@ public class RoomController {
     } else if (clickedArrow.getId().equals("arrowLeft")) {
       App.setRoot("room");
     }
-  }
 
-  public static void setClueHasBeenInteractedWith(boolean b) {
-    clueHasBeenInteractedWith = false;
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 }

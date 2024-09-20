@@ -17,20 +17,13 @@ import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.Guessing;
 
-// import map
-
+/**
+ * The TimeManager class is responsible for managing the game's timer. It handles time countdowns,
+ * state transitions based on time remaining, and updates the timer on the UI.
+ */
 public class TimeManager {
   private static TimeManager instance;
-
   private static int interval = 300; // 300 for 5 minutes
-
-  public static synchronized TimeManager getInstance() {
-    if (instance == null) {
-      instance = new TimeManager();
-    }
-    return instance;
-  }
-
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
@@ -39,11 +32,26 @@ public class TimeManager {
   private MediaPlayer player;
   private Media sound;
 
+  /**
+   * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
+   * exists at any time.
+   *
+   * @return the singleton instance of TimeManager
+   */
+  public static synchronized TimeManager getInstance() {
+    if (instance == null) {
+      instance = new TimeManager();
+    }
+    return instance;
+  }
+
+  /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {
     initialiseTimer();
     updateTimerLabels(); // Set initial label values
   }
 
+  /** Initializes the timer with a one-second interval. */
   public void initialiseTimer() {
     timeline =
         new Timeline(
@@ -52,9 +60,7 @@ public class TimeManager {
                 e -> {
                   try {
                     decrementTime();
-                  } catch (IOException e1) {
-                    e1.printStackTrace();
-                  } catch (URISyntaxException e1) {
+                  } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
                   }
                   updateTimerInGame();
@@ -62,8 +68,14 @@ public class TimeManager {
     timeline.setCycleCount(Timeline.INDEFINITE);
   }
 
+  /**
+   * Decrements the timer by one second. Handles different game states when time runs out, such as
+   * moving to the guessing state or game over.
+   *
+   * @throws IOException if there is an I/O error
+   * @throws URISyntaxException if there is an error with the URI syntax
+   */
   public void decrementTime() throws IOException, URISyntaxException {
-    // if seconds and minutes are 0, handle it according to game state
     if (interval == 0) {
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
           && InteragationRoomController.getSuspectsHaveBeenTalkedTo()
@@ -138,26 +150,29 @@ public class TimeManager {
       formattedSeconds = String.format("%02d", seconds);
     }
   }
-
+  
+  /** Sets the timer to 61 seconds for the guessing state. */
   private void setGuessTimer() {
-    interval = 61; // added a second so that GUI could show 1 minute
+    interval = 61; // Set 1 minute for guessing state
     initialiseTimer();
   }
 
+  /** Starts the timer and updates the time on the game UI. */
   public void startTimer() {
     updateTimerInGame();
     timeline.play();
   }
 
+  /** Stops the timer. */
   public void stopTimer() {
     timeline.stop();
   }
 
+  /** Updates the time labels in the game UI. */
   public void updateTimerInGame() {
     Platform.runLater(
         () -> {
           Parent currentRoot = SceneManager.getUiRoot(SceneManager.AppUi.ROOM);
-
           if (currentRoot != null) {
             Label minutesLabel = (Label) currentRoot.lookup("#mins");
             Label secondsLabel = (Label) currentRoot.lookup("#secs");
@@ -174,12 +189,50 @@ public class TimeManager {
         });
   }
 
+  /**
+   * Sets the timer labels for the minutes and seconds and updates them immediately.
+   *
+   * @param mins the label for minutes
+   * @param secs the label for seconds
+   */
   public void setTimerLabel(Label mins, Label secs) {
     this.mins = mins;
     this.secs = secs;
     updateTimerLabels(); // Update the labels immediately after setting them
   }
 
+  /** Resets the timer labels and stops the timer. */
+  public void resetTimer() {
+    interval = 0;
+    updateTimerLabels();
+  }
+
+  /** Resets the timer to 5 minutes and stops any running timer. */
+  public void resetTimerRestart() {
+    interval = 300; // Reset to 5 minutes (300 seconds)
+    updateTimerLabels();
+    stopTimer();
+  }
+
+  /**
+   * Sets a custom interval for the timer.
+   *
+   * @param interval1 the interval in seconds
+   */
+  public void setInterval(int interval1) {
+    interval = interval1;
+  }
+
+  /**
+   * Retrieves the current time interval.
+   *
+   * @return the time interval in seconds
+   */
+  public int getInterval() {
+    return interval;
+  }
+
+  /** Updates the timer labels (minutes and seconds) to display the current remaining time. */
   private void updateTimerLabels() {
     int minutes = interval / 60;
     int seconds = interval % 60;
@@ -191,25 +244,33 @@ public class TimeManager {
     }
   }
 
-  // make a reset function
-  public void resetTimer() {
-    interval = 0;
-    updateTimerLabels();
-  }
-
-  public void resetTimerRestart() {
-    interval = 300; // Reset to 5 minutes
-    updateTimerLabels();
-    stopTimer(); // Stop the current timer if it was running
-  }
-
-  // make a setter for interval
-  public void setInterval(int interval1) {
-    interval = interval1;
-  }
-
-  // make a getter for time interval
-  public int getInterval() {
-    return interval;
+  /**
+   * Handles the game over state by checking the current thief and navigating to the correct ending.
+   *
+   * @throws IOException if there is an I/O error
+   */
+  private void handleGameOverState() throws IOException {
+    SubmitAnswerController.setIsFirstTime(false);
+    if (SubmitAnswerController.getAnswer() != null) {
+      Map<String, String> map = SubmitAnswerController.intiateanswer();
+      SubmitAnswerController intiateanswer = new SubmitAnswerController();
+      intiateanswer.intizliaseAndGpt(map);
+    } else {
+      String thief = SubmitAnswerController.getThief();
+      if (thief == null) {
+        App.setRoot("badending");
+        stopTimer();
+        return;
+      }
+      if (thief.equals("janitor")) {
+        App.setRoot("badending");
+      } else if (thief.equals("hos")) {
+        App.setRoot("goodending2");
+      } else if (thief.equals("curator")) {
+        App.setRoot("badending");
+      } else {
+        System.err.println("error");
+      }
+    }
   }
 }

@@ -151,6 +151,7 @@ public class GameStateContext {
     gameState.handleGuessClick();
   }
 
+  // Get the current state of the game
   public GameState getCurrentState() {
     return gameState;
   }

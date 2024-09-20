@@ -110,17 +110,12 @@
                   <Font size="18.0" />
                </font>
             </TextArea>
-            <Button fx:id="btnSend" layoutX="580.0" layoutY="99.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="76.0" text="Send">
+            <Button fx:id="btnSend" layoutX="652.0" layoutY="99.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="103.0" text="Send">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="656.0" layoutY="99.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="31.0" prefWidth="98.0" text="Go Back">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-            <TextField fx:id="txtInput" layoutY="98.0" onKeyPressed="#handleEnterKey" prefHeight="46.0" prefWidth="580.0">
+            <TextField fx:id="txtInput" layoutY="98.0" onKeyPressed="#handleEnterKey" prefHeight="46.0" prefWidth="652.0">
                <font>
                   <Font size="18.0" />
                </font>

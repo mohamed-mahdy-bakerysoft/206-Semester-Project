@@ -1,34 +1,48 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.states.GameOver;
+import nz.ac.auckland.se206.states.Guessing;
 
+/**
+ * The EndingController class is responsible for managing the final feedback displayed at the end of
+ * the game based on the player's actions. It handles resetting the game state when the player
+ * chooses to restart and displays the feedback depending on the selected suspect.
+ */
 public class EndingController {
+
   @FXML private TextArea feedback;
   @FXML private TextArea feedback2;
 
-  // private static String thief = SubmitAnswerController.getThief();
-  // private static String feed = SubmitAnswerController.getFeed();
   private static String thief;
   private static String feed;
+  private MediaPlayer player;
+  private Media sound;
 
-  public void initialize() {
-
+  /**
+   * Initializes the feedback display for the ending scene. If no feedback is available, it shows a
+   * message indicating that the feedback is unavailable based on the selected suspect.
+   */
+  public void initialize() throws URISyntaxException {
     if (feed == null) {
       if (thief == null) {
         System.out.println("thief is null");
         return;
       }
       if (thief.equals("hos")) {
-        feedback.appendText("feedback unavaiable");
+        feedback.appendText("feedback unavailable");
         return;
       } else {
-        feedback2.appendText("feedback unavaiable");
+        feedback2.appendText("feedback unavailable");
         return;
       }
     }
@@ -39,19 +53,51 @@ public class EndingController {
     } else if (thief.equals("janitor")) {
       feedback2.setText(feed);
     } else {
+    }
+    System.out.println("game state:" + RoomController.getGameContext().getCurrentState());
 
+    // playing the TTS audio when player wins or loses
+    if (RoomController.getGameContext().getCurrentState()
+        instanceof GameOver) { // only plays audio if game is over
+      if (Guessing.getGameResult()) { // if true
+        sound = new Media(App.class.getResource("/sounds/correct_you_win.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
+      } else {
+        sound =
+            new Media(
+                App.class.getResource("/sounds/better_luck_next_time.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
+      }
     }
   }
 
-  // make setters for feed and tehif
+  /**
+   * Sets the feedback string to be displayed in the ending screen.
+   *
+   * @param feed the feedback string to set
+   */
   public static void setFeed(String feed) {
     EndingController.feed = feed;
   }
 
+  /**
+   * Sets the suspect identified as the thief.
+   *
+   * @param thief the suspect identified as the thief
+   */
   public static void setThief(String thief) {
     EndingController.thief = thief;
   }
 
+  /**
+   * Handles the restart button click event. Resets the game state, timer, and necessary controllers
+   * to restart the game from the beginning.
+   *
+   * @param event the action event triggered by the restart button
+   * @throws IOException if there is an error navigating to the start room
+   */
   @FXML
   private void handleRestartClick(ActionEvent event) throws IOException {
     // Reset the game state
@@ -74,29 +120,14 @@ public class EndingController {
 
     // Navigate back to the start room
     App.setRoot("start");
-  }
 
-  @FXML
-  private void appendfeedback() {
-    // thief = SubmitAnswerController.getThief();
-    // feed = SubmitAnswerController.getFeed();
-    // if (feed == null) {
-    //   if (thief.equals("hos")) {
-    //     feedback.appendText("feedback unavaiable");
-    //     return;
-    //   } else {
-    //     feedback2.appendText("feedback unavaiable");
-    //     return;
-    //   }
-    // }
-    // if (thief.equals("hos")) {
-    //   feedback.setText(feed);
-    // } else if (thief.equals("curator")) {
-    //   feedback2.setText(feed);
-    // } else if (thief.equals("janitor")) {
-    //   feedback2.setText(feed);
-    // } else {
-
-    // }
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 }

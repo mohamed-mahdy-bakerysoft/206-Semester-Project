@@ -52,18 +52,26 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <TextArea fx:id="answerTxtArea" layoutX="561.0" layoutY="161.0" onKeyPressed="#handleEnterKey" onKeyReleased="#savefeedback" prefHeight="403.0" prefWidth="413.0" promptText="Record your response here:" wrapText="true">
+      <TextArea fx:id="answerTxtArea" layoutX="561.0" layoutY="161.0" onKeyPressed="#handleEnterKey" onKeyReleased="#savefeedback" prefHeight="413.0" prefWidth="413.0" promptText="Record your response here:" wrapText="true">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
       </TextArea>
       <ProgressBar fx:id="progressBar" layoutX="615.0" layoutY="570.0" prefHeight="19.0" prefWidth="301.0" progress="0.0" visible="false" />
-      <Button fx:id="submitButton" layoutX="636.0" layoutY="593.0" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="49.0" prefWidth="261.0" stylesheets="@../css/styles.css" text="Submit">
+      <Button fx:id="submitButton" layoutX="637.0" layoutY="591.0" mnemonicParsing="false" onAction="#sendAnswer" prefHeight="49.0" prefWidth="261.0" stylesheets="@../css/styles.css" text="Submit">
          <font>
             <Font name="System Bold Italic" size="24.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Button fx:id="goBack" layoutX="79.0" layoutY="596.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="39.0" prefWidth="134.0" stylesheets="@../css/styles.css" text="Go Back">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
