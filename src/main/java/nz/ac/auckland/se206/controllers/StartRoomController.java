@@ -34,7 +34,7 @@ public class StartRoomController {
   private void onStart(ActionEvent event)
       throws ApiProxyException, IOException, URISyntaxException {
     TimeManager timeManager = TimeManager.getInstance();
-    timeManager.setInterval(300);
+    timeManager.setInterval(60);
     timeManager.startTimer();
     sound = new Media(App.class.getResource("/sounds/opening_sound.mp3").toURI().toString());
     player = new MediaPlayer(sound);

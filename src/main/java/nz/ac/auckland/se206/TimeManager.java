@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SubmitAnswerController;
 import nz.ac.auckland.se206.states.GameOver;
+import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.Guessing;
 
 // import map
@@ -64,6 +65,20 @@ public class TimeManager {
   public void decrementTime() throws IOException, URISyntaxException {
     // if seconds and minutes are 0, handle it according to game state
     if (interval == 0) {
+      if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
+          && InteragationRoomController.getSuspectsHaveBeenTalkedTo()
+          && RoomController
+              .getClueHasBeenInteractedWith()) { // if game started state and suspects have been
+        // talked to and clue has been interacted with,
+        // move to guessing state
+        System.out.println("Game started state to guessing state");
+        GameStateContext context = GameStateContext.getInstance();
+        context.setState(context.getGuessingState());
+        System.out.println("Now in guessing state");
+        App.setRoot("whosThief");
+        setInterval(60);
+        return;
+      }
       if (RoomController.getGameContext().getCurrentState()
           instanceof GameOver) { // if game is over, do nothing
         stopTimer();
