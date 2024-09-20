@@ -283,7 +283,7 @@ public class InteragationRoomController {
 
   // NavBar Methods
   @FXML
-  private void toggleNavBar() {
+  private void onToggleNavBar() {
     TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), navBar);
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), navBar);
 
@@ -418,7 +418,7 @@ public class InteragationRoomController {
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void handleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
+  private void onHandleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
       if (!btnSend.isDisabled()) {
         sendMessage();
@@ -472,37 +472,37 @@ public class InteragationRoomController {
   }
 
   // Method to play "hmm" sound based on profession
-private void playHmmSound(String profession) {
-  // Stop the current player if it is playing
-  if (player != null) {
-    player.stop();
+  private void playHmmSound(String profession) {
+    // Stop the current player if it is playing
+    if (player != null) {
+      player.stop();
+    }
+
+    // Switch case to determine which sound to play based on profession
+    switch (profession) {
+      case "Art Currator":
+        // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
+        if (artCurratorHmm != null) {
+          player = new MediaPlayer(artCurratorHmm);
+        }
+        break;
+      case "Art Thief":
+        // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
+        if (thiefHmm != null) {
+          player = new MediaPlayer(thiefHmm);
+        }
+        break;
+      case "Janitor":
+        // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
+        if (janitorHmm != null) {
+          player = new MediaPlayer(janitorHmm);
+        }
+        break;
+    }
+
+    // Play the selected sound
+    player.play();
   }
-  
-  // Switch case to determine which sound to play based on profession
-  switch (profession) {
-    case "Art Currator":
-      // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
-      if (artCurratorHmm != null) {
-        player = new MediaPlayer(artCurratorHmm);
-      }
-      break;
-    case "Art Thief":
-      // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
-      if (thiefHmm != null) {
-        player = new MediaPlayer(thiefHmm);
-      }
-      break;
-    case "Janitor":
-      // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
-      if (janitorHmm != null) {
-        player = new MediaPlayer(janitorHmm);
-      }
-      break;
-  }
-  
-  // Play the selected sound
-  player.play();
-}
 
   private void appendChatMessage(ChatMessage msg) {
     Map<String, StringBuilder> chatHistory = context.getChatHistory();
@@ -629,7 +629,7 @@ private void playHmmSound(String profession) {
    * @throws InterruptedException
    */
   @FXML
-  private void handleRectangleClick(MouseEvent event)
+  private void onHandleRectangleClick(MouseEvent event)
       throws IOException, URISyntaxException, InterruptedException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
 
@@ -671,7 +671,7 @@ private void playHmmSound(String profession) {
    * @throws URISyntaxException
    */
   @FXML
-  private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
+  private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     chatGroup.setVisible(false);
     if (clueHasBeenInteractedWith
         && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&

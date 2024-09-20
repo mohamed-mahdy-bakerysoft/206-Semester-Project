@@ -143,8 +143,6 @@ public class App extends Application {
     SceneManager.addUi(AppUi.BIN, loadFxml("clue2"));
     SceneManager.addUi(AppUi.MAP, loadFxml("clue3"));
     // Added Intel room Here
-    // Corridor
-    SceneManager.addUi(AppUi.INTELROOM, loadFxml("Intel_Draft"));
     // RoomOne
     SceneManager.addUi(AppUi.INTELROOMONE, loadFxml("IntelRoomOne"));
     // RoomTwo
