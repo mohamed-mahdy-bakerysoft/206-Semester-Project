@@ -692,7 +692,6 @@ public class InteragationRoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
-    // App.setRoot("whosThief");
   }
 
   @FXML
