@@ -77,12 +77,12 @@ public class TimeManager {
    */
   public void decrementTime() throws IOException, URISyntaxException {
     if (interval == 0) {
+      // Check if the game is in the started state, suspects have been talked to, and clue has been
+      // interacted with
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
           && InteragationRoomController.getSuspectsHaveBeenTalkedTo()
-          && RoomController
-              .getClueHasBeenInteractedWith()) { // if game started state and suspects have been
-        // talked to and clue has been interacted with,
-        // move to guessing state
+          && RoomController.getClueHasBeenInteractedWith()) {
+        // Move to guessing state
         System.out.println("Game started state to guessing state");
         GameStateContext context = GameStateContext.getInstance();
         context.setState(context.getGuessingState());
@@ -91,16 +91,17 @@ public class TimeManager {
         setInterval(60);
         return;
       }
-      if (RoomController.getGameContext().getCurrentState()
-          instanceof GameOver) { // if game is over, do nothing
+      // Check if the game is over
+      if (RoomController.getGameContext().getCurrentState() instanceof GameOver) {
         stopTimer();
         System.out.println("Game is over");
         return;
-      } else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
+      }
+      // Check if the game is in the guessing state or if the player has not investigated
+      else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
           || !(InteragationRoomController.getSuspectsHaveBeenTalkedTo()
-              && RoomController
-                  .getClueHasBeenInteractedWith())) { // if already in guessing state OR player has
-        // not investigated, move to game over state
+              && RoomController.getClueHasBeenInteractedWith())) {
+        // Move to game over state
         SubmitAnswerController.setIsFirstTime(false);
         if (SubmitAnswerController.getAnswer() != null) {
           Map<String, String> map = SubmitAnswerController.intiateanswer();
@@ -108,12 +109,13 @@ public class TimeManager {
           intiateanswer.intizliaseAndGpt(map);
         } else {
           String thief = SubmitAnswerController.getThief();
-          // cehck if thief is null
+          // Check if thief is null
           if (thief == null) {
             App.setRoot("badending");
             TimeManager.getInstance().stopTimer();
             return;
           }
+          // Handle different thief outcomes
           if (thief.equals("janitor")) {
             App.setRoot("badending");
             TimeManager.getInstance().stopTimer();
@@ -122,17 +124,14 @@ public class TimeManager {
           } else if (thief.equals("curator")) {
             App.setRoot("badending");
             TimeManager.getInstance().stopTimer();
-
           } else {
             System.err.println("error");
           }
         }
         timeline.stop();
-
         return;
-      } else { // move to guessing state and give 60 seconds to guess
-        // RoomController.getGameContext()
-        //     .setState(RoomController.getGameContext().getGuessingState());
+      } else {
+        // Move to guessing state and give 60 seconds to guess
         App.setRoot("whosThief");
         sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
         player = new MediaPlayer(sound);
@@ -142,7 +141,8 @@ public class TimeManager {
         System.out.println("Now in guessing state");
       }
       timeline.stop();
-    } else { // else decrement the timer by 1 second
+    } else {
+      // Decrement the timer by 1 second
       interval--;
       int minutes = interval / 60;
       int seconds = interval % 60;
@@ -168,15 +168,21 @@ public class TimeManager {
     timeline.stop();
   }
 
-  /** Updates the time labels in the game UI. */
+  /**
+   * Updates the timer in the game UI. This method is run on the JavaFX application thread to ensure
+   * that UI updates are performed safely.
+   */
   public void updateTimerInGame() {
     Platform.runLater(
         () -> {
+          // Get the current root of the ROOM scene
           Parent currentRoot = SceneManager.getUiRoot(SceneManager.AppUi.ROOM);
           if (currentRoot != null) {
+            // Look up the labels for minutes and seconds in the current root
             Label minutesLabel = (Label) currentRoot.lookup("#mins");
             Label secondsLabel = (Label) currentRoot.lookup("#secs");
 
+            // If the labels are found, update their text with the formatted time
             if (minutesLabel != null && secondsLabel != null) {
               mins.setText(formattedMinutes);
               secs.setText(formattedSeconds);

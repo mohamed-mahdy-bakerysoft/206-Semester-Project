@@ -69,28 +69,40 @@ public class ComputerClueController extends ClueController {
    * @throws IOException if there is an I/O error during scene transition
    */
   public void handleComputerClick(MouseEvent event) throws IOException {
+    // Get the rectangle that was clicked
     Rectangle clicked = (Rectangle) event.getSource();
+
+    // Determine which rectangle was clicked and navigate to the corresponding scene
     switch (clicked.getId()) {
       case "rectInternetExplorer":
       case "rectBackToInbox":
+        // Navigate to the scene associated with Internet Explorer or Back to Inbox
         App.setRoot("computerclue2");
         break;
       case "rectOpenEmail":
+        // Navigate to the scene associated with opening an email
         App.setRoot("computerclue3");
         break;
       case "rectEscape":
+        // Navigate to the scene associated with escaping
         App.setRoot("computerclue1");
         break;
       case "rectSecurityCamera":
+        // Navigate to the scene associated with the security camera
         App.setRoot("computerclue4");
         break;
     }
-    // adding mouse click sound effect
+
+    // Adding mouse click sound effect
     try {
+      // Load the mouse click sound effect
       sound = new Media(App.class.getResource("/sounds/mouseclick.mp3").toURI().toString());
     } catch (URISyntaxException e) {
+      // Print the stack trace if there is an error loading the sound effect
       e.printStackTrace();
     }
+
+    // Create a media player for the sound effect and play it
     player = new MediaPlayer(sound);
     player.play();
   }
@@ -102,13 +114,28 @@ public class ComputerClueController extends ClueController {
    * @param event the mouse event triggered by clicking to submit the password
    * @throws IOException if there is an I/O error during scene transition
    */
+  /**
+   * Handles password input and checks if the entered password is correct. If the password is wrong
+   * and more than two attempts have been made, a password hint is displayed.
+   *
+   * @param event the mouse event triggered by clicking to submit the password
+   * @throws IOException if there is an I/O error during scene transition
+   */
   public void handlePassword(MouseEvent event) throws IOException {
+    // Increment the number of incorrect password guesses
     incrementPasswordGuesses();
+
+    // Check if the entered password matches the correct password
     if (passwordTxtField.getText().equals("willthegoat")) {
+      // If the password is correct, navigate to the next scene
       App.setRoot("computerclue1");
+      // Set the flag indicating the password has been successfully guessed
       passwordHasBeenGuessed = true;
     } else if (passwordGuesses >= 2 && !passwordTxtField.getText().isEmpty()) {
+      // If the password is incorrect and more than two attempts have been made, clear the text
+      // field
       passwordTxtField.clear();
+      // Display the password hint to assist the user
       passwordHint.setVisible(true);
     }
   }

@@ -100,6 +100,12 @@ public class App extends Application {
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
+  /**
+   * Shows the ending scene based on the provided ending type.
+   *
+   * @param ending the type of ending ("good_ending" or "bad_ending")
+   * @throws IOException if the FXML file for the ending is not found
+   */
   public static void showEnding(String ending) throws IOException {
     switch (ending) {
       case "good_ending":
@@ -108,6 +114,8 @@ public class App extends Application {
       case "bad_ending":
         setRoot("badending");
         break;
+      default:
+        throw new IllegalArgumentException("Unknown ending type: " + ending);
     }
   }
 

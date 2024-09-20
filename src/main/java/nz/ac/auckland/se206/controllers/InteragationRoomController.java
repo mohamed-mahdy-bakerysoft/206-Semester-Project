@@ -320,9 +320,13 @@ public class InteragationRoomController {
    * @return the system prompt string
    */
   private String getSystemPrompt() {
+    // Retrieve the chat history from the game context
     Map<String, StringBuilder> chatHistory = context.getChatHistory();
+    // Create a map to store the profession and chat history
     Map<String, String> map = new HashMap<>();
     String promptFile = null;
+
+    // Determine the prompt file based on the profession
     switch (profession) {
       case "Art Currator":
         promptFile = "suspect1.txt";
@@ -334,13 +338,18 @@ public class InteragationRoomController {
         promptFile = "suspect2.txt";
         break;
     }
+
+    // Populate the map with the profession and chat history
     map.put("profession", profession);
     map.put("chathistory", chatHistory.get(promptFile).toString());
-    // testing purposes
+
+    // For testing purposes, print the chat history and entire chat history
     System.out.println("Chat history: ");
     System.out.println(chatHistory.get(promptFile).toString());
     System.out.println("Entire Chat history: ");
     System.out.println(chatHistory);
+
+    // Generate and return the prompt using the PromptEngineering class
     return PromptEngineering.getPrompt(promptFile, map);
   }
 
@@ -360,6 +369,13 @@ public class InteragationRoomController {
     return result.getChatMessage();
   }
 
+  /**
+   * Generates an initial message based on the given profession.
+   *
+   * @param profession the profession of the person being addressed (e.g., "Art Currator", "Art
+   *     Thief", "Janitor")
+   * @return a string containing the initial message tailored to the given profession
+   */
   private String getInitialMessageForProfession(String profession) {
     switch (profession) {
       case "Art Currator":

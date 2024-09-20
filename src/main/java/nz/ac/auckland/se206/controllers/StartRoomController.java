@@ -17,10 +17,10 @@ import nz.ac.auckland.se206.TimeManager;
  */
 public class StartRoomController {
 
-  @FXML private Button startButton;
+  @FXML private Button startButton; // The button to start the game
 
-  private MediaPlayer player;
-  private Media sound;
+  private MediaPlayer player; // MediaPlayer to play sounds
+  private Media sound; // Media object to hold sound files
 
   /**
    * Initializes the start room view by playing the welcome sound when the room is loaded.
@@ -30,6 +30,7 @@ public class StartRoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException, URISyntaxException {
+    // Load and play the welcome sound
     sound = new Media(App.class.getResource("/sounds/welcome.mp3").toURI().toString());
     player = new MediaPlayer(sound);
     player.play();
@@ -47,12 +48,17 @@ public class StartRoomController {
   @FXML
   private void onStart(ActionEvent event)
       throws ApiProxyException, IOException, URISyntaxException {
+    // Get the instance of TimeManager and set the interval to 300 seconds
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setInterval(300);
-    timeManager.startTimer();
+    timeManager.startTimer(); // Start the game timer
+
+    // Load and play the opening sound
     sound = new Media(App.class.getResource("/sounds/opening_sound.mp3").toURI().toString());
     player = new MediaPlayer(sound);
     player.play();
+
+    // Transition to the next room
     App.setRoot("room");
   }
 }
