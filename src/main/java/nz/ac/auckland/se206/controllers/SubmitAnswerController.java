@@ -13,8 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
@@ -94,8 +92,6 @@ public class SubmitAnswerController {
   @FXML private Label mins;
   @FXML private Label secs;
   @FXML private ProgressBar progressBar;
-  private MediaPlayer player;
-  private Media sound;
 
   private ChatCompletionRequest chatCompletionRequest;
 

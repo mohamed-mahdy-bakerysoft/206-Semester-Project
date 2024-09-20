@@ -232,6 +232,8 @@ public class InteragationRoomController {
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
 
+    // Disable the send button when the profession is being set
+    btnSend.setDisable(true);
     // Only display the initial message if no previous conversation exists
     if (!suspectHasBeenTalkedToMap.get(profession)) {
       appendChatMessage(new ChatMessage("user", getInitialMessageForProfession(profession)));
@@ -259,6 +261,8 @@ public class InteragationRoomController {
           event -> {
             ChatMessage resultMessage = task.getValue();
             appendChatMessage(resultMessage);
+            // Enable the send button after the response is processed
+            btnSend.setDisable(false);
             if (!suspectHasBeenTalkedToMap.get(profession)) {
               suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
             }
@@ -266,6 +270,8 @@ public class InteragationRoomController {
 
       task.setOnFailed(
           event -> {
+            // Enable the send button after the response is processed
+            btnSend.setDisable(false);
             task.getException().printStackTrace();
           });
 
@@ -398,7 +404,9 @@ public class InteragationRoomController {
   @FXML
   private void handleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      sendMessage();
+      if (!btnSend.isDisabled()) {
+        sendMessage();
+      }
     }
   }
 
@@ -417,7 +425,7 @@ public class InteragationRoomController {
     txtInput.clear();
     ChatMessage msg = new ChatMessage("user", message);
     appendChatMessage(msg);
-
+    btnSend.setDisable(true); // Disable the send button while processing the message
     // Run user message in a background thread
     Task<ChatMessage> task =
         new Task<>() {
@@ -431,6 +439,7 @@ public class InteragationRoomController {
         event1 -> {
           ChatMessage resultMessage = task.getValue();
           appendChatMessage(resultMessage);
+          btnSend.setDisable(false); // Re-enable the send button
           // Check if TTS should be used
           if (!suspectHasBeenTalkedToMap.get(profession)) {
             suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
@@ -439,6 +448,7 @@ public class InteragationRoomController {
 
     task.setOnFailed(
         event1 -> {
+          btnSend.setDisable(false); // Re-enable the send button
           task.getException().printStackTrace();
         });
 
