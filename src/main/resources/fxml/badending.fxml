@@ -19,7 +19,7 @@
          <font>
             <Font name="Courier New" size="18.0" />
          </font></TextArea>
-      <Button fx:id="restartButton" layoutX="490.0" layoutY="460.0" onAction="#handleRestartClick" prefHeight="42.0" prefWidth="182.0" stylesheets="@../css/styles.css" text="Restart Game">
+      <Button fx:id="restartButton" layoutX="490.0" layoutY="460.0" onAction="#onHandleRestartClick" prefHeight="42.0" prefWidth="182.0" stylesheets="@../css/styles.css" text="Restart Game">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
