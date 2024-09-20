@@ -215,9 +215,7 @@ public class InteragationRoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyPressed(KeyEvent event) {
-    // System.out.println("Key " + event.getCode() + " pressed");
-  }
+  public void onKeyPressed(KeyEvent event) {}
 
   /**
    * Handles the key released event.
@@ -225,9 +223,7 @@ public class InteragationRoomController {
    * @param event the key event
    */
   @FXML
-  public void onKeyReleased(KeyEvent event) {
-    // System.out.println("Key " + event.getCode() + " released");
-  }
+  public void onKeyReleased(KeyEvent event) {}
 
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
@@ -692,7 +688,6 @@ public class InteragationRoomController {
       player = new MediaPlayer(sound);
       player.play();
     }
-    // App.setRoot("whosThief");
   }
 
   @FXML
