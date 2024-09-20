@@ -11,18 +11,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndingController">
    <children>
-      <ImageView fitHeight="453.0" fitWidth="787.0" layoutX="161.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="430.0" fitWidth="767.0" layoutX="188.0" layoutY="-19.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/youwin.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback" editable="false" layoutX="196.0" layoutY="548.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true" />
-      <Text layoutX="200.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feedback:">
+      <TextArea fx:id="feedback" editable="false" layoutX="196.0" layoutY="499.0" prefHeight="163.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true">
          <font>
-            <Font name="System Bold Italic" size="36.0" />
+            <Font name="Courier New" size="18.0" />
+         </font></TextArea>
+      <Text layoutX="196.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Feedback:">
+         <font>
+            <Font name="Courier New Bold" size="27.0" />
          </font>
       </Text>
-      <Button fx:id="restartButton" layoutX="446.0" layoutY="446.0" onAction="#handleRestartClick" prefHeight="50.0" prefWidth="218.0" stylesheets="@../css/styles.css" text="Restart Game">
+      <Button fx:id="restartButton" layoutX="441.0" layoutY="411.0" onAction="#handleRestartClick" prefHeight="50.0" prefWidth="218.0" stylesheets="@../css/styles.css" text="Restart Game">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
