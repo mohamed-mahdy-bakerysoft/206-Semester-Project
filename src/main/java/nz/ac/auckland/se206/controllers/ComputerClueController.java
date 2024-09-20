@@ -1,11 +1,14 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
@@ -45,6 +48,8 @@ public class ComputerClueController extends ClueController {
   @FXML private TextField passwordTxtField;
   @FXML private ImageView passwordHint;
   @FXML private Rectangle rectSecurityCamera;
+  private MediaPlayer player;
+  private Media sound;
 
   /**
    * Initializes the computer clue view, including loading any necessary assets.
@@ -80,6 +85,14 @@ public class ComputerClueController extends ClueController {
         App.setRoot("computerclue4");
         break;
     }
+    // adding mouse click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/mouseclick.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   /**

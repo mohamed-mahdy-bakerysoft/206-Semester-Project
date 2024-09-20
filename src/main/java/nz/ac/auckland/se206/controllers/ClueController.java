@@ -1,12 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
@@ -33,6 +36,8 @@ public class ClueController {
 
   /** ImageView to display password hints in the clue scene. */
   @FXML private ImageView passwordHint;
+  private MediaPlayer player;
+  private Media sound;
 
   /**
    * Initializes the clue scene by setting the countdown timer. This method is called automatically
@@ -64,6 +69,15 @@ public class ClueController {
     } else {
       App.setRoot("room");
     }
+
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   /**
@@ -78,6 +92,15 @@ public class ClueController {
     if (clicked.getId().equals("rectLogBook")) {
       App.setRoot("logbookclue1");
     }
+
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   /**
@@ -91,9 +114,17 @@ public class ClueController {
     System.out.println(ComputerClueController.getPasswordHasBeenGuessed());
     if (ComputerClueController.getPasswordHasBeenGuessed()) {
       App.setRoot("computerclue1");
-      return;
+    } else {
+      App.setRoot("computercluepassword");
     }
-    App.setRoot("computercluepassword");
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 
   /**

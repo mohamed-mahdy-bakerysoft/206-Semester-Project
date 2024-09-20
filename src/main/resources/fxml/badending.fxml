@@ -6,16 +6,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndingController">
    <children>
-      <ImageView fitHeight="492.0" fitWidth="863.0" layoutX="164.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="492.0" fitWidth="863.0" layoutX="150.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/youlose.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback2" editable="false" layoutX="177.0" layoutY="550.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback unavailable" wrapText="true" />
-      <Button fx:id="restartButton" layoutX="489.0" layoutY="492.0" onAction="#handleRestartClick" prefHeight="42.0" prefWidth="182.0" stylesheets="@../css/styles.css" text="Restart Game">
+      <TextArea fx:id="feedback2" editable="false" layoutX="207.0" layoutY="527.0" prefHeight="114.0" prefWidth="749.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true">
+         <font>
+            <Font name="Courier New" size="18.0" />
+         </font></TextArea>
+      <Button fx:id="restartButton" layoutX="490.0" layoutY="460.0" onAction="#handleRestartClick" prefHeight="42.0" prefWidth="182.0" stylesheets="@../css/styles.css" text="Restart Game">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

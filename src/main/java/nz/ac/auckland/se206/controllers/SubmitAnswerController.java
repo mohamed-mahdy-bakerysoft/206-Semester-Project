@@ -13,6 +13,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
@@ -21,6 +23,7 @@ import nz.ac.auckland.apiproxy.chat.openai.Choice;
 import nz.ac.auckland.apiproxy.config.ApiProxyConfig;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
@@ -92,6 +95,8 @@ public class SubmitAnswerController {
   @FXML private Label mins;
   @FXML private Label secs;
   @FXML private ProgressBar progressBar;
+  private MediaPlayer player;
+  private Media sound;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -99,8 +104,9 @@ public class SubmitAnswerController {
    * Initializes the controller, setting up the timer and resetting the first-time flag if
    * necessary.
    */
-  public void initialize() {
-    if (isFirstTime) {
+  public void initialize() throws URISyntaxException {
+
+    if (isFirstTime == true) {
       timeManager.stopTimer();
       timeManager.setInterval(60);
     }
@@ -151,8 +157,10 @@ public class SubmitAnswerController {
           task.getException().printStackTrace();
         });
 
-    progressBar.progressProperty().bind(task.progressProperty());
-    new Thread(task).start(); // Run the task in a background thread
+      progressBar.progressProperty().bind(task.progressProperty());
+      new Thread(task).start(); // Run the task in a background thread
+    }
+    GameStateContext.getInstance().setState(GameStateContext.getInstance().getGameOverState());
   }
 
   /**

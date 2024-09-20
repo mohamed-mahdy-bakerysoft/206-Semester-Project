@@ -1,12 +1,17 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.states.GameOver;
+import nz.ac.auckland.se206.states.Guessing;
 
 /**
  * The EndingController class is responsible for managing the final feedback displayed at the end of
@@ -20,13 +25,14 @@ public class EndingController {
 
   private static String thief;
   private static String feed;
+  private MediaPlayer player;
+  private Media sound;
 
   /**
    * Initializes the feedback display for the ending scene. If no feedback is available, it shows a
    * message indicating that the feedback is unavailable based on the selected suspect.
    */
-  public void initialize() {
-
+  public void initialize() throws URISyntaxException {
     if (feed == null) {
       if (thief == null) {
         System.out.println("thief is null");
@@ -46,6 +52,24 @@ public class EndingController {
       feedback2.setText(feed);
     } else if (thief.equals("janitor")) {
       feedback2.setText(feed);
+    } else {
+    }
+    System.out.println("game state:" + RoomController.getGameContext().getCurrentState());
+
+    // playing the TTS audio when player wins or loses
+    if (RoomController.getGameContext().getCurrentState()
+        instanceof GameOver) { // only plays audio if game is over
+      if (Guessing.getGameResult()) { // if true
+        sound = new Media(App.class.getResource("/sounds/correct_you_win.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
+      } else {
+        sound =
+            new Media(
+                App.class.getResource("/sounds/better_luck_next_time.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
+      }
     }
   }
 
@@ -94,5 +118,14 @@ public class EndingController {
 
     // Navigate back to the start room
     App.setRoot("start");
+
+    // adding click sound effect
+    try {
+      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+    }
+    player = new MediaPlayer(sound);
+    player.play();
   }
 }
