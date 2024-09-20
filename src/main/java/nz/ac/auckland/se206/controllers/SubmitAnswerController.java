@@ -25,6 +25,7 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
+import nz.ac.auckland.se206.states.Guessing;
 
 // improt java fxml text
 
@@ -74,10 +75,12 @@ public class SubmitAnswerController {
     if (isFirstTime == true) {
       timeManager.stopTimer();
       timeManager.setInterval(60);
-
-      // sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
-      // player = new MediaPlayer(sound);
-      // player.play();
+      if (RoomController.getGameContext().getCurrentState()
+          instanceof Guessing) { // only plays audio if in guessing state
+        sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
+      }
     }
     timeManager.startTimer();
     timeManager.setTimerLabel(mins, secs);
