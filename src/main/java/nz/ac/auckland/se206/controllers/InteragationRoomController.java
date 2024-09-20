@@ -235,7 +235,7 @@ public class InteragationRoomController {
           new ChatCompletionRequest(config)
               .setN(1)
               .setTemperature(0.8)
-              .setTopP(0.5)
+              .setTopP(0.7)
               .setMaxTokens(80);
 
       // Run GPT request in a background thread
