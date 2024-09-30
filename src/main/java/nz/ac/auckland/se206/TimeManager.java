@@ -23,7 +23,7 @@ import nz.ac.auckland.se206.states.Guessing;
  */
 public class TimeManager {
   private static TimeManager instance;
-  private static int interval = 300; // 300 for 5 minutes
+  private static int interval;
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;

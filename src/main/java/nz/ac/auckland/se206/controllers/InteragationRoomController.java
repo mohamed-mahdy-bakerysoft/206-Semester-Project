@@ -121,15 +121,15 @@ public class InteragationRoomController {
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
-  @FXML private ImageView Currator0;
-  @FXML private ImageView Currator1;
-  @FXML private ImageView Currator2;
-  @FXML private ImageView Thief0;
-  @FXML private ImageView Thief1;
-  @FXML private ImageView Thief2;
-  @FXML private ImageView Janitor0;
-  @FXML private ImageView Janitor1;
-  @FXML private ImageView Janitor2;
+  @FXML private ImageView currator0;
+  @FXML private ImageView currator1;
+  @FXML private ImageView currator2;
+  @FXML private ImageView thief0;
+  @FXML private ImageView thief1;
+  @FXML private ImageView thief2;
+  @FXML private ImageView janitor0;
+  @FXML private ImageView janitor1;
+  @FXML private ImageView janitor2;
   @FXML private Group chatGroup;
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
@@ -517,14 +517,14 @@ public class InteragationRoomController {
     switch (profession) {
       case "Art Currator":
         chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("Currator", randomIndex);
+        setImageVisibility("currator", randomIndex);
         break;
       case "Art Thief":
         chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("Thief", randomIndex);
+        setImageVisibility("thief", randomIndex);
         break;
       case "Janitor":
-        setImageVisibility("Janitor", randomIndex);
+        setImageVisibility("janitor", randomIndex);
         chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
         break;
     }
