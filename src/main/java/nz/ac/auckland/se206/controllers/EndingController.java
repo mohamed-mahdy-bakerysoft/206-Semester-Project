@@ -20,11 +20,29 @@ import nz.ac.auckland.se206.states.Guessing;
  */
 public class EndingController {
 
-  @FXML private TextArea feedback;
-  @FXML private TextArea feedback2;
-
   private static String thief;
   private static String feed;
+
+  /**
+   * Sets the feedback string to be displayed in the ending screen.
+   *
+   * @param feed the feedback string to set
+   */
+  public static void setFeed(String feed) {
+    EndingController.feed = feed;
+  }
+
+  /**
+   * Sets the suspect identified as the thief.
+   *
+   * @param thief the suspect identified as the thief
+   */
+  public static void setThief(String thief) {
+    EndingController.thief = thief;
+  }
+
+  @FXML private TextArea feedback;
+  @FXML private TextArea feedback2;
   private MediaPlayer player;
   private Media sound;
 
@@ -83,24 +101,6 @@ public class EndingController {
         player.play();
       }
     }
-  }
-
-  /**
-   * Sets the feedback string to be displayed in the ending screen.
-   *
-   * @param feed the feedback string to set
-   */
-  public static void setFeed(String feed) {
-    EndingController.feed = feed;
-  }
-
-  /**
-   * Sets the suspect identified as the thief.
-   *
-   * @param thief the suspect identified as the thief
-   */
-  public static void setThief(String thief) {
-    EndingController.thief = thief;
   }
 
   /**

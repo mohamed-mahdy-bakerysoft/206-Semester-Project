@@ -109,6 +109,7 @@ public class InteragationRoomController {
     return clueHasBeenInteractedWith;
   }
 
+  @FXML private BorderPane mainPane;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
   @FXML private Button suspect2Button;
@@ -116,7 +117,6 @@ public class InteragationRoomController {
   @FXML private Button btnBack;
   @FXML private Button btnSend;
   @FXML private Button btnGoBack;
-  @FXML private BorderPane mainPane;
   @FXML private Group chatGroup;
   @FXML private ImageView currator0;
   @FXML private ImageView currator1;
@@ -133,14 +133,14 @@ public class InteragationRoomController {
   @FXML private TextField txtInput;
   @FXML private VBox navBar;
 
+  @SuppressWarnings("unused")
+  private Map<String, StringBuilder> chatHistory;
+
   private MediaPlayer player;
   private Media sound;
   private Media artCurratorHmm;
   private Media thiefHmm;
   private Media janitorHmm;
-
-  @SuppressWarnings("unused")
-  private Map<String, StringBuilder> chatHistory;
 
   private boolean navBarVisible = false;
   private int originalWidth = 1100;

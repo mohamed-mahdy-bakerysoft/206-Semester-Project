@@ -41,13 +41,13 @@ public class ComputerClueController extends ClueController {
   }
 
   // FXML components representing various clickable elements on the computer clue scene.
+  @FXML private ImageView passwordHint;
   @FXML private Rectangle rectOpenEmail;
   @FXML private Rectangle rectEscape;
   @FXML private Rectangle rectBackToInbox;
   @FXML private Rectangle rectInternetExplorer;
-  @FXML private TextField passwordTxtField;
-  @FXML private ImageView passwordHint;
   @FXML private Rectangle rectSecurityCamera;
+  @FXML private TextField passwordTxtField;
   private MediaPlayer player;
   private Media sound;
 

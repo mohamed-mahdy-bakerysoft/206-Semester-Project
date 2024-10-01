@@ -70,27 +70,24 @@ public class RoomController {
     clueHasBeenInteractedWith = false;
   }
 
-  // Added navbar with buttons
-  @FXML private VBox navBar;
+  @FXML private BorderPane mainPane;
+  @FXML private Button btnGuess;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
   @FXML private Button suspect2Button;
   @FXML private Button suspect3Button;
-
-  @FXML private Rectangle rectSecurityCamera;
-  @FXML private Rectangle rectPerson1;
-  @FXML private Rectangle rectPerson2;
-  @FXML private Rectangle rectPerson3;
-  @FXML private Rectangle rectOfficer;
-  // @FXML private Button btnGoIntelRoom;
-  @FXML private Button btnGuess;
-  @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
   @FXML private ImageView mainLeftArrow;
   @FXML private ImageView mainRightArrow;
   @FXML private ImageView arrowLeft;
   @FXML private ImageView arrowRight;
+  @FXML private Rectangle rectSecurityCamera;
+  @FXML private Rectangle rectPerson1;
+  @FXML private Rectangle rectPerson2;
+  @FXML private Rectangle rectPerson3;
+  @FXML private Rectangle rectOfficer;
+  @FXML private VBox navBar;
 
   private MediaPlayer player;
   private Media sound;
