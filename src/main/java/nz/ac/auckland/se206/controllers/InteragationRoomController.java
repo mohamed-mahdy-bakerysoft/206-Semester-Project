@@ -109,18 +109,15 @@ public class InteragationRoomController {
     return clueHasBeenInteractedWith;
   }
 
-  // Added navbar with buttons
-  @FXML private VBox navBar;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
   @FXML private Button suspect2Button;
   @FXML private Button suspect3Button;
-
-  // @FXML private Button btnGoIntelRoom;
   @FXML private Button btnBack;
+  @FXML private Button btnSend;
+  @FXML private Button btnGoBack;
   @FXML private BorderPane mainPane;
-  @FXML private Label mins;
-  @FXML private Label secs;
+  @FXML private Group chatGroup;
   @FXML private ImageView currator0;
   @FXML private ImageView currator1;
   @FXML private ImageView currator2;
@@ -130,11 +127,11 @@ public class InteragationRoomController {
   @FXML private ImageView janitor0;
   @FXML private ImageView janitor1;
   @FXML private ImageView janitor2;
-  @FXML private Group chatGroup;
+  @FXML private Label mins;
+  @FXML private Label secs;
   @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
-  @FXML private Button btnSend;
-  @FXML private Button btnGoBack;
+  @FXML private VBox navBar;
 
   private MediaPlayer player;
   private Media sound;
