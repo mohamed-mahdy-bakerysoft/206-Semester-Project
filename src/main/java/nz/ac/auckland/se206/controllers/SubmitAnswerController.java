@@ -114,6 +114,7 @@ public class SubmitAnswerController {
    * updates and invokes GPT model interactions.
    */
   public void sendAnswer() {
+    TimeManager.getInstance().getPlayer().stop();
     submitButton.setDisable(true); // Disable the submit button to prevent multiple submissions
     timeManager.stopTimer(); // Stop the timer
     if (answerTxtArea.getText().isEmpty()) {

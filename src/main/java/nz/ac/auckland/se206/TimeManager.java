@@ -23,15 +23,15 @@ import nz.ac.auckland.se206.states.Guessing;
  */
 public class TimeManager {
   private static TimeManager instance;
-  private static int interval = 300; // 300 for 5 minutes
+  private static int interval; // 300 for 5 minutes
+  private static MediaPlayer player;
+  private static Media sound;
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
   private Label mins;
   private Label secs;
   private Label dot;
-  private MediaPlayer player;
-  private Media sound;
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -44,6 +44,11 @@ public class TimeManager {
       instance = new TimeManager();
     }
     return instance;
+  }
+
+  // make a getter for player
+  public MediaPlayer getPlayer() {
+    return player;
   }
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
@@ -92,6 +97,13 @@ public class TimeManager {
 
       // Check if time is 30 seconds or less, change style if true
       if (interval <= 30) {
+        // check if media player is playing
+        if (player == null) {
+          sound = new Media(App.class.getResource("/sounds/ticking.mp3").toURI().toString());
+          player = new MediaPlayer(sound);
+          player.play();
+        }
+
         if (interval % 2 == 0) {
           // Blinking effect
           mins.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
@@ -104,6 +116,10 @@ public class TimeManager {
         }
 
       } else {
+        if (player != null) {
+          player.stop();
+          player = null;
+        }
         // Reset to default styles when time is more than 30 seconds
         mins.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
         dot.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
@@ -112,6 +128,10 @@ public class TimeManager {
     }
 
     if (interval == 0) {
+      if (player != null) {
+        player.stop();
+        player = null;
+      }
       // Check if the game is in the started state, suspects have been talked to, and clue has been
       // interacted with
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
