@@ -40,6 +40,15 @@ public class ComputerClueController extends ClueController {
     passwordGuesses++;
   }
 
+  /**
+   * Resets the password guess count and status, allowing the puzzle to be attempted again from the
+   * beginning.
+   */
+  public static void reset() {
+    passwordGuesses = 0; // Reset the number of password guesses
+    passwordHasBeenGuessed = false; // Reset the guessed status
+  }
+
   // FXML components representing various clickable elements on the computer clue scene.
   @FXML private ImageView passwordHint;
   @FXML private Rectangle rectOpenEmail;
@@ -151,14 +160,5 @@ public class ComputerClueController extends ClueController {
     if (keyEvent.getCode().toString().equals("ENTER")) {
       handlePassword(null);
     }
-  }
-
-  /**
-   * Resets the password guess count and status, allowing the puzzle to be attempted again from the
-   * beginning.
-   */
-  public static void reset() {
-    passwordGuesses = 0; // Reset the number of password guesses
-    passwordHasBeenGuessed = false; // Reset the guessed status
   }
 }
