@@ -90,6 +90,7 @@ public class SubmitAnswerController {
   @FXML private TextArea feedback2; // Another text area for feedback
   @FXML private Label mins; // Label to display minutes
   @FXML private Label secs; // Label to display seconds
+  @FXML private Label dot;
   @FXML private ProgressBar progressBar; // Progress bar for task progress
 
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
@@ -105,7 +106,7 @@ public class SubmitAnswerController {
       timeManager.setInterval(60); // Set the timer interval to 60 seconds
     }
     timeManager.startTimer(); // Start the timer
-    timeManager.setTimerLabel(mins, secs); // Set the timer labels
+    timeManager.setTimerLabel(mins, secs, dot); // Set the timer labels
   }
 
   /**

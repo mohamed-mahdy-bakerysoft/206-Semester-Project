@@ -50,7 +50,7 @@ public class StartRoomController {
       throws ApiProxyException, IOException, URISyntaxException {
     // Get the instance of TimeManager and set the interval to 300 seconds
     TimeManager timeManager = TimeManager.getInstance();
-    timeManager.setInterval(300);
+    timeManager.setInterval(60);
     timeManager.startTimer(); // Start the game timer
 
     // Load and play the opening sound

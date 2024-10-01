@@ -28,6 +28,7 @@ public class ClueController {
   @FXML private Label mins;
 
   @FXML private Label secs;
+  @FXML private Label dot;
 
   /** Rectangle elements representing hints or key clues within the scene. */
   @FXML private Rectangle rectHint;
@@ -49,7 +50,7 @@ public class ClueController {
   @FXML
   public void initialize() throws ApiProxyException {
     TimeManager timeManager = TimeManager.getInstance();
-    timeManager.setTimerLabel(mins, secs);
+    timeManager.setTimerLabel(mins, secs, dot);
   }
 
   /**

@@ -121,6 +121,7 @@ public class InteragationRoomController {
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
+  @FXML private Label dot;
   @FXML private ImageView Currator0;
   @FXML private ImageView Currator1;
   @FXML private ImageView Currator2;
@@ -197,7 +198,7 @@ public class InteragationRoomController {
     }
     initializeSounds();
     TimeManager timeManager = TimeManager.getInstance();
-    timeManager.setTimerLabel(mins, secs);
+    timeManager.setTimerLabel(mins, secs, dot);
     // Initialize the game context with the charHistory
     this.chatHistory = context.getChatHistory();
     // testing purposes
@@ -206,7 +207,7 @@ public class InteragationRoomController {
 
   public void setTime() {
     TimeManager timeManager = TimeManager.getInstance();
-    timeManager.setTimerLabel(mins, secs);
+    timeManager.setTimerLabel(mins, secs, dot);
   }
 
   /**

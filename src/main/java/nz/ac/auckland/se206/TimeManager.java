@@ -29,6 +29,7 @@ public class TimeManager {
   private Timeline timeline;
   private Label mins;
   private Label secs;
+  private Label dot;
   private MediaPlayer player;
   private Media sound;
 
@@ -84,6 +85,32 @@ public class TimeManager {
    * @throws URISyntaxException if there is an error with the URI syntax
    */
   public void decrementTime() throws IOException, URISyntaxException {
+    // If the labels are found, update their text with the formatted time
+    if (mins != null && secs != null) {
+      mins.setText(formattedMinutes);
+      secs.setText(formattedSeconds);
+
+      // Check if time is 30 seconds or less, change style if true
+      if (interval <= 30) {
+        if (interval % 2 == 0) {
+          // Blinking effect
+          mins.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+          dot.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+          secs.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+        } else {
+          mins.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+          dot.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+          secs.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+        }
+
+      } else {
+        // Reset to default styles when time is more than 30 seconds
+        mins.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
+        dot.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
+        secs.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
+      }
+    }
+
     if (interval == 0) {
       // Check if the game is in the started state, suspects have been talked to, and clue has been
       // interacted with
@@ -209,9 +236,10 @@ public class TimeManager {
    * @param mins the label for minutes
    * @param secs the label for seconds
    */
-  public void setTimerLabel(Label mins, Label secs) {
+  public void setTimerLabel(Label mins, Label secs, Label dot) {
     this.mins = mins;
     this.secs = secs;
+    this.dot = dot;
     updateTimerLabels(); // Update the labels immediately after setting them
   }
 

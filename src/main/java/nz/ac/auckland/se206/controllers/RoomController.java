@@ -87,6 +87,7 @@ public class RoomController {
   @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
+  @FXML private Label dot;
   @FXML private ImageView mainLeftArrow;
   @FXML private ImageView mainRightArrow;
   @FXML private ImageView arrowLeft;
@@ -143,7 +144,7 @@ public class RoomController {
       System.out.println("First time");
       isFirstTimeInit = false;
     }
-    timeManager.setTimerLabel(mins, secs);
+    timeManager.setTimerLabel(mins, secs, dot);
   }
 
   /**
