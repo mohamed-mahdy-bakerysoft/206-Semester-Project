@@ -233,6 +233,8 @@ public class InteragationRoomController {
     // Only display the initial message if no previous conversation exists
     if (!suspectHasBeenTalkedToMap.get(profession)) {
       appendChatMessage(new ChatMessage("user", getInitialMessageForProfession(profession)));
+      System.out.println(
+          "****************************appending user meesage*********************************");
     }
 
     try {
@@ -337,7 +339,7 @@ public class InteragationRoomController {
 
     // Populate the map with the profession and chat history
     map.put("profession", profession);
-    map.put("chathistory", chatHistory.get(promptFile).toString());
+    // map.put("chathistory", chatHistory.get(promptFile).toString());
 
     // For testing purposes, print the chat history and entire chat history
     System.out.println("Chat history: ");
@@ -407,6 +409,8 @@ public class InteragationRoomController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    System.out.println("**********************Game State:" + context.getCurrentState());
+    System.out.println("**********************Current Chat history:" + context.getChatHistory());
     sendMessage();
   }
 
