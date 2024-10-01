@@ -47,8 +47,6 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  */
 public class InteragationRoomController {
   private static boolean clueHasBeenInteractedWith = false;
-  private String profession;
-  private ChatCompletionRequest chatCompletionRequest;
   private static boolean isFirstTimeInit = true;
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
   private static Map<String, String> professionToNameMap = new HashMap<>();
@@ -148,6 +146,8 @@ public class InteragationRoomController {
   private Media thiefHmm;
   private Media janitorHmm;
 
+  private String profession;
+  private ChatCompletionRequest chatCompletionRequest;
   private boolean navBarVisible = false;
   private int originalWidth = 1100;
   private Random random = new Random();
