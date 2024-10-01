@@ -94,9 +94,10 @@ public class TimeManager {
     if (mins != null && secs != null) {
       mins.setText(formattedMinutes);
       secs.setText(formattedSeconds);
-
-      // Check if time is 30 seconds or less, change style if true
-      if (interval <= 30) {
+      if ((RoomController.getGameContext().getCurrentState() instanceof GameStarted
+              && interval <= 31)
+          || (RoomController.getGameContext().getCurrentState() instanceof Guessing
+              && interval <= 11)) {
         // check if media player is playing
         if (player == null) {
           sound = new Media(App.class.getResource("/sounds/ticking.mp3").toURI().toString());
