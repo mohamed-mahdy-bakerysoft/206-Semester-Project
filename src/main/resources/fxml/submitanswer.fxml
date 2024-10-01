@@ -32,17 +32,17 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="HOSPhoto" fitHeight="319.0" fitWidth="368.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="hosPhoto" fitHeight="319.0" fitWidth="368.0" layoutX="187.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/WillWhosThief.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="CuratorPhoto" fitHeight="328.0" fitWidth="325.0" layoutX="198.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="curatorPhoto" fitHeight="328.0" fitWidth="325.0" layoutX="198.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/FrankWhosThief.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="JanitorPhoto" fitHeight="334.0" fitWidth="333.0" layoutX="182.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="janitorPhoto" fitHeight="334.0" fitWidth="333.0" layoutX="182.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/JohnWhosThief.png" />
          </image>
