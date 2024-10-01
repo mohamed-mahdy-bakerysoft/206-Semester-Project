@@ -109,6 +109,12 @@ public class InteragationRoomController {
     return clueHasBeenInteractedWith;
   }
 
+  public static void resetSuspectsTalkedToMap() {
+    suspectHasBeenTalkedToMap.put("Art Currator", false);
+    suspectHasBeenTalkedToMap.put("Art Thief", false);
+    suspectHasBeenTalkedToMap.put("Janitor", false);
+  }
+
   @FXML private BorderPane mainPane;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
@@ -732,11 +738,5 @@ public class InteragationRoomController {
     chatGroup.setVisible(false); // Ensure chat group is visible
     InteragationRoomController.setIsChatOpened(false);
     App.setRoot("room");
-  }
-
-  public static void resetSuspectsTalkedToMap() {
-    suspectHasBeenTalkedToMap.put("Art Currator", false);
-    suspectHasBeenTalkedToMap.put("Art Thief", false);
-    suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 }

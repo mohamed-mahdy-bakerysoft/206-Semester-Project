@@ -39,7 +39,7 @@ public class BinClueController extends ClueController {
   @FXML private Rectangle rectBackDrop;
 
   /** Instance of DraggableMaker to enable dragging behavior for the rubbish objects. */
-  DraggableMaker draggableMaker = new DraggableMaker();
+  private DraggableMaker draggableMaker = new DraggableMaker();
 
   /**
    * Initializes the bin clue scene by making the rubbish objects draggable. This method is called
