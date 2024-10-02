@@ -15,7 +15,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -25,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -37,6 +38,7 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.bluebub.Bubble;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
 
 // improt key event
@@ -133,9 +135,10 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private ImageView janitor2;
   @FXML private Label mins;
   @FXML private Label secs;
-  @FXML private TextArea txtaChat;
+  @FXML private ScrollPane chatScrollPane;
   @FXML private TextField txtInput;
   @FXML private VBox navBar;
+  @FXML private VBox chatContainer;
 
   @SuppressWarnings("unused")
   private Map<String, StringBuilder> chatHistory;
@@ -147,6 +150,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private Media janitorHmm;
 
   private String profession;
+  private Bubble currentBubble;
   private ChatCompletionRequest chatCompletionRequest;
   private boolean navBarVisible = false;
   private int originalWidth = 1100;
@@ -408,37 +412,42 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws IOException if there is an I/O error
    */
   private void sendMessage() throws ApiProxyException, IOException {
-    String message = txtInput.getText().trim();
+    String message = "Sample user input"; // Simulate user input for now
+
     if (message.isEmpty()) {
       return;
     }
-    txtInput.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-    btnSend.setDisable(true); // Disable the send button while processing the message
-    // Run user message in a background thread
+
+    // Add the user's chat bubble to the VBox
+    addChatBubble("user", message);
+
+    // Disable send button while processing the message
+    btnSend.setDisable(true);
+
     Task<ChatMessage> task =
         new Task<>() {
           @Override
           protected ChatMessage call() throws ApiProxyException {
-            return runGpt(msg);
+            // Send the user's message to the GPT model
+            return runGpt(new ChatMessage("user", message));
           }
         };
 
     task.setOnSucceeded(
-        event1 -> {
+        event -> {
           ChatMessage resultMessage = task.getValue();
-          appendChatMessage(resultMessage);
-          btnSend.setDisable(false); // Re-enable the send button
-          // Check if TTS should be used
-          if (!suspectHasBeenTalkedToMap.get(profession)) {
-            suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
-          }
+
+          // Add the response as a chat bubble
+          addChatBubble(resultMessage.getRole(), resultMessage.getContent());
+
+          // Re-enable send button
+          btnSend.setDisable(false);
         });
 
     task.setOnFailed(
-        event1 -> {
-          btnSend.setDisable(false); // Re-enable the send button
+        event -> {
+          // Re-enable send button in case of failure
+          btnSend.setDisable(false);
           task.getException().printStackTrace();
         });
 
@@ -479,15 +488,15 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void appendChatMessage(ChatMessage msg) {
+    // Assuming chatHistory and other required data are already initialized
     Map<String, StringBuilder> chatHistory = context.getChatHistory();
     int randomIndex = random.nextInt(3); // Generates 0, 1, or 2
 
     if (!msg.getRole().equals("user")) {
-      System.out.println("playing hmm sound from " + profession);
       playHmmSound(profession);
     }
 
-    // Adding to history and change the image of the person after each sentence
+    // Add to chat history based on the profession and message role
     switch (profession) {
       case "Art Currator":
         chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
@@ -502,17 +511,31 @@ public class InteragationRoomController implements RoomNavigationHandler {
         chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
         break;
     }
-    // Start the text animation after a small delay to allow "hmm" sound to finish
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(500); // Adjust delay to match the length of the "hmm" sound
-                Platform.runLater(() -> writeOnTextAnimation(msg.getRole(), msg.getContent()));
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
-            })
-        .start();
+
+    // Append the chat bubble instead of text
+    addChatBubble(msg.getRole(), msg.getContent());
+  }
+
+  // Add this method to append a chat bubble for each message
+  private void addChatBubble(String role, String content) {
+    Bubble bubble = new Bubble(content); // Create a new chat bubble
+
+    // Customize the bubble based on the role (user or system)
+    if (role.equals("user")) {
+      bubble.setBubbleColor(Color.LIGHTGREEN); // User message bubble
+    } else {
+      bubble.setBubbleColor(Color.WHITE); // System message bubble
+    }
+
+    // Add the bubble to the VBox and auto-scroll
+    Platform.runLater(
+        () -> {
+          chatContainer.getChildren().add(bubble);
+
+          // Auto-scroll to the bottom of the ScrollPane
+          chatScrollPane.layout(); // Force layout update to make sure all elements are added
+          chatScrollPane.setVvalue(1.0); // Scroll to the bottom
+        });
   }
 
   // Helper method to set visibility based on the random index
@@ -550,49 +573,65 @@ public class InteragationRoomController implements RoomNavigationHandler {
     return (ImageView) currentRoot.lookup("#" + imageId); // Adjust based on your FXML structure
   }
 
-  /**
-   * Creates a write-on text animation for a chat message.
-   *
-   * @param role the role of the message sender (e.g., "system", "user")
-   * @param text the content of the message
-   */
-  private void writeOnTextAnimation(String role, String text) {
-    String displayName;
-    if (role.equals("user")) {
-      displayName = professionToNameMap.get("user"); // Use the mapped name or default to role
-    } else {
-      displayName = professionToNameMap.get(profession); // Use the mapped name or default to role
-    }
+  // /**
+  //  * Creates a write-on text animation for a chat message.
+  //  *
+  //  * @param role the role of the message sender (e.g., "system", "user")
+  //  * @param text the content of the message
+  //  */
+  // private void writeOnTextAnimation(String role, String text) {
+  //   String displayName;
+  //   if (role.equals("user")) {
+  //     displayName = professionToNameMap.get("user"); // Use the mapped name or default to role
+  //   } else {
+  //     displayName = professionToNameMap.get(profession); // Use the mapped name or default to
+  // role
+  //   }
 
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            StringBuilder currentText = new StringBuilder(displayName + ": ");
-            for (char ch : text.toCharArray()) {
-              currentText.append(ch);
-              String finalText = currentText.toString();
-              Platform.runLater(
-                  () -> {
-                    // Use String replacement to ensure text is placed correctly
-                    String previousText = txtaChat.getText();
-                    int lastMessageIndex = previousText.lastIndexOf(displayName + ":");
-                    if (lastMessageIndex != -1) {
-                      txtaChat.setText(
-                          previousText.substring(0, lastMessageIndex) + finalText + "\n");
-                    } else {
-                      txtaChat.appendText(finalText + "\n");
-                    }
-                  });
-              Thread.sleep(35); // Adjust delay for typing effect
-            }
-            // Small delay to prevent overlap
-            Thread.sleep(1200); // MODIFY to prevent overlap...
-            return null;
-          }
-        };
-    new Thread(task).start();
-  }
+  //   Task<Void> task =
+  //       new Task<Void>() {
+  //         @Override
+  //         protected Void call() throws Exception {
+  //           StringBuilder currentText = new StringBuilder(displayName + ": ");
+  //           for (char ch : text.toCharArray()) {
+  //             currentText.append(ch);
+  //             String finalText = currentText.toString();
+  //             Platform.runLater(
+  //                 () -> {
+  //                   // Use String replacement to ensure text is placed correctly
+  //                   String previousText = txtaChat.getText();
+  //                   int lastMessageIndex = previousText.lastIndexOf(displayName + ":");
+  //                   if (lastMessageIndex != -1) {
+  //                     txtaChat.setText(
+  //                         previousText.substring(0, lastMessageIndex) + finalText + "\n");
+  //                   } else {
+  //                     txtaChat.appendText(finalText + "\n");
+  //                   }
+  //                 });
+  //             Thread.sleep(35); // Adjust delay for typing effect
+  //           }
+  //           // Small delay to prevent overlap
+  //           Thread.sleep(1200); // MODIFY to prevent overlap...
+  //           return null;
+  //         }
+  //       };
+  //   new Thread(task).start();
+  // }
+  // private void writeTextWithoutAnimation(String role, String text) {
+  //   String displayName;
+  //   if (role.equals("user")) {
+  //     displayName = professionToNameMap.get("user"); // Use the mapped name or default to role
+  //   } else {
+  //     displayName = professionToNameMap.get(profession); // Use the mapped name or default to
+  // role
+  //   }
+
+  //   Platform.runLater(
+  //       () -> {
+  //         String finalText = displayName + ": " + text + "\n";
+  //         txtaChat.appendText(finalText);
+  //       });
+  // }
 
   /**
    * Handles mouse clicks on rectangles representing people in the room.
@@ -627,7 +666,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
     if (!isChatOpened) {
       chatGroup.setVisible(true); // Ensure chat group is visible
-      txtaChat.clear();
       txtInput.clear();
 
       setProfession(profession);
