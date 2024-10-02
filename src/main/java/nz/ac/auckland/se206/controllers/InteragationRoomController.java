@@ -614,7 +614,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
   //       };
   //   new Thread(task).start();
   // }
-  private int number = 0;
 
   private void writeOnTextAnimation(String role, String text) {
     String displayName;
