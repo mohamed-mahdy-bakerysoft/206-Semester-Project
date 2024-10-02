@@ -45,7 +45,7 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  * Added Controller class for the intelroom view. Handles user interactions within the room where
  * the user can chat with customers and guess their profession.
  */
-public class InteragationRoomController {
+public class InteragationRoomController implements RoomNavigationHandler {
   private static boolean clueHasBeenInteractedWith = false;
   private static boolean isFirstTimeInit = true;
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
@@ -160,38 +160,8 @@ public class InteragationRoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    // NavBar Initialization
-    // Initialize with navBar hidden
-    navBar.setTranslateX(+200);
-    navBar.setDisable(true);
-    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
-    suspect1Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomOne");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    suspect2Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomTwo");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    suspect3Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomThree");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
+    NavBarUtils.setupNavBarAndSuspectButtons(
+        navBar, suspect1Button, suspect2Button, suspect3Button, this);
 
     if (isFirstTimeInit) {
       initializeSuspectTalkedToMap();
@@ -227,6 +197,15 @@ public class InteragationRoomController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {}
+
+  @Override
+  public void goToRoom(String roomName) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
+    // Handle room switching logic
+    App.setRoot(roomName);
+  }
 
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
@@ -303,14 +282,6 @@ public class InteragationRoomController {
     // Play both transitions
     translateTransition.play();
     fadeTransition.play();
-  }
-
-  private void goToRoom(String roomName) throws IOException {
-    // Before navigating, reset the window size if navBar is visible
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    stage.setWidth(originalWidth);
-    // Handle room switching logic
-    App.setRoot(roomName);
   }
 
   /**
