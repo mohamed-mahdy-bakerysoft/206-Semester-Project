@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -452,6 +451,19 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
+  private String getSuspectTypeForProfession(String profession) {
+    switch (profession) {
+      case "Art Currator":
+        return "currator";
+      case "Art Thief":
+        return "thief";
+      case "Janitor":
+        return "janitor";
+      default:
+        return "";
+    }
+  }
+
   private static void initializeRoleToNameMap() {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
@@ -583,7 +595,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Update the suspect's image based on the message
     if (!msg.getRole().equals("user")) {
       playHmmSound(profession);
-      setImageVisibility(profession.toLowerCase().replace(" ", ""), random.nextInt(3));
+      String suspectType = getSuspectTypeForProfession(profession);
+      setImageVisibility(suspectType, random.nextInt(3));
     }
 
     // Append the chat bubble to the UI
@@ -658,7 +671,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     Platform.runLater(
         () -> {
           chatScrollPane.layout();
-          chatScrollPane.setVvalue(1.0);
+          chatScrollPane.setVvalue(chatScrollPane.getVmax());
         });
   }
 
@@ -670,21 +683,17 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Show the selected image based on the random index
     switch (randomIndex) {
       case 0:
-        // Show suspectType + "1" image (e.g. Currator1)
         getImageView(suspectType + "0").setVisible(true);
         break;
       case 1:
-        // Show suspectType + "2" image (e.g. Currator2)
         getImageView(suspectType + "1").setVisible(true);
         break;
       case 2:
-        // Show suspectType + "3" image (e.g. Currator3)
         getImageView(suspectType + "2").setVisible(true);
         break;
     }
   }
 
-  // Hide all images for a given suspect
   private void hideAllImages(String suspectType) {
     getImageView(suspectType + "0").setVisible(false);
     getImageView(suspectType + "1").setVisible(false);
@@ -693,8 +702,29 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
   private ImageView getImageView(String imageId) {
-    Parent currentRoot = navBar.getScene().getRoot(); // Get the root of the current scene
-    return (ImageView) currentRoot.lookup("#" + imageId); // Adjust based on your FXML structure
+    switch (imageId) {
+      case "currator0":
+        return currator0;
+      case "currator1":
+        return currator1;
+      case "currator2":
+        return currator2;
+      case "thief0":
+        return thief0;
+      case "thief1":
+        return thief1;
+      case "thief2":
+        return thief2;
+      case "janitor0":
+        return janitor0;
+      case "janitor1":
+        return janitor1;
+      case "janitor2":
+        return janitor2;
+      default:
+        System.err.println("No ImageView found for ID: " + imageId);
+        return null;
+    }
   }
 
   // /**
