@@ -107,7 +107,7 @@
          <children>
             <ScrollPane fx:id="chatScrollPane" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" prefHeight="105.0" prefWidth="707.0" vbarPolicy="ALWAYS">
                <content>
-                  <VBox fx:id="chatContainer" prefHeight="104.0" prefWidth="698.0" spacing="10.0" />
+                  <VBox fx:id="chatContainer" prefHeight="104.0" prefWidth="698.0" spacing="5.0" />
                </content>
             </ScrollPane>
             <TextField fx:id="txtInput" layoutY="100.0" onKeyPressed="#onHandleEnterKey" prefHeight="46.0" prefWidth="607.0">

@@ -11,6 +11,8 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -21,12 +23,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -373,7 +385,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
     professionToNameMap.put("Janitor", "John");
-    professionToNameMap.put("user", "Investigator");
+    professionToNameMap.put("user", "You");
   }
 
   /**
@@ -412,7 +424,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws IOException if there is an I/O error
    */
   private void sendMessage() throws ApiProxyException, IOException {
-    String message = "Sample user input"; // Simulate user input for now
+    String message = txtInput.getText().trim(); // Get the user's message
 
     if (message.isEmpty()) {
       return;
@@ -518,23 +530,60 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   // Add this method to append a chat bubble for each message
   private void addChatBubble(String role, String content) {
-    Bubble bubble = new Bubble(content); // Create a new chat bubble
-
-    // Customize the bubble based on the role (user or system)
+    // Create a Label for the sender's name
+    Label senderLabel = new Label();
     if (role.equals("user")) {
-      bubble.setBubbleColor(Color.LIGHTGREEN); // User message bubble
+      senderLabel.setText("You");
     } else {
-      bubble.setBubbleColor(Color.WHITE); // System message bubble
+      String senderName = professionToNameMap.get(profession);
+      senderLabel.setText(senderName != null ? senderName : "Unknown");
     }
+    senderLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+    senderLabel.setPadding(new Insets(0, 0, 2, 0));
 
-    // Add the bubble to the VBox and auto-scroll
+    // Create Text for the message
+    Text messageText = new Text(content);
+    messageText.setFont(Font.font("Arial", 18));
+    messageText.setFill(Color.BLACK);
+
+    // Wrap the Text in a TextFlow
+    TextFlow messageFlow = new TextFlow(messageText);
+    messageFlow.setMaxWidth(400); // Adjust as needed
+    messageFlow.setPadding(new Insets(10));
+    messageFlow.setLineSpacing(1.5);
+
+    // Style the TextFlow to look like a chat bubble
+    BackgroundFill backgroundFill;
+    if (role.equals("user")) {
+      backgroundFill = new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), Insets.EMPTY);
+    } else {
+      backgroundFill = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(10), Insets.EMPTY);
+    }
+    messageFlow.setBackground(new Background(backgroundFill));
+
+    // Create a VBox to hold the senderLabel and messageFlow
+    VBox messageBox = new VBox(senderLabel, messageFlow);
+    messageBox.setAlignment(role.equals("user") ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+    messageBox.setMaxWidth(400 + 20); // Adjust max width for padding
+
+    // Create an HBox to hold the messageBox
+    HBox messageContainer = new HBox(messageBox);
+    messageContainer.setPadding(new Insets(5));
+    messageContainer.setAlignment(role.equals("user") ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+
+    // Allow the messageBox to grow horizontally
+    HBox.setHgrow(messageBox, Priority.ALWAYS);
+    messageBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
+    messageBox.setMinWidth(0);
+
+    // Add the messageContainer to the chatContainer (VBox)
+    chatContainer.getChildren().add(messageContainer);
+
+    // Scroll to the bottom of the chat
     Platform.runLater(
         () -> {
-          chatContainer.getChildren().add(bubble);
-
-          // Auto-scroll to the bottom of the ScrollPane
-          chatScrollPane.layout(); // Force layout update to make sure all elements are added
-          chatScrollPane.setVvalue(1.0); // Scroll to the bottom
+          chatScrollPane.layout();
+          chatScrollPane.setVvalue(1.0);
         });
   }
 
