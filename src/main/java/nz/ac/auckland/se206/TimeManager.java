@@ -24,7 +24,11 @@ import nz.ac.auckland.se206.states.Guessing;
  */
 public class TimeManager {
   private static TimeManager instance;
-  private static int interval;
+
+  private static int interval; // 300 for 5 minutes
+  private static MediaPlayer player;
+  private static Media sound;
+
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -39,14 +43,19 @@ public class TimeManager {
     return instance;
   }
 
+  // make a getter for player
+  public MediaPlayer getPlayer() {
+    return player;
+  }
+
   @FXML private Label mins;
   @FXML private Label secs;
+  @FXML private Label dot;
 
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
-  private MediaPlayer player;
-  private Media sound;
+
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {
@@ -87,7 +96,49 @@ public class TimeManager {
    * @throws URISyntaxException if there is an error with the URI syntax
    */
   public void decrementTime() throws IOException, URISyntaxException {
+    // If the labels are found, update their text with the formatted time
+    if (mins != null && secs != null) {
+      mins.setText(formattedMinutes);
+      secs.setText(formattedSeconds);
+      if ((RoomController.getGameContext().getCurrentState() instanceof GameStarted
+              && interval <= 31)
+          || (RoomController.getGameContext().getCurrentState() instanceof Guessing
+              && interval <= 11)) {
+        // check if media player is playing
+        if (player == null) {
+          sound = new Media(App.class.getResource("/sounds/ticking.mp3").toURI().toString());
+          player = new MediaPlayer(sound);
+          player.play();
+        }
+
+        if (interval % 2 == 0) {
+          // Blinking effect
+          mins.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+          dot.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+          secs.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+        } else {
+          mins.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+          dot.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+          secs.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+        }
+
+      } else {
+        if (player != null) {
+          player.stop();
+          player = null;
+        }
+        // Reset to default styles when time is more than 30 seconds
+        mins.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
+        dot.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
+        secs.setStyle("-fx-text-fill: white; -fx-font-weight: normal;");
+      }
+    }
+
     if (interval == 0) {
+      if (player != null) {
+        player.stop();
+        player = null;
+      }
       // Check if the game is in the started state, suspects have been talked to, and clue has been
       // interacted with
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
@@ -212,9 +263,10 @@ public class TimeManager {
    * @param mins the label for minutes
    * @param secs the label for seconds
    */
-  public void setTimerLabel(Label mins, Label secs) {
+  public void setTimerLabel(Label mins, Label secs, Label dot) {
     this.mins = mins;
     this.secs = secs;
+    this.dot = dot;
     updateTimerLabels(); // Update the labels immediately after setting them
   }
 
