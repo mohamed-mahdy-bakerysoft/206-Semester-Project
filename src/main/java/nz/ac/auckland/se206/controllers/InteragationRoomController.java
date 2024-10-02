@@ -278,6 +278,20 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
+  public static void resetStaticVariables() {
+    clueHasBeenInteractedWith = false;
+    isFirstTimeInit = true;
+    isChatOpened = false;
+
+    // Reset suspectHasBeenTalkedToMap
+    suspectHasBeenTalkedToMap.clear();
+    initializeSuspectTalkedToMap();
+
+    // Reset professionToNameMap if necessary
+    professionToNameMap.clear();
+    initializeRoleToNameMap();
+  }
+
   private void sendMessageToAI(ChatMessage userMessage, List<ChatMessage> conversationHistory) {
     // Add the user's message to the conversation history
     conversationHistory.add(userMessage);
@@ -438,7 +452,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
-  private void initializeRoleToNameMap() {
+  private static void initializeRoleToNameMap() {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
     professionToNameMap.put("Janitor", "John");

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
-import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.GameState;
@@ -164,12 +164,14 @@ public class GameStateContext {
     // Reset the game state back to the initial game started state
     this.gameState = this.gameStartedState;
 
-    // Clear the chat history for the suspects
-    chatHistory.get("suspect1.txt").clear();
-    chatHistory.get("suspect2.txt").clear();
-    chatHistory.get("thief.txt").clear();
+    // Clear the chat history for all suspects
+    for (List<ChatMessage> historyList : chatHistory.values()) {
+      if (historyList != null) {
+        historyList.clear();
+      }
+    }
 
-    // Reset clue interaction
-    RoomController.setClueHasBeenInteractedWith(false);
+    // Reset clue interaction and other static variables
+    InteragationRoomController.resetStaticVariables();
   }
 }
