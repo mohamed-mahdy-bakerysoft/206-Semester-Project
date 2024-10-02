@@ -178,6 +178,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     this.chatHistory = context.getChatHistory();
     // testing purposes
     System.out.println("Entire Chat history intalizeed");
+    isChatOpened = false;
   }
 
   public void setTime() {
@@ -713,6 +714,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    isChatOpened = false;
     chatGroup.setVisible(false); // Ensure chat group is visible
     InteragationRoomController.setIsChatOpened(false);
     App.setRoot("room");
