@@ -24,8 +24,16 @@ public class GameStateContext {
   private final Guessing guessingState;
   private final GameOver gameOverState;
   private static GameStateContext instance;
-  private GameState gameState;
+
+  public static GameStateContext getInstance() {
+    if (instance == null) {
+      instance = new GameStateContext();
+    }
+    return instance;
+  }
+
   private Map<String, StringBuilder> chatHistory;
+  private GameState gameState;
 
   /** Constructs a new GameStateContext and initializes the game states and professions. */
   private GameStateContext() {
@@ -46,13 +54,6 @@ public class GameStateContext {
     rectanglesToProfession.put("rectPerson3", "Janitor");
     rectIdToGuess = "rectPerson2";
     professionToGuess = "Art Thief";
-  }
-
-  public static GameStateContext getInstance() {
-    if (instance == null) {
-      instance = new GameStateContext();
-    }
-    return instance;
   }
 
   /**

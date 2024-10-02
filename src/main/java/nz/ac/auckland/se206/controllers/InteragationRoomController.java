@@ -45,10 +45,8 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
  * Added Controller class for the intelroom view. Handles user interactions within the room where
  * the user can chat with customers and guess their profession.
  */
-public class InteragationRoomController {
+public class InteragationRoomController implements RoomNavigationHandler {
   private static boolean clueHasBeenInteractedWith = false;
-  private String profession;
-  private ChatCompletionRequest chatCompletionRequest;
   private static boolean isFirstTimeInit = true;
   private static Map<String, Boolean> suspectHasBeenTalkedToMap = new HashMap<>();
   private static Map<String, String> professionToNameMap = new HashMap<>();
@@ -109,33 +107,41 @@ public class InteragationRoomController {
     return clueHasBeenInteractedWith;
   }
 
-  // Added navbar with buttons
-  @FXML private VBox navBar;
+  public static void resetSuspectsTalkedToMap() {
+    suspectHasBeenTalkedToMap.put("Art Currator", false);
+    suspectHasBeenTalkedToMap.put("Art Thief", false);
+    suspectHasBeenTalkedToMap.put("Janitor", false);
+  }
+
+  @FXML private BorderPane mainPane;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
   @FXML private Button suspect2Button;
   @FXML private Button suspect3Button;
-
-  // @FXML private Button btnGoIntelRoom;
   @FXML private Button btnBack;
-  @FXML private BorderPane mainPane;
-  @FXML private Label mins;
-  @FXML private Label secs;
-  @FXML private Label dot;
-  @FXML private ImageView Currator0;
-  @FXML private ImageView Currator1;
-  @FXML private ImageView Currator2;
-  @FXML private ImageView Thief0;
-  @FXML private ImageView Thief1;
-  @FXML private ImageView Thief2;
-  @FXML private ImageView Janitor0;
-  @FXML private ImageView Janitor1;
-  @FXML private ImageView Janitor2;
-  @FXML private Group chatGroup;
-  @FXML private TextArea txtaChat;
-  @FXML private TextField txtInput;
   @FXML private Button btnSend;
   @FXML private Button btnGoBack;
+  @FXML private Group chatGroup;
+  @FXML private ImageView currator0;
+  @FXML private ImageView currator1;
+  @FXML private ImageView currator2;
+  @FXML private ImageView thief0;
+  @FXML private ImageView thief1;
+  @FXML private ImageView thief2;
+  @FXML private ImageView janitor0;
+  @FXML private ImageView janitor1;
+  @FXML private ImageView janitor2;
+  @FXML private Label mins;
+  @FXML private Label secs;
+
+  @FXML private Label dot;
+
+  @FXML private TextArea txtaChat;
+  @FXML private TextField txtInput;
+  @FXML private VBox navBar;
+
+  @SuppressWarnings("unused")
+  private Map<String, StringBuilder> chatHistory;
 
   private MediaPlayer player;
   private Media sound;
@@ -143,9 +149,8 @@ public class InteragationRoomController {
   private Media thiefHmm;
   private Media janitorHmm;
 
-  @SuppressWarnings("unused")
-  private Map<String, StringBuilder> chatHistory;
-
+  private String profession;
+  private ChatCompletionRequest chatCompletionRequest;
   private boolean navBarVisible = false;
   private int originalWidth = 1100;
   private Random random = new Random();
@@ -158,38 +163,8 @@ public class InteragationRoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    // NavBar Initialization
-    // Initialize with navBar hidden
-    navBar.setTranslateX(+200);
-    navBar.setDisable(true);
-    // btnGoIntelRoom.setOnAction(e -> toggleNavBar());
-    suspect1Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomOne");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    suspect2Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomTwo");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    suspect3Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomThree");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
+    NavBarUtils.setupNavBarAndSuspectButtons(
+        navBar, suspect1Button, suspect2Button, suspect3Button, this);
 
     if (isFirstTimeInit) {
       initializeSuspectTalkedToMap();
@@ -225,6 +200,15 @@ public class InteragationRoomController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {}
+
+  @Override
+  public void goToRoom(String roomName) throws IOException {
+    // Before navigating, reset the window size if navBar is visible
+    Stage stage = (Stage) navBar.getScene().getWindow();
+    stage.setWidth(originalWidth);
+    // Handle room switching logic
+    App.setRoot(roomName);
+  }
 
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
@@ -303,14 +287,6 @@ public class InteragationRoomController {
     // Play both transitions
     translateTransition.play();
     fadeTransition.play();
-  }
-
-  private void goToRoom(String roomName) throws IOException {
-    // Before navigating, reset the window size if navBar is visible
-    Stage stage = (Stage) navBar.getScene().getWindow();
-    stage.setWidth(originalWidth);
-    // Handle room switching logic
-    App.setRoot(roomName);
   }
 
   /**
@@ -522,14 +498,14 @@ public class InteragationRoomController {
     switch (profession) {
       case "Art Currator":
         chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("Currator", randomIndex);
+        setImageVisibility("currator", randomIndex);
         break;
       case "Art Thief":
         chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("Thief", randomIndex);
+        setImageVisibility("thief", randomIndex);
         break;
       case "Janitor":
-        setImageVisibility("Janitor", randomIndex);
+        setImageVisibility("janitor", randomIndex);
         chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
         break;
     }
@@ -676,7 +652,7 @@ public class InteragationRoomController {
    * @throws URISyntaxException
    */
   @FXML
-  private void handleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
+  private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
     chatGroup.setVisible(false);
     if (clueHasBeenInteractedWith
         && InteragationRoomController.getSuspectsHaveBeenTalkedTo()) { // TO DO: &&
@@ -696,7 +672,7 @@ public class InteragationRoomController {
   }
 
   @FXML
-  private void handleBackToCrimeSceneClick(ActionEvent event) throws IOException {
+  private void onHandleBackToCrimeSceneClick(ActionEvent event) throws IOException {
     // Before navigating, reset the window size if navBar is visible
     Stage stage = (Stage) navBar.getScene().getWindow();
     stage.setWidth(originalWidth);
@@ -740,11 +716,5 @@ public class InteragationRoomController {
     chatGroup.setVisible(false); // Ensure chat group is visible
     InteragationRoomController.setIsChatOpened(false);
     App.setRoot("room");
-  }
-
-  public static void resetSuspectsTalkedToMap() {
-    suspectHasBeenTalkedToMap.put("Art Currator", false);
-    suspectHasBeenTalkedToMap.put("Art Thief", false);
-    suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 }

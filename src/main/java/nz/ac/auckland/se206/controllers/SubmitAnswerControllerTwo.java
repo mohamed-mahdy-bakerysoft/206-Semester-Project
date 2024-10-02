@@ -13,9 +13,9 @@ import nz.ac.auckland.se206.App;
 public class SubmitAnswerControllerTwo extends SubmitAnswerController {
 
   // FXML annotations to link with the corresponding ImageView elements in the FXML file
-  @FXML private ImageView JanitorPhoto;
-  @FXML private ImageView HOSPhoto;
-  @FXML private ImageView CuratorPhoto;
+  @FXML private ImageView janitorPhoto;
+  @FXML private ImageView hosPhoto;
+  @FXML private ImageView curatorPhoto;
 
   /**
    * Initializes the controller by calling the parent initialize method and then displaying the
@@ -38,11 +38,11 @@ public class SubmitAnswerControllerTwo extends SubmitAnswerController {
   private void displayChosenSuspect() {
     // Check the value of the thief and set the corresponding ImageView to visible
     if (getThief().equals("janitor")) {
-      JanitorPhoto.setVisible(true);
+      janitorPhoto.setVisible(true);
     } else if (getThief().equals("hos")) {
-      HOSPhoto.setVisible(true);
+      hosPhoto.setVisible(true);
     } else if (getThief().equals("curator")) {
-      CuratorPhoto.setVisible(true);
+      curatorPhoto.setVisible(true);
     }
   }
 

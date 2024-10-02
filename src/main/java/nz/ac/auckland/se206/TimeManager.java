@@ -6,6 +6,7 @@ import java.util.Map;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
@@ -23,15 +24,11 @@ import nz.ac.auckland.se206.states.Guessing;
  */
 public class TimeManager {
   private static TimeManager instance;
+
   private static int interval; // 300 for 5 minutes
   private static MediaPlayer player;
   private static Media sound;
-  private String formattedMinutes;
-  private String formattedSeconds;
-  private Timeline timeline;
-  private Label mins;
-  private Label secs;
-  private Label dot;
+
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -50,6 +47,15 @@ public class TimeManager {
   public MediaPlayer getPlayer() {
     return player;
   }
+
+  @FXML private Label mins;
+  @FXML private Label secs;
+  @FXML private Label dot;
+
+  private String formattedMinutes;
+  private String formattedSeconds;
+  private Timeline timeline;
+
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {

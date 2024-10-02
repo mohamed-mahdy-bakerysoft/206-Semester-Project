@@ -81,17 +81,34 @@ public class SubmitAnswerController {
     isFirstTime = true; // Reset to ensure the timer logic behaves correctly
   }
 
+  /**
+   * Initiates the answer submission process.
+   *
+   * @return a map containing the answer and thief
+   */
+  public static Map<String, String> intiateanswer() {
+    Map<String, String> map = new HashMap<>();
+    map.put("answer", answer); // Put the answer in the map
+    map.put("thief", thief); // Put the selected thief in the map
+    return map;
+  }
+
   @FXML private Button submitButton; // Button to submit the answer
-  @FXML private TextArea answerTxtArea; // Text area for player's answer
+  @FXML private Label mins; // Label to display minutes
+  @FXML private Label secs; // Label to display seconds
+  @FXML private ProgressBar progressBar; // Progress bar for task progress
   @FXML private Rectangle janitor; // Rectangle representing the janitor suspect
   @FXML private Rectangle hos; // Rectangle representing the head of security suspect
   @FXML private Rectangle curator; // Rectangle representing the curator suspect
   @FXML private TextArea feedback; // Text area for feedback
   @FXML private TextArea feedback2; // Another text area for feedback
-  @FXML private Label mins; // Label to display minutes
-  @FXML private Label secs; // Label to display seconds
+
+
   @FXML private Label dot;
-  @FXML private ProgressBar progressBar; // Progress bar for task progress
+
+
+  @FXML private TextArea answerTxtArea; // Text area for player's answer
+
 
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
 
@@ -157,18 +174,6 @@ public class SubmitAnswerController {
         .progressProperty()
         .bind(task.progressProperty()); // Bind progress bar to task progress
     new Thread(task).start(); // Run the task in a background thread
-  }
-
-  /**
-   * Initiates the answer submission process.
-   *
-   * @return a map containing the answer and thief
-   */
-  public static Map<String, String> intiateanswer() {
-    Map<String, String> map = new HashMap<>();
-    map.put("answer", answer); // Put the answer in the map
-    map.put("thief", thief); // Put the selected thief in the map
-    return map;
   }
 
   /** Saves the current answer entered in the text area. */

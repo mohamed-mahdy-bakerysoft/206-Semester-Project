@@ -47,10 +47,10 @@
                </graphic>
             </Button>
             <Button fx:id="corridorButton" text="The Corridor" />
-            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBackToCrimeSceneClick" prefHeight="44.0" prefWidth="200.0" text="Back to Crime Scene" />
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#onHandleBackToCrimeSceneClick" prefHeight="44.0" prefWidth="200.0" text="Back to Crime Scene" />
          </children>
       </VBox>
-      <Button fx:id="btnGuess" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
+      <Button fx:id="btnGuess" layoutX="392.0" layoutY="9.0" mnemonicParsing="false" onAction="#onHandleGuessClick" prefHeight="44.0" prefWidth="140.0" text="Make a Guess">
          <font>
             <Font size="18.0" />
          </font>

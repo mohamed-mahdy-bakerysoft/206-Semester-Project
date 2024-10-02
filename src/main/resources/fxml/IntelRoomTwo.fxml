@@ -84,17 +84,17 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="Janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/janitor.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Janitor1" fitHeight="605.0" fitWidth="598.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" visible="false">
+      <ImageView fx:id="janitor1" fitHeight="605.0" fitWidth="598.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../images/jan2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Janitor2" fitHeight="597.0" fitWidth="598.0" layoutX="220.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="janitor2" fitHeight="597.0" fitWidth="598.0" layoutX="220.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/jan3.png" />
          </image>

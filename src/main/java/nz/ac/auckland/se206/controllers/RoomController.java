@@ -27,7 +27,7 @@ import nz.ac.auckland.se206.states.Guessing;
  * Controller class for the room view. Handles user interactions within the room where the user can
  * chat with customers and guess their profession.
  */
-public class RoomController {
+public class RoomController implements RoomNavigationHandler {
 
   private static boolean isFirstTimeInit = true;
   private static GameStateContext context = GameStateContext.getInstance();
@@ -70,21 +70,12 @@ public class RoomController {
     clueHasBeenInteractedWith = false;
   }
 
-  // Added navbar with buttons
-  @FXML private VBox navBar;
+  @FXML private BorderPane mainPane;
+  @FXML private Button btnGuess;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
   @FXML private Button suspect2Button;
   @FXML private Button suspect3Button;
-
-  @FXML private Rectangle rectSecurityCamera;
-  @FXML private Rectangle rectPerson1;
-  @FXML private Rectangle rectPerson2;
-  @FXML private Rectangle rectPerson3;
-  @FXML private Rectangle rectOfficer;
-  // @FXML private Button btnGoIntelRoom;
-  @FXML private Button btnGuess;
-  @FXML private BorderPane mainPane;
   @FXML private Label mins;
   @FXML private Label secs;
   @FXML private Label dot;
@@ -92,6 +83,12 @@ public class RoomController {
   @FXML private ImageView mainRightArrow;
   @FXML private ImageView arrowLeft;
   @FXML private ImageView arrowRight;
+  @FXML private Rectangle rectSecurityCamera;
+  @FXML private Rectangle rectPerson1;
+  @FXML private Rectangle rectPerson2;
+  @FXML private Rectangle rectPerson3;
+  @FXML private Rectangle rectOfficer;
+  @FXML private VBox navBar;
 
   private MediaPlayer player;
   private Media sound;
@@ -107,39 +104,8 @@ public class RoomController {
   @FXML
   public void initialize() throws URISyntaxException {
     TimeManager timeManager = TimeManager.getInstance();
-    // NavBar Initialization
-    // Initialize with navBar hidden
-    navBar.setTranslateX(+200);
-    navBar.setDisable(true);
-    suspect1Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-
-            goToRoom("IntelRoomOne");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    suspect2Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomTwo");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-    suspect3Button.setOnAction(
-        e -> {
-          try {
-            InteragationRoomController.setIsChatOpened(false);
-            goToRoom("IntelRoomThree");
-          } catch (IOException e1) {
-            e1.printStackTrace();
-          }
-        });
-
+    NavBarUtils.setupNavBarAndSuspectButtons(
+        navBar, suspect1Button, suspect2Button, suspect3Button, this);
     if (isFirstTimeInit) {
       System.out.println("First time");
       isFirstTimeInit = false;
@@ -201,7 +167,8 @@ public class RoomController {
     player.play();
   }
 
-  private void goToRoom(String roomName) throws IOException {
+  @Override
+  public void goToRoom(String roomName) throws IOException {
     // Before navigating, reset the window size if navBar is visible
     Stage stage = (Stage) navBar.getScene().getWindow();
     stage.setWidth(originalWidth);

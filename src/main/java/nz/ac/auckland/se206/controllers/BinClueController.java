@@ -26,20 +26,20 @@ public class BinClueController extends ClueController {
   @FXML private Label secs;
 
   /** ImageView elements representing the draggable rubbish objects and keycard in the bin. */
-  @FXML private ImageView Rubbish1;
+  @FXML private ImageView rubbish1;
 
-  @FXML private ImageView Rubbish2;
-  @FXML private ImageView Rubbish3;
-  @FXML private ImageView Rubbish4;
-  @FXML private ImageView Rubbish5;
-  @FXML private ImageView Keycard;
-  @FXML private ImageView Keycard2;
+  @FXML private ImageView rubbish2;
+  @FXML private ImageView rubbish3;
+  @FXML private ImageView rubbish4;
+  @FXML private ImageView rubbish5;
+  @FXML private ImageView keyCard;
+  @FXML private ImageView keyCard2;
 
   /** Rectangle element used to highlight the backdrop when the keycard is found. */
   @FXML private Rectangle rectBackDrop;
 
   /** Instance of DraggableMaker to enable dragging behavior for the rubbish objects. */
-  DraggableMaker draggableMaker = new DraggableMaker();
+  private DraggableMaker draggableMaker = new DraggableMaker();
 
   /**
    * Initializes the bin clue scene by making the rubbish objects draggable. This method is called
@@ -53,19 +53,19 @@ public class BinClueController extends ClueController {
     super.initialize();
 
     // Make the first rubbish object draggable
-    draggableMaker.makeDraggable(Rubbish1);
+    draggableMaker.makeDraggable(rubbish1);
 
     // Make the second rubbish object draggable
-    draggableMaker.makeDraggable(Rubbish2);
+    draggableMaker.makeDraggable(rubbish2);
 
     // Make the third rubbish object draggable
-    draggableMaker.makeDraggable(Rubbish3);
+    draggableMaker.makeDraggable(rubbish3);
 
     // Make the fourth rubbish object draggable
-    draggableMaker.makeDraggable(Rubbish4);
+    draggableMaker.makeDraggable(rubbish4);
 
     // Make the fifth rubbish object draggable
-    draggableMaker.makeDraggable(Rubbish5);
+    draggableMaker.makeDraggable(rubbish5);
   }
 
   /**
@@ -76,7 +76,7 @@ public class BinClueController extends ClueController {
    */
   public void handleKeyCard(MouseEvent event) throws IOException {
     rectBackDrop.setVisible(true);
-    Keycard2.setVisible(true);
+    keyCard2.setVisible(true);
   }
 
   /**
@@ -87,6 +87,6 @@ public class BinClueController extends ClueController {
    */
   public void handleClickBack(MouseEvent event) throws IOException {
     rectBackDrop.setVisible(false);
-    Keycard2.setVisible(false);
+    keyCard2.setVisible(false);
   }
 }
