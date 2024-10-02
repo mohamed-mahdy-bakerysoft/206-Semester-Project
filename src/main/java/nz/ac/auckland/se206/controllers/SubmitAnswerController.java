@@ -102,7 +102,13 @@ public class SubmitAnswerController {
   @FXML private Rectangle curator; // Rectangle representing the curator suspect
   @FXML private TextArea feedback; // Text area for feedback
   @FXML private TextArea feedback2; // Another text area for feedback
+
+
+  @FXML private Label dot;
+
+
   @FXML private TextArea answerTxtArea; // Text area for player's answer
+
 
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
 
@@ -117,7 +123,7 @@ public class SubmitAnswerController {
       timeManager.setInterval(60); // Set the timer interval to 60 seconds
     }
     timeManager.startTimer(); // Start the timer
-    timeManager.setTimerLabel(mins, secs); // Set the timer labels
+    timeManager.setTimerLabel(mins, secs, dot); // Set the timer labels
   }
 
   /**
@@ -125,6 +131,7 @@ public class SubmitAnswerController {
    * updates and invokes GPT model interactions.
    */
   public void sendAnswer() {
+    TimeManager.getInstance().getPlayer().stop();
     submitButton.setDisable(true); // Disable the submit button to prevent multiple submissions
     timeManager.stopTimer(); // Stop the timer
     if (answerTxtArea.getText().isEmpty()) {
