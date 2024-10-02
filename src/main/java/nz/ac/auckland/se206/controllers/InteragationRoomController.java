@@ -2,7 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javafx.animation.FadeTransition;
@@ -50,10 +52,7 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
-import nz.ac.auckland.se206.bluebub.Bubble;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-
-// improt key event
 
 /**
  * Added Controller class for the intelroom view. Handles user interactions within the room where
@@ -152,8 +151,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private VBox navBar;
   @FXML private VBox chatContainer;
 
-  @SuppressWarnings("unused")
-  private Map<String, StringBuilder> chatHistory;
+  private Map<String, List<ChatMessage>> chatHistory;
 
   private MediaPlayer player;
   private Media sound;
@@ -162,7 +160,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private Media janitorHmm;
 
   private String profession;
-  private Bubble currentBubble;
   private ChatCompletionRequest chatCompletionRequest;
   private boolean navBarVisible = false;
   private int originalWidth = 1100;
@@ -228,26 +225,26 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
     // Disable the send button when the profession is being set
     btnSend.setDisable(true);
+
+    // Clear the chat container to avoid mixing messages from different suspects
+    chatContainer.getChildren().clear();
+
+    // Get conversation history for the suspect
+    String promptFile = getPromptFileForProfession(profession);
+    List<ChatMessage> conversationHistory = context.getChatHistory().get(promptFile);
+
     // Only display the initial message if no previous conversation exists
-    if (!suspectHasBeenTalkedToMap.get(profession)) {
-      appendChatMessage(new ChatMessage("user", getInitialMessageForProfession(profession)));
-    }
+    if (conversationHistory == null || conversationHistory.isEmpty()) {
+      ChatMessage initialMessage =
+          new ChatMessage("user", getInitialMessageForProfession(profession));
+      appendChatMessage(initialMessage);
 
-    try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-      chatCompletionRequest =
-          new ChatCompletionRequest(config)
-              .setN(1)
-              .setTemperature(0.8)
-              .setTopP(0.7)
-              .setMaxTokens(80);
-
-      // Run GPT request in a background thread
+      // Send the initial message to the AI
       Task<ChatMessage> task =
           new Task<>() {
             @Override
             protected ChatMessage call() throws ApiProxyException {
-              return runGpt(new ChatMessage("system", getSystemPrompt()));
+              return runGpt(initialMessage);
             }
           };
 
@@ -255,23 +252,20 @@ public class InteragationRoomController implements RoomNavigationHandler {
           event -> {
             ChatMessage resultMessage = task.getValue();
             appendChatMessage(resultMessage);
-            // Enable the send button after the response is processed
             btnSend.setDisable(false);
-            if (!suspectHasBeenTalkedToMap.get(profession)) {
-              suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
-            }
+            suspectHasBeenTalkedToMap.put(profession, true);
           });
 
       task.setOnFailed(
           event -> {
-            // Enable the send button after the response is processed
             btnSend.setDisable(false);
             task.getException().printStackTrace();
           });
 
       new Thread(task).start();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
+    } else {
+      // Enable the send button immediately if conversation exists
+      btnSend.setDisable(false);
     }
   }
 
@@ -306,37 +300,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @return the system prompt string
    */
   private String getSystemPrompt() {
-    // Retrieve the chat history from the game context
-    Map<String, StringBuilder> chatHistory = context.getChatHistory();
-    // Create a map to store the profession and chat history
     Map<String, String> map = new HashMap<>();
-    String promptFile = null;
-
-    // Determine the prompt file based on the profession
-    switch (profession) {
-      case "Art Currator":
-        promptFile = "suspect1.txt";
-        break;
-      case "Art Thief":
-        promptFile = "thief.txt";
-        break;
-      case "Janitor":
-        promptFile = "suspect2.txt";
-        break;
-    }
-
-    // Populate the map with the profession and chat history
     map.put("profession", profession);
-    map.put("chathistory", chatHistory.get(promptFile).toString());
-
-    // For testing purposes, print the chat history and entire chat history
-    System.out.println("Chat history: ");
-    System.out.println(chatHistory.get(promptFile).toString());
-    System.out.println("Entire Chat history: ");
-    System.out.println(chatHistory);
-
-    // Generate and return the prompt using the PromptEngineering class
-    return PromptEngineering.getPrompt(promptFile, map);
+    return PromptEngineering.getPrompt(getPromptFileForProfession(profession), map);
   }
 
   /**
@@ -347,12 +313,35 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    chatCompletionRequest.addMessage(msg);
-    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+    String promptFile = getPromptFileForProfession(profession);
+    Map<String, List<ChatMessage>> chatHistory = context.getChatHistory();
+    List<ChatMessage> conversationHistory = chatHistory.get(promptFile);
 
+    // Create a new ChatCompletionRequest
+    ApiProxyConfig config = ApiProxyConfig.readConfig();
+    ChatCompletionRequest chatCompletionRequest =
+        new ChatCompletionRequest(config).setN(1).setTemperature(0.8).setTopP(0.7).setMaxTokens(80);
+
+    // Start with the system prompt
+    chatCompletionRequest.addMessage(new ChatMessage("system", getSystemPrompt()));
+
+    // Add all previous messages in the conversation
+    for (ChatMessage previousMsg : conversationHistory) {
+      chatCompletionRequest.addMessage(previousMsg);
+    }
+
+    // Add the new user message
+    chatCompletionRequest.addMessage(msg);
+
+    // Execute the request
+    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
     Choice result = chatCompletionResult.getChoices().iterator().next();
-    chatCompletionRequest.addMessage(result.getChatMessage());
-    return result.getChatMessage();
+    ChatMessage aiResponse = result.getChatMessage();
+
+    // Add the assistant's reply to the conversation history
+    conversationHistory.add(aiResponse);
+
+    return aiResponse;
   }
 
   /**
@@ -430,35 +419,36 @@ public class InteragationRoomController implements RoomNavigationHandler {
       return;
     }
 
-    // Add the user's chat bubble to the VBox
-    addChatBubble("user", message);
+    // Create a ChatMessage for the user's input
+    ChatMessage userMessage = new ChatMessage("user", message);
+
+    // Append user's message to the conversation history and UI
+    appendChatMessage(userMessage);
+
+    // Clear the input field
+    txtInput.clear();
 
     // Disable send button while processing the message
     btnSend.setDisable(true);
 
+    // Run GPT in a background task
     Task<ChatMessage> task =
         new Task<>() {
           @Override
           protected ChatMessage call() throws ApiProxyException {
-            // Send the user's message to the GPT model
-            return runGpt(new ChatMessage("user", message));
+            return runGpt(userMessage);
           }
         };
 
     task.setOnSucceeded(
         event -> {
           ChatMessage resultMessage = task.getValue();
-
-          // Add the response as a chat bubble
-          addChatBubble(resultMessage.getRole(), resultMessage.getContent());
-
-          // Re-enable send button
+          appendChatMessage(resultMessage);
           btnSend.setDisable(false);
         });
 
     task.setOnFailed(
         event -> {
-          // Re-enable send button in case of failure
           btnSend.setDisable(false);
           task.getException().printStackTrace();
         });
@@ -500,32 +490,42 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void appendChatMessage(ChatMessage msg) {
-    // Assuming chatHistory and other required data are already initialized
-    Map<String, StringBuilder> chatHistory = context.getChatHistory();
-    int randomIndex = random.nextInt(3); // Generates 0, 1, or 2
+    Map<String, List<ChatMessage>> chatHistory = context.getChatHistory();
 
     if (!msg.getRole().equals("user")) {
       playHmmSound(profession);
     }
 
-    // Add to chat history based on the profession and message role
-    switch (profession) {
-      case "Art Currator":
-        chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("currator", randomIndex);
-        break;
-      case "Art Thief":
-        chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("thief", randomIndex);
-        break;
-      case "Janitor":
-        setImageVisibility("janitor", randomIndex);
-        chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        break;
+    String promptFile = getPromptFileForProfession(profession);
+
+    // Get the conversation history for the current suspect
+    List<ChatMessage> conversationHistory = chatHistory.get(promptFile);
+    if (conversationHistory == null) {
+      conversationHistory = new ArrayList<>();
+      chatHistory.put(promptFile, conversationHistory);
     }
 
-    // Append the chat bubble instead of text
+    // Add the new message to the conversation history
+    conversationHistory.add(msg);
+
+    // Update the suspect's image based on the message
+    setImageVisibility(profession.toLowerCase().replace(" ", ""), random.nextInt(3));
+
+    // Append the chat bubble to the UI
     addChatBubble(msg.getRole(), msg.getContent());
+  }
+
+  private String getPromptFileForProfession(String profession) {
+    switch (profession) {
+      case "Art Currator":
+        return "suspect1.txt";
+      case "Art Thief":
+        return "thief.txt";
+      case "Janitor":
+        return "suspect2.txt";
+      default:
+        return "unknown.txt";
+    }
   }
 
   // Add this method to append a chat bubble for each message

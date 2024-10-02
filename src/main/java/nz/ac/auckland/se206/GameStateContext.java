@@ -2,9 +2,12 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
@@ -32,7 +35,7 @@ public class GameStateContext {
     return instance;
   }
 
-  private Map<String, StringBuilder> chatHistory;
+  private Map<String, List<ChatMessage>> chatHistory;
   private GameState gameState;
 
   /** Constructs a new GameStateContext and initializes the game states and professions. */
@@ -44,9 +47,9 @@ public class GameStateContext {
     gameState = gameStartedState; // Initial state
 
     chatHistory = new HashMap<>();
-    chatHistory.put("suspect1.txt", new StringBuilder());
-    chatHistory.put("suspect2.txt", new StringBuilder());
-    chatHistory.put("thief.txt", new StringBuilder());
+    chatHistory.put("suspect1.txt", new ArrayList<>());
+    chatHistory.put("thief.txt", new ArrayList<>());
+    chatHistory.put("suspect2.txt", new ArrayList<>());
 
     rectanglesToProfession = new HashMap<>();
     rectanglesToProfession.put("rectPerson1", "Art Currator");
@@ -61,7 +64,7 @@ public class GameStateContext {
    *
    * @param chatHistory the current chat history
    */
-  public Map<String, StringBuilder> getChatHistory() {
+  public Map<String, List<ChatMessage>> getChatHistory() {
     return chatHistory;
   }
 
@@ -162,9 +165,9 @@ public class GameStateContext {
     this.gameState = this.gameStartedState;
 
     // Clear the chat history for the suspects
-    chatHistory.get("suspect1.txt").setLength(0);
-    chatHistory.get("suspect2.txt").setLength(0);
-    chatHistory.get("thief.txt").setLength(0);
+    chatHistory.get("suspect1.txt").clear();
+    chatHistory.get("suspect2.txt").clear();
+    chatHistory.get("thief.txt").clear();
 
     // Reset clue interaction
     RoomController.setClueHasBeenInteractedWith(false);
