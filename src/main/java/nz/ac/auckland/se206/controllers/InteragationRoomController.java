@@ -218,6 +218,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   @Override
   public void goToRoom(String roomName) throws IOException {
+    isChatOpened = false;
+    chatGroup.setVisible(false);
     // Before navigating, reset the window size if navBar is visible
     Stage stage = (Stage) navBar.getScene().getWindow();
     stage.setWidth(originalWidth);
@@ -227,7 +229,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
-    System.out.println("***************************Profession: " + profession);
+
     // Disable the send button when the profession is being set
     btnSend.setDisable(true);
 
@@ -242,7 +244,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
       // Initialize the conversation history if it doesn't exist
       conversationHistory = new ArrayList<>();
       context.getChatHistory().put(promptFile, conversationHistory);
-
     }
 
     if (conversationHistory.isEmpty()) {
@@ -252,11 +253,12 @@ public class InteragationRoomController implements RoomNavigationHandler {
       appendChatMessage(initialMessage);
 
       // Send the initial message to the AI
-      sendMessageToAI(initialMessage, conversationHistory);
+      sendMessageToAI(initialMessage, conversationHistory, true);
     } else {
       // Revisiting the suspect
       // Create a special system message to prompt the AI to initiate the conversation
       ChatMessage systemMessage = new ChatMessage("system", getSystemPromptForRevisit());
+
       // Run GPT in a background task
       Task<ChatMessage> task =
           new Task<>() {
@@ -269,9 +271,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
       task.setOnSucceeded(
           event -> {
             ChatMessage resultMessage = task.getValue();
-            // print out the result meesage
-            System.out.println(
-                "***************************Result Message: " + resultMessage.getContent());
             appendChatMessage(resultMessage);
             btnSend.setDisable(false);
           });
@@ -300,7 +299,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
     initializeRoleToNameMap();
   }
 
-  private void sendMessageToAI(ChatMessage userMessage, List<ChatMessage> conversationHistory) {
+  private void sendMessageToAI(
+      ChatMessage userMessage, List<ChatMessage> conversationHistory, boolean isFirstInteraction) {
     // Add the user's message to the conversation history
     conversationHistory.add(userMessage);
 
@@ -318,6 +318,12 @@ public class InteragationRoomController implements RoomNavigationHandler {
           ChatMessage resultMessage = task.getValue();
           appendChatMessage(resultMessage);
           btnSend.setDisable(false);
+
+          if (isFirstInteraction) {
+            // Mark the suspect as talked to
+            suspectHasBeenTalkedToMap.put(profession, true);
+            System.out.println("Set " + profession + " as talked to.");
+          }
         });
 
     task.setOnFailed(
@@ -489,6 +495,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+
     // System.out.println("**********************Game State:" + context.getCurrentState());
     // System.out.println("**********************Current Chat history:" + context.getChatHistory());
     sendMessage();
@@ -536,29 +543,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Disable send button while processing the message
     btnSend.setDisable(true);
 
-    // Run GPT in a background task
-    Task<ChatMessage> task =
-        new Task<>() {
-          @Override
-          protected ChatMessage call() throws ApiProxyException {
-            return runGpt(userMessage, conversationHistory);
-          }
-        };
-
-    task.setOnSucceeded(
-        event -> {
-          ChatMessage resultMessage = task.getValue();
-          appendChatMessage(resultMessage);
-          btnSend.setDisable(false);
-        });
-
-    task.setOnFailed(
-        event -> {
-          btnSend.setDisable(false);
-          task.getException().printStackTrace();
-        });
-
-    new Thread(task).start();
+    // Send the message to the AI
+    sendMessageToAI(userMessage, conversationHistory, false);
   }
 
   // Method to play "hmm" sound based on profession
