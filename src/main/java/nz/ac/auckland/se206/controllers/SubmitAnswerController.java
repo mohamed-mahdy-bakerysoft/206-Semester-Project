@@ -31,8 +31,8 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 public class SubmitAnswerController {
 
   private static String feed; // Feedback from GPT response
-  private static String thief; // Selected thief by the player
-  private static String answer; // Player's answer
+  protected static String thief; // Selected thief by the player
+  protected static String answer; // Player's answer
   private static boolean isFirstTime = true; // Flag to check if it's the player's first interaction
   public static TimeManager timeManager =
       TimeManager.getInstance(); // Singleton instance of TimeManager

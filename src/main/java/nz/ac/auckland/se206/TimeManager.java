@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import nz.ac.auckland.se206.controllers.EndingController;
 import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SubmitAnswerController;
@@ -28,7 +29,6 @@ public class TimeManager {
   private static int interval; // 300 for 5 minutes
   private static MediaPlayer player;
   private static Media sound;
-
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -55,7 +55,6 @@ public class TimeManager {
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
-
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {
@@ -150,6 +149,9 @@ public class TimeManager {
         context.setState(context.getGuessingState());
         System.out.println("Now in guessing state");
         App.setRoot("whosThief");
+        sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
         setInterval(60);
         return;
       }
@@ -173,6 +175,7 @@ public class TimeManager {
           String thief = SubmitAnswerController.getThief();
           // Check if thief is null
           if (thief == null) {
+            EndingController.setFeed("You did not pick a thief in time.");
             App.setRoot("badending");
             TimeManager.getInstance().stopTimer();
             return;

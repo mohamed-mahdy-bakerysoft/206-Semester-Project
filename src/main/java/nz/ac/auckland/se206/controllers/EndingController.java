@@ -59,6 +59,11 @@ public class EndingController {
    */
   public void initialize() throws URISyntaxException {
     // Check if feedback is null
+    if (thief == null && feed != null) {
+      System.out.println("thief is null");
+      feedback2.setText(feed);
+      return;
+    }
     if (feed == null) {
       // Check if thief is null
       if (thief == null) {
