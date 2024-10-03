@@ -2,7 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javafx.animation.FadeTransition;
@@ -11,21 +13,33 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
@@ -38,8 +52,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
-
-// improt key event
 
 /**
  * Added Controller class for the intelroom view. Handles user interactions within the room where
@@ -135,14 +147,15 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private Label mins;
   @FXML private Label secs;
 
+  @FXML private ScrollPane chatScrollPane;
   @FXML private Label dot;
 
-  @FXML private TextArea txtaChat;
   @FXML private TextField txtInput;
   @FXML private VBox navBar;
+  @FXML private VBox chatContainer;
 
-  @SuppressWarnings("unused")
-  private Map<String, StringBuilder> chatHistory;
+  private Map<String, List<ChatMessage>> chatHistory;
+  private List<ChatMessage> conversationHistory;
 
   private MediaPlayer player;
   private Media sound;
@@ -205,6 +218,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   @Override
   public void goToRoom(String roomName) throws IOException {
+    isChatOpened = false;
+    chatGroup.setVisible(false);
     // Before navigating, reset the window size if navBar is visible
     Stage stage = (Stage) navBar.getScene().getWindow();
     stage.setWidth(originalWidth);
@@ -214,59 +229,110 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
-    System.out.println("***************************Profession: " + profession);
+
     // Disable the send button when the profession is being set
     btnSend.setDisable(true);
-    // Only display the initial message if no previous conversation exists
-    if (!suspectHasBeenTalkedToMap.get(profession)) {
-      appendChatMessage(new ChatMessage("user", getInitialMessageForProfession(profession)));
-      // System.out.println(
-      //     "****************************appending user meesage*********************************");
+
+    // Clear the chat container to avoid mixing messages from different suspects
+    chatContainer.getChildren().clear();
+
+    // Get conversation history for the suspect
+    String promptFile = getPromptFileForProfession(profession);
+    conversationHistory = context.getChatHistory().get(promptFile);
+
+    if (conversationHistory == null) {
+      // Initialize the conversation history if it doesn't exist
+      conversationHistory = new ArrayList<>();
+      context.getChatHistory().put(promptFile, conversationHistory);
     }
 
-    try {
-      ApiProxyConfig config = ApiProxyConfig.readConfig();
-      chatCompletionRequest =
-          new ChatCompletionRequest(config)
-              .setN(1)
-              .setTemperature(0.8)
-              .setTopP(0.7)
-              .setMaxTokens(80);
+    if (conversationHistory.isEmpty()) {
+      // First time talking to the suspect
+      ChatMessage initialMessage =
+          new ChatMessage("user", getInitialMessageForProfession(profession));
+      appendChatMessage(initialMessage);
 
-      // Run GPT request in a background thread
+      // Send the initial message to the AI
+      sendMessageToAI(initialMessage, conversationHistory, true);
+    } else {
+      // Revisiting the suspect
+      // Create a special system message to prompt the AI to initiate the conversation
+      ChatMessage systemMessage = new ChatMessage("system", getSystemPromptForRevisit());
+
+      // Run GPT in a background task
       Task<ChatMessage> task =
           new Task<>() {
             @Override
             protected ChatMessage call() throws ApiProxyException {
-              return runGpt(new ChatMessage("system", getSystemPrompt()));
+              return runGptForRevisit(systemMessage, conversationHistory);
             }
           };
 
       task.setOnSucceeded(
           event -> {
             ChatMessage resultMessage = task.getValue();
-            // print out the result meesage
-            System.out.println(
-                "***************************Result Message: " + resultMessage.getContent());
             appendChatMessage(resultMessage);
-            // Enable the send button after the response is processed
             btnSend.setDisable(false);
-            if (!suspectHasBeenTalkedToMap.get(profession)) {
-              suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
-            }
           });
 
       task.setOnFailed(
           event -> {
-            // Enable the send button after the response is processed
             btnSend.setDisable(false);
             task.getException().printStackTrace();
           });
 
       new Thread(task).start();
-    } catch (ApiProxyException e) {
-      e.printStackTrace();
     }
+  }
+
+  public static void resetStaticVariables() {
+    clueHasBeenInteractedWith = false;
+    isFirstTimeInit = true;
+    isChatOpened = false;
+
+    // Reset suspectHasBeenTalkedToMap
+    suspectHasBeenTalkedToMap.clear();
+    initializeSuspectTalkedToMap();
+
+    // Reset professionToNameMap if necessary
+    professionToNameMap.clear();
+    initializeRoleToNameMap();
+  }
+
+  private void sendMessageToAI(
+      ChatMessage userMessage, List<ChatMessage> conversationHistory, boolean isFirstInteraction) {
+    // Add the user's message to the conversation history
+    conversationHistory.add(userMessage);
+
+    // Run GPT in a background task
+    Task<ChatMessage> task =
+        new Task<>() {
+          @Override
+          protected ChatMessage call() throws ApiProxyException {
+            return runGpt(userMessage, conversationHistory);
+          }
+        };
+
+    task.setOnSucceeded(
+        event -> {
+          ChatMessage resultMessage = task.getValue();
+          appendChatMessage(resultMessage);
+          btnSend.setDisable(false);
+
+          if (isFirstInteraction) {
+            // Mark the suspect as talked to
+            suspectHasBeenTalkedToMap.put(profession, true);
+            System.out.println("Set " + profession + " as talked to.");
+          }
+        });
+
+    task.setOnFailed(
+        event -> {
+          btnSend.setDisable(false);
+          task.getException().printStackTrace();
+        });
+
+    new Thread(task).start();
   }
 
   // NavBar Methods
@@ -300,39 +366,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @return the system prompt string
    */
   private String getSystemPrompt() {
-    // Retrieve the chat history from the game context
-    Map<String, StringBuilder> chatHistory = context.getChatHistory();
-    // Create a map to store the profession and chat history
     Map<String, String> map = new HashMap<>();
-    String promptFile = null;
-
-    // Determine the prompt file based on the profession
-    switch (profession) {
-      case "Art Currator":
-        promptFile = "suspect1.txt";
-        break;
-      case "Art Thief":
-        promptFile = "thief.txt";
-        break;
-      case "Janitor":
-        promptFile = "suspect2.txt";
-        break;
-    }
-
-    // Populate the map with the profession and chat history
     map.put("profession", profession);
-    // System.out.println(
-    //     "chatHistory.get(promptFile).toString(): " + chatHistory.get(promptFile).toString());
-    map.put("chathistory", chatHistory.get(promptFile).toString());
-
-    // For testing purposes, print the chat history and entire chat history
-    // System.out.println("Chat history: ");
-    // System.out.println(chatHistory.get(promptFile).toString());
-    // System.out.println("Entire Chat history: ");
-    // System.out.println(chatHistory);
-
-    // Generate and return the prompt using the PromptEngineering class
-    return PromptEngineering.getPrompt(promptFile, map);
+    return PromptEngineering.getPrompt(getPromptFileForProfession(profession), map);
   }
 
   /**
@@ -342,13 +378,66 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    chatCompletionRequest.addMessage(msg);
-    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+  private ChatMessage runGpt(ChatMessage userMessage, List<ChatMessage> conversationHistory)
+      throws ApiProxyException {
+    // Create a new ChatCompletionRequest
+    ApiProxyConfig config = ApiProxyConfig.readConfig();
+    ChatCompletionRequest chatCompletionRequest =
+        new ChatCompletionRequest(config).setN(1).setTemperature(0.8).setTopP(0.7).setMaxTokens(80);
 
+    // Start with the system prompt
+    chatCompletionRequest.addMessage(new ChatMessage("system", getSystemPrompt()));
+
+    // Add all previous messages in the conversation
+    for (ChatMessage previousMsg : conversationHistory) {
+      chatCompletionRequest.addMessage(previousMsg);
+    }
+
+    // Add the new user message
+    chatCompletionRequest.addMessage(userMessage);
+
+    // Execute the request
+    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
     Choice result = chatCompletionResult.getChoices().iterator().next();
-    chatCompletionRequest.addMessage(result.getChatMessage());
-    return result.getChatMessage();
+    ChatMessage aiResponse = result.getChatMessage();
+
+    // Add the assistant's reply to the conversation history
+    conversationHistory.add(aiResponse);
+
+    return aiResponse;
+  }
+
+  private String getSystemPromptForRevisit() {
+    Map<String, String> map = new HashMap<>();
+    map.put("profession", profession);
+    map.put("conversation_state", "revisit");
+    return PromptEngineering.getPrompt(getPromptFileForProfession(profession), map);
+  }
+
+  private ChatMessage runGptForRevisit(
+      ChatMessage systemMessage, List<ChatMessage> conversationHistory) throws ApiProxyException {
+    // Create a new ChatCompletionRequest
+    ApiProxyConfig config = ApiProxyConfig.readConfig();
+    ChatCompletionRequest chatCompletionRequest =
+        new ChatCompletionRequest(config).setN(1).setTemperature(0.8).setTopP(0.7).setMaxTokens(80);
+
+    // Start with the system prompt
+    chatCompletionRequest.addMessage(systemMessage);
+
+    // Add all previous messages in the conversation
+    for (ChatMessage previousMsg : conversationHistory) {
+      chatCompletionRequest.addMessage(previousMsg);
+    }
+
+    // Execute the request
+    ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+    Choice result = chatCompletionResult.getChoices().iterator().next();
+    ChatMessage aiResponse = result.getChatMessage();
+
+    // Add the assistant's reply to the conversation history
+    conversationHistory.add(aiResponse);
+
+    return aiResponse;
   }
 
   /**
@@ -377,11 +466,24 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
-  private void initializeRoleToNameMap() {
+  private String getSuspectTypeForProfession(String profession) {
+    switch (profession) {
+      case "Art Currator":
+        return "currator";
+      case "Art Thief":
+        return "thief";
+      case "Janitor":
+        return "janitor";
+      default:
+        return "";
+    }
+  }
+
+  private static void initializeRoleToNameMap() {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
     professionToNameMap.put("Janitor", "John");
-    professionToNameMap.put("user", "Investigator");
+    professionToNameMap.put("user", "You");
   }
 
   /**
@@ -393,6 +495,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+
     // System.out.println("**********************Game State:" + context.getCurrentState());
     // System.out.println("**********************Current Chat history:" + context.getChatHistory());
     sendMessage();
@@ -422,41 +525,26 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws IOException if there is an I/O error
    */
   private void sendMessage() throws ApiProxyException, IOException {
-    String message = txtInput.getText().trim();
+    String message = txtInput.getText().trim(); // Get the user's message
+
     if (message.isEmpty()) {
       return;
     }
+
+    // Create a ChatMessage for the user's input
+    ChatMessage userMessage = new ChatMessage("user", message);
+
+    // Append user's message to the conversation history and UI
+    appendChatMessage(userMessage);
+
+    // Clear the input field
     txtInput.clear();
-    ChatMessage msg = new ChatMessage("user", message);
-    appendChatMessage(msg);
-    btnSend.setDisable(true); // Disable the send button while processing the message
-    // Run user message in a background thread
-    Task<ChatMessage> task =
-        new Task<>() {
-          @Override
-          protected ChatMessage call() throws ApiProxyException {
-            return runGpt(msg);
-          }
-        };
 
-    task.setOnSucceeded(
-        event1 -> {
-          ChatMessage resultMessage = task.getValue();
-          appendChatMessage(resultMessage);
-          btnSend.setDisable(false); // Re-enable the send button
-          // Check if TTS should be used
-          if (!suspectHasBeenTalkedToMap.get(profession)) {
-            suspectHasBeenTalkedToMap.put(profession, true); // Mark TTS as used for this suspect
-          }
-        });
+    // Disable send button while processing the message
+    btnSend.setDisable(true);
 
-    task.setOnFailed(
-        event1 -> {
-          btnSend.setDisable(false); // Re-enable the send button
-          task.getException().printStackTrace();
-        });
-
-    new Thread(task).start();
+    // Send the message to the AI
+    sendMessageToAI(userMessage, conversationHistory, false);
   }
 
   // Method to play "hmm" sound based on profession
@@ -493,46 +581,95 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void appendChatMessage(ChatMessage msg) {
+    // Get the conversation history
+    Map<String, List<ChatMessage>> chatHistory = context.getChatHistory();
+    String promptFile = getPromptFileForProfession(profession);
+    List<ChatMessage> conversationHistory = chatHistory.get(promptFile);
 
-    Map<String, StringBuilder> chatHistory = context.getChatHistory();
-    int randomIndex = random.nextInt(3); // Generates 0, 1, or 2
+    // Add the message to the conversation history
+    conversationHistory.add(msg);
 
+    // Update the suspect's image based on the message
     if (!msg.getRole().equals("user")) {
-      // System.out.println("playing hmm sound from " + profession);
       playHmmSound(profession);
+      String suspectType = getSuspectTypeForProfession(profession);
+      setImageVisibility(suspectType, random.nextInt(3));
     }
 
-    // Adding to history and change the image of the person after each sentence
+    // Append the chat bubble to the UI
+    addChatBubble(msg.getRole(), msg.getContent());
+  }
+
+  private String getPromptFileForProfession(String profession) {
     switch (profession) {
       case "Art Currator":
-        chatHistory.get("suspect1.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("currator", randomIndex);
-        break;
+        return "suspect1.txt";
       case "Art Thief":
-        chatHistory.get("thief.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        setImageVisibility("thief", randomIndex);
-        break;
+        return "thief.txt";
       case "Janitor":
-        setImageVisibility("janitor", randomIndex);
-        chatHistory.get("suspect2.txt").append(msg.getRole() + ": " + msg.getContent() + "\n\n");
-        break;
+        return "suspect2.txt";
+      default:
+        return "unknown.txt";
     }
-    // Start the text animation after a small delay to allow "hmm" sound to finish
-    new Thread(
-            () -> {
-              try {
-                Thread.sleep(500); // Adjust delay to match the length of the "hmm" sound
-                Platform.runLater(
-                    () -> {
-                      System.out.println(
-                          "Role: " + msg.getRole() + ", Content: " + msg.getContent());
-                      writeOnTextAnimation(msg.getRole(), msg.getContent());
-                    });
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
-            })
-        .start();
+  }
+
+  // Add this method to append a chat bubble for each message
+  private void addChatBubble(String role, String content) {
+    // Create a Label for the sender's name
+    Label senderLabel = new Label();
+    if (role.equals("user")) {
+      senderLabel.setText("You");
+    } else {
+      String senderName = professionToNameMap.get(profession);
+      senderLabel.setText(senderName != null ? senderName : "Unknown");
+    }
+    senderLabel.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+    senderLabel.setPadding(new Insets(0, 0, 2, 0));
+
+    // Create Text for the message
+    Text messageText = new Text(content);
+    messageText.setFont(Font.font("Arial", 18));
+    messageText.setFill(Color.BLACK);
+
+    // Wrap the Text in a TextFlow
+    TextFlow messageFlow = new TextFlow(messageText);
+    messageFlow.setMaxWidth(400); // Adjust as needed
+    messageFlow.setPadding(new Insets(10));
+    messageFlow.setLineSpacing(1.5);
+
+    // Style the TextFlow to look like a chat bubble
+    BackgroundFill backgroundFill;
+    if (role.equals("user")) {
+      backgroundFill = new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), Insets.EMPTY);
+    } else {
+      backgroundFill = new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(10), Insets.EMPTY);
+    }
+    messageFlow.setBackground(new Background(backgroundFill));
+
+    // Create a VBox to hold the senderLabel and messageFlow
+    VBox messageBox = new VBox(senderLabel, messageFlow);
+    messageBox.setAlignment(role.equals("user") ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+    messageBox.setMaxWidth(400 + 20); // Adjust max width for padding
+
+    // Create an HBox to hold the messageBox
+    HBox messageContainer = new HBox(messageBox);
+    messageContainer.setPadding(new Insets(5));
+    messageContainer.setAlignment(role.equals("user") ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
+
+    // Allow the messageBox to grow horizontally
+    HBox.setHgrow(messageBox, Priority.ALWAYS);
+    messageBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
+    messageBox.setMinWidth(0);
+
+    // Add the messageContainer to the chatContainer (VBox)
+    chatContainer.getChildren().add(messageContainer);
+
+    // Scroll to the bottom of the chat
+    Platform.runLater(
+        () -> {
+          chatScrollPane.layout();
+          chatScrollPane.setVvalue(chatScrollPane.getVmax());
+        });
   }
 
   // Helper method to set visibility based on the random index
@@ -543,21 +680,17 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Show the selected image based on the random index
     switch (randomIndex) {
       case 0:
-        // Show suspectType + "1" image (e.g. Currator1)
         getImageView(suspectType + "0").setVisible(true);
         break;
       case 1:
-        // Show suspectType + "2" image (e.g. Currator2)
         getImageView(suspectType + "1").setVisible(true);
         break;
       case 2:
-        // Show suspectType + "3" image (e.g. Currator3)
         getImageView(suspectType + "2").setVisible(true);
         break;
     }
   }
 
-  // Hide all images for a given suspect
   private void hideAllImages(String suspectType) {
     getImageView(suspectType + "0").setVisible(false);
     getImageView(suspectType + "1").setVisible(false);
@@ -566,88 +699,29 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
   private ImageView getImageView(String imageId) {
-    Parent currentRoot = navBar.getScene().getRoot(); // Get the root of the current scene
-    return (ImageView) currentRoot.lookup("#" + imageId); // Adjust based on your FXML structure
-  }
-
-  /**
-   * Creates a write-on text animation for a chat message.
-   *
-   * @param role the role of the message sender (e.g., "system", "user")
-   * @param text the content of the message
-   */
-  // private void writeOnTextAnimation(String role, String text) {
-  //   String displayName;
-  //   if (role.equals("user")) {
-  //     displayName = professionToNameMap.get("user"); // Use the mapped name or default to role
-  //   } else {
-  //     displayName = professionToNameMap.get(profession); // Use the mapped name or default to
-  // role
-  //   }
-
-  //   Task<Void> task =
-  //       new Task<Void>() {
-  //         @Override
-  //         protected Void call() throws Exception {
-  //           StringBuilder currentText = new StringBuilder(displayName + ": ");
-  //           for (char ch : text.toCharArray()) {
-  //             currentText.append(ch);
-  //             String finalText = currentText.toString();
-  //             Platform.runLater(
-  //                 () -> {
-  //                   // Use String replacement to ensure text is placed correctly
-  //                   String previousText = txtaChat.getText();
-  //                   int lastMessageIndex = previousText.lastIndexOf(displayName + ":");
-  //                   if (lastMessageIndex != -1) {
-  //                     txtaChat.setText(
-  //                         previousText.substring(0, lastMessageIndex) + finalText + "\n");
-  //                   } else {
-  //                     txtaChat.appendText(finalText + "\n");
-  //                   }
-  //                 });
-  //             Thread.sleep(35); // Adjust delay for typing effect
-  //           }
-  //           // Small delay to prevent overlap
-  //           Thread.sleep(1200); // MODIFY to prevent overlap...
-  //           return null;
-  //         }
-  //       };
-  //   new Thread(task).start();
-  // }
-
-  private void writeOnTextAnimation(String role, String text) {
-    String displayName;
-
-    // Map the "user" role to a specific name or default to role
-    if (role.equals("user")) {
-      displayName = professionToNameMap.getOrDefault("user", "User");
-    } else {
-      // Use the profession-based display name or default to the role
-      displayName = professionToNameMap.getOrDefault(profession, role);
+    switch (imageId) {
+      case "currator0":
+        return currator0;
+      case "currator1":
+        return currator1;
+      case "currator2":
+        return currator2;
+      case "thief0":
+        return thief0;
+      case "thief1":
+        return thief1;
+      case "thief2":
+        return thief2;
+      case "janitor0":
+        return janitor0;
+      case "janitor1":
+        return janitor1;
+      case "janitor2":
+        return janitor2;
+      default:
+        System.err.println("No ImageView found for ID: " + imageId);
+        return null;
     }
-
-    String finalText = displayName + ": " + text;
-    System.out.println("finalText: " + finalText);
-
-    // Update the chat window without animation
-    Platform.runLater(
-        () -> {
-          String previousText = txtaChat.getText();
-          int lastMessageIndex = previousText.lastIndexOf(displayName + ":");
-
-          // Check if the last occurrence of displayName contains the same message
-          if (lastMessageIndex != -1) {
-            String lastMessage = previousText.substring(lastMessageIndex).trim();
-
-            // Avoid adding duplicate messages (ensure we don't repeat the same displayName)
-            if (!lastMessage.equals(finalText)) {
-              txtaChat.setText(previousText + "\n" + finalText + "\n");
-            }
-          } else {
-            // Append the new message if the name isn't found
-            txtaChat.appendText(finalText + "\n");
-          }
-        });
   }
 
   /**
@@ -686,7 +760,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
     if (!isChatOpened) {
       chatGroup.setVisible(true); // Ensure chat group is visible
-      txtaChat.clear();
       txtInput.clear();
 
       setProfession(profession);
