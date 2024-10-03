@@ -126,7 +126,7 @@ public class EndingController {
 
     // Reset suspects talked to map
     InteragationRoomController.resetSuspectsTalkedToMap();
-
+    RoomController.setClueHasBeenInteractedWith(false);
     // Reset the computer clue controller
     ComputerClueController.reset();
 

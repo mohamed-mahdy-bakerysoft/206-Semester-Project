@@ -138,6 +138,36 @@ public class TimeManager {
         player.stop();
         player = null;
       }
+
+      // if (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()) {
+      //   String msg = "You did not talk to all the three suspects in time.";
+      //   String msg2 = "";
+      //   if (!RoomController.getClueHasBeenInteractedWith()) {
+      //     msg2 = "You did not interact with a clue in time.";
+      //   }
+      //   String finalmsg = msg + "\n" + msg2;
+      //   EndingController.setFeed(finalmsg);
+      //   App.setRoot("badending");
+      // }
+
+      if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
+          && (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()
+              || !RoomController.getClueHasBeenInteractedWith())) {
+        String msg = "";
+        String msg2 = "";
+        if (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()) {
+          msg = "You did not talk to all the three suspects in time.";
+        }
+        if (!RoomController.getClueHasBeenInteractedWith()) {
+          msg2 = "You did not interact with a clue in time.";
+        }
+
+        String finalMsg = msg + "\n" + msg2;
+        EndingController.setFeed(finalMsg);
+        App.setRoot("badending");
+        return;
+      }
+
       // Check if the game is in the started state, suspects have been talked to, and clue has been
       // interacted with
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
