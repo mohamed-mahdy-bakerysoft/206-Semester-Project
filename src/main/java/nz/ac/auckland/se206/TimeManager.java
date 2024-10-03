@@ -163,6 +163,9 @@ public class TimeManager {
         }
 
         String finalMsg = msg + "\n" + msg2;
+        if (msg.equals("")) {
+          finalMsg = msg2;
+        }
         EndingController.setFeed(finalMsg);
         App.setRoot("badending");
         return;
