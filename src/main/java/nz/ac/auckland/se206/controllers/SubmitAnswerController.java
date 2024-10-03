@@ -131,7 +131,9 @@ public class SubmitAnswerController {
     if (TimeManager.getInstance().getPlayer() != null) {
       TimeManager.getInstance().getPlayer().stop();
     }
-    submitButton.setDisable(true); // Disable the submit button to prevent multiple submissions
+    if (submitButton != null) {
+      submitButton.setDisable(true);
+    } // Disable the submit button to prevent multiple submissions
     timeManager.stopTimer(); // Stop the timer
     if (answerTxtArea.getText().isEmpty()) {
       return; // Return if the answer text area is empty
@@ -265,7 +267,9 @@ public class SubmitAnswerController {
           } catch (IOException e) {
             e.printStackTrace(); // Print stack trace for exceptions
           }
-          submitButton.setDisable(false); // Re-enable the submit button
+          if (submitButton != null) {
+            submitButton.setDisable(false); // Enable the submit button
+          }
         });
 
     new Thread(task).start(); // Start the background task
