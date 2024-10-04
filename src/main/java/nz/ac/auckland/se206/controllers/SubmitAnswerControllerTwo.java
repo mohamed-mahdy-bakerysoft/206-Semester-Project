@@ -54,6 +54,8 @@ public class SubmitAnswerControllerTwo extends SubmitAnswerController {
   @FXML
   private void onGoBack() throws IOException {
     // Set the root to the "whosThief" screen
+    thief = null;
+    answer = null;
     App.setRoot("whosThief");
   }
 }
