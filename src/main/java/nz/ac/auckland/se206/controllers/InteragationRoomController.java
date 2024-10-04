@@ -200,6 +200,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // testing purposes
     // System.out.println("Entire Chat history intalizeed");
     isChatOpened = false;
+    rectangleClicked = false;
   }
 
   public void setTime() {
@@ -226,6 +227,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @Override
   public void goToRoom(String roomName) throws IOException {
     isChatOpened = false;
+    rectangleClicked = false;
     chatGroup.setVisible(false);
     // Before navigating, reset the window size if navBar is visible
     Stage stage = (Stage) navBar.getScene().getWindow();
@@ -756,7 +758,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
       throws IOException, URISyntaxException, InterruptedException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
 
-    hideInitialImage();
     rectangleClicked = true;
 
     // Identify which suspect was clicked and set the profession accordingly
@@ -776,10 +777,10 @@ public class InteragationRoomController implements RoomNavigationHandler {
         return;
     }
 
-    // Display the chat UI
-    // Initialize the chat with the suspect
-    // This method handles initializing chat context
+    String suspectType = getSuspectTypeForProfession(profession);
+    hideInitialImage(suspectType);
 
+    // Display the chat UI
     if (!isChatOpened) {
       chatGroup.setVisible(true); // Ensure chat group is visible
       txtInput.clear();
@@ -870,18 +871,85 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML
   private void onHoverImage(MouseEvent event) {
     if (!rectangleClicked) {
-      curratorHover.setVisible(true);
+      if (event.getSource() instanceof ImageView) {
+        ImageView hoveredImage = (ImageView) event.getSource();
+        String imageId = hoveredImage.getId();
+        String suspectType = getSuspectTypeFromImageId(imageId);
+        if (!suspectType.isEmpty()) {
+          getImageView(suspectType + "Hover").setVisible(true);
+        }
+      } else {
+        // Log or handle the unexpected event source
+        System.err.println("onHoverImage called, but source is not an ImageView");
+      }
+    }
+  }
+
+  @FXML
+  private void onHoverRectangle(MouseEvent event) {
+    if (!rectangleClicked) {
+      Rectangle hoveredRectangle = (Rectangle) event.getSource();
+      String rectangleId = hoveredRectangle.getId();
+      String suspectType = getSuspectTypeFromRectangleId(rectangleId);
+      if (!suspectType.isEmpty()) {
+        getImageView(suspectType + "Hover").setVisible(true);
+      }
+    }
+  }
+
+  @FXML
+  private void onHideRectangle(MouseEvent event) {
+    Rectangle hoveredRectangle = (Rectangle) event.getSource();
+    String rectangleId = hoveredRectangle.getId();
+    String suspectType = getSuspectTypeFromRectangleId(rectangleId);
+    if (!suspectType.isEmpty()) {
+      getImageView(suspectType + "Hover").setVisible(false);
     }
   }
 
   @FXML
   private void onHideImage(MouseEvent event) {
-    curratorHover.setVisible(false);
+    if (event.getSource() instanceof ImageView) {
+      ImageView hoveredImage = (ImageView) event.getSource();
+      String imageId = hoveredImage.getId();
+      String suspectType = getSuspectTypeFromImageId(imageId);
+      if (!suspectType.isEmpty()) {
+        getImageView(suspectType + "Hover").setVisible(false);
+      }
+    } else {
+      // Log or handle the unexpected event source
+      System.err.println("onHideImage called, but source is not an ImageView");
+    }
   }
 
-  private void hideInitialImage() {
-    currator0.setVisible(true); // initial image
-    curratorInitial.setVisible(false);
-    curratorHover.setVisible(false);
+  private String getSuspectTypeFromRectangleId(String rectangleId) {
+    switch (rectangleId) {
+      case "rectPerson1":
+        return "currator";
+      case "rectPerson2":
+        return "thief";
+      case "rectPerson3":
+        return "janitor";
+      default:
+        return "";
+    }
+  }
+
+  private String getSuspectTypeFromImageId(String imageId) {
+    if (imageId.startsWith("currator")) {
+      return "currator";
+    } else if (imageId.startsWith("thief")) {
+      return "thief";
+    } else if (imageId.startsWith("janitor")) {
+      return "janitor";
+    } else {
+      return "";
+    }
+  }
+
+  private void hideInitialImage(String suspectType) {
+    getImageView(suspectType + "0").setVisible(true); // Show initial chat image
+    getImageView(suspectType + "Initial").setVisible(false);
+    getImageView(suspectType + "Hover").setVisible(false);
   }
 }
