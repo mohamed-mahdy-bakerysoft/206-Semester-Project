@@ -138,35 +138,36 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private ImageView currator0;
   @FXML private ImageView currator1;
   @FXML private ImageView currator2;
-  @FXML private ImageView thief0;
-  @FXML private ImageView thief1;
-  @FXML private ImageView thief2;
   @FXML private ImageView janitor0;
   @FXML private ImageView janitor1;
   @FXML private ImageView janitor2;
+  @FXML private ImageView thief0;
+  @FXML private ImageView thief1;
+  @FXML private ImageView thief2;
   @FXML private Label mins;
   @FXML private Label secs;
-
-  @FXML private ScrollPane chatScrollPane;
   @FXML private Label dot;
-
+  @FXML private ScrollPane chatScrollPane;
   @FXML private TextField txtInput;
   @FXML private VBox navBar;
   @FXML private VBox chatContainer;
 
+  @SuppressWarnings("unused")
   private Map<String, List<ChatMessage>> chatHistory;
+
   private List<ChatMessage> conversationHistory;
+  private boolean navBarVisible = false;
+
+  @SuppressWarnings("unused")
+  private ChatCompletionRequest chatCompletionRequest;
 
   private MediaPlayer player;
   private Media sound;
   private Media artCurratorHmm;
   private Media thiefHmm;
   private Media janitorHmm;
-
-  private String profession;
-  private ChatCompletionRequest chatCompletionRequest;
-  private boolean navBarVisible = false;
   private int originalWidth = 1100;
+  private String profession;
   private Random random = new Random();
 
   /**
