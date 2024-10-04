@@ -84,7 +84,17 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <ImageView fx:id="janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="janitorInitial" fitHeight="476.0" fitWidth="442.0" layoutX="220.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/JohnInit.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="janitorHover" fitHeight="436.0" fitWidth="433.0" layoutX="238.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/JohnInit2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/janitor.png" />
          </image>
@@ -99,7 +109,7 @@
             <Image url="@../images/jan3.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="476.0" layoutX="365.0" layoutY="161.0" onMouseClicked="#onHandleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="312.0">
+      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="450.0" layoutX="271.0" layoutY="182.0" onMouseClicked="#onHandleRectangleClick" onMouseEntered="#onHoverImage" onMouseExited="#onHideImage" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="304.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>

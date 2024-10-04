@@ -143,9 +143,13 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private ImageView thief0;
   @FXML private ImageView thief1;
   @FXML private ImageView thief2;
+  @FXML private ImageView thiefInitial;
+  @FXML private ImageView thiefHover;
   @FXML private ImageView janitor0;
   @FXML private ImageView janitor1;
   @FXML private ImageView janitor2;
+  @FXML private ImageView janitorInitial;
+  @FXML private ImageView janitorHover;
   @FXML private Label mins;
   @FXML private Label secs;
 
@@ -703,18 +707,30 @@ public class InteragationRoomController implements RoomNavigationHandler {
   // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
   private ImageView getImageView(String imageId) {
     switch (imageId) {
+      case "curratorInitial":
+        return curratorInitial;
+      case "curratorHover":
+        return curratorHover;
       case "currator0":
         return currator0;
       case "currator1":
         return currator1;
       case "currator2":
         return currator2;
+      case "thiefInitial":
+        return thiefInitial;
+      case "thiefHover":
+        return thiefHover;
       case "thief0":
         return thief0;
       case "thief1":
         return thief1;
       case "thief2":
         return thief2;
+      case "janitorInitial":
+        return janitorInitial;
+      case "janitorHover":
+        return janitorHover;
       case "janitor0":
         return janitor0;
       case "janitor1":

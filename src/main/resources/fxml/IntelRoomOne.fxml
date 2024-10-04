@@ -109,7 +109,7 @@
             <Image url="@../images/artcurr2.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="507.0" layoutX="416.0" layoutY="167.0" onMouseClicked="#onHandleRectangleClick" onMouseEntered="#onHoverImage" onMouseExited="#onHideImage" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="269.0">
+      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="484.0" layoutX="212.0" layoutY="165.0" onMouseClicked="#onHandleRectangleClick" onMouseEntered="#onHoverImage" onMouseExited="#onHideImage" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="249.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
