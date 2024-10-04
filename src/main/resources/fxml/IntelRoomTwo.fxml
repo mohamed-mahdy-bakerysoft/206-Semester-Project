@@ -15,128 +15,139 @@
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InteragationRoomController">
-   <children>
-      <ImageView fitHeight="704.0" fitWidth="1301.0" layoutX="-76.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/JanitorRoom.png" />
-         </image>
-      </ImageView>
-      <VBox fx:id="navBar" alignment="CENTER" layoutX="914.0" layoutY="135.0" prefHeight="516.0" prefWidth="196.0" style="-fx-background-image: url('/images/nav_bar_background.png'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 2;">
-         <children>
-            <Button fx:id="suspect1Button" contentDisplay="GRAPHIC_ONLY" prefHeight="97.0" prefWidth="91.0" snapToPixel="false" style="-fx-background-color: transparent;" textAlignment="CENTER" wrapText="true">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
-                     <image>
-                        <Image url="@../images/NavFrank.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="suspect2Button" contentDisplay="GRAPHIC_ONLY" prefHeight="143.0" prefWidth="69.0" style="-fx-background-color: transparent;" text="Suspect 2">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
-                     <image>
-                        <Image url="@../images/NavJohn.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="suspect3Button" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" text="Suspect 3">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
-                     <image>
-                        <Image url="@../images/NavWill.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </VBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/TimerBackground.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
-         <font>
-            <Font name="Curlz MT" size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
-         <font>
-            <Font name="Curlz MT" size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="dot" alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
-         <font>
-            <Font name="Curlz MT" size="45.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/janitor.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="janitor1" fitHeight="605.0" fitWidth="598.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" visible="false">
-         <image>
-            <Image url="@../images/jan2.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="janitor2" fitHeight="597.0" fitWidth="598.0" layoutX="220.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/jan3.png" />
-         </image>
-      </ImageView>
-      <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="476.0" layoutX="365.0" layoutY="161.0" onMouseClicked="#onHandleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="312.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Rectangle>
-      <Group fx:id="chatGroup" layoutX="207.0" layoutY="470.0" visible="false">
-         <children>
-            <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="160.0" prefWidth="707.0" vbarPolicy="ALWAYS">
-               <content>
-                  <VBox fx:id="chatContainer" prefHeight="104.0" prefWidth="698.0" spacing="10.0" />
-               </content>
-            </ScrollPane>
-            <TextField fx:id="txtInput" layoutY="160.0" onKeyPressed="#onHandleEnterKey" prefHeight="46.0" prefWidth="607.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <Button fx:id="btnSend" layoutX="610.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="103.0" stylesheets="@../css/styles.css" text="Send">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Button>
-         </children>
-      </Group>
-      <ImageView fitHeight="107.0" fitWidth="117.0" layoutX="969.0" layoutY="13.0" onMouseClicked="#onToggleNavBar" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/FileIcon.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <Button fx:id="backButton" layoutX="789.0" layoutY="35.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" stylesheets="@../css/styles.css" text="Go back">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-   </children>
+  <children>
+    <ImageView fitHeight="704.0" fitWidth="1301.0" layoutX="-76.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/JanitorRoom.png" />
+      </image>
+    </ImageView>
+    <VBox fx:id="navBar" alignment="CENTER" layoutX="914.0" layoutY="135.0" prefHeight="516.0" prefWidth="196.0" style="-fx-background-image: url('/images/nav_bar_background.png'); -fx-background-size: cover; -fx-background-position: center center; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 2;">
+      <children>
+        <Button fx:id="suspect1Button" contentDisplay="GRAPHIC_ONLY" prefHeight="97.0" prefWidth="91.0" snapToPixel="false" style="-fx-background-color: transparent;" textAlignment="CENTER" wrapText="true">
+          <opaqueInsets>
+            <Insets />
+          </opaqueInsets>
+          <graphic>
+            <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
+              <image>
+                <Image url="@../images/NavFrank.png" />
+              </image>
+              <cursor>
+                <Cursor fx:constant="HAND" />
+              </cursor>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="suspect2Button" contentDisplay="GRAPHIC_ONLY" prefHeight="143.0" prefWidth="69.0" style="-fx-background-color: transparent;" text="Suspect 2">
+          <graphic>
+            <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
+              <image>
+                <Image url="@../images/NavJohn.png" />
+              </image>
+              <cursor>
+                <Cursor fx:constant="HAND" />
+              </cursor>
+            </ImageView>
+          </graphic>
+        </Button>
+        <Button fx:id="suspect3Button" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" text="Suspect 3">
+          <graphic>
+            <ImageView fitHeight="150.0" fitWidth="150.0" translateY="10.0">
+              <image>
+                <Image url="@../images/NavWill.png" />
+              </image>
+              <cursor>
+                <Cursor fx:constant="HAND" />
+              </cursor>
+            </ImageView>
+          </graphic>
+        </Button>
+      </children>
+    </VBox>
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/TimerBackground.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+      <font>
+        <Font name="Curlz MT" size="45.0" />
+      </font>
+    </Label>
+    <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="29.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+      <font>
+        <Font name="Curlz MT" size="45.0" />
+      </font>
+    </Label>
+    <Label fx:id="dot" alignment="CENTER" contentDisplay="CENTER" layoutX="59.0" layoutY="30.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+      <font>
+        <Font name="Curlz MT" size="45.0" />
+      </font>
+    </Label>
+    <ImageView fx:id="janitorInitial" fitHeight="476.0" fitWidth="442.0" layoutX="209.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/JohnInit.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="janitorHover" fitHeight="436.0" fitWidth="448.0" layoutX="225.0" layoutY="187.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+        <Image url="@../images/JohnInit2.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="janitor0" fitHeight="584.0" fitWidth="557.0" layoutX="243.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+        <Image url="@../images/janitor.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="janitor1" fitHeight="605.0" fitWidth="598.0" layoutX="258.0" layoutY="98.0" pickOnBounds="true" visible="false">
+      <image>
+        <Image url="@../images/jan2.png" />
+      </image>
+    </ImageView>
+    <ImageView fx:id="janitor2" fitHeight="597.0" fitWidth="598.0" layoutX="220.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+        <Image url="@../images/jan3.png" />
+      </image>
+    </ImageView>
+    <Rectangle fx:id="rectPerson3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="450.0" layoutX="302.0" layoutY="182.0" onMouseClicked="#onHandleRectangleClick" onMouseEntered="#onHoverRectangle" onMouseExited="#onHideRectangle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="304.0">
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </Rectangle>
+    <Group fx:id="chatGroup" layoutX="207.0" layoutY="470.0" visible="false">
+      <children>
+        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="160.0" prefWidth="707.0" vbarPolicy="ALWAYS">
+          <content>
+            <VBox fx:id="chatContainer" prefHeight="104.0" prefWidth="698.0" spacing="10.0" />
+          </content>
+        </ScrollPane>
+        <TextField fx:id="txtInput" layoutY="160.0" onKeyPressed="#onHandleEnterKey" prefHeight="46.0" prefWidth="607.0">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </TextField>
+        <Button fx:id="btnSend" layoutX="610.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="103.0" stylesheets="@../css/styles.css" text="Send">
+          <font>
+            <Font size="20.0" />
+          </font>
+        </Button>
+      </children>
+    </Group>
+    <ImageView fitHeight="107.0" fitWidth="117.0" layoutX="969.0" layoutY="13.0" onMouseClicked="#onToggleNavBar" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/FileIcon.png" />
+      </image>
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </ImageView>
+    <Button fx:id="backButton" layoutX="789.0" layoutY="35.0" mnemonicParsing="false" onAction="#onGoBack" prefHeight="52.0" prefWidth="137.0" stylesheets="@../css/styles.css" text="Go back">
+      <font>
+        <Font name="System Bold" size="25.0" />
+      </font>
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </Button>
+  </children>
 </Pane>
