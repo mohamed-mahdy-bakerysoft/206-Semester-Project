@@ -31,8 +31,8 @@ import nz.ac.auckland.se206.prompts.PromptEngineering;
 public class SubmitAnswerController {
 
   private static String feed; // Feedback from GPT response
-  private static String thief; // Selected thief by the player
-  private static String answer; // Player's answer
+  protected static String thief; // Selected thief by the player
+  protected static String answer; // Player's answer
   private static boolean isFirstTime = true; // Flag to check if it's the player's first interaction
   public static TimeManager timeManager =
       TimeManager.getInstance(); // Singleton instance of TimeManager
@@ -103,12 +103,9 @@ public class SubmitAnswerController {
   @FXML private TextArea feedback; // Text area for feedback
   @FXML private TextArea feedback2; // Another text area for feedback
 
-
   @FXML private Label dot;
 
-
   @FXML private TextArea answerTxtArea; // Text area for player's answer
-
 
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
 
@@ -131,8 +128,12 @@ public class SubmitAnswerController {
    * updates and invokes GPT model interactions.
    */
   public void sendAnswer() {
-    TimeManager.getInstance().getPlayer().stop();
-    submitButton.setDisable(true); // Disable the submit button to prevent multiple submissions
+    if (TimeManager.getInstance().getPlayer() != null) {
+      TimeManager.getInstance().getPlayer().stop();
+    }
+    if (submitButton != null) {
+      submitButton.setDisable(true);
+    } // Disable the submit button to prevent multiple submissions
     timeManager.stopTimer(); // Stop the timer
     if (answerTxtArea.getText().isEmpty()) {
       return; // Return if the answer text area is empty
@@ -266,7 +267,9 @@ public class SubmitAnswerController {
           } catch (IOException e) {
             e.printStackTrace(); // Print stack trace for exceptions
           }
-          submitButton.setDisable(false); // Re-enable the submit button
+          if (submitButton != null) {
+            submitButton.setDisable(false); // Enable the submit button
+          }
         });
 
     new Thread(task).start(); // Start the background task

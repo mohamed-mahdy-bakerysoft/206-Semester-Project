@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import nz.ac.auckland.se206.controllers.EndingController;
 import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SubmitAnswerController;
@@ -29,7 +30,6 @@ public class TimeManager {
   private static MediaPlayer player;
   private static Media sound;
 
-
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
    * exists at any time.
@@ -43,11 +43,6 @@ public class TimeManager {
     return instance;
   }
 
-  // make a getter for player
-  public MediaPlayer getPlayer() {
-    return player;
-  }
-
   @FXML private Label mins;
   @FXML private Label secs;
   @FXML private Label dot;
@@ -55,7 +50,6 @@ public class TimeManager {
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
-
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {
@@ -86,6 +80,11 @@ public class TimeManager {
                 }));
     // Set the Timeline to repeat indefinitely
     timeline.setCycleCount(Timeline.INDEFINITE);
+  }
+
+  // make a getter for player
+  public MediaPlayer getPlayer() {
+    return player;
   }
 
   /**
@@ -139,6 +138,39 @@ public class TimeManager {
         player.stop();
         player = null;
       }
+
+      // if (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()) {
+      //   String msg = "You did not talk to all the three suspects in time.";
+      //   String msg2 = "";
+      //   if (!RoomController.getClueHasBeenInteractedWith()) {
+      //     msg2 = "You did not interact with a clue in time.";
+      //   }
+      //   String finalmsg = msg + "\n" + msg2;
+      //   EndingController.setFeed(finalmsg);
+      //   App.setRoot("badending");
+      // }
+
+      if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
+          && (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()
+              || !RoomController.getClueHasBeenInteractedWith())) {
+        String msg = "";
+        String msg2 = "";
+        if (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()) {
+          msg = "You did not talk to all the three suspects in time.";
+        }
+        if (!RoomController.getClueHasBeenInteractedWith()) {
+          msg2 = "You did not interact with a clue in time.";
+        }
+
+        String finalMsg = msg + "\n" + msg2;
+        if (msg.equals("")) {
+          finalMsg = msg2;
+        }
+        EndingController.setFeed(finalMsg);
+        App.setRoot("badending");
+        return;
+      }
+
       // Check if the game is in the started state, suspects have been talked to, and clue has been
       // interacted with
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
@@ -150,6 +182,9 @@ public class TimeManager {
         context.setState(context.getGuessingState());
         System.out.println("Now in guessing state");
         App.setRoot("whosThief");
+        sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
+        player = new MediaPlayer(sound);
+        player.play();
         setInterval(60);
         return;
       }
@@ -173,6 +208,7 @@ public class TimeManager {
           String thief = SubmitAnswerController.getThief();
           // Check if thief is null
           if (thief == null) {
+            EndingController.setFeed("You did not pick a thief in time.");
             App.setRoot("badending");
             TimeManager.getInstance().stopTimer();
             return;

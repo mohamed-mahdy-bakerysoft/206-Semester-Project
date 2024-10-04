@@ -126,6 +126,27 @@ public class InteragationRoomController implements RoomNavigationHandler {
     suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 
+  private static void initializeRoleToNameMap() {
+    professionToNameMap.put("Art Currator", "Frank");
+    professionToNameMap.put("Art Thief", "William");
+    professionToNameMap.put("Janitor", "John");
+    professionToNameMap.put("user", "You");
+  }
+
+  public static void resetStaticVariables() {
+    clueHasBeenInteractedWith = false;
+    isFirstTimeInit = true;
+    isChatOpened = false;
+
+    // Reset suspectHasBeenTalkedToMap
+    suspectHasBeenTalkedToMap.clear();
+    initializeSuspectTalkedToMap();
+
+    // Reset professionToNameMap if necessary
+    professionToNameMap.clear();
+    initializeRoleToNameMap();
+  }
+
   @FXML private BorderPane mainPane;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
@@ -152,16 +173,20 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private ImageView janitorHover;
   @FXML private Label mins;
   @FXML private Label secs;
-
-  @FXML private ScrollPane chatScrollPane;
   @FXML private Label dot;
-
+  @FXML private ScrollPane chatScrollPane;
   @FXML private TextField txtInput;
   @FXML private VBox navBar;
   @FXML private VBox chatContainer;
 
+  @SuppressWarnings("unused")
   private Map<String, List<ChatMessage>> chatHistory;
+
   private List<ChatMessage> conversationHistory;
+  private boolean navBarVisible = false;
+
+  @SuppressWarnings("unused")
+  private ChatCompletionRequest chatCompletionRequest;
 
   private MediaPlayer player;
   private Media sound;
@@ -173,7 +198,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean navBarVisible = false;
   private boolean rectangleClicked = false;
+
   private int originalWidth = 1100;
+  private String profession;
   private Random random = new Random();
 
   /**
@@ -292,20 +319,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
       new Thread(task).start();
     }
-  }
-
-  public static void resetStaticVariables() {
-    clueHasBeenInteractedWith = false;
-    isFirstTimeInit = true;
-    isChatOpened = false;
-
-    // Reset suspectHasBeenTalkedToMap
-    suspectHasBeenTalkedToMap.clear();
-    initializeSuspectTalkedToMap();
-
-    // Reset professionToNameMap if necessary
-    professionToNameMap.clear();
-    initializeRoleToNameMap();
   }
 
   private void sendMessageToAI(
@@ -486,13 +499,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
       default:
         return "";
     }
-  }
-
-  private static void initializeRoleToNameMap() {
-    professionToNameMap.put("Art Currator", "Frank");
-    professionToNameMap.put("Art Thief", "William");
-    professionToNameMap.put("Janitor", "John");
-    professionToNameMap.put("user", "You");
   }
 
   /**
