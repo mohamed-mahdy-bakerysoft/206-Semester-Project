@@ -602,13 +602,16 @@ public class InteragationRoomController implements RoomNavigationHandler {
     if (!msg.getRole().equals("user")) {
       playHmmSound(profession);
       String suspectType = getSuspectTypeForProfession(profession);
-      setImageVisibility(suspectType, random.nextInt(3));
+      setImageVisibility(
+          suspectType,
+          random.nextInt(3)); // initialises a random image of the suspect after each message
     }
 
     // Append the chat bubble to the UI
     addChatBubble(msg.getRole(), msg.getContent());
   }
 
+  // Method to get the prompt file based on the profession
   private String getPromptFileForProfession(String profession) {
     switch (profession) {
       case "Art Currator":
@@ -700,6 +703,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
+  // Helper method to hide all images based on the suspect type
   private void hideAllImages(String suspectType) {
     getImageView(suspectType + "0").setVisible(false);
     getImageView(suspectType + "1").setVisible(false);
