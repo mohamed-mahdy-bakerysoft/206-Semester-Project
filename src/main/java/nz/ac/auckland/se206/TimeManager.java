@@ -29,7 +29,6 @@ public class TimeManager {
   private static MediaPlayer player;
   private static Media sound;
 
-
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
    * exists at any time.
@@ -55,7 +54,6 @@ public class TimeManager {
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
-
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {
