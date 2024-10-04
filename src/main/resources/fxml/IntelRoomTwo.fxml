@@ -89,7 +89,7 @@
         <Image url="@../images/JohnInit.png" />
       </image>
     </ImageView>
-    <ImageView fx:id="janitorHover" fitHeight="476.0" fitWidth="442.0" layoutX="220.0" layoutY="185.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="janitorHover" fitHeight="436.0" fitWidth="448.0" layoutX="225.0" layoutY="187.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/JohnInit2.png" />
       </image>
