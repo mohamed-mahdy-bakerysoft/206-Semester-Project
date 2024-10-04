@@ -138,6 +138,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private ImageView currator0;
   @FXML private ImageView currator1;
   @FXML private ImageView currator2;
+  @FXML private ImageView curratorInitial;
+  @FXML private ImageView curratorHover;
   @FXML private ImageView thief0;
   @FXML private ImageView thief1;
   @FXML private ImageView thief2;
@@ -166,6 +168,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private String profession;
   private ChatCompletionRequest chatCompletionRequest;
   private boolean navBarVisible = false;
+  private boolean rectangleClicked = false;
   private int originalWidth = 1100;
   private Random random = new Random();
 
@@ -737,6 +740,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
       throws IOException, URISyntaxException, InterruptedException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
 
+    hideInitialImage();
+    rectangleClicked = true;
+
     // Identify which suspect was clicked and set the profession accordingly
     String suspectId = clickedRectangle.getId();
     switch (suspectId) {
@@ -839,8 +845,27 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     isChatOpened = false;
+    rectangleClicked = false;
     chatGroup.setVisible(false); // Ensure chat group is visible
     InteragationRoomController.setIsChatOpened(false);
     App.setRoot("room");
+  }
+
+  @FXML
+  private void onHoverImage(MouseEvent event) {
+    if (!rectangleClicked) {
+      curratorHover.setVisible(true);
+    }
+  }
+
+  @FXML
+  private void onHideImage(MouseEvent event) {
+    curratorHover.setVisible(false);
+  }
+
+  private void hideInitialImage() {
+    currator0.setVisible(true); // initial image
+    curratorInitial.setVisible(false);
+    curratorHover.setVisible(false);
   }
 }

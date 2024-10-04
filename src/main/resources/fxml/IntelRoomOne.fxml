@@ -84,10 +84,17 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectRoomOne" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="371.0" layoutX="623.0" layoutY="96.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="77.0" />
-      <Rectangle fx:id="rectRoomTwo" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="222.0" layoutX="543.0" layoutY="136.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="41.0" />
-      <Rectangle fx:id="rectRoomThree" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="156.0" layoutX="493.0" layoutY="160.0" onMouseClicked="#handleRoomsClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
-      <ImageView fx:id="currator0" fitHeight="562.0" fitWidth="564.0" layoutX="283.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="curratorInitial" fitHeight="476.0" fitWidth="475.0" layoutX="326.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/FrankInit.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="curratorHover" fitHeight="181.0" fitWidth="223.0" layoutX="445.0" layoutY="189.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/FrankInit2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="currator0" fitHeight="562.0" fitWidth="564.0" layoutX="283.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/artcurrator.png" />
          </image>
@@ -102,7 +109,7 @@
             <Image url="@../images/artcurr2.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="484.0" layoutX="442.0" layoutY="168.0" onMouseClicked="#onHandleRectangleClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="237.0">
+      <Rectangle fx:id="rectPerson1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="507.0" layoutX="416.0" layoutY="167.0" onMouseClicked="#onHandleRectangleClick" onMouseEntered="#onHoverImage" onMouseExited="#onHideImage" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="269.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
