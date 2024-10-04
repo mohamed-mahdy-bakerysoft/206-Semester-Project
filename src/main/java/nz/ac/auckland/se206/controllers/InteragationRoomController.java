@@ -757,6 +757,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private void onHandleRectangleClick(MouseEvent event)
       throws IOException, URISyntaxException, InterruptedException {
     Rectangle clickedRectangle = (Rectangle) event.getSource();
+    clickedRectangle.setDisable(true); // Disable the rectangle after clicking
 
     rectangleClicked = true;
 
@@ -788,6 +789,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       setProfession(profession);
       isChatOpened = true; // prevent further calls
     } else {
+      clickedRectangle.setDisable(true); // Disable the rectangle after clicking
       System.out.println("Chat has already been opened!");
     }
   }
