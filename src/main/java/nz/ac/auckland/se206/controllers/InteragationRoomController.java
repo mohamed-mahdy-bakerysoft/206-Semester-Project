@@ -126,6 +126,27 @@ public class InteragationRoomController implements RoomNavigationHandler {
     suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 
+  private static void initializeRoleToNameMap() {
+    professionToNameMap.put("Art Currator", "Frank");
+    professionToNameMap.put("Art Thief", "William");
+    professionToNameMap.put("Janitor", "John");
+    professionToNameMap.put("user", "You");
+  }
+
+  public static void resetStaticVariables() {
+    clueHasBeenInteractedWith = false;
+    isFirstTimeInit = true;
+    isChatOpened = false;
+
+    // Reset suspectHasBeenTalkedToMap
+    suspectHasBeenTalkedToMap.clear();
+    initializeSuspectTalkedToMap();
+
+    // Reset professionToNameMap if necessary
+    professionToNameMap.clear();
+    initializeRoleToNameMap();
+  }
+
   @FXML private BorderPane mainPane;
   @FXML private Button corridorButton;
   @FXML private Button suspect1Button;
@@ -284,20 +305,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
       new Thread(task).start();
     }
-  }
-
-  public static void resetStaticVariables() {
-    clueHasBeenInteractedWith = false;
-    isFirstTimeInit = true;
-    isChatOpened = false;
-
-    // Reset suspectHasBeenTalkedToMap
-    suspectHasBeenTalkedToMap.clear();
-    initializeSuspectTalkedToMap();
-
-    // Reset professionToNameMap if necessary
-    professionToNameMap.clear();
-    initializeRoleToNameMap();
   }
 
   private void sendMessageToAI(
@@ -478,13 +485,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
       default:
         return "";
     }
-  }
-
-  private static void initializeRoleToNameMap() {
-    professionToNameMap.put("Art Currator", "Frank");
-    professionToNameMap.put("Art Thief", "William");
-    professionToNameMap.put("Janitor", "John");
-    professionToNameMap.put("user", "You");
   }
 
   /**
