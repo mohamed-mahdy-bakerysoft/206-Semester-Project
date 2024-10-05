@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +37,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -170,6 +174,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private boolean navBarVisible = false;
   private int originalWidth = 1100;
   private Random random = new Random();
+  @FXML private Circle dot0, dot1, dot2; // Make sure these match the fx:id you set in Scene Builder
+
+  private Timeline timeline;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -179,6 +186,17 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+
+    timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0), e -> enlargeDot(dot0)),
+            new KeyFrame(Duration.seconds(0.5), e -> resetDot(dot0)),
+            new KeyFrame(Duration.seconds(0.5), e -> enlargeDot(dot1)),
+            new KeyFrame(Duration.seconds(1), e -> resetDot(dot1)),
+            new KeyFrame(Duration.seconds(1), e -> enlargeDot(dot2)),
+            new KeyFrame(Duration.seconds(1.5), e -> resetDot(dot2)));
+
+    timeline.setCycleCount(Timeline.INDEFINITE);
 
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
@@ -201,6 +219,16 @@ public class InteragationRoomController implements RoomNavigationHandler {
   public void setTime() {
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setTimerLabel(mins, secs, dot);
+  }
+
+  // Method to increase the size of a dot
+  private void enlargeDot(Circle dot) {
+    dot.setRadius(10); // Increase the radius to 10 (or whatever size you want)
+  }
+
+  // Method to reset the size of a dot back to normal
+  private void resetDot(Circle dot) {
+    dot.setRadius(5); // Reset the radius to 5
   }
 
   /**
@@ -260,6 +288,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else {
       // Revisiting the suspect
       // Create a special system message to prompt the AI to initiate the conversation
+      setThinkingBubbleVisibility(true);
       ChatMessage systemMessage = new ChatMessage("system", getSystemPromptForRevisit());
 
       // Run GPT in a background task
@@ -529,6 +558,25 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else if (profession.equals("Janitor")) {
       bubble2.setVisible(isVisible);
     }
+    dot0.setVisible(isVisible);
+    dot1.setVisible(isVisible);
+    dot2.setVisible(isVisible);
+    if (isVisible) {
+      Task<Void> task =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              Platform.runLater(() -> timeline.play());
+              return null;
+            }
+          };
+
+      Thread thread = new Thread(task);
+      thread.setDaemon(true);
+      thread.start();
+    } else {
+      timeline.stop();
+    }
   }
 
   /**
@@ -540,6 +588,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   private void sendMessage() throws ApiProxyException, IOException {
     setThinkingBubbleVisibility(true);
+
     String message = txtInput.getText().trim(); // Get the user's message
 
     if (message.isEmpty()) {

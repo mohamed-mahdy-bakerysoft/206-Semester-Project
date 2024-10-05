@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -143,5 +144,8 @@
             <Image url="@../images/thinkingBubble.png" />
          </image>
       </ImageView>
+      <Circle fx:id="dot0" layoutX="377.0" layoutY="128.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Circle fx:id="dot1" layoutX="409.0" layoutY="128.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Circle fx:id="dot2" layoutX="439.0" layoutY="128.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
    </children>
 </Pane>
