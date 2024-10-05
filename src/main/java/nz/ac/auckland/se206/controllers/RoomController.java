@@ -83,6 +83,8 @@ public class RoomController implements RoomNavigationHandler {
   @FXML private ImageView mainRightArrow;
   @FXML private ImageView arrowLeft;
   @FXML private ImageView arrowRight;
+  @FXML private ImageView securityDoorClosed;
+  @FXML private ImageView securityDoorOpened;
   @FXML private Rectangle rectSecurityCamera;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
@@ -233,6 +235,46 @@ public class RoomController implements RoomNavigationHandler {
     }
     player = new MediaPlayer(sound);
     player.play();
+  }
+
+  /**
+   * Handles mouse hover events on the clues in the room.
+   *
+   * @param event the mouse event triggered by hovering over a clue
+   */
+  @FXML
+  private void onHoverClue(MouseEvent event) {
+    Rectangle hoveredClue = (Rectangle) event.getSource();
+    switch (hoveredClue.getId()) {
+      case "rectSecurityRoom":
+        securityDoorClosed.setVisible(false);
+        securityDoorOpened.setVisible(true);
+        break;
+      case "rectBin":
+        break;
+      case "rectPaperClue":
+        break;
+    }
+  }
+
+  /**
+   * Handles mouse exit events on the clues in the room.
+   *
+   * @param event the mouse event triggered by exiting hover of a clue
+   */
+  @FXML
+  private void onExitClue(MouseEvent event) {
+    Rectangle hoveredClue = (Rectangle) event.getSource();
+    switch (hoveredClue.getId()) {
+      case "rectSecurityRoom":
+        securityDoorClosed.setVisible(true);
+        securityDoorOpened.setVisible(false);
+        break;
+      case "rectBin":
+        break;
+      case "rectPaperClue":
+        break;
+    }
   }
 
   /**
