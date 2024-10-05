@@ -85,7 +85,8 @@ public class RoomController implements RoomNavigationHandler {
   @FXML private ImageView arrowRight;
   @FXML private ImageView securityDoorClosed;
   @FXML private ImageView securityDoorOpened;
-  @FXML private Rectangle rectSecurityCamera;
+  @FXML private ImageView binNormalState;
+  @FXML private ImageView binHoverState;
   @FXML private Rectangle rectPerson1;
   @FXML private Rectangle rectPerson2;
   @FXML private Rectangle rectPerson3;
@@ -251,6 +252,8 @@ public class RoomController implements RoomNavigationHandler {
         securityDoorOpened.setVisible(true);
         break;
       case "rectBin":
+        binHoverState.setVisible(true);
+        binNormalState.setVisible(false);
         break;
       case "rectPaperClue":
         break;
@@ -271,6 +274,8 @@ public class RoomController implements RoomNavigationHandler {
         securityDoorOpened.setVisible(false);
         break;
       case "rectBin":
+        binHoverState.setVisible(false);
+        binNormalState.setVisible(true);
         break;
       case "rectPaperClue":
         break;
