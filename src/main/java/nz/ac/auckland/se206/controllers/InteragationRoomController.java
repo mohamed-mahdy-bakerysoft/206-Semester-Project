@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -682,20 +680,23 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Add the messageContainer to the chatContainer (VBox)
     chatContainer.getChildren().add(messageContainer);
 
-    // Scroll to the bottom of the chat
-    Platform.runLater(
-        () -> {
-          chatScrollPane.layout();
-          chatScrollPane.setVvalue(chatScrollPane.getVmax());
-        });
+    // // Scroll to the bottom of the chat
+    // Platform.runLater(
+    //     () -> {
+    //       chatScrollPane.layout();
+    //       chatScrollPane.setVvalue(chatScrollPane.getVmax());
+    //     });
 
-    PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
-    pause.setOnFinished(
-        event -> {
-          setThinkingBubbleVisibility(false);
-        });
+    // PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+    // pause.setOnFinished(
+    //     event -> {
+    //       setThinkingBubbleVisibility(false);
+    //     });
 
-    pause.play();
+    // pause.play();
+    if (!role.equals("user")) {
+      setThinkingBubbleVisibility(false);
+    }
   }
 
   // Helper method to set visibility based on the random index
