@@ -190,11 +190,11 @@ public class InteragationRoomController implements RoomNavigationHandler {
     timeline =
         new Timeline(
             new KeyFrame(Duration.seconds(0), e -> enlargeDot(dot0)),
-            new KeyFrame(Duration.seconds(0.5), e -> resetDot(dot0)),
+            new KeyFrame(Duration.seconds(0.5), e -> resetDot()),
             new KeyFrame(Duration.seconds(0.5), e -> enlargeDot(dot1)),
-            new KeyFrame(Duration.seconds(1), e -> resetDot(dot1)),
+            new KeyFrame(Duration.seconds(1), e -> resetDot()),
             new KeyFrame(Duration.seconds(1), e -> enlargeDot(dot2)),
-            new KeyFrame(Duration.seconds(1.5), e -> resetDot(dot2)));
+            new KeyFrame(Duration.seconds(1.5), e -> resetDot()));
 
     timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -227,8 +227,10 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   // Method to reset the size of a dot back to normal
-  private void resetDot(Circle dot) {
-    dot.setRadius(5); // Reset the radius to 5
+  private void resetDot() {
+    dot0.setRadius(5); // Reset the radius to 5
+    dot1.setRadius(5); // Reset the radius to 5
+    dot2.setRadius(5); // Reset the radius to 5
   }
 
   /**
@@ -562,6 +564,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     dot1.setVisible(isVisible);
     dot2.setVisible(isVisible);
     if (isVisible) {
+      resetDot();
       Task<Void> task =
           new Task<Void>() {
             @Override
@@ -728,19 +731,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
     // Add the messageContainer to the chatContainer (VBox)
     chatContainer.getChildren().add(messageContainer);
-
-    // // Scroll to the bottom of the chat
-    // Platform.runLater(
-    //     () -> {
-    //       chatScrollPane.layout();
-    //       chatScrollPane.setVvalue(chatScrollPane.getVmax());
-    //     });
-
-    // PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
-    // pause.setOnFinished(
-    //     event -> {
-    //       setThinkingBubbleVisibility(false);
-    //     });
 
     // pause.play();
     if (!role.equals("user")) {
