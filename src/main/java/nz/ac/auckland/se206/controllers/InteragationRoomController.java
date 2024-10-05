@@ -194,9 +194,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private Media thiefHmm;
   private Media janitorHmm;
 
-  private String profession;
-  private ChatCompletionRequest chatCompletionRequest;
-  private boolean navBarVisible = false;
   private boolean rectangleClicked = false;
 
   private int originalWidth = 1100;
