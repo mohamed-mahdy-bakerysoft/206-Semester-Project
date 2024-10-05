@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -135,6 +136,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private Button btnSend;
   @FXML private Button btnGoBack;
   @FXML private Group chatGroup;
+  @FXML private ImageView bubble1;
+  @FXML private ImageView bubble2;
+  @FXML private ImageView bubble3;
   @FXML private ImageView currator0;
   @FXML private ImageView currator1;
   @FXML private ImageView currator2;
@@ -177,6 +181,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
 
@@ -449,6 +454,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   private String getInitialMessageForProfession(String profession) {
     // Switch case to determine the initial message based on the profession
+    setThinkingBubbleVisibility(true);
     switch (profession) {
       case "Art Currator":
         return "Hey can you tell me what happened here? I'm investigating this case."; // Case for
@@ -517,6 +523,16 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
+  private void setThinkingBubbleVisibility(boolean isVisible) {
+    if (profession.equals("Art Currator")) {
+      bubble1.setVisible(isVisible);
+    } else if (profession.equals("Art Thief")) {
+      bubble3.setVisible(isVisible);
+    } else if (profession.equals("Janitor")) {
+      bubble2.setVisible(isVisible);
+    }
+  }
+
   /**
    * Sends a message to the GPT model.
    *
@@ -525,6 +541,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws IOException if there is an I/O error
    */
   private void sendMessage() throws ApiProxyException, IOException {
+    setThinkingBubbleVisibility(true);
     String message = txtInput.getText().trim(); // Get the user's message
 
     if (message.isEmpty()) {
@@ -581,6 +598,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void appendChatMessage(ChatMessage msg) {
+
     // Get the conversation history
     Map<String, List<ChatMessage>> chatHistory = context.getChatHistory();
     String promptFile = getPromptFileForProfession(profession);
@@ -670,6 +688,14 @@ public class InteragationRoomController implements RoomNavigationHandler {
           chatScrollPane.layout();
           chatScrollPane.setVvalue(chatScrollPane.getVmax());
         });
+
+    PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+    pause.setOnFinished(
+        event -> {
+          setThinkingBubbleVisibility(false);
+        });
+
+    pause.play();
   }
 
   // Helper method to set visibility based on the random index

@@ -141,5 +141,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ImageView fx:id="bubble1" fitHeight="150.0" fitWidth="200.0" layoutX="324.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/thinkingBubble.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
