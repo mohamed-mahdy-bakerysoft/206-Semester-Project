@@ -43,11 +43,6 @@ public class TimeManager {
     return instance;
   }
 
-  // make a getter for player
-  public MediaPlayer getPlayer() {
-    return player;
-  }
-
   @FXML private Label mins;
   @FXML private Label secs;
   @FXML private Label dot;
@@ -85,6 +80,11 @@ public class TimeManager {
                 }));
     // Set the Timeline to repeat indefinitely
     timeline.setCycleCount(Timeline.INDEFINITE);
+  }
+
+  // make a getter for player
+  public MediaPlayer getPlayer() {
+    return player;
   }
 
   /**
