@@ -77,7 +77,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="120.0" layoutY="487.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rect-bin" width="77.0">
+      <ImageView fx:id="binNormalState" fitHeight="142.0" fitWidth="140.0" layoutX="-4.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/bin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="binHoverState" fitHeight="125.0" fitWidth="150.0" layoutX="2.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/binHover.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectBin" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="140.0" layoutX="16.0" layoutY="467.0" onMouseClicked="#handleClueClick" onMouseEntered="#onHoverClue" onMouseExited="#onExitClue" opacity="0.0" stroke="BLACK" strokeType="INSIDE" styleClass="rect-bin" width="101.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>

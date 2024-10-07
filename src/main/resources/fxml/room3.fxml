@@ -77,7 +77,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle fx:id="rectSecurityRoom" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="403.0" layoutX="273.0" layoutY="168.0" onMouseClicked="#handleClueClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="184.0">
+      <ImageView fx:id="securityDoorClosed" fitHeight="417.0" fitWidth="409.0" layoutX="148.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/securityDoorClosed.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="securityDoorOpened" fitHeight="442.0" fitWidth="441.0" layoutX="188.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/securityDoorOpen.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectSecurityRoom" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="417.0" layoutX="252.0" layoutY="154.0" onMouseClicked="#handleClueClick" onMouseEntered="#onHoverClue" onMouseExited="#onExitClue" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="205.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>

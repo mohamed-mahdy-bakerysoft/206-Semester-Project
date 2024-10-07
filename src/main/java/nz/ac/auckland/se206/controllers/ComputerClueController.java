@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -52,6 +53,7 @@ public class ComputerClueController extends ClueController {
   // FXML components representing various clickable elements on the computer clue scene.
   @FXML private ImageView passwordHint;
   @FXML private Rectangle rectOpenEmail;
+  @FXML private Rectangle rectOpenEmailTherapy;
   @FXML private Rectangle rectEscape;
   @FXML private Rectangle rectBackToInbox;
   @FXML private Rectangle rectInternetExplorer;
@@ -92,6 +94,10 @@ public class ComputerClueController extends ClueController {
         // Navigate to the scene associated with opening an email
         App.setRoot("computerclue3");
         break;
+      case "rectOpenEmailTherapy":
+        // Navigate to the scene associated with opening an email
+        App.setRoot("computerclue5");
+        break;
       case "rectEscape":
         // Navigate to the scene associated with escaping
         App.setRoot("computerclue1");
@@ -120,22 +126,20 @@ public class ComputerClueController extends ClueController {
    * Handles password input and checks if the entered password is correct. If the password is wrong
    * and more than two attempts have been made, a password hint is displayed.
    *
-   * @param event the mouse event triggered by clicking to submit the password
    * @throws IOException if there is an I/O error during scene transition
    */
-  /**
-   * Handles password input and checks if the entered password is correct. If the password is wrong
-   * and more than two attempts have been made, a password hint is displayed.
-   *
-   * @param event the mouse event triggered by clicking to submit the password
-   * @throws IOException if there is an I/O error during scene transition
-   */
-  public void handlePassword(MouseEvent event) throws IOException {
+  // Remove MouseEvent parameter from handlePassword
+  public void handlePassword() throws IOException {
+    if (passwordTxtField == null) {
+      // Handle the null case for passwordTxtField
+      System.err.println("Password text field is not initialized.");
+      return;
+    }
     // Increment the number of incorrect password guesses
     incrementPasswordGuesses();
 
     // Check if the entered password matches the correct password
-    if (passwordTxtField.getText().equals("willthegoat")) {
+    if (passwordTxtField.getText().equals("Emily2023")) {
       // If the password is correct, navigate to the next scene
       App.setRoot("computerclue1");
       // Set the flag indicating the password has been successfully guessed
@@ -157,8 +161,8 @@ public class ComputerClueController extends ClueController {
    * @throws IOException if there is an I/O error during scene transition
    */
   public void handleEnter(KeyEvent keyEvent) throws IOException {
-    if (keyEvent.getCode().toString().equals("ENTER")) {
-      handlePassword(null);
+    if (keyEvent.getCode() == KeyCode.ENTER) {
+      handlePassword();
     }
   }
 }
