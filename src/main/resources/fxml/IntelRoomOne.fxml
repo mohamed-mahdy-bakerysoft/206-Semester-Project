@@ -150,6 +150,14 @@
         <Cursor fx:constant="HAND" />
       </cursor>
     </Button>
+      <ImageView fx:id="bubble1" fitHeight="150.0" fitWidth="200.0" layoutX="344.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/thinkingBubble.png" />
+         </image>
+      </ImageView>
+      <Circle fx:id="dot0" layoutX="385.0" layoutY="143.0" radius="5" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Circle fx:id="dot1" layoutX="419.0" layoutY="143.0" radius="5" stroke="BLACK" strokeType="INSIDE" visible="false" />
+      <Circle fx:id="dot2" layoutX="450.0" layoutY="143.0" radius="5" stroke="BLACK" strokeType="INSIDE" visible="false" />
   </children>
 
 </Pane>
