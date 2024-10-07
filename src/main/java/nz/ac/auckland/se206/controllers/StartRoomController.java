@@ -59,6 +59,6 @@ public class StartRoomController {
     player.play();
 
     // Transition to the next room
-    App.setRoot("room");
+    App.setRoot("cutscenes");
   }
 }

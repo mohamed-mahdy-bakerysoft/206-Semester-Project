@@ -136,6 +136,7 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     SceneManager.addUi(AppUi.START, loadFxml("start"));
+    SceneManager.addUi(AppUi.CUTSCENE, loadFxml("cutscenes"));
     SceneManager.addUi(AppUi.ROOM, loadFxml("room"));
     SceneManager.addUi(AppUi.GOOD_END, loadFxml("goodending"));
     SceneManager.addUi(AppUi.BAD_END, loadFxml("badending"));
