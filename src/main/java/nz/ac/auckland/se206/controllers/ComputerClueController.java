@@ -135,7 +135,7 @@ public class ComputerClueController extends ClueController {
     incrementPasswordGuesses();
 
     // Check if the entered password matches the correct password
-    if (passwordTxtField.getText().equals("willthegoat")) {
+    if (passwordTxtField.getText().equals("Emily2023")) {
       // If the password is correct, navigate to the next scene
       App.setRoot("computerclue1");
       // Set the flag indicating the password has been successfully guessed
