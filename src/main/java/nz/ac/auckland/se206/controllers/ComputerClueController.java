@@ -126,17 +126,15 @@ public class ComputerClueController extends ClueController {
    * Handles password input and checks if the entered password is correct. If the password is wrong
    * and more than two attempts have been made, a password hint is displayed.
    *
-   * @param event the mouse event triggered by clicking to submit the password
    * @throws IOException if there is an I/O error during scene transition
    */
-  /**
-   * Handles password input and checks if the entered password is correct. If the password is wrong
-   * and more than two attempts have been made, a password hint is displayed.
-   *
-   * @param event the mouse event triggered by clicking to submit the password
-   * @throws IOException if there is an I/O error during scene transition
-   */
-  public void handlePassword(MouseEvent event) throws IOException {
+  // Remove MouseEvent parameter from handlePassword
+  public void handlePassword() throws IOException {
+    if (passwordTxtField == null) {
+      // Handle the null case for passwordTxtField
+      System.err.println("Password text field is not initialized.");
+      return;
+    }
     // Increment the number of incorrect password guesses
     incrementPasswordGuesses();
 
@@ -164,7 +162,7 @@ public class ComputerClueController extends ClueController {
    */
   public void handleEnter(KeyEvent keyEvent) throws IOException {
     if (keyEvent.getCode() == KeyCode.ENTER) {
-      handlePassword(null);
+      handlePassword();
     }
   }
 }
