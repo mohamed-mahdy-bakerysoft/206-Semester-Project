@@ -109,6 +109,8 @@ public class RoomController implements RoomNavigationHandler {
   @FXML
   public void initialize() throws URISyntaxException {
     TimeManager timeManager = TimeManager.getInstance();
+    timeManager.setInterval(300);
+    timeManager.startTimer(); // Start the game timer
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
     if (isFirstTimeInit) {
