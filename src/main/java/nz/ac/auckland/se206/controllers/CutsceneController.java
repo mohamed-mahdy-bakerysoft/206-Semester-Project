@@ -32,14 +32,16 @@ public class CutsceneController {
     // List of dialogue lines for Alice and the player
     dialogueLines = new ArrayList<>();
     dialogueLines.add(
-        "Alice: Hi there, investigator. I'm Alice. I've been following this case closely.");
+        "Alice: Welcome Agent I am Inspector A, your mentor. We have a case to solve.");
     dialogueLines.add(
-        "Alice: We have three key suspects: an art curator, a janitor, and a notorious art thief.");
-    dialogueLines.add("Player: Can you tell me more about them?");
-    dialogueLines.add("Alice: Sure. The curator has a clean record, but he's hiding something.");
-    dialogueLines.add(
-        "Alice: The janitor is a bit suspicious too, always sneaking around the building.");
-    dialogueLines.add("Alice: And the art thief... well, he's a known criminal, but he's smart.");
+        "Alice: Your mission is to find out who stole this famous painting created by the late"
+            + "owner of the George St Art gallery Teressa Harris.");
+    dialogueLines.add("Alice: There are 3 suspects you need to investigate");
+    dialogueLines.add("Alice: Frank the art Curator, son of the late artist Teresa Harris.");
+    dialogueLines.add("Alice: William, the head of security of the gallery.");
+    dialogueLines.add("Alice: And John the Janitor, known to be an ex-convict.");
+    dialogueLines.add("Alice: Chat with all of these suspects and find clues in the crime scene.");
+    dialogueLines.add("Alice: Good luck Agent, the fate of the painting is in your hands.");
     dialogueLines.add("Player: Sounds complicated. I'll need to investigate them all.");
 
     // Display the first line of dialogue
