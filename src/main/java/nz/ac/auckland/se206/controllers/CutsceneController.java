@@ -21,6 +21,12 @@ public class CutsceneController {
 
   @FXML private Button btnSkip;
 
+  @FXML private ImageView newspaperImage;
+  @FXML private ImageView paintingImage;
+  @FXML private ImageView williamImage;
+  @FXML private ImageView frankImage;
+  @FXML private ImageView johnImage;
+
   private List<String> dialogueLines;
   private int currentDialogueIndex;
 
@@ -66,9 +72,45 @@ public class CutsceneController {
     startGame(); // Directly transition to the game
   }
 
-  // This method displays the next dialogue in the list with a slight pause
   private void displayNextDialogue() {
+    // Display the current dialogue text
     dialogueText.setText(dialogueLines.get(currentDialogueIndex));
+
+    // Control image visibility based on current dialogue index
+    switch (currentDialogueIndex) {
+      case 1: // After Alice introduces the suspects
+        // Make the newspaper image visible
+        newspaperImage.setVisible(true);
+        paintingImage.setVisible(true);
+        break;
+      case 2: // After Alice introduces Frank
+        newspaperImage.setVisible(false);
+        paintingImage.setVisible(false);
+        break;
+      case 3: // After Alice introduces the curator
+        frankImage.setVisible(true);
+        break;
+      case 4: // After Alice introduces William
+        williamImage.setVisible(true);
+        break;
+      case 5: // After Alice introduces John
+        johnImage.setVisible(true);
+        break;
+      case 6: // After Alice finishes the introduction
+        frankImage.setVisible(false);
+        williamImage.setVisible(false);
+        johnImage.setVisible(false);
+        break;
+
+      default:
+        // Hide all other images by default
+        newspaperImage.setVisible(false);
+        paintingImage.setVisible(false);
+        williamImage.setVisible(false);
+        frankImage.setVisible(false);
+        johnImage.setVisible(false);
+        break;
+    }
 
     // Increment the index for the next line
     currentDialogueIndex++;
