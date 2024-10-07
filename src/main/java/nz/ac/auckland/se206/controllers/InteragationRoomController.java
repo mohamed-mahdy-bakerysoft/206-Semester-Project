@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -35,6 +37,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -156,6 +159,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   @FXML private Button btnSend;
   @FXML private Button btnGoBack;
   @FXML private Group chatGroup;
+  @FXML private ImageView bubble1;
+  @FXML private ImageView bubble2;
+  @FXML private ImageView bubble3;
   @FXML private ImageView currator0;
   @FXML private ImageView currator1;
   @FXML private ImageView currator2;
@@ -199,6 +205,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private int originalWidth = 1100;
   private String profession;
   private Random random = new Random();
+  @FXML private Circle dot0, dot1, dot2; // Make sure these match the fx:id you set in Scene Builder
+
+  private Timeline timeline;
 
   /**
    * Initializes the room view. If it's the first time initialization, it will provide instructions
@@ -208,6 +217,18 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+
+    timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0), e -> enlargeDot(dot0)),
+            new KeyFrame(Duration.seconds(0.5), e -> resetDot()),
+            new KeyFrame(Duration.seconds(0.5), e -> enlargeDot(dot1)),
+            new KeyFrame(Duration.seconds(1), e -> resetDot()),
+            new KeyFrame(Duration.seconds(1), e -> enlargeDot(dot2)),
+            new KeyFrame(Duration.seconds(1.5), e -> resetDot()));
+
+    timeline.setCycleCount(Timeline.INDEFINITE);
+
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
 
@@ -230,6 +251,18 @@ public class InteragationRoomController implements RoomNavigationHandler {
   public void setTime() {
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setTimerLabel(mins, secs, dot);
+  }
+
+  // Method to increase the size of a dot
+  private void enlargeDot(Circle dot) {
+    dot.setRadius(10); // Increase the radius to 10 (or whatever size you want)
+  }
+
+  // Method to reset the size of a dot back to normal
+  private void resetDot() {
+    dot0.setRadius(5); // Reset the radius to 5
+    dot1.setRadius(5); // Reset the radius to 5
+    dot2.setRadius(5); // Reset the radius to 5
   }
 
   /**
@@ -290,6 +323,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else {
       // Revisiting the suspect
       // Create a special system message to prompt the AI to initiate the conversation
+      setThinkingBubbleVisibility(true);
       ChatMessage systemMessage = new ChatMessage("system", getSystemPromptForRevisit());
 
       // Run GPT in a background task
@@ -468,6 +502,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   private String getInitialMessageForProfession(String profession) {
     // Switch case to determine the initial message based on the profession
+    setThinkingBubbleVisibility(true);
     switch (profession) {
       case "Art Currator":
         return "Hey can you tell me what happened here? I'm investigating this case."; // Case for
@@ -529,6 +564,36 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
+  private void setThinkingBubbleVisibility(boolean isVisible) {
+    if (profession.equals("Art Currator")) {
+      bubble1.setVisible(isVisible);
+    } else if (profession.equals("Art Thief")) {
+      bubble3.setVisible(isVisible);
+    } else if (profession.equals("Janitor")) {
+      bubble2.setVisible(isVisible);
+    }
+    dot0.setVisible(isVisible);
+    dot1.setVisible(isVisible);
+    dot2.setVisible(isVisible);
+    if (isVisible) {
+      resetDot();
+      Task<Void> task =
+          new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+              Platform.runLater(() -> timeline.play());
+              return null;
+            }
+          };
+
+      Thread thread = new Thread(task);
+      thread.setDaemon(true);
+      thread.start();
+    } else {
+      timeline.stop();
+    }
+  }
+
   /**
    * Sends a message to the GPT model.
    *
@@ -537,6 +602,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws IOException if there is an I/O error
    */
   private void sendMessage() throws ApiProxyException, IOException {
+    setThinkingBubbleVisibility(true);
+
     String message = txtInput.getText().trim(); // Get the user's message
 
     if (message.isEmpty()) {
@@ -593,6 +660,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void appendChatMessage(ChatMessage msg) {
+
     // Get the conversation history
     Map<String, List<ChatMessage>> chatHistory = context.getChatHistory();
     String promptFile = getPromptFileForProfession(profession);
@@ -679,12 +747,10 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Add the messageContainer to the chatContainer (VBox)
     chatContainer.getChildren().add(messageContainer);
 
-    // Scroll to the bottom of the chat
-    Platform.runLater(
-        () -> {
-          chatScrollPane.layout();
-          chatScrollPane.setVvalue(chatScrollPane.getVmax());
-        });
+    // pause.play();
+    if (!role.equals("user")) {
+      setThinkingBubbleVisibility(false);
+    }
   }
 
   // Helper method to set visibility based on the random index
