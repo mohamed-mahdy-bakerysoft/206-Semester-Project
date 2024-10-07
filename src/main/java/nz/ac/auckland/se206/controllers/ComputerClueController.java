@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -162,7 +163,7 @@ public class ComputerClueController extends ClueController {
    * @throws IOException if there is an I/O error during scene transition
    */
   public void handleEnter(KeyEvent keyEvent) throws IOException {
-    if (keyEvent.getCode().toString().equals("ENTER")) {
+    if (keyEvent.getCode() == KeyCode.ENTER) {
       handlePassword(null);
     }
   }
