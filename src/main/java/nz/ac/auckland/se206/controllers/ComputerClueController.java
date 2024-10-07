@@ -52,6 +52,7 @@ public class ComputerClueController extends ClueController {
   // FXML components representing various clickable elements on the computer clue scene.
   @FXML private ImageView passwordHint;
   @FXML private Rectangle rectOpenEmail;
+  @FXML private Rectangle rectOpenEmailTherapy;
   @FXML private Rectangle rectEscape;
   @FXML private Rectangle rectBackToInbox;
   @FXML private Rectangle rectInternetExplorer;
@@ -91,6 +92,10 @@ public class ComputerClueController extends ClueController {
       case "rectOpenEmail":
         // Navigate to the scene associated with opening an email
         App.setRoot("computerclue3");
+        break;
+      case "rectOpenEmailTherapy":
+        // Navigate to the scene associated with opening an email
+        App.setRoot("computerclue5");
         break;
       case "rectEscape":
         // Navigate to the scene associated with escaping
