@@ -7,25 +7,24 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndingController">
    <children>
-      <ImageView fitHeight="430.0" fitWidth="767.0" layoutX="-106.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="746.0" fitWidth="1239.0" layoutX="-69.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/youwin.png" />
+            <Image url="@../images/WinScreen.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback" editable="false" layoutX="526.0" layoutY="72.0" prefHeight="567.0" prefWidth="528.0" style="-fx-control-inner-background: #D1B266;" text="Feedback:" wrapText="true">
+      <TextArea fx:id="feedback" editable="false" layoutX="239.0" layoutY="142.0" prefHeight="515.0" prefWidth="592.0" wrapText="true">
          <font>
             <Font name="Courier New" size="18.0" />
          </font></TextArea>
-      <Text layoutX="526.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Feedback:" wrappingWidth="226.8369140625">
-         <font>
-            <Font name="Courier New Bold" size="27.0" />
-         </font>
-      </Text>
-      <Button fx:id="restartButton" layoutX="154.0" layoutY="463.0" onAction="#onHandleRestartClick" prefHeight="65.0" prefWidth="244.0" stylesheets="@../css/styles.css" text="Restart Game">
+      <ImageView fitHeight="409.0" fitWidth="450.0" layoutX="572.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/passed.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="restartButton" layoutX="903.0" layoutY="23.0" onAction="#onHandleRestartClick" prefHeight="46.0" prefWidth="155.0" stylesheets="@../css/styles.css" text="Restart Game">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
