@@ -24,7 +24,7 @@
         <Image url="@../images/Alice-Wave.png" />
       </image>
     </ImageView>
-    <ImageView fitHeight="842.0" fitWidth="852.0" layoutX="118.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+    <ImageView fitHeight="457.0" fitWidth="744.0" layoutX="191.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" smooth="false">
       <image>
         <Image url="@../images/Cutscene_ChatBox.png" />
       </image>
@@ -66,14 +66,14 @@
     </ImageView>
 
     <!-- Dialogue Text -->
-    <Label fx:id="dialogueText" alignment="TOP_LEFT" layoutX="153.0" layoutY="450.0" prefHeight="200.0" prefWidth="783.0" style="-fx-padding: 15;" textFill="#070707" wrapText="true">
+    <Label fx:id="dialogueText" alignment="TOP_LEFT" layoutX="213.0" layoutY="469.0" onKeyPressed="#onHandleEnterKey" prefHeight="178.0" prefWidth="697.0" style="-fx-padding: 15;" textFill="#070707" wrapText="true">
       <font>
         <Font name="Courier New" size="21.0" />
       </font>
     </Label>
 
     <!-- Next Button -->
-    <Button fx:id="btnNext" layoutX="767.0" layoutY="609.0" onAction="#onNextDialogue" onKeyPressed="#onHandleEnterKey" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
+    <Button fx:id="btnNext" layoutX="734.0" layoutY="601.0" onAction="#onNextDialogue" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
 
     <!-- Skip Button -->
     <Button fx:id="btnSkip" layoutX="884.0" layoutY="30.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
