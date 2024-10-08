@@ -48,7 +48,6 @@ public class CutsceneController {
     dialogueLines.add("Alice: And John the Janitor, known to be an ex-convict.");
     dialogueLines.add("Alice: Chat with all of these suspects and find clues in the crime scene.");
     dialogueLines.add("Alice: Good luck Agent, the fate of the painting is in your hands.");
-    dialogueLines.add("Player: Sounds complicated. I'll need to investigate them all.");
 
     // Display the first line of dialogue
     displayNextDialogue();

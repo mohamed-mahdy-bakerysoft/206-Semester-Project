@@ -48,7 +48,7 @@ public class StartRoomController {
   private void onStart(ActionEvent event)
       throws ApiProxyException, IOException, URISyntaxException {
     // Get the instance of TimeManager and set the interval to 300 seconds
-    // Load and play the opening sound
+    // Load and play the opening sound (MOVE LATER)
     sound = new Media(App.class.getResource("/sounds/opening_sound.mp3").toURI().toString());
     player = new MediaPlayer(sound);
     player.play();

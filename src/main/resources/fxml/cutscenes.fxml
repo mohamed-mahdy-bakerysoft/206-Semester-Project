@@ -12,19 +12,19 @@
 
   <children>
     <!-- Background Image -->
-    <ImageView fitHeight="745.0" fitWidth="1245.0" layoutX="-74.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fitHeight="705.0" fitWidth="1254.0" layoutX="-83.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../images/CutSceneBackground.png" />
       </image>
     </ImageView>
 
     <!-- Alice's Image -->
-    <ImageView fx:id="aliceImage" fitHeight="541.0" fitWidth="542.0" layoutX="273.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="aliceImage" fitHeight="564.0" fitWidth="562.0" layoutX="263.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../images/Alice-Wave.png" />
       </image>
     </ImageView>
-    <ImageView fitHeight="842.0" fitWidth="852.0" layoutX="104.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+    <ImageView fitHeight="842.0" fitWidth="852.0" layoutX="118.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true" smooth="false">
       <image>
         <Image url="@../images/Cutscene_ChatBox.png" />
       </image>
@@ -66,20 +66,20 @@
     </ImageView>
 
     <!-- Dialogue Text -->
-    <Label fx:id="dialogueText" layoutX="156.0" layoutY="439.0" prefHeight="148.0" prefWidth="726.0" style="-fx-padding: 15;" textFill="#070707" wrapText="true">
+    <Label fx:id="dialogueText" alignment="TOP_LEFT" layoutX="153.0" layoutY="450.0" prefHeight="200.0" prefWidth="783.0" style="-fx-padding: 15;" textFill="#070707" wrapText="true">
       <font>
-        <Font name="Arial" size="26.0" />
+        <Font name="Courier New" size="21.0" />
       </font>
     </Label>
 
     <!-- Next Button -->
-    <Button fx:id="btnNext" layoutX="884.0" layoutY="124.0" onAction="#onNextDialogue" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Next" />
+    <Button fx:id="btnNext" layoutX="767.0" layoutY="609.0" onAction="#onNextDialogue" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
 
     <!-- Skip Button -->
-    <Button fx:id="btnSkip" layoutX="885.0" layoutY="41.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip" />
-    <Text fill="WHITE" layoutX="47.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="April 6th 2024 PI Master’s HQ" wrappingWidth="358.2530212402344">
+    <Button fx:id="btnSkip" layoutX="884.0" layoutY="30.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
+    <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="April 6th 2024 PI Master’s HQ" wrappingWidth="335.2530212402344">
       <font>
-        <Font name="Courier New Bold" size="37.0" />
+        <Font name="Courier New Bold" size="29.0" />
       </font>
     </Text>
   </children>
