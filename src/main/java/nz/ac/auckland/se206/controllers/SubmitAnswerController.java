@@ -108,6 +108,7 @@ public class SubmitAnswerController {
   @FXML private TextArea answerTxtArea; // Text area for player's answer
 
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
+  private boolean once = true;
 
   /**
    * Initializes the controller, setting up the timer and resetting the first-time flag if
@@ -206,8 +207,9 @@ public class SubmitAnswerController {
    */
   @FXML
   private void handleEnterKey(KeyEvent event) throws IOException {
-    if (event.getCode().equals(KeyCode.ENTER)) {
+    if (event.getCode().equals(KeyCode.ENTER) && once) {
       sendAnswer(); // Call the same method for submitting the answer
+      once = false; // Set the flag to prevent multiple submissions
     }
   }
 
