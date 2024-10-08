@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionRequest;
 import nz.ac.auckland.apiproxy.chat.openai.ChatCompletionResult;
 import nz.ac.auckland.apiproxy.chat.openai.ChatMessage;
@@ -36,6 +39,8 @@ public class SubmitAnswerController {
   private static boolean isFirstTime = true; // Flag to check if it's the player's first interaction
   public static TimeManager timeManager =
       TimeManager.getInstance(); // Singleton instance of TimeManager
+  private static int counter = 0;
+  private Timeline timeline; // Timeline for timer updates
 
   /**
    * Gets the current feedback.
@@ -115,13 +120,71 @@ public class SubmitAnswerController {
    * necessary.
    */
   public void initialize() throws URISyntaxException {
-
-    if (isFirstTime == true) {
+    if (isFirstTime) {
       timeManager.stopTimer(); // Stop the timer if it's the first time
       timeManager.setInterval(60); // Set the timer interval to 60 seconds
     }
+
+    // Initialize the counter to the interval
     timeManager.startTimer(); // Start the timer
     timeManager.setTimerLabel(mins, secs, dot); // Set the timer labels
+
+    // Set up the timeline to run every second
+    timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1),
+                event -> {
+                  try {
+                    updateTimer(); // Call the updateTimer() method with proper exception handling
+                  } catch (IOException e) {
+                    e.printStackTrace(); // Handle the IOException
+                  }
+                }));
+    timeline.setCycleCount(Timeline.INDEFINITE); // Repeat indefinitely
+    timeline.play(); // Start the timeline
+  }
+
+  private boolean sendOnce = true;
+
+  private void updateTimer() throws IOException {
+    counter = timeManager.getInterval();
+    System.out.println(counter); // Debugging log to check the countdown
+
+    if (counter <= 0) {
+      timeline.stop(); // Stop the timer when counter reaches 0
+      counter = 0; // Ensure counter stays at 0
+      if (thief == null) {
+        feed = "You did not select a suspect in time!";
+        EndingController.setFeed(feed);
+        App.setRoot("badending");
+        return;
+      }
+
+      if ((answer == null || answer.equals("")) && sendOnce) {
+        feed = "You ran out of time! You did not write anything down";
+        EndingController.setThief(thief);
+        EndingController.setFeed(feed);
+
+        if (thief.equals("janitor")) {
+          App.setRoot("badending");
+          TimeManager.getInstance().stopTimer();
+        } else if (thief.equals("hos")) {
+          App.setRoot("goodending2");
+        } else if (thief.equals("curator")) {
+          App.setRoot("badending");
+          TimeManager.getInstance().stopTimer();
+        } else {
+          System.err.println("error");
+        }
+        sendOnce = false;
+        return;
+      }
+      if (!answer.equals("") && sendOnce) { // If an answer has been provided, send it
+        sendAnswer();
+        sendOnce = false;
+      }
+    }
   }
 
   /**
@@ -129,6 +192,9 @@ public class SubmitAnswerController {
    * updates and invokes GPT model interactions.
    */
   public void sendAnswer() {
+    if (timeline == null) {
+      timeline.stop();
+    }
     if (TimeManager.getInstance().getPlayer() != null) {
       TimeManager.getInstance().getPlayer().stop();
     }
@@ -136,16 +202,18 @@ public class SubmitAnswerController {
       submitButton.setDisable(true);
     } // Disable the submit button to prevent multiple submissions
     timeManager.stopTimer(); // Stop the timer
-    if (answerTxtArea.getText().isEmpty()) {
+    if (answer.equals("")) {
       return; // Return if the answer text area is empty
     }
 
     Map<String, String> map = new HashMap<>();
-    map.put("answer", answerTxtArea.getText()); // Put the answer in the map
+    map.put("answer", answer); // Put the answer in the map
     map.put("thief", thief); // Put the selected thief in the map
 
+    if (progressBar == null) {
+      return;
+    }
     progressBar.setVisible(true); // Show the progress bar
-
     Task<Void> task =
         new Task<Void>() {
           @Override
@@ -182,6 +250,7 @@ public class SubmitAnswerController {
   @FXML
   private void savefeedback() {
     answer = answerTxtArea.getText(); // Save the answer from the text area
+    System.out.println(answer);
   }
 
   /**

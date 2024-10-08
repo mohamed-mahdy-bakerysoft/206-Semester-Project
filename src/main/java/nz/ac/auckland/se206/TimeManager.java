@@ -2,7 +2,6 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Map;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -200,10 +199,17 @@ public class TimeManager {
               && RoomController.getClueHasBeenInteractedWith())) {
         // Move to game over state
         SubmitAnswerController.setIsFirstTime(false);
-        if (SubmitAnswerController.getAnswer() != null) {
-          Map<String, String> map = SubmitAnswerController.intiateanswer();
-          SubmitAnswerController intiateanswer = new SubmitAnswerController();
-          intiateanswer.intizliaseAndGpt(map);
+        if (SubmitAnswerController.getAnswer() != null
+            || SubmitAnswerController.getAnswer() == null) {
+          // TimeManager.getInstance().stopTimer();
+          if (player != null) {
+            player.stop();
+            player = null;
+          }
+          return;
+          // Map<String, String> map = SubmitAnswerController.intiateanswer();
+          // SubmitAnswerController intiateanswer = new SubmitAnswerController();
+          // intiateanswer.intizliaseAndGpt(map);
         } else {
           String thief = SubmitAnswerController.getThief();
           // Check if thief is null
