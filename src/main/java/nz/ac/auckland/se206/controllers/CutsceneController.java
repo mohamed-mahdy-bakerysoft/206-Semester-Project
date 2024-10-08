@@ -8,7 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
+import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 
 public class CutsceneController {
@@ -121,6 +124,22 @@ public class CutsceneController {
     PauseTransition pause = new PauseTransition(Duration.seconds(2)); // Adjust duration if needed
     pause.setOnFinished(event -> btnNext.setDisable(false));
     pause.play();
+  }
+
+  /**
+   * Handles the "Enter" key press in the TextField to send a message.
+   *
+   * @param event the KeyEvent triggered by pressing a key
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws IOException if there is an I/O error
+   */
+  @FXML
+  private void onHandleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      if (!btnNext.isDisabled()) {
+        onNextDialogue();
+      }
+    }
   }
 
   // This method handles the transition to the actual game start scene

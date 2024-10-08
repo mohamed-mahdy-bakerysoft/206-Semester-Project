@@ -73,7 +73,7 @@
     </Label>
 
     <!-- Next Button -->
-    <Button fx:id="btnNext" layoutX="767.0" layoutY="609.0" onAction="#onNextDialogue" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
+    <Button fx:id="btnNext" layoutX="767.0" layoutY="609.0" onAction="#onNextDialogue" onKeyPressed="#onHandleEnterKey" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
 
     <!-- Skip Button -->
     <Button fx:id="btnSkip" layoutX="884.0" layoutY="30.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
