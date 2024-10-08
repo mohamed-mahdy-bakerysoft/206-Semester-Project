@@ -602,13 +602,14 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @throws IOException if there is an I/O error
    */
   private void sendMessage() throws ApiProxyException, IOException {
-    setThinkingBubbleVisibility(true);
 
     String message = txtInput.getText().trim(); // Get the user's message
 
     if (message.isEmpty()) {
       return;
     }
+
+    setThinkingBubbleVisibility(true);
 
     // Create a ChatMessage for the user's input
     ChatMessage userMessage = new ChatMessage("user", message);
