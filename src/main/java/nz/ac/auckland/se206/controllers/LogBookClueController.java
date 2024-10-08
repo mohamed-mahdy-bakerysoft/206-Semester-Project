@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -16,6 +17,10 @@ import nz.ac.auckland.se206.App;
  */
 public class LogBookClueController extends ClueController {
 
+  @FXML private ImageView leftTurnPage;
+  @FXML private ImageView rightTurnPage;
+  @FXML private ImageView leftIndicator;
+  @FXML private ImageView rightIndicator;
   @FXML private Rectangle rectLogBook;
   @FXML private Rectangle rectPageTurnRight;
   @FXML private Rectangle rectPageTurnRight2;
@@ -76,5 +81,45 @@ public class LogBookClueController extends ClueController {
       App.setRoot("logbookclue2");
     }
     player.play();
+  }
+
+  /**
+   * Handles mouse hover events on the clues in the room.
+   *
+   * @param event the mouse event triggered by hovering over a clue
+   */
+  @FXML
+  private void onHoverPageTurn(MouseEvent event) {
+    Rectangle hoveredClue = (Rectangle) event.getSource();
+    switch (hoveredClue.getId()) {
+      case "rectPageTurnRight", "rectPageTurnRight2":
+        rightIndicator.setVisible(false);
+        rightTurnPage.setVisible(true);
+        break;
+      case "rectPageTurnLeft", "rectPageTurnLeft2":
+        leftTurnPage.setVisible(true);
+        leftIndicator.setVisible(false);
+        break;
+    }
+  }
+
+  /**
+   * Handles mouse exit events on the clues in the room.
+   *
+   * @param event the mouse event triggered by exiting hover of a clue
+   */
+  @FXML
+  private void onExitPageTurn(MouseEvent event) {
+    Rectangle hoveredClue = (Rectangle) event.getSource();
+    switch (hoveredClue.getId()) {
+      case "rectPageTurnRight", "rectPageTurnRight2":
+        rightIndicator.setVisible(true);
+        rightTurnPage.setVisible(false);
+        break;
+      case "rectPageTurnLeft", "rectPageTurnLeft2":
+        leftTurnPage.setVisible(false);
+        leftIndicator.setVisible(true);
+        break;
+    }
   }
 }

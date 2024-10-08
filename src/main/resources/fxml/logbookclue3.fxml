@@ -44,7 +44,17 @@
             <Font name="Curlz MT" size="45.0" />
          </font>
       </Label>
-      <Rectangle fx:id="rectPageTurnLeft2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="106.0" layoutX="117.0" layoutY="570.0" onMouseClicked="#handleTurnPageClickLeft" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="114.0">
+      <ImageView fx:id="leftIndicator" fitHeight="69.0" fitWidth="58.0" layoutX="112.0" layoutY="609.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Turn%20page%20indicator.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="leftTurnPage" fitHeight="150.0" fitWidth="200.0" layoutX="105.0" layoutY="540.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/turnPageLeft.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectPageTurnLeft2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" focusTraversable="true" height="76.0" layoutX="109.0" layoutY="591.0" onMouseClicked="#handleTurnPageClickLeft" onMouseEntered="#onHoverPageTurn" onMouseExited="#onExitPageTurn" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="75.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
