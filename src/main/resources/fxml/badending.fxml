@@ -10,16 +10,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1100.0" style="-fx-background-color: #D1B266;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndingController">
    <children>
-      <ImageView fitHeight="492.0" fitWidth="863.0" layoutX="119.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="660.0" fitWidth="1169.0" layoutX="-34.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/youlose.png" />
+            <Image url="@../images/LoseScreen.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback2" editable="false" layoutX="259.0" layoutY="486.0" prefHeight="80.0" prefWidth="582.0" style="-fx-control-inner-background: #D1B266;" wrapText="true">
+      <TextArea fx:id="feedback2" editable="false" layoutX="269.0" layoutY="447.0" prefHeight="198.0" prefWidth="561.0" style="-fx-background-color: white;" wrapText="true">
          <font>
             <Font name="Courier New" size="18.0" />
          </font></TextArea>
-      <Button fx:id="restartButton" layoutX="449.0" layoutY="590.0" onAction="#onHandleRestartClick" prefHeight="63.0" prefWidth="204.0" stylesheets="@../css/styles.css" text="Restart Game">
+      <ImageView fitHeight="169.0" fitWidth="184.0" layoutX="666.0" layoutY="511.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/failed.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="restartButton" layoutX="898.0" layoutY="24.0" onAction="#onHandleRestartClick" prefHeight="47.0" prefWidth="159.0" stylesheets="@../css/styles.css" text="Restart Game">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

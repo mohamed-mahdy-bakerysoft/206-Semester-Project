@@ -135,6 +135,11 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
+    // add icon to the window:
+    stage
+        .getIcons()
+        .add(new javafx.scene.image.Image(App.class.getResourceAsStream("/images/icon.png")));
+
     SceneManager.addUi(AppUi.START, loadFxml("start"));
     SceneManager.addUi(AppUi.ROOM, loadFxml("room"));
     SceneManager.addUi(AppUi.GOOD_END, loadFxml("goodending"));
