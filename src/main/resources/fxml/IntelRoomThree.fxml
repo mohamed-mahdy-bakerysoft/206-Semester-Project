@@ -96,17 +96,17 @@
         <Image url="@../images/WillInit2.png" />
       </image>
     </ImageView>
-    <ImageView fx:id="thief0" fitHeight="570.0" fitWidth="706.0" layoutX="218.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="thief0" fitHeight="570.0" fitWidth="706.0" layoutX="191.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/headofsecurity%20-%20CROPPED.png" />
       </image>
     </ImageView>
-    <ImageView fx:id="thief1" fitHeight="533.0" fitWidth="706.0" layoutX="221.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="thief1" fitHeight="669.0" fitWidth="923.0" layoutX="228.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/hos2.png" />
       </image>
     </ImageView>
-    <ImageView fx:id="thief2" fitHeight="577.0" fitWidth="776.0" layoutX="182.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="thief2" fitHeight="690.0" fitWidth="669.0" layoutX="235.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/hos3.png" />
       </image>
