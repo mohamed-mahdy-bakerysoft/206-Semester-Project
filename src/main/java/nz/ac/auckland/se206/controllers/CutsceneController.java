@@ -28,8 +28,6 @@ public class CutsceneController {
     this.dialogueLines = new ArrayList<>();
   }
 
-  @FXML private ImageView aliceImage;
-
   @FXML private Label dialogueText;
   @FXML private Label mins;
   @FXML private Label dot;
@@ -39,6 +37,8 @@ public class CutsceneController {
 
   @FXML private Button btnSkip;
 
+  @FXML private ImageView aliceImage;
+  @FXML private ImageView aliceImage2;
   @FXML private ImageView newspaperImage;
   @FXML private ImageView paintingImage;
   @FXML private ImageView williamImage;
@@ -136,6 +136,14 @@ public class CutsceneController {
     // Control image visibility based on current dialogue index
     newspaperImage.setVisible(currentDialogueIndex == 0);
     paintingImage.setVisible(currentDialogueIndex == 0);
+
+    aliceImage.setVisible(currentDialogueIndex == 0);
+    aliceImage2.setVisible(
+        currentDialogueIndex == 1
+            || currentDialogueIndex == 2
+            || currentDialogueIndex == 3
+            || currentDialogueIndex == 4);
+
     frankImage.setVisible(
         currentDialogueIndex == 2 || currentDialogueIndex == 3 || currentDialogueIndex == 4);
     williamImage.setVisible(currentDialogueIndex == 3 || currentDialogueIndex == 4);
