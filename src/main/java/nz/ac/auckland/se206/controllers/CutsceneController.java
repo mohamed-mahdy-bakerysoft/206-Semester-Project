@@ -18,6 +18,13 @@ import nz.ac.auckland.se206.App;
 
 public class CutsceneController {
 
+  public CutsceneController() {
+    this.currentDialogueIndex = 0;
+    this.leftProgressBar = new ProgressBar();
+    this.rightProgressBar = new ProgressBar();
+    this.dialogueLines = new ArrayList<>();
+  }
+
   @FXML private ImageView aliceImage;
 
   @FXML private Label dialogueText;
@@ -43,7 +50,6 @@ public class CutsceneController {
   @FXML
   public void initialize() {
     currentDialogueIndex = 0;
-
     // List of dialogue lines for Alice and the player
     dialogueLines = new ArrayList<>();
     dialogueLines.add(
