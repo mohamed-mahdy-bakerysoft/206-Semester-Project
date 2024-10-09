@@ -22,7 +22,7 @@ public class CutsceneController {
   public static TimeManager timeManager =
       TimeManager.getInstance(); // Singleton instance of TimeManager
 
-  public static void setFirstTime(boolean first){
+  public static void setFirstTime(boolean first) {
     firstTime = first;
   }
 
@@ -83,9 +83,9 @@ public class CutsceneController {
     leftProgressBar.setProgress(1.0);
     rightProgressBar.setProgress(1.0);
 
-    if(firstTime){
+    if (firstTime) {
       // Display the first line of dialogue
-    displayNextDialogue();
+      displayNextDialogue();
     }
   }
 
@@ -157,6 +157,7 @@ public class CutsceneController {
     johnImage.setVisible(currentDialogueIndex == 4);
 
     if (currentDialogueIndex == 5) {
+      aliceImage.setVisible(true);
       frankImage.setVisible(false);
       williamImage.setVisible(false);
       johnImage.setVisible(false);
