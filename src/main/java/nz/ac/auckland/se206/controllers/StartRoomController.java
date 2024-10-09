@@ -57,6 +57,7 @@ public class StartRoomController {
     timeManager.setInterval(300);
       timeManager.startTimer(); // Start the game timer
     // Transition to the next room
+    CutsceneController.setFirstTime(true);
     App.setRoot("cutscenes");
 
   }

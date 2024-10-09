@@ -18,8 +18,13 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
 
 public class CutsceneController {
+  public static boolean firstTime = false;
   public static TimeManager timeManager =
       TimeManager.getInstance(); // Singleton instance of TimeManager
+
+  public static void setFirstTime(boolean first){
+    firstTime = first;
+  }
 
   public CutsceneController() {
     this.currentDialogueIndex = 0;
@@ -77,8 +82,10 @@ public class CutsceneController {
     leftProgressBar.setProgress(1.0);
     rightProgressBar.setProgress(1.0);
 
-    // Display the first line of dialogue
+    if(firstTime){
+      // Display the first line of dialogue
     displayNextDialogue();
+    }
   }
 
   // This method displays the next dialogue in the sequence

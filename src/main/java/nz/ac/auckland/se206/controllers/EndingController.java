@@ -99,6 +99,7 @@ return;
    */
   @FXML
   private void onHandleRestartClick(ActionEvent event) throws IOException {
+    CutsceneController.setFirstTime(false);
     // Reset the game state
     GameStateContext.getInstance().reset();
 
