@@ -9,7 +9,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.TimeManager;
 
 /**
  * The StartRoomController class manages the interaction within the starting room of the game. It
@@ -49,16 +48,12 @@ public class StartRoomController {
   private void onStart(ActionEvent event)
       throws ApiProxyException, IOException, URISyntaxException {
     // Get the instance of TimeManager and set the interval to 300 seconds
-    TimeManager timeManager = TimeManager.getInstance();
-    timeManager.setInterval(300);
-    timeManager.startTimer(); // Start the game timer
-
-    // Load and play the opening sound
+    // Load and play the opening sound (MOVE LATER)
     sound = new Media(App.class.getResource("/sounds/opening_sound.mp3").toURI().toString());
     player = new MediaPlayer(sound);
     player.play();
 
     // Transition to the next room
-    App.setRoot("room");
+    App.setRoot("cutscenes");
   }
 }

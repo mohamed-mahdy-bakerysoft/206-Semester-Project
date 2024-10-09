@@ -141,6 +141,7 @@ public class App extends Application {
         .add(new javafx.scene.image.Image(App.class.getResourceAsStream("/images/icon.png")));
 
     SceneManager.addUi(AppUi.START, loadFxml("start"));
+    SceneManager.addUi(AppUi.CUTSCENE, loadFxml("cutscenes"));
     SceneManager.addUi(AppUi.ROOM, loadFxml("room"));
     SceneManager.addUi(AppUi.GOOD_END, loadFxml("goodending"));
     SceneManager.addUi(AppUi.BAD_END, loadFxml("badending"));

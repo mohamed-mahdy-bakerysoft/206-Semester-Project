@@ -112,6 +112,8 @@ public class RoomController implements RoomNavigationHandler {
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
     if (isFirstTimeInit) {
+      timeManager.setInterval(300);
+      timeManager.startTimer(); // Start the game timer
       System.out.println("First time");
       isFirstTimeInit = false;
     }

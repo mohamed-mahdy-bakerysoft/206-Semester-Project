@@ -18,6 +18,7 @@ public class SceneManager {
     ROOM,
     CHAT,
     START,
+    CUTSCENE,
     GOOD_END,
     BAD_END,
     CAMERA,
