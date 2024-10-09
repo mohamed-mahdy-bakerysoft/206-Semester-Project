@@ -51,6 +51,7 @@ public class CutsceneController {
   private List<String> dialogueLines;
   private int currentDialogueIndex;
   private Timeline progressTimeline;
+  private boolean isGameStarted = false;
 
   // This method initializes the cutscene by loading Alice's dialogue
   @FXML
@@ -180,11 +181,17 @@ public class CutsceneController {
       progressTimeline.stop(); // Stop the timeline if it's running
     }
 
-    try {
-      System.out.println("Starting game...");
-      App.setRoot("room"); // Assuming 'room' is the first game scene
-    } catch (IOException e) {
-      e.printStackTrace();
+    if (!isGameStarted) {
+      isGameStarted = true;
+      try {
+        System.out.println("Starting game...");
+        App.setRoot("room"); // Assuming 'room' is the first game scene
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      System.out.println("Game already started.");
+      return;
     }
   }
 }
