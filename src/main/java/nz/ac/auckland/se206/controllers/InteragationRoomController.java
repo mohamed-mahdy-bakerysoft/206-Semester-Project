@@ -726,7 +726,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
     if (role.equals("user")) {
       backgroundFill = new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), Insets.EMPTY);
     } else {
-      backgroundFill = new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY);
+      backgroundFill =
+          new BackgroundFill(Color.rgb(210, 210, 210), new CornerRadii(10), Insets.EMPTY);
     }
     messageFlow.setBackground(new Background(backgroundFill));
 

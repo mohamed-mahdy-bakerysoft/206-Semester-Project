@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
@@ -122,10 +123,19 @@
                   <Image url="@../images/ChatBox%20-%20John.png" />
                </image>
             </ImageView>
-        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="-8.0" layoutY="-28.0" prefHeight="185.0" prefWidth="722.0" vbarPolicy="ALWAYS">
+        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="-8.0" layoutY="-28.0" prefHeight="185.0" prefWidth="722.0" stylesheets="@../css/styles.css" vbarPolicy="ALWAYS">
           <content>
             <VBox fx:id="chatContainer" prefHeight="184.0" prefWidth="698.0" spacing="10.0" />
           </content>
+               <styleClass>
+                  <String fx:value="decrement-arrow" />
+                  <String fx:value="decrement-button" />
+                  <String fx:value="increment-arrow" />
+                  <String fx:value="scroll-bar" />
+                  <String fx:value="scroll-pane" />
+                  <String fx:value="thumb" />
+                  <String fx:value="track" />
+               </styleClass>
         </ScrollPane>
         <TextField fx:id="txtInput" layoutX="-8.0" layoutY="157.0" onKeyPressed="#onHandleEnterKey" prefHeight="39.0" prefWidth="610.0">
           <font>

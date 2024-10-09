@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
@@ -115,17 +116,26 @@
         <Cursor fx:constant="HAND" />
       </cursor>
     </Rectangle>
-    <Group fx:id="chatGroup" layoutX="197.0" layoutY="471.0">
+    <Group fx:id="chatGroup" layoutX="197.0" layoutY="471.0" visible="false">
       <children>
             <ImageView fitHeight="438.0" fitWidth="773.0" layoutX="-33.0" layoutY="-158.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/ChatBox%20-%20Will.png" />
                </image>
             </ImageView>
-        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="-8.0" layoutY="-28.0" prefHeight="185.0" prefWidth="722.0" vbarPolicy="ALWAYS">
+        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="-8.0" layoutY="-28.0" prefHeight="185.0" prefWidth="722.0" stylesheets="@../css/styles.css" vbarPolicy="ALWAYS">
           <content>
             <VBox fx:id="chatContainer" prefHeight="184.0" prefWidth="698.0" spacing="10.0" />
           </content>
+               <styleClass>
+                  <String fx:value="decrement-arrow" />
+                  <String fx:value="decrement-button" />
+                  <String fx:value="increment-arrow" />
+                  <String fx:value="scroll-bar" />
+                  <String fx:value="scroll-pane" />
+                  <String fx:value="thumb" />
+                  <String fx:value="track" />
+               </styleClass>
         </ScrollPane>
         <TextField fx:id="txtInput" layoutX="-8.0" layoutY="157.0" onKeyPressed="#onHandleEnterKey" prefHeight="39.0" prefWidth="610.0">
           <font>
