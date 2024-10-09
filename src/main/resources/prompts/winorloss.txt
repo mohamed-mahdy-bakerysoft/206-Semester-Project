@@ -11,28 +11,24 @@ ONLY Mention The fact that they guessed the wrong Thief. This SHOULD ONLY TAKE O
 Otherwise if they guessed the right person as the thief, compare the inputted answer with the following info:
 
 The story goes as follows:
-In a prestigious art museum, a complex heist takes place at night. The stolen piece is a priceless painting, and suspicion falls on the staff members, each with a possible motive.
-
+In a prestigious art museum, a complex heist takes place at night on the 05/04/2024. The stolen piece is a priceless painting, and suspicion falls on the staff members, each with a possible motive.
 John, the Janitor:
 Backstory: John, a former skilled robber, is trying to turn his life around. Miss Teresa, the art curator’s mother, gave him the job to help him start fresh. Her words, "It’s never too late to change things around for the better," gave him hope for redemption.
 Suspect Status: John's criminal past makes him an easy target, and he was scheduled to work the night of the heist. However, he claims that his keycard was stolen before his shift. He insists that he had nothing to do with the crime and was framed.
 Involvement: William, the Head of Security, stole John's keycard during a casual chat to use it in the robbery, knowing John’s criminal history would make him a prime suspect.
-
 William, the Head of Security (HOS):
 Backstory: William is haunted by the loss of his partner/wife during a robbery gone wrong in 2023. The trauma has led him into a deep depression and crushing debt from therapy bills. He has since developed Obsessive-Compulsive Personality Disorder (OCPD) from the fear that he might lose another friend, which makes him obsess over security and maintenance.
 Suspect Status: William saw an opportunity to steal the valuable painting and used his position to delay the shipment by citing maintenance issues, and blames it on the fact that Frank continues to decline his security maintenance requests. He also stole the janitor’s keycard to frame him.
 Involvement: William carried out the theft. He blames the faulty security system, citing his repeated maintenance requests that were denied by Frank, the art curator, as the reason the security wasn’t working properly. He stole the painting now in retaliation against Frank who ignored his warnings about security, but also to clear up his personal financial debts from therapy bills.
-
 Frank, the Art Curator:
 Backstory: The stolen painting was created by Frank’s late mother, Teresa Harris. Frank has always been obsessed with the painting, seeing it as a way to honour her memory. He had plans to bring the painting home for safekeeping, but the shipment was delayed due to Security Staff Shortages to oversee the shipment (This is just an excuse made by William).
 Suspect Status: Frank’s emotional attachment to the painting, his controlling nature, and his access to everything in the museum make him suspicious. His behaviour has become erratic since the theft, which only adds to the suspicion.
-Involvement: Frank was manipulated by William. He was uneasy about the shipment delay and the constant maintenance requests (Frank ignored them thinking it was just Williams OCPD, but it still does make Frank feel uneasy), and his emotional state made him seem guilty, though he had no direct involvement in the theft.
-
+Involvement: Frank was manipulated by William. He was uneasy about the shipment delay (which was originally scheduled to ship to his house on the 05/04/2024 and was rescheduled to  06/04/2024) and the constant maintenance requests (Frank ignored them thinking it was just Williams OCPD, but it still does make Frank feel uneasy), and his emotional state made him seem guilty, though he had no direct involvement in the theft.
 How the game works:
 through interacting the clues, the player should realise:
 - Through interacting with the curators logbook, it clears up suspicion of the curator, he wasn’t there on the night of the heist.
   but shows that the head of security and janitor was in the gallery that night. It does also show that the intended shipping of the painting to the Curators
-  house was also rescheduled before the robbery occured and there a numerous security maintaince requests declined by Frank 
+  house was also rescheduled before the robbery occured and there a numerous security maintaince requests declined by Frank, made by William.
 
 - Janitor's ID found at the crime scene in the rubbish bin, at first he will be lying to the player at the start,
   However, after finding the keycard, the janitor should confess to the player he didn't want to tell anybody as he could lose the employee of the month if his boss knows that he has lost his keycard.
