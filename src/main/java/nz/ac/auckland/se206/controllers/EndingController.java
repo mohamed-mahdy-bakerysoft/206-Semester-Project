@@ -61,32 +61,14 @@ public class EndingController {
     // Check if feedback is null
     if (thief == null && feed != null) {
       System.out.println("thief is null");
-      feedback2.setText(feed);
+      feedback.setText(feed);
       return;
     }
     if (feed == null) {
-      // Check if thief is null
-      if (thief == null) {
-        System.out.println("thief is null");
-        return;
-      }
-      // Display feedback unavailable message based on the thief
-      if (thief.equals("hos")) {
-        feedback.appendText("feedback unavailable");
-        return;
-      } else {
-        feedback2.appendText("feedback unavailable");
-        return;
-      }
+return; 
     }
-    // Display feedback based on the thief
-    if (thief.equals("hos")) {
-      feedback.setText(feed);
-    } else if (thief.equals("curator")) {
-      feedback2.setText(feed);
-    } else if (thief.equals("janitor")) {
-      feedback2.setText(feed);
-    }
+  
+    feedback.setText(feed);
 
     // Log the current game state
     System.out.println("game state:" + RoomController.getGameContext().getCurrentState());

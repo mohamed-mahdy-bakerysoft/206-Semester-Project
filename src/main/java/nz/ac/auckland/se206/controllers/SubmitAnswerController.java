@@ -149,7 +149,6 @@ public class SubmitAnswerController {
 
   private void updateTimer() throws IOException {
     counter = timeManager.getInterval();
-    System.out.println(counter); // Debugging log to check the countdown
 
     if (counter <= 0) {
       timeline.stop(); // Stop the timer when counter reaches 0
@@ -162,21 +161,15 @@ public class SubmitAnswerController {
       }
 
       if ((answer == null || answer.equals("")) && sendOnce) {
-        feed = "You ran out of time! You did not write anything down";
+        if (thief.equals("hos")){
+          feed = "You arrested the head of security however he went to court and the judge found him not guilty due to lack of evidence from the dectetive";
+        }
+        else{
+          feed = "You arrested the "+ thief +" however he went to court and the judge found him not guilty due to lack of evidence from the dectetive";
+        }
         EndingController.setThief(thief);
         EndingController.setFeed(feed);
-
-        if (thief.equals("janitor")) {
-          App.setRoot("badending");
-          TimeManager.getInstance().stopTimer();
-        } else if (thief.equals("hos")) {
-          App.setRoot("goodending2");
-        } else if (thief.equals("curator")) {
-          App.setRoot("badending");
-          TimeManager.getInstance().stopTimer();
-        } else {
-          System.err.println("error");
-        }
+        App.setRoot("badending");
         sendOnce = false;
         return;
       }

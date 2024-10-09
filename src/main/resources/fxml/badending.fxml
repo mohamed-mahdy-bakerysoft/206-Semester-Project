@@ -15,7 +15,7 @@
             <Image url="@../images/LoseScreen.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="feedback2" editable="false" layoutX="269.0" layoutY="447.0" prefHeight="198.0" prefWidth="561.0" style="-fx-background-color: white;" wrapText="true">
+      <TextArea fx:id="feedback" editable="false" layoutX="269.0" layoutY="447.0" prefHeight="198.0" prefWidth="561.0" style="-fx-background-color: white;" wrapText="true">
          <font>
             <Font name="Courier New" size="18.0" />
          </font></TextArea>
