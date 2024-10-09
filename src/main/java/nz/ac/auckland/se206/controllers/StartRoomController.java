@@ -9,6 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.TimeManager;
 
 /**
  * The StartRoomController class manages the interaction within the starting room of the game. It
@@ -52,8 +53,11 @@ public class StartRoomController {
     sound = new Media(App.class.getResource("/sounds/opening_sound.mp3").toURI().toString());
     player = new MediaPlayer(sound);
     player.play();
-
+    TimeManager timeManager = TimeManager.getInstance();
+    timeManager.setInterval(300);
+      timeManager.startTimer(); // Start the game timer
     // Transition to the next room
     App.setRoot("cutscenes");
+
   }
 }
