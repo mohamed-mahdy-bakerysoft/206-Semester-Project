@@ -115,19 +115,24 @@
         <Cursor fx:constant="HAND" />
       </cursor>
     </Rectangle>
-    <Group fx:id="chatGroup" layoutX="207.0" layoutY="470.0" visible="false">
+    <Group fx:id="chatGroup" layoutX="197.0" layoutY="471.0">
       <children>
-        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="160.0" prefWidth="707.0" vbarPolicy="ALWAYS">
+            <ImageView fitHeight="438.0" fitWidth="773.0" layoutX="-33.0" layoutY="-158.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/ChatBox%20-%20Will.png" />
+               </image>
+            </ImageView>
+        <ScrollPane fx:id="chatScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="-8.0" layoutY="-28.0" prefHeight="185.0" prefWidth="722.0" vbarPolicy="ALWAYS">
           <content>
-            <VBox fx:id="chatContainer" prefHeight="104.0" prefWidth="698.0" spacing="10.0" />
+            <VBox fx:id="chatContainer" prefHeight="184.0" prefWidth="698.0" spacing="10.0" />
           </content>
         </ScrollPane>
-        <TextField fx:id="txtInput" layoutY="160.0" onKeyPressed="#onHandleEnterKey" prefHeight="46.0" prefWidth="607.0">
+        <TextField fx:id="txtInput" layoutX="-8.0" layoutY="157.0" onKeyPressed="#onHandleEnterKey" prefHeight="39.0" prefWidth="610.0">
           <font>
-            <Font size="18.0" />
+            <Font name="Courier New" size="18.0" />
           </font>
         </TextField>
-        <Button fx:id="btnSend" layoutX="610.0" layoutY="160.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="103.0" stylesheets="@../css/styles.css" text="Send">
+        <Button fx:id="btnSend" layoutX="603.0" layoutY="158.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="113.0" stylesheets="@../css/styles.css" text="Send">
           <font>
             <Font size="20.0" />
           </font>
