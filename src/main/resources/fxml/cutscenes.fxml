@@ -20,11 +20,16 @@
     </ImageView>
 
     <!-- Alice's Image -->
-    <ImageView fx:id="aliceImage" fitHeight="564.0" fitWidth="562.0" layoutX="263.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="aliceImage" fitHeight="564.0" fitWidth="562.0" layoutX="264.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../images/Alice-Wave.png" />
       </image>
     </ImageView>
+      <ImageView fx:id="aliceImage2" fitHeight="531.0" fitWidth="526.0" layoutX="279.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Alice.png" />
+         </image>
+      </ImageView>
     <ImageView fitHeight="457.0" fitWidth="744.0" layoutX="191.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" smooth="false">
       <image>
         <Image url="@../images/Cutscene_ChatBox.png" />
@@ -32,14 +37,14 @@
     </ImageView>
 
     <!-- Newspaper Image (Hidden initially) -->
-    <ImageView fx:id="newspaperImage" fitHeight="200.0" fitWidth="300.0" layoutX="168.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="newspaperImage" fitHeight="218.0" fitWidth="221.0" layoutX="182.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/teresa.png" />
       </image>
     </ImageView>
 
     <!-- Painting Image (Hidden initially) -->
-    <ImageView fx:id="paintingImage" fitHeight="222.0" fitWidth="228.0" layoutX="690.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="paintingImage" fitHeight="383.0" fitWidth="426.0" layoutX="637.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/painting.png" />
       </image>
@@ -83,11 +88,31 @@
     <Button fx:id="btnNext" layoutX="740.0" layoutY="616.0" onAction="#onNextDialogue" prefHeight="35.0" prefWidth="177.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
 
     <!-- Skip Button -->
-    <Button fx:id="btnSkip" layoutX="884.0" layoutY="30.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
+    <Button fx:id="btnSkip" layoutX="910.0" layoutY="147.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
     <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="April 6th 2024 PI Master’s HQ" wrappingWidth="335.2530212402344">
       <font>
         <Font name="Courier New Bold" size="29.0" />
       </font>
     </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="927.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TimerBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="dot" alignment="CENTER" contentDisplay="CENTER" layoutX="965.0" layoutY="40.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="944.0" layoutY="38.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="994.0" layoutY="39.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
   </children>
 </Pane>

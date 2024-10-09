@@ -103,7 +103,7 @@ public class TimeManager {
           || (RoomController.getGameContext().getCurrentState() instanceof Guessing
               && interval <= 11)) {
         // check if media player is playing
-        if (player == null) {
+        if (player == null && interval < 11) {
           sound = new Media(App.class.getResource("/sounds/ticking.mp3").toURI().toString());
           player = new MediaPlayer(sound);
           player.play();
