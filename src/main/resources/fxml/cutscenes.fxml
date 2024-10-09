@@ -83,11 +83,31 @@
     <Button fx:id="btnNext" layoutX="740.0" layoutY="616.0" onAction="#onNextDialogue" prefHeight="35.0" prefWidth="177.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
 
     <!-- Skip Button -->
-    <Button fx:id="btnSkip" layoutX="884.0" layoutY="30.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
+    <Button fx:id="btnSkip" layoutX="910.0" layoutY="147.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
     <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="April 6th 2024 PI Master’s HQ" wrappingWidth="335.2530212402344">
       <font>
         <Font name="Courier New Bold" size="29.0" />
       </font>
     </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="927.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TimerBackground.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="dot" alignment="CENTER" contentDisplay="CENTER" layoutX="965.0" layoutY="40.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="944.0" layoutY="38.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
+      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="994.0" layoutY="39.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+         <font>
+            <Font name="Curlz MT" size="45.0" />
+         </font>
+      </Label>
   </children>
 </Pane>

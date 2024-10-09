@@ -15,8 +15,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.TimeManager;
 
 public class CutsceneController {
+  public static TimeManager timeManager =
+      TimeManager.getInstance(); // Singleton instance of TimeManager
 
   public CutsceneController() {
     this.currentDialogueIndex = 0;
@@ -28,6 +31,9 @@ public class CutsceneController {
   @FXML private ImageView aliceImage;
 
   @FXML private Label dialogueText;
+  @FXML private Label mins;
+  @FXML private Label dot;
+  @FXML private Label secs;
 
   @FXML private Button btnNext;
 
@@ -42,6 +48,7 @@ public class CutsceneController {
   @FXML private ProgressBar leftProgressBar;
   @FXML private ProgressBar rightProgressBar;
 
+
   private List<String> dialogueLines;
   private int currentDialogueIndex;
   private Timeline progressTimeline;
@@ -49,6 +56,8 @@ public class CutsceneController {
   // This method initializes the cutscene by loading Alice's dialogue
   @FXML
   public void initialize() {
+      timeManager.setTimerLabel(mins, secs, dot);
+    
     currentDialogueIndex = 0;
     // List of dialogue lines for Alice and the player
     dialogueLines = new ArrayList<>();
