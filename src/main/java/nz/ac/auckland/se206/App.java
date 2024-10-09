@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.InteragationRoomController;
 
 /**
@@ -20,9 +21,6 @@ import nz.ac.auckland.se206.controllers.InteragationRoomController;
 public class App extends Application {
 
   private static Scene scene;
-
-  private static Stage primaryStage;
-
   private static Map<String, Parent> sceneCache = new HashMap<>();
   private static Map<String, InteragationRoomController> controllerCache = new HashMap<>();
 
@@ -33,14 +31,6 @@ public class App extends Application {
    */
   public static void main(final String[] args) {
     launch();
-  }
-
-  public static Stage getPrimaryStage() {
-    return primaryStage;
-  }
-
-  public static Scene getScene() {
-    return scene;
   }
 
   /**
@@ -145,17 +135,28 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    primaryStage = stage;
-    SceneManager.setScene(SceneManager.AppUi.START);
-    scene = primaryStage.getScene();
-    if (scene == null) {
-      scene = new Scene(SceneManager.getUiRoot(SceneManager.AppUi.START));
-      primaryStage.setScene(scene);
-    } else {
-      scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.START));
-    }
-    primaryStage.setHeight(730);
-    primaryStage.setWidth(1100);
-    primaryStage.show();
+    SceneManager.addUi(AppUi.START, loadFxml("start"));
+    SceneManager.addUi(AppUi.CUTSCENE, loadFxml("cutscenes"));
+    SceneManager.addUi(AppUi.ROOM, loadFxml("room"));
+    SceneManager.addUi(AppUi.GOOD_END, loadFxml("goodending"));
+    SceneManager.addUi(AppUi.BAD_END, loadFxml("badending"));
+    SceneManager.addUi(AppUi.CAMERA, loadFxml("clue1"));
+    SceneManager.addUi(AppUi.BIN, loadFxml("clue2"));
+    SceneManager.addUi(AppUi.MAP, loadFxml("clue3"));
+    // Added Intel room Here
+    // Corridor
+    SceneManager.addUi(AppUi.INTELROOM, loadFxml("Intel_Draft"));
+    // RoomOne
+    SceneManager.addUi(AppUi.INTELROOMONE, loadFxml("IntelRoomOne"));
+    // RoomTwo
+    SceneManager.addUi(AppUi.INTELROOMTWO, loadFxml("IntelRoomTwo"));
+    // RoomThree
+    SceneManager.addUi(AppUi.INTELROOMTHREE, loadFxml("IntelRoomThree"));
+
+    scene = new Scene(SceneManager.getUiRoot(AppUi.START));
+    stage.setScene(scene);
+    stage.setHeight(730);
+    stage.setWidth(1100);
+    stage.show();
   }
 }

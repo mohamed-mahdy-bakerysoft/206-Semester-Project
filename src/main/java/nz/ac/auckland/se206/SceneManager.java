@@ -1,21 +1,22 @@
 package nz.ac.auckland.se206;
 
-import java.io.IOException;
 import java.util.HashMap;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 /**
  * The SceneManager class is responsible for managing different UI scenes within the application. It
- * loads scenes on demand and caches them for future use.
+ * allows storing, retrieving, and switching between various scenes based on an enum that represents
+ * different parts of the application.
  */
 public class SceneManager {
 
+  /**
+   * The AppUi enum defines different scenes in the application. Each enum constant corresponds to a
+   * specific view or part of the user interface.
+   */
   public enum AppUi {
     ROOM,
-    ROOM2,
-    ROOM3,
+    CHAT,
     START,
     CUTSCENE,
     GOOD_END,
@@ -23,82 +24,32 @@ public class SceneManager {
     CAMERA,
     BIN,
     MAP,
-    INTELROOM,
-    INTELROOMONE,
-    INTELROOMTWO,
-    INTELROOMTHREE
+    INTELROOM, // General intel room
+    INTELROOMONE, // Room for Art Currator
+    INTELROOMTWO, // Room for Art Thief
+    INTELROOMTHREE // Room for Janitor
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<>();
 
   /**
-   * Retrieves the root node of the UI scene associated with the specified AppUi enum constant. If
-   * the scene is not already loaded, it loads it from the corresponding FXML file.
+   * Adds a UI scene to the scene map. Each scene is associated with an AppUi enum constant, which
+   * can later be used to retrieve the corresponding scene.
    *
-   * @param appUi the enum constant representing the UI scene to retrieve
-   * @return the root node of the UI scene
-   * @throws IOException if the FXML file is not found
+   * @param appUi the enum constant representing the UI scene
+   * @param uiRoot the root node of the scene to be added
    */
-  public static Parent getUiRoot(AppUi appUi) throws IOException {
-    if (!sceneMap.containsKey(appUi)) {
-      // Load the FXML file associated with appUi
-      String fxmlFileName = getFxmlFileName(appUi);
-      FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxmlFileName + ".fxml"));
-      Parent uiRoot = loader.load();
-      sceneMap.put(appUi, uiRoot);
-    }
-    return sceneMap.get(appUi);
-  }
-
-  private static String getFxmlFileName(AppUi appUi) {
-    switch (appUi) {
-      case ROOM:
-        return "room";
-      case ROOM2:
-        return "room2";
-      case ROOM3:
-        return "room3";
-      case START:
-        return "start";
-      case CUTSCENE:
-        return "cutscenes";
-      case GOOD_END:
-        return "goodending";
-      case BAD_END:
-        return "badending";
-      case CAMERA:
-        return "clue1";
-      case BIN:
-        return "clue2";
-      case MAP:
-        return "clue3";
-      case INTELROOM:
-        return "Intel_Draft";
-      case INTELROOMONE:
-        return "IntelRoomOne";
-      case INTELROOMTWO:
-        return "IntelRoomTwo";
-      case INTELROOMTHREE:
-        return "IntelRoomThree";
-      default:
-        throw new IllegalArgumentException("Unknown AppUi: " + appUi);
-    }
+  public static void addUi(AppUi appUi, Parent uiRoot) {
+    sceneMap.put(appUi, uiRoot);
   }
 
   /**
-   * Changes the current scene to the specified AppUi.
+   * Retrieves the root node of the UI scene associated with the specified AppUi enum constant.
    *
-   * @param appUi the enum constant representing the UI scene to switch to
-   * @throws IOException if the FXML file is not found
+   * @param appUi the enum constant representing the UI scene to retrieve
+   * @return the root node of the UI scene, or null if the scene has not been added
    */
-  public static void setScene(AppUi appUi) throws IOException {
-    Parent root = getUiRoot(appUi);
-    Scene scene = App.getScene();
-    if (scene == null) {
-      scene = new Scene(root);
-      App.getPrimaryStage().setScene(scene);
-    } else {
-      scene.setRoot(root);
-    }
+  public static Parent getUiRoot(AppUi appUi) {
+    return sceneMap.get(appUi);
   }
 }

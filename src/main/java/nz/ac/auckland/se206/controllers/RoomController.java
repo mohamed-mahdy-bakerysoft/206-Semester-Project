@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
-import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.states.Guessing;
 
@@ -109,13 +108,16 @@ public class RoomController implements RoomNavigationHandler {
    */
   @FXML
   public void initialize() throws URISyntaxException {
-    TimeManager.getInstance().setTimerLabel(mins, secs, dot);
+    TimeManager timeManager = TimeManager.getInstance();
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
     if (isFirstTimeInit) {
+      timeManager.setInterval(300);
+      timeManager.startTimer(); // Start the game timer
       System.out.println("First time");
       isFirstTimeInit = false;
     }
+    timeManager.setTimerLabel(mins, secs, dot);
   }
 
   /**
@@ -218,15 +220,15 @@ public class RoomController implements RoomNavigationHandler {
     switch (clickedRectangle.getId()) {
       case "rectSecurityRoom":
         // Navigate to the clue1 view
-        SceneManager.setScene(SceneManager.AppUi.CAMERA);
+        App.setRoot("clue1");
         break;
       case "rectBin":
         // Navigate to the clue2 view
-        SceneManager.setScene(SceneManager.AppUi.BIN);
+        App.setRoot("clue2");
         break;
       case "rectPaperClue":
         // Navigate to the clue3 view
-        SceneManager.setScene(SceneManager.AppUi.MAP);
+        App.setRoot("clue3");
         break;
     }
 
@@ -320,11 +322,16 @@ public class RoomController implements RoomNavigationHandler {
    * @throws IOException exception if file is not found.
    */
   public void onClickRight(MouseEvent event) throws IOException {
+    if (context.getCurrentState()
+        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
+      // investigation
+      return;
+    }
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowRight")) {
-      SceneManager.setScene(SceneManager.AppUi.ROOM2);
+      App.setRoot("room2");
     } else if (clickedArrow.getId().equals("arrowRight")) {
-      SceneManager.setScene(SceneManager.AppUi.ROOM);
+      App.setRoot("room");
     }
 
     // adding click sound effect
@@ -352,9 +359,9 @@ public class RoomController implements RoomNavigationHandler {
     ImageView clickedArrow = (ImageView) event.getSource();
     if (clickedArrow.getId().equals("mainArrowLeft")) {
       System.out.println("clicked");
-      SceneManager.setScene(SceneManager.AppUi.ROOM3);
+      App.setRoot("room3");
     } else if (clickedArrow.getId().equals("arrowLeft")) {
-      SceneManager.setScene(SceneManager.AppUi.ROOM);
+      App.setRoot("room");
     }
 
     // adding click sound effect

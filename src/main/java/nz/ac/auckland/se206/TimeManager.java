@@ -29,7 +29,6 @@ public class TimeManager {
   private static int interval; // 300 for 5 minutes
   private static MediaPlayer player;
   private static Media sound;
-  private boolean isTimerStarted = false;
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -63,21 +62,23 @@ public class TimeManager {
    * decrements the timer every second and updates the timer in the game UI.
    */
   public void initialiseTimer() {
-    if (timeline != null) {
-      timeline.stop();
-    }
+    // Create a new Timeline with a KeyFrame that triggers every second
     timeline =
         new Timeline(
             new KeyFrame(
                 javafx.util.Duration.seconds(1),
                 e -> {
                   try {
+                    // Decrement the timer and handle state transitions
                     decrementTime();
                   } catch (IOException | URISyntaxException e1) {
+                    // Print stack trace if an exception occurs
                     e1.printStackTrace();
                   }
+                  // Update the timer in the game UI
                   updateTimerInGame();
                 }));
+    // Set the Timeline to repeat indefinitely
     timeline.setCycleCount(Timeline.INDEFINITE);
   }
 
@@ -256,19 +257,13 @@ public class TimeManager {
 
   /** Starts the timer and updates the time on the game UI. */
   public void startTimer() {
-    if (!isTimerStarted) {
-      updateTimerInGame();
-      timeline.play();
-      isTimerStarted = true;
-      System.out.println("Timer started");
-    }
+    updateTimerInGame();
+    timeline.play();
   }
 
   /** Stops the timer. */
   public void stopTimer() {
     timeline.stop();
-    isTimerStarted = false;
-    System.out.println("Timer stopped");
   }
 
   /**
@@ -279,26 +274,21 @@ public class TimeManager {
     Platform.runLater(
         () -> {
           // Get the current root of the ROOM scene
-          Parent currentRoot;
-          try {
-            currentRoot = SceneManager.getUiRoot(SceneManager.AppUi.ROOM);
-            if (currentRoot != null) {
-              // Look up the labels for minutes and seconds in the current root
-              Label minutesLabel = (Label) currentRoot.lookup("#mins");
-              Label secondsLabel = (Label) currentRoot.lookup("#secs");
+          Parent currentRoot = SceneManager.getUiRoot(SceneManager.AppUi.ROOM);
+          if (currentRoot != null) {
+            // Look up the labels for minutes and seconds in the current root
+            Label minutesLabel = (Label) currentRoot.lookup("#mins");
+            Label secondsLabel = (Label) currentRoot.lookup("#secs");
 
-              // If the labels are found, update their text with the formatted time
-              if (minutesLabel != null && secondsLabel != null) {
-                mins.setText(formattedMinutes);
-                secs.setText(formattedSeconds);
-              } else {
-                System.out.println("Label elements not found");
-              }
+            // If the labels are found, update their text with the formatted time
+            if (minutesLabel != null && secondsLabel != null) {
+              mins.setText(formattedMinutes);
+              secs.setText(formattedSeconds);
             } else {
-              System.out.println("Current root is null");
+              System.out.println("Label elements not found");
             }
-          } catch (IOException e) {
-            e.printStackTrace();
+          } else {
+            System.out.println("Current root is null");
           }
         });
   }
