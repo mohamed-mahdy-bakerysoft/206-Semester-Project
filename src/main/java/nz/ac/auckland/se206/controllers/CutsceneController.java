@@ -170,7 +170,7 @@ public class CutsceneController {
    */
   @FXML
   private void onHandleEnterKey(KeyEvent event) throws IOException {
-    if (event.getCode() == KeyCode.ENTER) {
+    if (event.getCode() == KeyCode.ENTER && !btnNext.isDisabled()) {
       if (progressTimeline != null) {
         progressTimeline.stop(); // Stop the auto-skip progress bar timeline
       }
