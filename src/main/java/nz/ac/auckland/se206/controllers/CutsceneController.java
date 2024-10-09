@@ -3,15 +3,17 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
-import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 
 public class CutsceneController {
@@ -30,8 +32,12 @@ public class CutsceneController {
   @FXML private ImageView frankImage;
   @FXML private ImageView johnImage;
 
+  @FXML private ProgressBar leftProgressBar;
+  @FXML private ProgressBar rightProgressBar;
+
   private List<String> dialogueLines;
   private int currentDialogueIndex;
+  private Timeline progressTimeline;
 
   // This method initializes the cutscene by loading Alice's dialogue
   @FXML
@@ -51,6 +57,10 @@ public class CutsceneController {
     dialogueLines.add("Alice: And John the Janitor, known to be an ex-convict.");
     dialogueLines.add("Alice: Chat with all of these suspects and find clues in the crime scene.");
     dialogueLines.add("Alice: Good luck Agent, the fate of the painting is in your hands.");
+
+    // Set initial progress bar values (full)
+    leftProgressBar.setProgress(1.0);
+    rightProgressBar.setProgress(1.0);
 
     // Display the first line of dialogue
     displayNextDialogue();
@@ -74,38 +84,64 @@ public class CutsceneController {
     startGame(); // Directly transition to the game
   }
 
+  // Method to automatically update progress bars and advance the dialogue
+  private void startProgressBarAutoSkip() {
+    progressTimeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(0.05),
+                event -> {
+                  // Reduce progress on both sides
+                  leftProgressBar.setProgress(leftProgressBar.getProgress() - 0.01);
+                  rightProgressBar.setProgress(rightProgressBar.getProgress() - 0.01);
+
+                  // If progress reaches 0, automatically move to the next dialogue
+                  if (leftProgressBar.getProgress() <= 0.0) {
+                    onNextDialogue();
+                  }
+                }));
+
+    // Set the cycle count so it stops after both bars reach zero
+    progressTimeline.setCycleCount(100); // Adjust as needed for timing
+    progressTimeline.play();
+  }
+
   private void displayNextDialogue() {
+    // Reset the progress bars for each new dialogue
+    leftProgressBar.setProgress(1.0);
+    rightProgressBar.setProgress(1.0);
+
+    // Start the progress bars animation for auto-skipping
+    startProgressBarAutoSkip();
+
     // Display the current dialogue text
     dialogueText.setText(dialogueLines.get(currentDialogueIndex));
 
     // Control image visibility based on current dialogue index
     switch (currentDialogueIndex) {
       case 1: // After Alice introduces the suspects
-        // Make the newspaper image visible
         newspaperImage.setVisible(true);
         paintingImage.setVisible(true);
         break;
-      case 2: // After Alice introduces Frank
+      case 2:
         newspaperImage.setVisible(false);
         paintingImage.setVisible(false);
         break;
-      case 3: // After Alice introduces the curator
+      case 3:
         frankImage.setVisible(true);
         break;
-      case 4: // After Alice introduces William
+      case 4:
         williamImage.setVisible(true);
         break;
-      case 5: // After Alice introduces John
+      case 5:
         johnImage.setVisible(true);
         break;
-      case 6: // After Alice finishes the introduction
+      case 6:
         frankImage.setVisible(false);
         williamImage.setVisible(false);
         johnImage.setVisible(false);
         break;
-
       default:
-        // Hide all other images by default
         newspaperImage.setVisible(false);
         paintingImage.setVisible(false);
         williamImage.setVisible(false);
@@ -127,23 +163,27 @@ public class CutsceneController {
   }
 
   /**
-   * Handles the "Enter" key press in the TextField to send a message.
+   * Handles the "Enter" key press to skip the current dialogue.
    *
    * @param event the KeyEvent triggered by pressing a key
-   * @throws ApiProxyException if there is an error communicating with the API proxy
    * @throws IOException if there is an I/O error
    */
   @FXML
-  private void onHandleEnterKey(KeyEvent event) throws ApiProxyException, IOException {
+  private void onHandleEnterKey(KeyEvent event) throws IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      if (!btnNext.isDisabled()) {
-        onNextDialogue();
+      if (progressTimeline != null) {
+        progressTimeline.stop(); // Stop the auto-skip progress bar timeline
       }
+      onNextDialogue(); // Trigger the next dialogue
     }
   }
 
   // This method handles the transition to the actual game start scene
   private void startGame() {
+    if (progressTimeline != null) {
+      progressTimeline.stop(); // Stop the timeline if it's running
+    }
+
     try {
       App.setRoot("room"); // Assuming 'room' is the first game scene
     } catch (IOException e) {

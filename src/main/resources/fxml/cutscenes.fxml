@@ -2,13 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="cutscenePane" prefHeight="690.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CutsceneController">
+<Pane fx:id="cutscenePane" onKeyPressed="#onHandleEnterKey" prefHeight="690.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CutsceneController">
 
   <children>
     <!-- Background Image -->
@@ -72,8 +73,14 @@
       </font>
     </Label>
 
+    <!-- Left progress bar -->
+    <ProgressBar fx:id="leftProgressBar" layoutX="360.0" layoutY="638.0" prefHeight="13.0" prefWidth="163.0" progress="1.0" />
+
+    <!-- Right progress bar -->
+    <ProgressBar fx:id="rightProgressBar" layoutX="522.0" layoutY="637.0" prefHeight="13.0" prefWidth="163.0" progress="1.0" rotate="-180.0" />
+
     <!-- Next Button -->
-    <Button fx:id="btnNext" layoutX="734.0" layoutY="601.0" onAction="#onNextDialogue" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
+    <Button fx:id="btnNext" layoutX="740.0" layoutY="616.0" onAction="#onNextDialogue" prefHeight="35.0" prefWidth="177.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Continue (ENTER)" />
 
     <!-- Skip Button -->
     <Button fx:id="btnSkip" layoutX="884.0" layoutY="30.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
