@@ -33,8 +33,6 @@ public class CutsceneController {
     this.dialogueLines = new ArrayList<>();
   }
 
-  @FXML private ImageView aliceImage;
-
   @FXML private Label dialogueText;
   @FXML private Label mins;
   @FXML private Label dot;
@@ -44,6 +42,8 @@ public class CutsceneController {
 
   @FXML private Button btnSkip;
 
+  @FXML private ImageView aliceImage;
+  @FXML private ImageView aliceImage2;
   @FXML private ImageView newspaperImage;
   @FXML private ImageView paintingImage;
   @FXML private ImageView williamImage;
@@ -53,21 +53,23 @@ public class CutsceneController {
   @FXML private ProgressBar leftProgressBar;
   @FXML private ProgressBar rightProgressBar;
 
-
   private List<String> dialogueLines;
   private int currentDialogueIndex;
   private Timeline progressTimeline;
+  private boolean isGameStarted = false;
 
   // This method initializes the cutscene by loading Alice's dialogue
   @FXML
   public void initialize() {
-      timeManager.setTimerLabel(mins, secs, dot);
-    
+    timeManager.setTimerLabel(mins, secs, dot);
+
+    // disable the skip button
+    btnSkip.setDefaultButton(false);
+    btnSkip.setFocusTraversable(false);
+
     currentDialogueIndex = 0;
     // List of dialogue lines for Alice and the player
     dialogueLines = new ArrayList<>();
-    dialogueLines.add(
-        "Alice: Welcome Agent I am Inspector A, your mentor. We have a case to solve.");
     dialogueLines.add(
         "Alice: Your mission is to find out who stole this famous painting created by the late"
             + "owner of the George St Art gallery Teressa Harris.");
@@ -75,7 +77,6 @@ public class CutsceneController {
     dialogueLines.add("Alice: Frank the art Curator, son of the late artist Teresa Harris.");
     dialogueLines.add("Alice: William, the head of security of the gallery.");
     dialogueLines.add("Alice: And John the Janitor, known to be an ex-convict.");
-    dialogueLines.add("Alice: Chat with all of these suspects and find clues in the crime scene.");
     dialogueLines.add("Alice: Good luck Agent, the fate of the painting is in your hands.");
 
     // Set initial progress bar values (full)
@@ -140,36 +141,25 @@ public class CutsceneController {
     dialogueText.setText(dialogueLines.get(currentDialogueIndex));
 
     // Control image visibility based on current dialogue index
-    switch (currentDialogueIndex) {
-      case 1: // After Alice introduces the suspects
-        newspaperImage.setVisible(true);
-        paintingImage.setVisible(true);
-        break;
-      case 2:
-        newspaperImage.setVisible(false);
-        paintingImage.setVisible(false);
-        break;
-      case 3:
-        frankImage.setVisible(true);
-        break;
-      case 4:
-        williamImage.setVisible(true);
-        break;
-      case 5:
-        johnImage.setVisible(true);
-        break;
-      case 6:
-        frankImage.setVisible(false);
-        williamImage.setVisible(false);
-        johnImage.setVisible(false);
-        break;
-      default:
-        newspaperImage.setVisible(false);
-        paintingImage.setVisible(false);
-        williamImage.setVisible(false);
-        frankImage.setVisible(false);
-        johnImage.setVisible(false);
-        break;
+    newspaperImage.setVisible(currentDialogueIndex == 0);
+    paintingImage.setVisible(currentDialogueIndex == 0);
+
+    aliceImage.setVisible(currentDialogueIndex == 0);
+    aliceImage2.setVisible(
+        currentDialogueIndex == 1
+            || currentDialogueIndex == 2
+            || currentDialogueIndex == 3
+            || currentDialogueIndex == 4);
+
+    frankImage.setVisible(
+        currentDialogueIndex == 2 || currentDialogueIndex == 3 || currentDialogueIndex == 4);
+    williamImage.setVisible(currentDialogueIndex == 3 || currentDialogueIndex == 4);
+    johnImage.setVisible(currentDialogueIndex == 4);
+
+    if (currentDialogueIndex == 5) {
+      frankImage.setVisible(false);
+      williamImage.setVisible(false);
+      johnImage.setVisible(false);
     }
 
     // Increment the index for the next line
@@ -206,10 +196,17 @@ public class CutsceneController {
       progressTimeline.stop(); // Stop the timeline if it's running
     }
 
-    try {
-      App.setRoot("room"); // Assuming 'room' is the first game scene
-    } catch (IOException e) {
-      e.printStackTrace();
+    if (!isGameStarted) {
+      isGameStarted = true;
+      try {
+        System.out.println("Starting game...");
+        App.setRoot("room"); // Assuming 'room' is the first game scene
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      System.out.println("Game already started.");
+      return;
     }
   }
 }

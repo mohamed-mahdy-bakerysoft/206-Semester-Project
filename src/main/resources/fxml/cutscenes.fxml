@@ -20,11 +20,16 @@
     </ImageView>
 
     <!-- Alice's Image -->
-    <ImageView fx:id="aliceImage" fitHeight="564.0" fitWidth="562.0" layoutX="263.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="aliceImage" fitHeight="564.0" fitWidth="562.0" layoutX="264.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../images/Alice-Wave.png" />
       </image>
     </ImageView>
+      <ImageView fx:id="aliceImage2" fitHeight="531.0" fitWidth="526.0" layoutX="279.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/Alice.png" />
+         </image>
+      </ImageView>
     <ImageView fitHeight="457.0" fitWidth="744.0" layoutX="191.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" smooth="false">
       <image>
         <Image url="@../images/Cutscene_ChatBox.png" />
@@ -32,14 +37,14 @@
     </ImageView>
 
     <!-- Newspaper Image (Hidden initially) -->
-    <ImageView fx:id="newspaperImage" fitHeight="200.0" fitWidth="300.0" layoutX="168.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="newspaperImage" fitHeight="218.0" fitWidth="221.0" layoutX="182.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/teresa.png" />
       </image>
     </ImageView>
 
     <!-- Painting Image (Hidden initially) -->
-    <ImageView fx:id="paintingImage" fitHeight="222.0" fitWidth="228.0" layoutX="690.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true" visible="false">
+    <ImageView fx:id="paintingImage" fitHeight="383.0" fitWidth="426.0" layoutX="637.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
         <Image url="@../images/painting.png" />
       </image>
