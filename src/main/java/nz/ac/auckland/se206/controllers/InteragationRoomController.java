@@ -752,6 +752,13 @@ public class InteragationRoomController implements RoomNavigationHandler {
     if (!role.equals("user")) {
       setThinkingBubbleVisibility(false);
     }
+
+    // Scroll to the bottom of the chat
+    Platform.runLater(
+        () -> {
+          chatScrollPane.layout();
+          chatScrollPane.setVvalue(chatScrollPane.getVmax());
+        });
   }
 
   // Helper method to set visibility based on the random index
