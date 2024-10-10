@@ -51,7 +51,7 @@ public class SubmitAnswerController {
   }
 
   /**
-   * Gets the current selected thief.
+   * Gets the current selected thief that the player has chosen.
    *
    * @return the thief chosen by the player
    */
@@ -60,7 +60,7 @@ public class SubmitAnswerController {
   }
 
   /**
-   * Gets the current answer.
+   * Gets the current answer the player has provided.
    *
    * @return the answer provided by the player
    */
