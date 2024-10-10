@@ -304,8 +304,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * Handles the event when the corridor button is clicked. It changes the view to the corridor.
    *
    * @param profession
-   * @throws URISyntaxException
-   * @throws InterruptedException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
+   * @throws InterruptedException if there is an error with the thread
    */
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;

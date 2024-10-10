@@ -62,9 +62,9 @@ public class RoomController implements RoomNavigationHandler {
   }
 
   /**
-   * Sets the clueHasBeenInteractedWith boolean to check if the clue has been interacted with.
+   * Sets the clueHasBeenInteractedWith boolean to false.
    *
-   * @return the clueHasBeenInteractedWith boolean
+   * @param b the boolean to set
    */
   public static void setClueHasBeenInteractedWith(boolean b) {
     clueHasBeenInteractedWith = false;
@@ -104,7 +104,7 @@ public class RoomController implements RoomNavigationHandler {
    * Initializes the room view. If it's the first time initialization, it will provide instructions
    * via text-to-speech.
    *
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error in the URI syntax
    */
   @FXML
   public void initialize() throws URISyntaxException {
@@ -188,7 +188,7 @@ public class RoomController implements RoomNavigationHandler {
    *
    * @param event the mouse event triggered by clicking a rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error in the URI syntax
    */
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
@@ -295,7 +295,7 @@ public class RoomController implements RoomNavigationHandler {
    *
    * @param event the action event triggered by clicking the guess button
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error in the URI syntax
    */
   @FXML
   private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
