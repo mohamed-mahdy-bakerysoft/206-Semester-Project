@@ -40,8 +40,8 @@ public class TextToSpeech {
               // changing voice based on what suspect is being spoken to
               switch (profession) {
                 case "Art Currator":
-                  provider = Provider.GOOGLE;
-                  voice = Voice.GOOGLE_EN_AU_STANDARD_C;
+                  provider = Provider.OPENAI;
+                  voice = Voice.OPENAI_ALLOY;
                   break;
                 case "Art Thief":
                   provider = Provider.GOOGLE;
