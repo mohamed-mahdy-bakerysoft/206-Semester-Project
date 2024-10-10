@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The CutsceneController class manages the introductory cutscene at the start of the game. It
@@ -55,6 +56,12 @@ public class CutsceneController {
   private int currentDialogueIndex;
   private Timeline progressTimeline;
   private boolean isGameStarted = false;
+  private MP3Player player;
+  private MP3Player player2;
+  private MP3Player player3;
+  private MP3Player player4;
+  private MP3Player player5;
+  private MP3Player player6;
 
   /**
    * Constructs a new CutsceneController object with default values for dialogue index, progress
@@ -87,7 +94,12 @@ public class CutsceneController {
     dialogueLines.add("Alice: William, the head of security of the gallery.");
     dialogueLines.add("Alice: And John the Janitor, known to be an ex-convict.");
     dialogueLines.add("Alice: Good luck Agent, the fate of the painting is in your hands.");
-
+    player = new MP3Player("src/main/resources/sounds/cutscene1.mp3");
+    player2 = new MP3Player("src/main/resources/sounds/cutscene2.mp3");
+    player3 = new MP3Player("src/main/resources/sounds/cutscene3.mp3");
+    player4 = new MP3Player("src/main/resources/sounds/cutscene4.mp3");
+    player5 = new MP3Player("src/main/resources/sounds/cutscene5.mp3");
+    player6 = new MP3Player("src/main/resources/sounds/cutscene6.mp3");
     // Set initial progress bar values (full)
     leftProgressBar.setProgress(1.0);
     rightProgressBar.setProgress(1.0);
@@ -170,6 +182,30 @@ public class CutsceneController {
       frankImage.setVisible(false);
       williamImage.setVisible(false);
       johnImage.setVisible(false);
+    }
+
+    // Play the corresponding audio file for each dialogue line
+    switch (currentDialogueIndex) {
+      case 0:
+        player.play();
+        break;
+      case 1:
+        player2.play();
+        break;
+      case 2:
+        player3.play();
+        break;
+      case 3:
+        player4.play();
+        break;
+      case 4:
+        player5.play();
+        break;
+      case 5:
+        player6.play();
+        break;
+      default:
+        break;
     }
 
     // Increment the index for the next line
