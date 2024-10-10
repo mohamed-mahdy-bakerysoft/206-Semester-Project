@@ -17,6 +17,11 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
 
+/**
+ * The CutsceneController class manages the introductory cutscene at the start of the game. It
+ * displays dialogue from Alice, the game's AI assistant, and introduces the player to the game's
+ * objective and suspects. The cutscene transitions to the game scene once the dialogue ends.
+ */
 public class CutsceneController {
   public static boolean firstTime = false;
   public static TimeManager timeManager =
@@ -51,6 +56,10 @@ public class CutsceneController {
   private Timeline progressTimeline;
   private boolean isGameStarted = false;
 
+  /**
+   * Constructs a new CutsceneController object with default values for dialogue index, progress
+   * bars, and dialogue lines.
+   */
   public CutsceneController() {
     this.currentDialogueIndex = 0;
     this.leftProgressBar = new ProgressBar();
@@ -58,7 +67,7 @@ public class CutsceneController {
     this.dialogueLines = new ArrayList<>();
   }
 
-  // This method initializes the cutscene by loading Alice's dialogue
+  /** Initializes the cutscene by setting the timer label and displaying the first dialogue line. */
   @FXML
   public void initialize() {
     timeManager.setTimerLabel(mins, secs, dot);
