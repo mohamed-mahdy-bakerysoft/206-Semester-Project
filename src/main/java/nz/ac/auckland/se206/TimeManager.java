@@ -138,17 +138,6 @@ public class TimeManager {
         player = null;
       }
 
-      // if (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()) {
-      //   String msg = "You did not talk to all the three suspects in time.";
-      //   String msg2 = "";
-      //   if (!RoomController.getClueHasBeenInteractedWith()) {
-      //     msg2 = "You did not interact with a clue in time.";
-      //   }
-      //   String finalmsg = msg + "\n" + msg2;
-      //   EndingController.setFeed(finalmsg);
-      //   App.setRoot("badending");
-      // }
-
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
           && (!InteragationRoomController.getSuspectsHaveBeenTalkedTo()
               || !RoomController.getClueHasBeenInteractedWith())) {
@@ -207,9 +196,6 @@ public class TimeManager {
             player = null;
           }
           return;
-          // Map<String, String> map = SubmitAnswerController.intiateanswer();
-          // SubmitAnswerController intiateanswer = new SubmitAnswerController();
-          // intiateanswer.intizliaseAndGpt(map);
         } else {
           String thief = SubmitAnswerController.getThief();
           // Check if thief is null
