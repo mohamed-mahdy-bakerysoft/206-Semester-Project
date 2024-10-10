@@ -94,11 +94,12 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @return true if all 3 suspects have been talked to, false otherwise
    */
   public static boolean getSuspectsHaveBeenTalkedTo() {
+    // Print out the suspects that have been talked to
     System.out.println("Art Currator talked to:" + suspectHasBeenTalkedToMap.get("Art Currator"));
     System.out.println("Janitor has been talked to:" + suspectHasBeenTalkedToMap.get("Janitor"));
     System.out.println(
         "Art thief has been tallked to:" + suspectHasBeenTalkedToMap.get("Art Thief"));
-
+    // Return whether all suspects have been talked to
     return suspectHasBeenTalkedToMap.get("Art Currator")
         && suspectHasBeenTalkedToMap.get("Art Thief")
         && suspectHasBeenTalkedToMap.get("Janitor");
@@ -535,7 +536,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private String getSuspectTypeForProfession(String profession) {
+    // Switch case to determine the suspect type based on the profession
     switch (profession) {
+      // Return the suspect type based on the profession
       case "Art Currator":
         return "currator";
       case "Art Thief":
@@ -543,6 +546,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "Janitor":
         return "janitor";
       default:
+        // Return an empty string if the profession is unknown
         return "";
     }
   }
@@ -576,6 +580,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void setThinkingBubbleVisibility(boolean isVisible) {
+    // Set the visibility of the thinking bubble based on the profession
     if (profession.equals("Art Currator")) {
       bubble1.setVisible(isVisible);
     } else if (profession.equals("Art Thief")) {
@@ -583,9 +588,11 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else if (profession.equals("Janitor")) {
       bubble2.setVisible(isVisible);
     }
+    // set the thinking dots on the screen
     dot0.setVisible(isVisible);
     dot1.setVisible(isVisible);
     dot2.setVisible(isVisible);
+    // Start the thinking animation
     if (isVisible) {
       resetDot();
       Task<Void> task =
@@ -601,6 +608,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       thread.setDaemon(true);
       thread.start();
     } else {
+      // Stop the thinking animation
       timeline.stop();
     }
   }
@@ -986,10 +994,14 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   @FXML
   private void onHoverRectangle(MouseEvent event) {
+    // Only show the hover image if the rectangle has not been clicked
     if (!rectangleClicked) {
+      // Get the suspect type based on the rectangle ID
       Rectangle hoveredRectangle = (Rectangle) event.getSource();
       String rectangleId = hoveredRectangle.getId();
+      // Get the suspect type based on the rectangle ID
       String suspectType = getSuspectTypeFromRectangleId(rectangleId);
+      // Show the hover image if the suspect type is not empty
       if (!suspectType.isEmpty()) {
         getImageView(suspectType + "Hover").setVisible(true);
       }
@@ -1022,6 +1034,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private String getSuspectTypeFromRectangleId(String rectangleId) {
+    // Switch case to determine the suspect type based on the rectangle ID
     switch (rectangleId) {
       case "rectPerson1":
         return "currator";
@@ -1030,11 +1043,13 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "rectPerson3":
         return "janitor";
       default:
+        // Return an empty string if the rectangle ID is unknown
         return "";
     }
   }
 
   private String getSuspectTypeFromImageId(String imageId) {
+    // Determine the suspect type based on the image ID
     if (imageId.startsWith("currator")) {
       return "currator";
     } else if (imageId.startsWith("thief")) {
@@ -1042,6 +1057,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else if (imageId.startsWith("janitor")) {
       return "janitor";
     } else {
+      // Return an empty string if the image ID is unknown
       return "";
     }
   }
