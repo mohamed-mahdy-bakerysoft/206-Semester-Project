@@ -13,14 +13,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.speech.MP3Player;
 import nz.ac.auckland.se206.states.Guessing;
 
 /**
@@ -95,8 +94,8 @@ public class RoomController implements RoomNavigationHandler {
   @FXML private Rectangle rectOfficer;
   @FXML private VBox navBar;
 
-  private MediaPlayer player;
-  private Media sound;
+  private MP3Player player;
+  private MP3Player player1;
   private boolean navBarVisible = false;
   private double originalWidth;
 
@@ -108,6 +107,8 @@ public class RoomController implements RoomNavigationHandler {
    */
   @FXML
   public void initialize() throws URISyntaxException {
+    player = new MP3Player("src/main/resources/sounds/button.mp3");
+    player1 = new MP3Player("src/main/resources/sounds/investigatemore.mp3");
     TimeManager timeManager = TimeManager.getInstance();
     NavBarUtils.setupNavBarAndSuspectButtons(
         navBar, suspect1Button, suspect2Button, suspect3Button, this);
@@ -164,13 +165,6 @@ public class RoomController implements RoomNavigationHandler {
     translateTransition.play();
     fadeTransition.play();
 
-    // adding click sound effect
-    try {
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    player = new MediaPlayer(sound);
     player.play();
   }
 
@@ -232,13 +226,6 @@ public class RoomController implements RoomNavigationHandler {
         break;
     }
 
-    // Play a click sound effect
-    try {
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    player = new MediaPlayer(sound);
     player.play();
   }
 
@@ -312,14 +299,7 @@ public class RoomController implements RoomNavigationHandler {
       System.out.println("Now in guessing state");
       context.handleGuessClick();
     } else {
-      sound =
-          new Media(
-              App.class
-                  .getResource("/sounds/investigate_more_before_guessing.mp3")
-                  .toURI()
-                  .toString());
-      player = new MediaPlayer(sound);
-      player.play();
+      player1.play();
     }
   }
 
@@ -342,14 +322,6 @@ public class RoomController implements RoomNavigationHandler {
     } else if (clickedArrow.getId().equals("arrowRight")) {
       App.setRoot("room");
     }
-
-    // adding click sound effect
-    try {
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    player = new MediaPlayer(sound);
     player.play();
   }
 
@@ -374,13 +346,6 @@ public class RoomController implements RoomNavigationHandler {
       App.setRoot("room");
     }
 
-    // adding click sound effect
-    try {
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    player = new MediaPlayer(sound);
     player.play();
   }
 }
