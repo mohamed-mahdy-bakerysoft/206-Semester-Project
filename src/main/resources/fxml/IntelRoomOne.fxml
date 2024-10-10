@@ -142,7 +142,7 @@
             <Font name="Courier New" size="18.0" />
           </font>
         </TextField>
-        <Button fx:id="btnSend" layoutX="603.0" layoutY="158.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="44.0" prefWidth="113.0" stylesheets="@../css/styles.css" text="Send">
+        <Button fx:id="btnSend" layoutX="603.0" layoutY="158.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="113.0" stylesheets="@../css/styles.css" text="Send">
           <font>
             <Font size="20.0" />
           </font>
