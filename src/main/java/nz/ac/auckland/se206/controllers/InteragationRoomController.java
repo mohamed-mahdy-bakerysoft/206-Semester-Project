@@ -542,9 +542,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-
-    // System.out.println("**********************Game State:" + context.getCurrentState());
-    // System.out.println("**********************Current Chat history:" + context.getChatHistory());
     sendMessage();
   }
 
