@@ -40,7 +40,6 @@ public class SubmitAnswerController {
   public static TimeManager timeManager =
       TimeManager.getInstance(); // Singleton instance of TimeManager
   private static int counter = 0;
-  private Timeline timeline; // Timeline for timer updates
 
   /**
    * Gets the current feedback.
@@ -111,9 +110,10 @@ public class SubmitAnswerController {
   @FXML private Label dot;
 
   @FXML private TextArea answerTxtArea; // Text area for player's answer
-
+  private Timeline timeline; // Timeline for timer updates
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
   private boolean once = true;
+  private boolean sendOnce = true;
 
   /**
    * Initializes the controller, setting up the timer and resetting the first-time flag if
@@ -127,7 +127,7 @@ public class SubmitAnswerController {
 
     // Initialize the counter to the interval
     timeManager.startTimer(); // Start the timer
-    timeManager.setTimerLabel(mins, secs, dot); // Set the timer labels
+    timeManager.setTimerLabel(mins, secs, dot); // Set the timer u
 
     // Set up the timeline to run every second
     timeline =
@@ -145,8 +145,6 @@ public class SubmitAnswerController {
     timeline.play(); // Start the timeline
   }
 
-  private boolean sendOnce = true;
-
   private void updateTimer() throws IOException {
     counter = timeManager.getInterval();
 
@@ -161,11 +159,16 @@ public class SubmitAnswerController {
       }
 
       if ((answer == null || answer.equals("")) && sendOnce) {
-        if (thief.equals("hos")){
-          feed = "You arrested the head of security however he went to court and the judge found him not guilty due to lack of evidence from the dectetive";
-        }
-        else{
-          feed = "You arrested the "+ thief +" however he went to court and the judge found him not guilty due to lack of evidence from the dectetive";
+        if (thief.equals("hos")) {
+          feed =
+              "You arrested the head of security however he went to court and the judge found him"
+                  + " not guilty due to lack of evidence from the dectetive";
+        } else {
+          feed =
+              "You arrested the "
+                  + thief
+                  + " however he went to court and the judge found him not guilty due to lack of"
+                  + " evidence from the dectetive";
         }
         EndingController.setThief(thief);
         EndingController.setFeed(feed);
