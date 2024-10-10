@@ -4,8 +4,18 @@ import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+/** Utility class for setting up the navigation bar and suspect buttons. */
 public class NavBarUtils {
 
+  /**
+   * Sets up the navigation bar and suspect buttons for the game.
+   *
+   * @param navBar the navigation bar
+   * @param suspect1Button the button for suspect 1
+   * @param suspect2Button the button for suspect 2
+   * @param suspect3Button the button for suspect 3
+   * @param handler the room navigation handler
+   */
   public static void setupNavBarAndSuspectButtons(
       VBox navBar,
       Button suspect1Button,
