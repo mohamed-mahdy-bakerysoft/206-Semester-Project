@@ -16,7 +16,7 @@ public interface GameState {
    * @param event the mouse event triggered by clicking a rectangle
    * @param rectangleId the ID of the clicked rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   void handleRectangleClick(MouseEvent event, String rectangleId)
       throws IOException, URISyntaxException;
@@ -25,7 +25,7 @@ public interface GameState {
    * Handles the event when the guess button is clicked.
    *
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   void handleGuessClick() throws IOException, URISyntaxException;
 }
