@@ -44,9 +44,9 @@ public class Bubble extends Region {
   }
 
   /**
-   * Sets the text to be displayed in the bubble.
+   * Sets the text of the bubble to the specified text.
    *
-   * @param text the text to display
+   * @param color the color of the text
    */
   public void setBubbleColor(Color color) {
     this.bubbleColor = color;

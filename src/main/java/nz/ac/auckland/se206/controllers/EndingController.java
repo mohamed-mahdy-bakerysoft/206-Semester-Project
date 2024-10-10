@@ -48,10 +48,6 @@ public class EndingController {
 
   /**
    * Initializes the feedback display for the ending scene. If no feedback is available, it shows a
-   * message indicating that the feedback is unavailable based on the selected suspect.
-   */
-  /**
-   * Initializes the feedback display for the ending scene. If no feedback is available, it shows a
    * message indicating that the feedback is unavailable based on the selected suspect. It also
    * plays the appropriate audio feedback based on the game result.
    *

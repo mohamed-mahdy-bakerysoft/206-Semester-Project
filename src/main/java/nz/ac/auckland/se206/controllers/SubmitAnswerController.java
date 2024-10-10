@@ -42,7 +42,7 @@ public class SubmitAnswerController {
   private static int counter = 0;
 
   /**
-   * Gets the current feedback.
+   * Gets the current feedback that the bot has written.
    *
    * @return the feedback from the GPT response
    */
