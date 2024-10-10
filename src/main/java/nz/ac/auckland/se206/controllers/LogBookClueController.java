@@ -35,7 +35,7 @@ public class LogBookClueController extends ClueController {
   public void initialize() throws ApiProxyException {
     // Call the parent class's initialize method
     super.initialize();
-    player = new MP3Player("src/main/resources/sounds/page_turn.mp3");
+    player = new MP3Player("src/main/resources/sounds/turningpage.mp3");
     player.play();
   }
 
