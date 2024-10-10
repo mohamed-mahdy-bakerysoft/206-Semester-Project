@@ -43,10 +43,23 @@ public class App extends Application {
     scene.setRoot(loadFxml(fxml));
   }
 
+  /**
+   * Sets the root of the scene to the specified parent node.
+   *
+   * @param root the parent node to set as the root of the scene
+   */
   public static void setSameRoot(Parent root) {
     scene.setRoot(root);
   }
 
+  /**
+   * Opens the chat scene based on the provided profession.
+   *
+   * @param event the mouse event triggered by clicking a rectangle
+   * @param profession the profession of the suspect
+   * @throws IOException if the FXML file for the chat scene is not found
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
+   */
   public static void openChat(MouseEvent event, String profession)
       throws IOException, URISyntaxException {
     String sceneKey = event.getSource().toString();
@@ -122,7 +135,11 @@ public class App extends Application {
     }
   }
 
-  // make a method that returns the current roots controller
+  /**
+   * Returns the controller associated with the current scene.
+   *
+   * @return the controller associated with the current scene
+   */
   public static InteragationRoomController getController() {
     return controllerCache.get(scene.toString());
   }

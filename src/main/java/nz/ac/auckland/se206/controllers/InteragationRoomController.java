@@ -139,11 +139,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     professionToNameMap.put("user", "You");
   }
 
-  /**
-   * Gets the professionToNameMap.
-   *
-   * @return the professionToNameMap
-   */
+  /** Gets the professionToNameMap, resets all the static variables here. */
   public static void resetStaticVariables() {
     clueHasBeenInteractedWith = false;
     isFirstTimeInit = true;
@@ -213,7 +209,10 @@ public class InteragationRoomController implements RoomNavigationHandler {
   private int originalWidth = 1100;
   private String profession;
   private Random random = new Random();
-  @FXML private Circle dot0, dot1, dot2; // Make sure these match the fx:id you set in Scene Builder
+  // Make sure these match the fx:id you set in Scene Builder
+  @FXML private Circle dot0;
+  @FXML private Circle dot1;
+  @FXML private Circle dot2;
 
   private Timeline timeline;
 
@@ -304,7 +303,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   /**
    * Handles the event when the corridor button is clicked. It changes the view to the corridor.
    *
-   * @param profession
+   * @param profession the profession of the suspect
    * @throws URISyntaxException if there is an error with the URI syntax for media files
    * @throws InterruptedException if there is an error with the thread
    */

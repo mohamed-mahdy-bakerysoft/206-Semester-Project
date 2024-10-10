@@ -255,7 +255,7 @@ public class TimeManager {
     timeline.play();
   }
 
-  /** Stops the timer. */
+  /** Stops the timer from running anymore */
   public void stopTimer() {
     timeline.stop();
   }
