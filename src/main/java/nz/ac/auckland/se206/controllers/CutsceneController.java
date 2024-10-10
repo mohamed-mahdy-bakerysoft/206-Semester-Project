@@ -217,16 +217,20 @@ public class CutsceneController {
     pause.play();
   }
 
+  // This method stops the currently playing audio
   private void stopCurrentPlayer() {
+    // Stop any currently playing audio
     if (player != null && player.isPlaying()) {
       player.stop();
     }
     if (player2 != null && player2.isPlaying()) {
       player2.stop();
     }
+
     if (player3 != null && player3.isPlaying()) {
       player3.stop();
     }
+
     if (player4 != null && player4.isPlaying()) {
       player4.stop();
     }

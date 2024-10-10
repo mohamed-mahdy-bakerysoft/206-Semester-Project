@@ -29,7 +29,6 @@ public class TimeManager {
   private static int interval; // 300 for 5 minutes
   private static MediaPlayer player;
   private static Media sound;
-  private MP3Player player2;
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -51,6 +50,7 @@ public class TimeManager {
   private String formattedMinutes;
   private String formattedSeconds;
   private Timeline timeline;
+  private MP3Player player2;
 
   /** Constructor for the TimeManager class. Initializes the timer and sets initial label values. */
   public TimeManager() {
@@ -254,7 +254,7 @@ public class TimeManager {
     timeline.play();
   }
 
-  /** Stops the timer from running anymore */
+  /** Stops the timer from running anymore. */
   public void stopTimer() {
     timeline.stop();
   }
