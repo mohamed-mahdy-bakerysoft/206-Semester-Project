@@ -55,10 +55,9 @@ public class StartRoomController {
     player.play();
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setInterval(300);
-      timeManager.startTimer(); // Start the game timer
+    timeManager.startTimer(); // Start the game timer
     // Transition to the next room
     CutsceneController.setFirstTime(true);
     App.setRoot("cutscenes");
-
   }
 }

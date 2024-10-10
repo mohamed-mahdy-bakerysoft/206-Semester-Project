@@ -26,13 +26,6 @@ public class CutsceneController {
     firstTime = first;
   }
 
-  public CutsceneController() {
-    this.currentDialogueIndex = 0;
-    this.leftProgressBar = new ProgressBar();
-    this.rightProgressBar = new ProgressBar();
-    this.dialogueLines = new ArrayList<>();
-  }
-
   @FXML private Label dialogueText;
   @FXML private Label mins;
   @FXML private Label dot;
@@ -57,6 +50,13 @@ public class CutsceneController {
   private int currentDialogueIndex;
   private Timeline progressTimeline;
   private boolean isGameStarted = false;
+
+  public CutsceneController() {
+    this.currentDialogueIndex = 0;
+    this.leftProgressBar = new ProgressBar();
+    this.rightProgressBar = new ProgressBar();
+    this.dialogueLines = new ArrayList<>();
+  }
 
   // This method initializes the cutscene by loading Alice's dialogue
   @FXML
