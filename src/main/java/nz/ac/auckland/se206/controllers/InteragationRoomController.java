@@ -319,7 +319,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       appendChatMessage(initialMessage);
 
       // Send the initial message to the AI
-      sendMessageToAI(initialMessage, conversationHistory, true);
+      sendMessageToBot(initialMessage, conversationHistory, true);
     } else {
       // Revisiting the suspect
       // Create a special system message to prompt the AI to initiate the conversation
@@ -352,7 +352,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
-  private void sendMessageToAI(
+  private void sendMessageToBot(
       ChatMessage userMessage, List<ChatMessage> conversationHistory, boolean isFirstInteraction) {
     // Add the user's message to the conversation history
     conversationHistory.add(userMessage);
@@ -621,7 +621,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     btnSend.setDisable(true);
 
     // Send the message to the AI
-    sendMessageToAI(userMessage, conversationHistory, false);
+    sendMessageToBot(userMessage, conversationHistory, false);
   }
 
   // Method to play "hmm" sound based on profession
