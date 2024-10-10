@@ -10,7 +10,7 @@ import nz.ac.auckland.se206.App;
  * The SubmitAnswerController2 class extends SubmitAnswerController and is responsible for
  * displaying the chosen suspect's photo based on the player's selection.
  */
-public class SubmitAnswerControllerTwo extends SubmitAnswerController {
+public class SubmitAnswerSecondController extends SubmitAnswerController {
 
   // FXML annotations to link with the corresponding ImageView elements in the FXML file
   @FXML private ImageView janitorPhoto;
