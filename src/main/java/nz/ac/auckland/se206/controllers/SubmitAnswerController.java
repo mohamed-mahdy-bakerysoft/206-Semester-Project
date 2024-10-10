@@ -26,13 +26,13 @@ import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
 import nz.ac.auckland.se206.prompts.PromptEngineering;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The SubmitAnswerController class manages the submission of answers in the guessing game. It
  * includes interactions with the OpenAI GPT model, progress bar handling, and timer management.
  */
 public class SubmitAnswerController {
-
   private static String feed; // Feedback from GPT response
   protected static String thief; // Selected thief by the player
   protected static String answer; // Player's answer
@@ -114,12 +114,14 @@ public class SubmitAnswerController {
   private ChatCompletionRequest chatCompletionRequest; // Request object for GPT interaction
   private boolean once = true;
   private boolean sendOnce = true;
+  private MP3Player player;
 
   /**
    * Initializes the controller, setting up the timer and resetting the first-time flag if
    * necessary.
    */
   public void initialize() throws URISyntaxException {
+    player = new MP3Player("src/main/resources/sounds/button.mp3");
     if (isFirstTime) {
       timeManager.stopTimer(); // Stop the timer if it's the first time
       timeManager.setInterval(60); // Set the timer interval to 60 seconds
@@ -188,6 +190,7 @@ public class SubmitAnswerController {
    * updates and invokes GPT model interactions.
    */
   public void sendAnswer() {
+    player.play(); // Play the click sound effect
     if (answer == null) {
       return;
     }
@@ -261,6 +264,7 @@ public class SubmitAnswerController {
    */
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
+    player.play(); // Play the click sound effect
     Rectangle clickedRectangle = (Rectangle) event.getSource();
     thief = clickedRectangle.getId(); // Set the thief based on the clicked rectangle
     isFirstTime = false; // Set the first-time flag to false
