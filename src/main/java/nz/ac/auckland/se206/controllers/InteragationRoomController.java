@@ -707,6 +707,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   // Method to get the prompt file based on the profession
   private String getPromptFileForProfession(String profession) {
+    // Switch case to determine the prompt file based on the profession
     switch (profession) {
       case "Art Currator":
         return "suspect1.txt";
@@ -715,6 +716,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "Janitor":
         return "suspect2.txt";
       default:
+        // Return "unknown.txt" if the profession is unknown
         return "unknown.txt";
     }
   }
@@ -813,6 +815,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   // Method to get the ImageView by ID (you can implement this based on your FXML
   // IDs)
   private ImageView getImageView(String imageId) {
+    // Switch case to determine the ImageView based on the image ID
     switch (imageId) {
       case "curratorInitial":
         return curratorInitial;
@@ -845,6 +848,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "janitor2":
         return janitor2;
       default:
+        // Log or handle the unexpected image ID
         System.err.println("No ImageView found for ID: " + imageId);
         return null;
     }

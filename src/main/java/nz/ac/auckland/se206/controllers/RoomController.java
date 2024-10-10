@@ -249,17 +249,21 @@ public class RoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onHoverClue(MouseEvent event) {
+    // Get the rectangle that was hovered
     Rectangle hoveredClue = (Rectangle) event.getSource();
     switch (hoveredClue.getId()) {
       case "rectSecurityRoom":
+        // Navigate to the clue1 view
         securityDoorClosed.setVisible(false);
         securityDoorOpened.setVisible(true);
         break;
       case "rectBin":
+        // Navigate to the clue2 view
         binHoverState.setVisible(true);
         binNormalState.setVisible(false);
         break;
       case "rectPaperClue":
+        // Navigate to the clue3 view
         bookNotHovered.setVisible(false);
         bookHovered.setVisible(true);
         break;
@@ -273,17 +277,21 @@ public class RoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onExitClue(MouseEvent event) {
+    // Get the rectangle that was hovered
     Rectangle hoveredClue = (Rectangle) event.getSource();
     switch (hoveredClue.getId()) {
       case "rectSecurityRoom":
+        // Navigate to the clue1 view
         securityDoorClosed.setVisible(true);
         securityDoorOpened.setVisible(false);
         break;
       case "rectBin":
+        // Navigate to the clue2 view
         binHoverState.setVisible(false);
         binNormalState.setVisible(true);
         break;
       case "rectPaperClue":
+        // Navigate to the clue3 view
         bookNotHovered.setVisible(true);
         bookHovered.setVisible(false);
         break;
@@ -323,7 +331,8 @@ public class RoomController implements RoomNavigationHandler {
    */
   public void onClickRight(MouseEvent event) throws IOException {
     if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
+        instanceof Guessing) { // if in guessing phase, the other areas should not be
+      // accessible for
       // investigation
       return;
     }
@@ -352,7 +361,8 @@ public class RoomController implements RoomNavigationHandler {
    */
   public void onClickLeft(MouseEvent event) throws IOException {
     if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
+        instanceof Guessing) { // if in guessing phase, the other areas should not be
+      // accessible for
       // investigation
       return;
     }

@@ -22,10 +22,11 @@ public class NavBarUtils {
       Button suspect2Button,
       Button suspect3Button,
       RoomNavigationHandler handler) {
-
+    // Set up the navigation bar and suspect buttons
     navBar.setTranslateX(+200);
     navBar.setDisable(true);
 
+    // Set up the suspect buttons
     suspect1Button.setOnAction(e -> handleRoomNavigation("IntelRoomOne", handler));
     suspect2Button.setOnAction(e -> handleRoomNavigation("IntelRoomTwo", handler));
     suspect3Button.setOnAction(e -> handleRoomNavigation("IntelRoomThree", handler));
