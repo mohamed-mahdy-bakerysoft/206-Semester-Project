@@ -5,11 +5,10 @@ import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The StartRoomController class manages the interaction within the starting room of the game. It
@@ -19,8 +18,7 @@ public class StartRoomController {
 
   @FXML private Button startButton; // The button to start the game
 
-  private MediaPlayer player; // MediaPlayer to play sounds
-  private Media sound; // Media object to hold sound files
+  private MP3Player sound; // The sound to be played
 
   /**
    * Initializes the start room view by playing the welcome sound when the room is loaded.
@@ -31,9 +29,8 @@ public class StartRoomController {
   @FXML
   public void initialize() throws ApiProxyException, URISyntaxException {
     // Load and play the welcome sound
-    sound = new Media(App.class.getResource("/sounds/welcome.mp3").toURI().toString());
-    player = new MediaPlayer(sound);
-    player.play();
+    sound = new MP3Player("/sounds/start.mp3");
+    sound.play();
   }
 
   /**
@@ -50,9 +47,6 @@ public class StartRoomController {
       throws ApiProxyException, IOException, URISyntaxException {
     // Get the instance of TimeManager and set the interval to 300 seconds
     // Load and play the opening sound (MOVE LATER)
-    sound = new Media(App.class.getResource("/sounds/opening_sound.mp3").toURI().toString());
-    player = new MediaPlayer(sound);
-    player.play();
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setInterval(300);
     timeManager.startTimer(); // Start the game timer
