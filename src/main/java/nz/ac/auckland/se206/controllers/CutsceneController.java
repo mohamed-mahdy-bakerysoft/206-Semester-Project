@@ -91,7 +91,7 @@ public class CutsceneController {
 
   // This method displays the next dialogue in the sequence
   @FXML
-  private void onNextDialogue() {
+  private void onLoadNextDialogue() {
     // Check if there are more dialogue lines to display
     if (currentDialogueIndex < dialogueLines.size()) {
       displayNextDialogue();
@@ -120,7 +120,7 @@ public class CutsceneController {
 
                   // If progress reaches 0, automatically move to the next dialogue
                   if (leftProgressBar.getProgress() <= 0.0) {
-                    onNextDialogue();
+                    onLoadNextDialogue();
                   }
                 }));
 
@@ -187,7 +187,7 @@ public class CutsceneController {
       if (progressTimeline != null) {
         progressTimeline.stop(); // Stop the auto-skip progress bar timeline
       }
-      onNextDialogue(); // Trigger the next dialogue
+      onLoadNextDialogue(); // Trigger the next dialogue
     }
   }
 
