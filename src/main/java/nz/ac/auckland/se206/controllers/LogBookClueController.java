@@ -1,15 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The LogBookClueController class manages the interaction with the logbook clue in the game. It
@@ -26,8 +24,7 @@ public class LogBookClueController extends ClueController {
   @FXML private Rectangle rectPageTurnRight2;
   @FXML private Rectangle rectPageTurnLeft;
   @FXML private Rectangle rectPageTurnLeft2;
-  private MediaPlayer player;
-  private Media sound;
+  private MP3Player player;
 
   /**
    * Initializes the logbook clue view by calling the parent class's initialize method.
@@ -38,15 +35,8 @@ public class LogBookClueController extends ClueController {
   public void initialize() throws ApiProxyException {
     // Call the parent class's initialize method
     super.initialize();
-    try {
-      // Load the sound file for the page turning effect
-      sound = new Media(App.class.getResource("/sounds/turningpage.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      // Print the stack trace if there is an error with the URI syntax
-      e.printStackTrace();
-    }
-    // Initialize the MediaPlayer with the loaded sound
-    player = new MediaPlayer(sound);
+    player = new MP3Player("src/main/resources/sounds/page_turn.mp3");
+    player.play();
   }
 
   /**
