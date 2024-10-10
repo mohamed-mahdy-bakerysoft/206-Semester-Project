@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The CutsceneController class manages the introductory cutscene at the start of the game. It
@@ -49,12 +50,17 @@ public class CutsceneController {
   @FXML private ImageView johnImage;
 
   @FXML private ProgressBar leftProgressBar;
-  @FXML private ProgressBar rightProgressBar;
 
   private List<String> dialogueLines;
   private int currentDialogueIndex;
   private Timeline progressTimeline;
   private boolean isGameStarted = false;
+  private MP3Player player;
+  private MP3Player player2;
+  private MP3Player player3;
+  private MP3Player player4;
+  private MP3Player player5;
+  private MP3Player player6;
 
   /**
    * Constructs a new CutsceneController object with default values for dialogue index, progress
@@ -63,7 +69,6 @@ public class CutsceneController {
   public CutsceneController() {
     this.currentDialogueIndex = 0;
     this.leftProgressBar = new ProgressBar();
-    this.rightProgressBar = new ProgressBar();
     this.dialogueLines = new ArrayList<>();
   }
 
@@ -87,10 +92,14 @@ public class CutsceneController {
     dialogueLines.add("Alice: William, the head of security of the gallery.");
     dialogueLines.add("Alice: And John the Janitor, known to be an ex-convict.");
     dialogueLines.add("Alice: Good luck Agent, the fate of the painting is in your hands.");
-
+    player = new MP3Player("src/main/resources/sounds/cutscene1.mp3");
+    player2 = new MP3Player("src/main/resources/sounds/cutscene2.mp3");
+    player3 = new MP3Player("src/main/resources/sounds/cutscene3.mp3");
+    player4 = new MP3Player("src/main/resources/sounds/cutscene4.mp3");
+    player5 = new MP3Player("src/main/resources/sounds/cutscene5.mp3");
+    player6 = new MP3Player("src/main/resources/sounds/cutscene6.mp3");
     // Set initial progress bar values (full)
     leftProgressBar.setProgress(1.0);
-    rightProgressBar.setProgress(1.0);
 
     if (firstTime) {
       // Display the first line of dialogue
@@ -113,6 +122,7 @@ public class CutsceneController {
   // This method skips the cutscene and goes directly to the game
   @FXML
   private void onSkipCutscene() throws IOException {
+    stopCurrentPlayer(); // Stop any currently playing MP3
     startGame(); // Directly transition to the game
   }
 
@@ -121,11 +131,10 @@ public class CutsceneController {
     progressTimeline =
         new Timeline(
             new KeyFrame(
-                Duration.seconds(0.05),
+                Duration.seconds(0.10),
                 event -> {
                   // Reduce progress on both sides
                   leftProgressBar.setProgress(leftProgressBar.getProgress() - 0.01);
-                  rightProgressBar.setProgress(rightProgressBar.getProgress() - 0.01);
 
                   // If progress reaches 0, automatically move to the next dialogue
                   if (leftProgressBar.getProgress() <= 0.0) {
@@ -141,7 +150,6 @@ public class CutsceneController {
   private void displayNextDialogue() {
     // Reset the progress bars for each new dialogue
     leftProgressBar.setProgress(1.0);
-    rightProgressBar.setProgress(1.0);
 
     // Start the progress bars animation for auto-skipping
     startProgressBarAutoSkip();
@@ -152,14 +160,12 @@ public class CutsceneController {
     // Control image visibility based on current dialogue index
     newspaperImage.setVisible(currentDialogueIndex == 0);
     paintingImage.setVisible(currentDialogueIndex == 0);
-
     aliceImage.setVisible(currentDialogueIndex == 0);
     aliceImage2.setVisible(
         currentDialogueIndex == 1
             || currentDialogueIndex == 2
             || currentDialogueIndex == 3
             || currentDialogueIndex == 4);
-
     frankImage.setVisible(
         currentDialogueIndex == 2 || currentDialogueIndex == 3 || currentDialogueIndex == 4);
     williamImage.setVisible(currentDialogueIndex == 3 || currentDialogueIndex == 4);
@@ -170,6 +176,33 @@ public class CutsceneController {
       frankImage.setVisible(false);
       williamImage.setVisible(false);
       johnImage.setVisible(false);
+    }
+
+    // Stop any currently playing MP3
+    stopCurrentPlayer();
+
+    // Play the corresponding audio file for each dialogue line
+    switch (currentDialogueIndex) {
+      case 0:
+        player.play();
+        break;
+      case 1:
+        player2.play();
+        break;
+      case 2:
+        player3.play();
+        break;
+      case 3:
+        player4.play();
+        break;
+      case 4:
+        player5.play();
+        break;
+      case 5:
+        player6.play();
+        break;
+      default:
+        break;
     }
 
     // Increment the index for the next line
@@ -184,6 +217,27 @@ public class CutsceneController {
     pause.play();
   }
 
+  private void stopCurrentPlayer() {
+    if (player != null && player.isPlaying()) {
+      player.stop();
+    }
+    if (player2 != null && player2.isPlaying()) {
+      player2.stop();
+    }
+    if (player3 != null && player3.isPlaying()) {
+      player3.stop();
+    }
+    if (player4 != null && player4.isPlaying()) {
+      player4.stop();
+    }
+    if (player5 != null && player5.isPlaying()) {
+      player5.stop();
+    }
+    if (player6 != null && player6.isPlaying()) {
+      player6.stop();
+    }
+  }
+
   /**
    * Handles the "Enter" key press to skip the current dialogue.
    *
@@ -196,6 +250,7 @@ public class CutsceneController {
       if (progressTimeline != null) {
         progressTimeline.stop(); // Stop the auto-skip progress bar timeline
       }
+      stopCurrentPlayer(); // Stop any currently playing audio
       onLoadNextDialogue(); // Trigger the next dialogue
     }
   }

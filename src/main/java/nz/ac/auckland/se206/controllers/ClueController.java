@@ -1,19 +1,17 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.apiproxy.exceptions.ApiProxyException;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The ClueController class manages the clue-based scenes in the game, handling interactions with
@@ -38,8 +36,7 @@ public class ClueController {
   /** ImageView to display password hints in the clue scene. */
   @FXML private ImageView passwordHint;
 
-  private MediaPlayer player;
-  private Media sound;
+  private MP3Player player;
 
   /**
    * Initializes the clue scene by setting the countdown timer. This method is called automatically
@@ -51,6 +48,7 @@ public class ClueController {
   public void initialize() throws ApiProxyException {
     TimeManager timeManager = TimeManager.getInstance();
     timeManager.setTimerLabel(mins, secs, dot);
+    player = new MP3Player("src/main/resources/sounds/button.mp3");
   }
 
   /**
@@ -78,17 +76,7 @@ public class ClueController {
       App.setRoot("room");
     }
 
-    // Adding click sound effect
-    try {
-      // Load the sound file
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      // Print stack trace if there is an error with the URI
-      e.printStackTrace();
-    }
-
-    // Initialize and play the media player with the sound
-    player = new MediaPlayer(sound);
+    // Adding click sound effect using MP3Player
     player.play();
   }
 
@@ -105,13 +93,7 @@ public class ClueController {
       App.setRoot("logbookclue1");
     }
 
-    // adding click sound effect
-    try {
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    player = new MediaPlayer(sound);
+    // Adding click sound effect using MP3Player
     player.play();
   }
 
@@ -129,13 +111,8 @@ public class ClueController {
     } else {
       App.setRoot("computercluepassword");
     }
-    // adding click sound effect
-    try {
-      sound = new Media(App.class.getResource("/sounds/button.mp3").toURI().toString());
-    } catch (URISyntaxException e) {
-      e.printStackTrace();
-    }
-    player = new MediaPlayer(sound);
+    // Adding click sound effect using MP3Player
+
     player.play();
   }
 

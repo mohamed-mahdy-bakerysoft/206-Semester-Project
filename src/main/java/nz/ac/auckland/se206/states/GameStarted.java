@@ -7,6 +7,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameStateContext;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The GameStarted state of the game. Handles the initial interactions when the game starts,
@@ -17,6 +18,7 @@ public class GameStarted implements GameState {
   private final GameStateContext context;
   private MediaPlayer player;
   private Media sound;
+  private MP3Player player2;
 
   /**
    * Constructs a new GameStarted state with the given game state context.
@@ -25,6 +27,7 @@ public class GameStarted implements GameState {
    */
   public GameStarted(GameStateContext context) {
     this.context = context;
+    player2 = new MP3Player("src/main/resources/sounds/makeaguess.mp3");
   }
 
   /**
@@ -60,9 +63,7 @@ public class GameStarted implements GameState {
    */
   @Override
   public void handleGuessClick() throws IOException, URISyntaxException {
-    sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
-    player = new MediaPlayer(sound);
-    player.play();
+    player2.play();
     context.setState(context.getGuessingState());
     App.setRoot("whosThief");
   }

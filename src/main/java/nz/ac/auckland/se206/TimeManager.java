@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.controllers.EndingController;
 import nz.ac.auckland.se206.controllers.InteragationRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SubmitAnswerController;
+import nz.ac.auckland.se206.speech.MP3Player;
 import nz.ac.auckland.se206.states.GameOver;
 import nz.ac.auckland.se206.states.GameStarted;
 import nz.ac.auckland.se206.states.Guessing;
@@ -28,6 +29,7 @@ public class TimeManager {
   private static int interval; // 300 for 5 minutes
   private static MediaPlayer player;
   private static Media sound;
+  private MP3Player player2;
 
   /**
    * Returns the singleton instance of the TimeManager class. Ensures only one instance of the class
@@ -54,6 +56,7 @@ public class TimeManager {
   public TimeManager() {
     initialiseTimer();
     updateTimerLabels(); // Set initial label values
+    player2 = new MP3Player("src/main/resources/sounds/makeaguess.mp3");
   }
 
   /**
@@ -171,9 +174,7 @@ public class TimeManager {
         context.setState(context.getGuessingState());
         System.out.println("Now in guessing state");
         App.setRoot("whosThief");
-        sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
-        player = new MediaPlayer(sound);
-        player.play();
+        player2.play();
         setInterval(60);
         return;
       }
@@ -225,9 +226,7 @@ public class TimeManager {
       } else {
         // Move to guessing state and give 60 seconds to guess
         App.setRoot("whosThief");
-        sound = new Media(App.class.getResource("/sounds/make_a_guess.mp3").toURI().toString());
-        player = new MediaPlayer(sound);
-        player.play();
+        player2.play();
         setGuessTimer();
         startTimer();
         System.out.println("Now in guessing state");
