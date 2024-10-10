@@ -188,6 +188,9 @@ public class SubmitAnswerController {
    * updates and invokes GPT model interactions.
    */
   public void sendAnswer() {
+    if (answer == null) {
+      return;
+    }
     if (timeline == null) {
       timeline.stop();
     }
