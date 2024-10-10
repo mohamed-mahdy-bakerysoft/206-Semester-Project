@@ -74,7 +74,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   /**
-   * Gets the game context.
+   * Gets the current game context the game is in.
    *
    * @return the game context.
    */
@@ -94,11 +94,12 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * @return true if all 3 suspects have been talked to, false otherwise
    */
   public static boolean getSuspectsHaveBeenTalkedTo() {
+    // Print out the suspects that have been talked to
     System.out.println("Art Currator talked to:" + suspectHasBeenTalkedToMap.get("Art Currator"));
     System.out.println("Janitor has been talked to:" + suspectHasBeenTalkedToMap.get("Janitor"));
     System.out.println(
         "Art thief has been tallked to:" + suspectHasBeenTalkedToMap.get("Art Thief"));
-
+    // Return whether all suspects have been talked to
     return suspectHasBeenTalkedToMap.get("Art Currator")
         && suspectHasBeenTalkedToMap.get("Art Thief")
         && suspectHasBeenTalkedToMap.get("Janitor");
@@ -123,12 +124,14 @@ public class InteragationRoomController implements RoomNavigationHandler {
     return clueHasBeenInteractedWith;
   }
 
+  /** Sets the clueHasBeenInteractedWith boolean to true. */
   public static void resetSuspectsTalkedToMap() {
     suspectHasBeenTalkedToMap.put("Art Currator", false);
     suspectHasBeenTalkedToMap.put("Art Thief", false);
     suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 
+  /** Sets the clueHasBeenInteractedWith boolean to true. */
   private static void initializeRoleToNameMap() {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
@@ -136,6 +139,11 @@ public class InteragationRoomController implements RoomNavigationHandler {
     professionToNameMap.put("user", "You");
   }
 
+  /**
+   * Gets the professionToNameMap.
+   *
+   * @return the professionToNameMap
+   */
   public static void resetStaticVariables() {
     clueHasBeenInteractedWith = false;
     isFirstTimeInit = true;
@@ -213,7 +221,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * Initializes the room view. If it's the first time initialization, it will provide instructions
    * via text-to-speech.
    *
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   @FXML
   public void initialize() throws ApiProxyException {
@@ -293,6 +301,13 @@ public class InteragationRoomController implements RoomNavigationHandler {
     App.setRoot(roomName);
   }
 
+  /**
+   * Handles the event when the corridor button is clicked. It changes the view to the corridor.
+   *
+   * @param profession
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
+   * @throws InterruptedException if there is an error with the thread
+   */
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
 
@@ -319,7 +334,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       appendChatMessage(initialMessage);
 
       // Send the initial message to the AI
-      sendMessageToAI(initialMessage, conversationHistory, true);
+      sendMessageToBot(initialMessage, conversationHistory, true);
     } else {
       // Revisiting the suspect
       // Create a special system message to prompt the AI to initiate the conversation
@@ -352,7 +367,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     }
   }
 
-  private void sendMessageToAI(
+  private void sendMessageToBot(
       ChatMessage userMessage, List<ChatMessage> conversationHistory, boolean isFirstInteraction) {
     // Add the user's message to the conversation history
     conversationHistory.add(userMessage);
@@ -521,7 +536,9 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private String getSuspectTypeForProfession(String profession) {
+    // Switch case to determine the suspect type based on the profession
     switch (profession) {
+      // Return the suspect type based on the profession
       case "Art Currator":
         return "currator";
       case "Art Thief":
@@ -529,6 +546,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "Janitor":
         return "janitor";
       default:
+        // Return an empty string if the profession is unknown
         return "";
     }
   }
@@ -542,9 +560,6 @@ public class InteragationRoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-
-    // System.out.println("**********************Game State:" + context.getCurrentState());
-    // System.out.println("**********************Current Chat history:" + context.getChatHistory());
     sendMessage();
   }
 
@@ -565,6 +580,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private void setThinkingBubbleVisibility(boolean isVisible) {
+    // Set the visibility of the thinking bubble based on the profession
     if (profession.equals("Art Currator")) {
       bubble1.setVisible(isVisible);
     } else if (profession.equals("Art Thief")) {
@@ -572,9 +588,11 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else if (profession.equals("Janitor")) {
       bubble2.setVisible(isVisible);
     }
+    // set the thinking dots on the screen
     dot0.setVisible(isVisible);
     dot1.setVisible(isVisible);
     dot2.setVisible(isVisible);
+    // Start the thinking animation
     if (isVisible) {
       resetDot();
       Task<Void> task =
@@ -590,6 +608,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       thread.setDaemon(true);
       thread.start();
     } else {
+      // Stop the thinking animation
       timeline.stop();
     }
   }
@@ -624,7 +643,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     btnSend.setDisable(true);
 
     // Send the message to the AI
-    sendMessageToAI(userMessage, conversationHistory, false);
+    sendMessageToBot(userMessage, conversationHistory, false);
   }
 
   // Method to play "hmm" sound based on profession
@@ -637,19 +656,22 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Switch case to determine which sound to play based on profession
     switch (profession) {
       case "Art Currator":
-        // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
+        // If the profession is "Art Currator" and the sound is available, create a new
+        // MediaPlayer
         if (artCurratorHmm != null) {
           player = new MediaPlayer(artCurratorHmm);
         }
         break;
       case "Art Thief":
-        // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
+        // If the profession is "Art Thief" and the sound is available, create a new
+        // MediaPlayer
         if (thiefHmm != null) {
           player = new MediaPlayer(thiefHmm);
         }
         break;
       case "Janitor":
-        // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
+        // If the profession is "Janitor" and the sound is available, create a new
+        // MediaPlayer
         if (janitorHmm != null) {
           player = new MediaPlayer(janitorHmm);
         }
@@ -685,6 +707,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   // Method to get the prompt file based on the profession
   private String getPromptFileForProfession(String profession) {
+    // Switch case to determine the prompt file based on the profession
     switch (profession) {
       case "Art Currator":
         return "suspect1.txt";
@@ -693,6 +716,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "Janitor":
         return "suspect2.txt";
       default:
+        // Return "unknown.txt" if the profession is unknown
         return "unknown.txt";
     }
   }
@@ -788,8 +812,10 @@ public class InteragationRoomController implements RoomNavigationHandler {
     getImageView(suspectType + "2").setVisible(false);
   }
 
-  // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
+  // Method to get the ImageView by ID (you can implement this based on your FXML
+  // IDs)
   private ImageView getImageView(String imageId) {
+    // Switch case to determine the ImageView based on the image ID
     switch (imageId) {
       case "curratorInitial":
         return curratorInitial;
@@ -822,6 +848,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "janitor2":
         return janitor2;
       default:
+        // Log or handle the unexpected image ID
         System.err.println("No ImageView found for ID: " + imageId);
         return null;
     }
@@ -832,8 +859,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
    *
    * @param event the mouse event triggered by clicking a rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
-   * @throws InterruptedException
+   * @throws URISyntaxException if there is an error with the URI syntax
+   * @throws InterruptedException if there is an error with the thread
    */
   @FXML
   private void onHandleRectangleClick(MouseEvent event)
@@ -881,7 +908,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    *
    * @param event the action event triggered by clicking the guess button
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax
    */
   @FXML
   private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
@@ -971,10 +998,14 @@ public class InteragationRoomController implements RoomNavigationHandler {
 
   @FXML
   private void onHoverRectangle(MouseEvent event) {
+    // Only show the hover image if the rectangle has not been clicked
     if (!rectangleClicked) {
+      // Get the suspect type based on the rectangle ID
       Rectangle hoveredRectangle = (Rectangle) event.getSource();
       String rectangleId = hoveredRectangle.getId();
+      // Get the suspect type based on the rectangle ID
       String suspectType = getSuspectTypeFromRectangleId(rectangleId);
+      // Show the hover image if the suspect type is not empty
       if (!suspectType.isEmpty()) {
         getImageView(suspectType + "Hover").setVisible(true);
       }
@@ -1007,6 +1038,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   private String getSuspectTypeFromRectangleId(String rectangleId) {
+    // Switch case to determine the suspect type based on the rectangle ID
     switch (rectangleId) {
       case "rectPerson1":
         return "currator";
@@ -1015,11 +1047,13 @@ public class InteragationRoomController implements RoomNavigationHandler {
       case "rectPerson3":
         return "janitor";
       default:
+        // Return an empty string if the rectangle ID is unknown
         return "";
     }
   }
 
   private String getSuspectTypeFromImageId(String imageId) {
+    // Determine the suspect type based on the image ID
     if (imageId.startsWith("currator")) {
       return "currator";
     } else if (imageId.startsWith("thief")) {
@@ -1027,6 +1061,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
     } else if (imageId.startsWith("janitor")) {
       return "janitor";
     } else {
+      // Return an empty string if the image ID is unknown
       return "";
     }
   }

@@ -65,9 +65,9 @@ public class EndingController {
       return;
     }
     if (feed == null) {
-return; 
+      return;
     }
-  
+
     feedback.setText(feed);
 
     // Log the current game state

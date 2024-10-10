@@ -90,13 +90,17 @@ public class LogBookClueController extends ClueController {
    */
   @FXML
   private void onHoverPageTurn(MouseEvent event) {
+    // Get the hovered clue
     Rectangle hoveredClue = (Rectangle) event.getSource();
+    // Show the appropriate indicator based on the hovered clue
     switch (hoveredClue.getId()) {
       case "rectPageTurnRight", "rectPageTurnRight2":
+        // Show the right page turn image and hide the right indicator
         rightIndicator.setVisible(false);
         rightTurnPage.setVisible(true);
         break;
       case "rectPageTurnLeft", "rectPageTurnLeft2":
+        // Show the left indicator and hide the left page turn image
         leftTurnPage.setVisible(true);
         leftIndicator.setVisible(false);
         break;
@@ -110,13 +114,17 @@ public class LogBookClueController extends ClueController {
    */
   @FXML
   private void onExitPageTurn(MouseEvent event) {
+    // Get the hovered clue
     Rectangle hoveredClue = (Rectangle) event.getSource();
+    // Hide the appropriate indicator based on the hovered clue
     switch (hoveredClue.getId()) {
       case "rectPageTurnRight", "rectPageTurnRight2":
+        // Hide the right indicator and show the right page turn image
         rightIndicator.setVisible(true);
         rightTurnPage.setVisible(false);
         break;
       case "rectPageTurnLeft", "rectPageTurnLeft2":
+        // Hide the left page turn image and show the left indicator
         leftTurnPage.setVisible(false);
         leftIndicator.setVisible(true);
         break;

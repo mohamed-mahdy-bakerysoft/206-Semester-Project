@@ -17,6 +17,11 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.TimeManager;
 
+/**
+ * The CutsceneController class manages the introductory cutscene at the start of the game. It
+ * displays dialogue from Alice, the game's AI assistant, and introduces the player to the game's
+ * objective and suspects. The cutscene transitions to the game scene once the dialogue ends.
+ */
 public class CutsceneController {
   public static boolean firstTime = false;
   public static TimeManager timeManager =
@@ -24,13 +29,6 @@ public class CutsceneController {
 
   public static void setFirstTime(boolean first) {
     firstTime = first;
-  }
-
-  public CutsceneController() {
-    this.currentDialogueIndex = 0;
-    this.leftProgressBar = new ProgressBar();
-    this.rightProgressBar = new ProgressBar();
-    this.dialogueLines = new ArrayList<>();
   }
 
   @FXML private Label dialogueText;
@@ -58,7 +56,18 @@ public class CutsceneController {
   private Timeline progressTimeline;
   private boolean isGameStarted = false;
 
-  // This method initializes the cutscene by loading Alice's dialogue
+  /**
+   * Constructs a new CutsceneController object with default values for dialogue index, progress
+   * bars, and dialogue lines.
+   */
+  public CutsceneController() {
+    this.currentDialogueIndex = 0;
+    this.leftProgressBar = new ProgressBar();
+    this.rightProgressBar = new ProgressBar();
+    this.dialogueLines = new ArrayList<>();
+  }
+
+  /** Initializes the cutscene by setting the timer label and displaying the first dialogue line. */
   @FXML
   public void initialize() {
     timeManager.setTimerLabel(mins, secs, dot);
@@ -91,7 +100,7 @@ public class CutsceneController {
 
   // This method displays the next dialogue in the sequence
   @FXML
-  private void onNextDialogue() {
+  private void onLoadNextDialogue() {
     // Check if there are more dialogue lines to display
     if (currentDialogueIndex < dialogueLines.size()) {
       displayNextDialogue();
@@ -120,7 +129,7 @@ public class CutsceneController {
 
                   // If progress reaches 0, automatically move to the next dialogue
                   if (leftProgressBar.getProgress() <= 0.0) {
-                    onNextDialogue();
+                    onLoadNextDialogue();
                   }
                 }));
 
@@ -187,7 +196,7 @@ public class CutsceneController {
       if (progressTimeline != null) {
         progressTimeline.stop(); // Stop the auto-skip progress bar timeline
       }
-      onNextDialogue(); // Trigger the next dialogue
+      onLoadNextDialogue(); // Trigger the next dialogue
     }
   }
 

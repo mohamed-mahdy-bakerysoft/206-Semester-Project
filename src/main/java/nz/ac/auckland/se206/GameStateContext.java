@@ -28,6 +28,11 @@ public class GameStateContext {
   private final GameOver gameOverState;
   private static GameStateContext instance;
 
+  /**
+   * Gets the instance of the GameStateContext.
+   *
+   * @return the instance of the GameStateContext
+   */
   public static GameStateContext getInstance() {
     if (instance == null) {
       instance = new GameStateContext();
@@ -60,9 +65,9 @@ public class GameStateContext {
   }
 
   /**
-   * Getter for the chat history
+   * Gets the chat history for all suspects.
    *
-   * @param chatHistory the current chat history
+   * @return the chat history for all suspects
    */
   public Map<String, List<ChatMessage>> getChatHistory() {
     return chatHistory;
@@ -138,7 +143,7 @@ public class GameStateContext {
    * @param event the mouse event triggered by clicking a rectangle
    * @param rectangleId the ID of the clicked rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   public void handleRectangleClick(MouseEvent event, String rectangleId)
       throws IOException, URISyntaxException {
@@ -149,7 +154,7 @@ public class GameStateContext {
    * Handles the event when the guess button is clicked.
    *
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   public void handleGuessClick() throws IOException, URISyntaxException {
     gameState.handleGuessClick();
@@ -160,6 +165,10 @@ public class GameStateContext {
     return gameState;
   }
 
+  /**
+   * Resets the game state back to the initial game started state and clears the chat history for
+   * all suspects.
+   */
   public void reset() {
     // Reset the game state back to the initial game started state
     this.gameState = this.gameStartedState;

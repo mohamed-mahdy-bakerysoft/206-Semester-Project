@@ -48,7 +48,7 @@ public class Guessing implements GameState {
    * @param event the mouse event triggered by clicking a rectangle
    * @param rectangleId the ID of the clicked rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   @Override
   public void handleRectangleClick(MouseEvent event, String rectangleId)

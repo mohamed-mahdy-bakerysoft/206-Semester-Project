@@ -9,6 +9,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * The Bubble class represents a speech bubble that can be displayed on the screen. It is used to
+ * display text in a visually appealing way.
+ */
 public class Bubble extends Region {
 
   private static final int PADDING = 14; // Padding for the text
@@ -20,6 +24,11 @@ public class Bubble extends Region {
 
   private Label label;
 
+  /**
+   * Creates a new Bubble object with the specified text.
+   *
+   * @param text the text to display in the bubble
+   */
   public Bubble(String text) {
     label = new Label(text);
     label.setFont(textFont);
@@ -34,6 +43,11 @@ public class Bubble extends Region {
     getChildren().add(label);
   }
 
+  /**
+   * Sets the text to be displayed in the bubble.
+   *
+   * @param text the text to display
+   */
   public void setBubbleColor(Color color) {
     this.bubbleColor = color;
     label.setBackground(

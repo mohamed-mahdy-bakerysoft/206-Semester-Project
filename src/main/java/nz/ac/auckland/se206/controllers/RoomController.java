@@ -62,9 +62,9 @@ public class RoomController implements RoomNavigationHandler {
   }
 
   /**
-   * Sets the clueHasBeenInteractedWith boolean to check if the clue has been interacted with.
+   * Sets the clueHasBeenInteractedWith boolean to false.
    *
-   * @return the clueHasBeenInteractedWith boolean
+   * @param b the boolean to set
    */
   public static void setClueHasBeenInteractedWith(boolean b) {
     clueHasBeenInteractedWith = false;
@@ -104,7 +104,7 @@ public class RoomController implements RoomNavigationHandler {
    * Initializes the room view. If it's the first time initialization, it will provide instructions
    * via text-to-speech.
    *
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error in the URI syntax
    */
   @FXML
   public void initialize() throws URISyntaxException {
@@ -188,7 +188,7 @@ public class RoomController implements RoomNavigationHandler {
    *
    * @param event the mouse event triggered by clicking a rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error in the URI syntax
    */
   @FXML
   private void handleRectangleClick(MouseEvent event) throws IOException, URISyntaxException {
@@ -249,17 +249,21 @@ public class RoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onHoverClue(MouseEvent event) {
+    // Get the rectangle that was hovered
     Rectangle hoveredClue = (Rectangle) event.getSource();
     switch (hoveredClue.getId()) {
       case "rectSecurityRoom":
+        // Navigate to the clue1 view
         securityDoorClosed.setVisible(false);
         securityDoorOpened.setVisible(true);
         break;
       case "rectBin":
+        // Navigate to the clue2 view
         binHoverState.setVisible(true);
         binNormalState.setVisible(false);
         break;
       case "rectPaperClue":
+        // Navigate to the clue3 view
         bookNotHovered.setVisible(false);
         bookHovered.setVisible(true);
         break;
@@ -273,17 +277,21 @@ public class RoomController implements RoomNavigationHandler {
    */
   @FXML
   private void onExitClue(MouseEvent event) {
+    // Get the rectangle that was hovered
     Rectangle hoveredClue = (Rectangle) event.getSource();
     switch (hoveredClue.getId()) {
       case "rectSecurityRoom":
+        // Navigate to the clue1 view
         securityDoorClosed.setVisible(true);
         securityDoorOpened.setVisible(false);
         break;
       case "rectBin":
+        // Navigate to the clue2 view
         binHoverState.setVisible(false);
         binNormalState.setVisible(true);
         break;
       case "rectPaperClue":
+        // Navigate to the clue3 view
         bookNotHovered.setVisible(true);
         bookHovered.setVisible(false);
         break;
@@ -295,7 +303,7 @@ public class RoomController implements RoomNavigationHandler {
    *
    * @param event the action event triggered by clicking the guess button
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error in the URI syntax
    */
   @FXML
   private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
@@ -323,7 +331,8 @@ public class RoomController implements RoomNavigationHandler {
    */
   public void onClickRight(MouseEvent event) throws IOException {
     if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
+        instanceof Guessing) { // if in guessing phase, the other areas should not be
+      // accessible for
       // investigation
       return;
     }
@@ -352,7 +361,8 @@ public class RoomController implements RoomNavigationHandler {
    */
   public void onClickLeft(MouseEvent event) throws IOException {
     if (context.getCurrentState()
-        instanceof Guessing) { // if in guessing phase, the other areas should not be accessible for
+        instanceof Guessing) { // if in guessing phase, the other areas should not be
+      // accessible for
       // investigation
       return;
     }
