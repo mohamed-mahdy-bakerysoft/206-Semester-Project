@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.speech.MP3Player;
 
 /**
  * The SubmitAnswerController2 class extends SubmitAnswerController and is responsible for
@@ -16,6 +17,7 @@ public class SubmitAnswerSecondController extends SubmitAnswerController {
   @FXML private ImageView janitorPhoto;
   @FXML private ImageView hosPhoto;
   @FXML private ImageView curatorPhoto;
+  private MP3Player player;
 
   /**
    * Initializes the controller by calling the parent initialize method and then displaying the
@@ -26,6 +28,7 @@ public class SubmitAnswerSecondController extends SubmitAnswerController {
   public void initialize() throws URISyntaxException {
     // Call the initialize method of the parent class
     super.initialize();
+    player = new MP3Player("src/main/resources/sounds/button.mp3");
     // Display the photo of the chosen suspect
     displayChosenSuspect();
   }
@@ -54,6 +57,7 @@ public class SubmitAnswerSecondController extends SubmitAnswerController {
   @FXML
   private void onGoBack() throws IOException {
     // Set the root to the "whosThief" screen
+    player.play();
     thief = null;
     answer = null;
     App.setRoot("whosThief");
