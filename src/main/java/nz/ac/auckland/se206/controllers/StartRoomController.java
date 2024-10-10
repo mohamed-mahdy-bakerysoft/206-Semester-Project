@@ -29,7 +29,7 @@ public class StartRoomController {
   @FXML
   public void initialize() throws ApiProxyException, URISyntaxException {
     // Load and play the welcome sound
-    sound = new MP3Player("/sounds/start.mp3");
+    sound = new MP3Player("src/main/resources/sounds/start.mp3");
     sound.play();
   }
 

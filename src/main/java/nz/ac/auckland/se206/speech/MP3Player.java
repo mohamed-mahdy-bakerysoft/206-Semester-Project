@@ -15,6 +15,7 @@ public class MP3Player {
   private final String filename;
   private AdvancedPlayer player;
   private Thread playerThread;
+  private boolean playing; // Flag to track if the player is currently playing
 
   /**
    * Constructs an MP3Player with the specified filename.
@@ -23,6 +24,7 @@ public class MP3Player {
    */
   public MP3Player(String filename) {
     this.filename = filename;
+    this.playing = false; // Initialize playing state to false
   }
 
   /**
@@ -39,25 +41,39 @@ public class MP3Player {
           new Thread(
               () -> {
                 try {
+                  playing = true; // Set playing state to true when playback starts
                   player.play();
                 } catch (JavaLayerException e) {
                   e.printStackTrace();
+                } finally {
+                  playing = false; // Set playing state to false when playback finishes
                 }
               });
 
       playerThread.start();
     } catch (FileNotFoundException | JavaLayerException e) {
       e.printStackTrace();
+      playing = false; // Ensure playing state is false if an exception occurs
     }
   }
 
   /** Stops the currently playing MP3 file, if any, and interrupts the player thread. */
   public void stop() {
     if (player != null) {
-      player.close();
+      player.close(); // Close the player to stop the audio
     }
     if (playerThread != null) {
-      playerThread.interrupt();
+      playerThread.interrupt(); // Interrupt the thread if it's running
     }
+    playing = false; // Ensure the playing state is set to false
+  }
+
+  /**
+   * Returns whether the MP3 file is currently playing.
+   *
+   * @return true if the MP3 file is playing, false otherwise
+   */
+  public boolean isPlaying() {
+    return playing;
   }
 }
