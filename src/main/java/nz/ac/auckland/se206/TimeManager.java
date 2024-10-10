@@ -159,7 +159,8 @@ public class TimeManager {
         return;
       }
 
-      // Check if the game is in the started state, suspects have been talked to, and clue has been
+      // Check if the game is in the started state, suspects have been talked to, and
+      // clue has been
       // interacted with
       if (RoomController.getGameContext().getCurrentState() instanceof GameStarted
           && InteragationRoomController.getSuspectsHaveBeenTalkedTo()
@@ -182,7 +183,8 @@ public class TimeManager {
         System.out.println("Game is over");
         return;
       }
-      // Check if the game is in the guessing state or if the player has not investigated
+      // Check if the game is in the guessing state or if the player has not
+      // investigated
       else if (RoomController.getGameContext().getCurrentState() instanceof Guessing
           || !(InteragationRoomController.getSuspectsHaveBeenTalkedTo()
               && RoomController.getClueHasBeenInteractedWith())) {

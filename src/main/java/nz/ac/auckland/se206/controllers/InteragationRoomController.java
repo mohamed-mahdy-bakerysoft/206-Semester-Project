@@ -648,19 +648,22 @@ public class InteragationRoomController implements RoomNavigationHandler {
     // Switch case to determine which sound to play based on profession
     switch (profession) {
       case "Art Currator":
-        // If the profession is "Art Currator" and the sound is available, create a new MediaPlayer
+        // If the profession is "Art Currator" and the sound is available, create a new
+        // MediaPlayer
         if (artCurratorHmm != null) {
           player = new MediaPlayer(artCurratorHmm);
         }
         break;
       case "Art Thief":
-        // If the profession is "Art Thief" and the sound is available, create a new MediaPlayer
+        // If the profession is "Art Thief" and the sound is available, create a new
+        // MediaPlayer
         if (thiefHmm != null) {
           player = new MediaPlayer(thiefHmm);
         }
         break;
       case "Janitor":
-        // If the profession is "Janitor" and the sound is available, create a new MediaPlayer
+        // If the profession is "Janitor" and the sound is available, create a new
+        // MediaPlayer
         if (janitorHmm != null) {
           player = new MediaPlayer(janitorHmm);
         }
@@ -799,7 +802,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
     getImageView(suspectType + "2").setVisible(false);
   }
 
-  // Method to get the ImageView by ID (you can implement this based on your FXML IDs)
+  // Method to get the ImageView by ID (you can implement this based on your FXML
+  // IDs)
   private ImageView getImageView(String imageId) {
     switch (imageId) {
       case "curratorInitial":
