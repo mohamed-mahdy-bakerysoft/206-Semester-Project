@@ -74,7 +74,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
   }
 
   /**
-   * Gets the game context.
+   * Gets the current game context the game is in.
    *
    * @return the game context.
    */
@@ -123,12 +123,14 @@ public class InteragationRoomController implements RoomNavigationHandler {
     return clueHasBeenInteractedWith;
   }
 
+  /** Sets the clueHasBeenInteractedWith boolean to true. */
   public static void resetSuspectsTalkedToMap() {
     suspectHasBeenTalkedToMap.put("Art Currator", false);
     suspectHasBeenTalkedToMap.put("Art Thief", false);
     suspectHasBeenTalkedToMap.put("Janitor", false);
   }
 
+  /** Sets the clueHasBeenInteractedWith boolean to true. */
   private static void initializeRoleToNameMap() {
     professionToNameMap.put("Art Currator", "Frank");
     professionToNameMap.put("Art Thief", "William");
@@ -136,6 +138,11 @@ public class InteragationRoomController implements RoomNavigationHandler {
     professionToNameMap.put("user", "You");
   }
 
+  /**
+   * Gets the professionToNameMap.
+   *
+   * @return the professionToNameMap
+   */
   public static void resetStaticVariables() {
     clueHasBeenInteractedWith = false;
     isFirstTimeInit = true;
@@ -213,7 +220,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    * Initializes the room view. If it's the first time initialization, it will provide instructions
    * via text-to-speech.
    *
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax for media files
    */
   @FXML
   public void initialize() throws ApiProxyException {
@@ -293,6 +300,13 @@ public class InteragationRoomController implements RoomNavigationHandler {
     App.setRoot(roomName);
   }
 
+  /**
+   * Handles the event when the corridor button is clicked. It changes the view to the corridor.
+   *
+   * @param profession
+   * @throws URISyntaxException
+   * @throws InterruptedException
+   */
   public void setProfession(String profession) throws URISyntaxException, InterruptedException {
     this.profession = profession;
 
@@ -829,8 +843,8 @@ public class InteragationRoomController implements RoomNavigationHandler {
    *
    * @param event the mouse event triggered by clicking a rectangle
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
-   * @throws InterruptedException
+   * @throws URISyntaxException if there is an error with the URI syntax
+   * @throws InterruptedException if there is an error with the thread
    */
   @FXML
   private void onHandleRectangleClick(MouseEvent event)
@@ -878,7 +892,7 @@ public class InteragationRoomController implements RoomNavigationHandler {
    *
    * @param event the action event triggered by clicking the guess button
    * @throws IOException if there is an I/O error
-   * @throws URISyntaxException
+   * @throws URISyntaxException if there is an error with the URI syntax
    */
   @FXML
   private void onHandleGuessClick(ActionEvent event) throws IOException, URISyntaxException {
