@@ -1,6 +1,6 @@
 /* progressbar.css */
 
-/* Container for the progress bar */
+/* Style for the progress bar container */
 .progress-bar-container {
   -fx-padding: 10px;
   -fx-background-color: #f5f5f5;
@@ -10,24 +10,23 @@
   -fx-background-radius: 10px;
 }
 
-/* The progress bar itself */
+/* Custom ProgressBar style */
 .progress-bar {
-  -fx-accent: linear-gradient(to right, #4caf50, #81c784); /* Gradient green progress bar */
   -fx-background-color: transparent;
-  -fx-background-insets: 0;
   -fx-padding: 0;
-  -fx-pref-height: 20px;
-  -fx-background-radius: 10px;
-  -fx-border-radius: 10px;
-  -fx-border-color: #81c784;
-  -fx-border-width: 1px;
+  -fx-pref-height: 20px; /* Height of the progress bar */
 }
 
 .progress-bar .track {
-  -fx-background-color: #d7d7d7; /* Light grey track background */
-  -fx-background-radius: 10px;
+  -fx-background-color: #d7d7d7; /* Gray background of the progress bar track */
+  -fx-background-radius: 10px; /* Rounded background */
+  -fx-padding: 0;
 }
 
 .progress-bar .fill {
-  -fx-background-radius: 10px; /* Rounded corners for the fill */
+  -fx-background-color: linear-gradient(to right, #4caf50, #81c784); /* Gradient fill for progress */
+  -fx-background-radius: 10px; /* Make the fill rounded */
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+  -fx-shape: null; /* Important: Ensures the fill respects the rounded shape */
 }
