@@ -9,7 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="cutscenePane" onKeyPressed="#onHandleEnterKey" prefHeight="690.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CutsceneController">
+<Pane fx:id="cutscenePane" onKeyPressed="#onHandleEnterKey" prefHeight="690.0" prefWidth="1100.0"
+  xmlns="http://javafx.com/javafx/22"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CutsceneController">
 
   <children>
     <!-- Background Image -->
@@ -25,11 +27,11 @@
         <Image url="@../images/Alice-Wave.png" />
       </image>
     </ImageView>
-      <ImageView fx:id="aliceImage2" fitHeight="531.0" fitWidth="526.0" layoutX="279.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/Alice.png" />
-         </image>
-      </ImageView>
+    <ImageView fx:id="aliceImage2" fitHeight="531.0" fitWidth="526.0" layoutX="279.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <image>
+        <Image url="@../images/Alice.png" />
+      </image>
+    </ImageView>
     <ImageView fitHeight="457.0" fitWidth="744.0" layoutX="191.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" smooth="false">
       <image>
         <Image url="@../images/Cutscene_ChatBox.png" />
@@ -83,31 +85,31 @@
 
     <!-- Skip Button -->
     <Button fx:id="btnSkip" layoutX="910.0" layoutY="147.0" onAction="#onSkipCutscene" prefHeight="50.0" prefWidth="183.0" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 18;" stylesheets="@../css/styles.css" text="Skip Cut-Scene" />
-      <ProgressBar fx:id="leftProgressBar" layoutX="748.0" layoutY="591.0" prefHeight="22.0" prefWidth="163.0" progress="1.0" />
+    <ProgressBar fx:id="leftProgressBar" layoutX="748.0" layoutY="591.0" prefHeight="22.0" prefWidth="163.0" progress="1.0" stylesheets="@../css/progressbar.css" style="-fx-accent: #4caf50;"/>
     <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="April 6th 2024 PI Master’s HQ" wrappingWidth="335.2530212402344">
       <font>
         <Font name="Courier New Bold" size="29.0" />
       </font>
     </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="927.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/TimerBackground.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="dot" alignment="CENTER" contentDisplay="CENTER" layoutX="965.0" layoutY="40.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
-         <font>
-            <Font name="Curlz MT" size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="944.0" layoutY="38.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
-         <font>
-            <Font name="Curlz MT" size="45.0" />
-         </font>
-      </Label>
-      <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="994.0" layoutY="39.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
-         <font>
-            <Font name="Curlz MT" size="45.0" />
-         </font>
-      </Label>
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="927.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/TimerBackground.png" />
+      </image>
+    </ImageView>
+    <Label fx:id="dot" alignment="CENTER" contentDisplay="CENTER" layoutX="965.0" layoutY="40.0" prefHeight="56.0" prefWidth="58.0" text=":" textFill="WHITE">
+      <font>
+        <Font name="Curlz MT" size="45.0" />
+      </font>
+    </Label>
+    <Label fx:id="mins" alignment="CENTER" contentDisplay="CENTER" layoutX="944.0" layoutY="38.0" prefHeight="69.0" prefWidth="58.0" text="2" textFill="WHITE">
+      <font>
+        <Font name="Curlz MT" size="45.0" />
+      </font>
+    </Label>
+    <Label fx:id="secs" alignment="CENTER" contentDisplay="CENTER" layoutX="994.0" layoutY="39.0" prefHeight="69.0" prefWidth="58.0" text="00" textFill="WHITE">
+      <font>
+        <Font name="Curlz MT" size="45.0" />
+      </font>
+    </Label>
   </children>
 </Pane>
