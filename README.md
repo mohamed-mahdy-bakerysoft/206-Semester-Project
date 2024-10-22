@@ -1,51 +1,64 @@
-# Sample JavaFX application using Proxy API
+# Guess Who's the Thief
 
-## To setup the API to access Chat Completions and TTS
+**Guess Who's the Thief** is an interactive, AI-driven mystery game that challenges players to uncover clues, interrogate suspects, and solve a high-stakes art theft case. This project combines gameplay with AI-powered dialogue and voice interaction, creating an engaging experience for players.
 
-- add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `apiproxy.config`
-- put inside the credentials that you received from no-reply@digitaledu.ac.nz (put the quotes "")
+## Key Features
+- **AI-Powered Dialogue**: Uses OpenAI's Chat Completions to provide unique, interactive feedback based on the player's choices.
+- **Timer Management**: Real-time countdown timers across scenes to keep the gameplay exciting and synchronized.
+- **Interactive Cutscenes**: Smooth transitions between dialogues with auto-skip functionality.
+- **Sound Integration**: Custom MP3 playback for sound effects during gameplay and cutscenes.
 
-  ```
-  email: "UPI@aucklanduni.ac.nz"
-  apiKey: "YOUR_KEY"
-  ```
-  These are your credentials to invoke the APIs. 
+## Gameplay Controls
+- **Movement**: Mouse and keyboard interactions to select suspects and submit answers.
+- **Key Bindings**:
+  - **Skip Cutscene**: `Enter` key skips current dialogue.
+  - **Submit Answer**: Press the `Submit` button or hit `Enter` to confirm your guess.
+  - **Interact**: Click on suspects or clues to investigate them.
 
-  The token credits are charged as follows:
-  - 1 token credit per 1 character for Googlel "Standard" Text-to-Speech. 
-  - 4 token credit per 1 character for Google "WaveNet" and "Neural2" Text-to-Speech.
-  - 1 token credit per 1 character for OpenAI Text-to-Text.
-  - 1 token credit per 1 token for OpenAI Chat Completions (as determined by OpenAI, charging both input and output tokens).
+## API Setup Instructions
+To set up the API to access Chat Completions and Text-to-Speech (TTS), follow these steps:
 
+1. In the root of the project (same level as `pom.xml`), create a file named `apiproxy.config`.
+2. Add the following credentials to the file (replace with your own):
 
-## Free TTS
+```txt
+email: "YOUR_UPI@aucklanduni.ac.nz"
+apiKey: "YOUR_KEY"
+```
+These credentials will allow you to invoke the APIs. Keep in mind the token usage:
+	•	1 token per character for Google “Standard” TTS.
+	•	4 tokens per character for Google “WaveNet” and “Neural2” TTS.
+	•	1 token per character for OpenAI Text-to-Text.
+	•	1 token per token for OpenAI Chat Completions (charged for both input and output tokens).
 
-There is a free TTS service available for testing purposes. You will see this in the `nz.ac.auckland.se206.speech.FreeTextToSpeech` class. The voice here is not as good as the Google and OpenAI TTS services, but it is free and can be used for testing purposes.
+## External Libraries and APIs
 
-You will see an example of this in the `ChatController` class. 
+- **OpenAI API**: Used for generating dynamic dialogue responses and clues in the game.
+- **Google TTS API**: Integrated for converting the text dialogues into voice prompts.
+- **JLayer (JavaZoom)**: A library for MP3 playback, used for playing background music and sound effects.
+- **JavaFX**: Utilized for the entire UI and game scene management.
+- **Maven**: Manages project dependencies and build processes.
+## Controls
 
+- **WASD / Arrow keys**: Navigate character or menu.
+- **Enter**: Submit responses or confirm selections.
+- **Escape**: Open the pause menu.
+- **Mouse**: Select suspects or interact with clues.
 
+## Team Collaboration
 
-## To setup codestyle's API
+| Team Member     | Role                             | GitHub                                          |
+| --------------- | -------------------------------- | ----------------------------------------------- |
+| Johnson Zhang     | Lead Developer & Game Logic      | [@ZingZing001](https://github.com/ZingZing001) |
+| Kimberly Zhu        | AI Integration & Dialogue Systems | [@kimkimz](https://github.com/kimkimz)|
+| Nicky Tian   | UI/UX Design & Sound Management  | [@Nicky8566](https://github.com/nicky8566)|
 
-- add in the root of the project (i.e., the same level where `pom.xml` is located) a file named `codestyle.config`
-- put inside the credentials that you received from gradestyle@digitaledu.ac.nz (put the quotes "")
+## Running the Game
 
-  ```
-  email: "UPI@aucklanduni.ac.nz"
-  accessToken: "YOUR_KEY"
-  ```
+1. Clone the repository to your local machine.
+2. Ensure you have a valid `apiproxy.config` file with API credentials.
+3. Open the project in your preferred IDE.
+4. Build and run the project using Maven.
 
- these are your credentials to invoke gradestyle
-
-## To run the game
-
-`./mvnw clean javafx:run`
-
-## To debug the game
-
-`./mvnw clean javafx:run@debug` then in VS Code "Run & Debug", then run "Debug JavaFX"
-
-## To run codestyle
-
-`./mvnw clean compile exec:java@style`
+## License
+This project is licensed under the MIT License.
