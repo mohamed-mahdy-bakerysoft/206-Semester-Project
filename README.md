@@ -53,9 +53,9 @@ These credentials will allow you to invoke the APIs. Keep in mind the token usag
 
 | Team Member     | Role                             | GitHub                                          |
 | --------------- | -------------------------------- | ----------------------------------------------- |
-| Johnson Zhang     | Lead Developer & Game Logic      | [@ZingZing001](https://github.com/ZingZing001) |
-| Kimberly Zhu        | AI Integration & Dialogue Systems | [@kimkimz](https://github.com/kimkimz)|
-| Nicky Tian   | UI/UX Design & Sound Management  | [@Nicky8566](https://github.com/nicky8566)|
+| Johnson Zhang     | Backend Developer & Game Logic      | [@ZingZing001](https://github.com/ZingZing001) |
+| Kimberly Zhu        | Frontend AI Integration & UI/UX Design | [@kimkimz](https://github.com/kimkimz)|
+| Nicky Tian   | UI/UX Design & Dialogue System  | [@Nicky8566](https://github.com/nicky8566)|
 
 ## Running the Game
 
